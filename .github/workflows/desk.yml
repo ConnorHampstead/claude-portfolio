@@ -7,6 +7,11 @@ on:
     # well clear of the US open (13:30 UTC summer / 14:30 UTC winter).
     - cron: '0 12 * * 1-5'
   workflow_dispatch:        # lets you trigger a run by hand from the Actions tab
+    inputs:
+      dry_run:
+        description: 'Dry run: generate and validate the brief, submit nothing'
+        type: boolean
+        default: true
 
 # Only one session at a time. A delayed run must never overlap the next.
 concurrency:
@@ -25,6 +30,8 @@ jobs:
       ALPACA_API_KEY_ID: ${{ secrets.ALPACA_API_KEY_ID }}
       ALPACA_API_SECRET_KEY: ${{ secrets.ALPACA_API_SECRET_KEY }}
       CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+      # Empty on scheduled runs, so cron always submits for real.
+      DRY_RUN: ${{ inputs.dry_run && '1' || '' }}
 
     steps:
       - uses: actions/checkout@v4
@@ -88,7 +95,9 @@ jobs:
             else
               echo "### Validation"
               echo '```'
-              cat "briefs/$(date -u +%Y-%m-%d).check.txt" 2>/dev/null || echo "(none)"
+              D=$(date -u +%Y-%m-%d)
+              cat "state/dryrun/${D}.check.txt" "briefs/${D}.check.txt" 2>/dev/null \
+                || echo "(none)"
               echo '```'
               echo "### Book"
               echo '```'

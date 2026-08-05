@@ -6,14 +6,30 @@
 set -euo pipefail
 
 DATE="$(date -u +%Y-%m-%d)"
-BRIEF="briefs/${DATE}.md"
+DRY_RUN="${DRY_RUN:-}"
 mkdir -p briefs state
+
+if [ -n "$DRY_RUN" ]; then
+  # Write to a scratch dir so a test run can never clobber a real brief, and
+  # never submits. Everything up to and including validation still executes.
+  mkdir -p state/dryrun
+  BRIEF="state/dryrun/${DATE}.md"
+  CHECK="state/dryrun/${DATE}.check.txt"
+  echo "*** DRY RUN - no orders will be submitted, no real brief overwritten ***"
+else
+  BRIEF="briefs/${DATE}.md"
+  CHECK="briefs/${DATE}.check.txt"
+fi
 
 echo "::group::Settle previous session"
 python3 desk.py reconcile | tee state/reconcile.txt
 # Only kill entry orders older than the max holding horizon. A limit order
 # resting from yesterday is still a live thesis; one from last week is not.
-python3 desk.py stale --older-than 5 --confirm | tee state/stale.txt
+if [ -n "$DRY_RUN" ]; then
+  python3 desk.py stale --older-than 5 | tee state/stale.txt
+else
+  python3 desk.py stale --older-than 5 --confirm | tee state/stale.txt
+fi
 python3 desk.py prep --out state/book.md
 cat state/book.md
 echo "::endgroup::"
@@ -45,12 +61,20 @@ fi
 
 echo "::group::Validate"
 # check never blocks: bad plays are rejected individually and the good ones proceed.
-python3 desk.py check "${BRIEF}" | tee "briefs/${DATE}.check.txt"
+python3 desk.py check "${BRIEF}" | tee "${CHECK}"
 echo "::endgroup::"
 
-echo "::group::Submit"
-python3 desk.py submit "${BRIEF}" --confirm | tee "briefs/${DATE}.submit.txt"
-echo "::endgroup::"
+if [ -n "$DRY_RUN" ]; then
+  echo "::group::Submit (SKIPPED - dry run)"
+  echo "Dry run complete. The plan above was validated but not sent."
+  echo "Brief:      ${BRIEF}"
+  echo "Validation: ${CHECK}"
+  echo "::endgroup::"
+else
+  echo "::group::Submit"
+  python3 desk.py submit "${BRIEF}" --confirm | tee "briefs/${DATE}.submit.txt"
+  echo "::endgroup::"
+fi
 
 echo "::group::Score"
 python3 desk.py score | tee state/score.txt
