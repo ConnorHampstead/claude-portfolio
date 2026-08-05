@@ -5,6 +5,13 @@
 #
 set -euo pipefail
 
+# An unset GitHub secret expands to an empty string, and an empty auth variable
+# is worse than an absent one — Claude Code resolves credentials in precedence
+# order and an empty high-precedence var can shadow the one you meant to use.
+for v in ANTHROPIC_API_KEY ANTHROPIC_AUTH_TOKEN CLAUDE_CODE_OAUTH_TOKEN; do
+  if [ -z "${!v:-}" ]; then unset "$v" || true; fi
+done
+
 DATE="$(date -u +%Y-%m-%d)"
 DRY_RUN="${DRY_RUN:-}"
 mkdir -p briefs state
@@ -79,4 +86,10 @@ fi
 echo "::group::Score"
 python3 desk.py score | tee state/score.txt
 python3 desk.py status | tee state/status.txt
+echo "::endgroup::"
+
+echo "::group::Performance chart"
+# Snapshots equity, redraws the curve against SPY, and rewrites the block
+# between the PERFORMANCE markers in README.md.
+python3 desk.py chart --update-readme
 echo "::endgroup::"

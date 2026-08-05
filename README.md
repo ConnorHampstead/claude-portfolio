@@ -1,5 +1,12 @@
 # Paper Trading Desk — Alpaca Harness
 
+<!-- PERFORMANCE:START -->
+
+*The performance chart appears here after the first session.*
+
+<!-- PERFORMANCE:END -->
+
+
 Takes the JSON block from Claude's morning brief, enforces the risk rules, sizes
 positions from the stop, submits bracket orders to an Alpaca **paper** account,
 and logs everything so you can score both P&L and calibration afterwards.
@@ -272,4 +279,39 @@ Set up email notification for failed workflow runs (GitHub Settings →
 Notifications → Actions). A run that dies at 12:00 UTC while you're on holiday is
 otherwise invisible until you come back.
 
-First session (2026-08-05) was run manually.
+---
+
+## 9. The performance chart
+
+`desk.py chart --update-readme` snapshots equity, redraws the curve, and rewrites
+the block between the `PERFORMANCE` markers at the top of this file. It runs at
+the end of every session, so the chart in the README is never more than a day
+stale.
+
+Equity comes from Alpaca's portfolio history endpoint, which is daily
+mark-to-market including open positions — so the curve reflects unrealised P&L,
+not just closed trades. A local copy is also appended to `state/equity.csv` each
+run, which is what the chart falls back to if the endpoint is unavailable, and
+what the average-exposure figure is computed from.
+
+The benchmark is SPY, split- and dividend-adjusted, normalised to the same
+starting value.
+
+### Reading it honestly
+
+**The comparison is not like-for-like, and the exposure row is what tells you
+so.** The desk holds at most five positions and is frequently in cash; SPY is
+100% invested at all times. If the desk returns half of SPY at a third of the
+exposure, that is not underperformance — it's less risk taken. If it matches SPY
+while fully invested, that's just beta, and you could have had it for free.
+
+This is why the chart carries a **PRELIMINARY** watermark until 30 sessions and
+20 closed trades. A rising line over three weeks is noise that happens to look
+like skill, and a chart is far more persuasive than the number of samples behind
+it justifies. The watermark disappears on its own once the sample supports
+looking at it.
+
+Even then, the equity curve is the *last* thing that becomes informative. The
+calibration table in `desk.py score` tells you whether the model knows what it
+knows, and it starts meaning something around twenty trades — long before the
+P&L does.
