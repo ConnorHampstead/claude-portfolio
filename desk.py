@@ -821,6 +821,225 @@ def cmd_prep(args):
         print(text)
 
 
+EQUITY_CSV = HERE / "state" / "equity.csv"
+EQUITY_FIELDS = ["date", "equity", "cash", "gross_exposure", "net_exposure", "positions"]
+
+README_START = "<!-- PERFORMANCE:START -->"
+README_END = "<!-- PERFORMANCE:END -->"
+
+
+def snapshot_equity():
+    """Append today's book snapshot to equity.csv. Idempotent per date."""
+    acct = get_account()
+    positions = get_positions()
+    equity = float(acct["equity"])
+    row = {
+        "date": datetime.now(timezone.utc).strftime("%Y-%m-%d"),
+        "equity": round(equity, 2),
+        "cash": round(float(acct["cash"]), 2),
+        "gross_exposure": round(sum(abs(float(p["market_value"])) for p in positions), 2),
+        "net_exposure": round(sum(float(p["market_value"]) for p in positions), 2),
+        "positions": len(positions),
+    }
+    EQUITY_CSV.parent.mkdir(parents=True, exist_ok=True)
+    rows = []
+    if EQUITY_CSV.exists():
+        with EQUITY_CSV.open(newline="") as f:
+            rows = [r for r in csv.DictReader(f) if r["date"] != row["date"]]
+    rows.append(row)
+    rows.sort(key=lambda r: r["date"])
+    with EQUITY_CSV.open("w", newline="") as f:
+        w = csv.DictWriter(f, fieldnames=EQUITY_FIELDS)
+        w.writeheader()
+        for r in rows:
+            w.writerow({k: r.get(k, "") for k in EQUITY_FIELDS})
+    return rows
+
+
+def fetch_portfolio_history() -> dict:
+    """Daily mark-to-market equity from Alpaca. Returns {date: equity}."""
+    for period in ("all", "1A", "3M", "1M"):
+        try:
+            h = api("GET", "/v2/account/portfolio/history",
+                    params={"period": period, "timeframe": "1D",
+                            "pnl_reset": "no_reset"})
+            ts, eq = h.get("timestamp") or [], h.get("equity") or []
+            if ts and eq:
+                out = {}
+                for t, e in zip(ts, eq):
+                    if e:
+                        d = datetime.fromtimestamp(t, timezone.utc).strftime("%Y-%m-%d")
+                        out[d] = float(e)
+                if out:
+                    return out
+        except RuntimeError:
+            continue
+    return {}
+
+
+def fetch_spy(start: str, end: str, feed: str) -> dict:
+    """Split- and dividend-adjusted SPY daily closes. Returns {date: close}."""
+    params = {"symbols": "SPY", "timeframe": "1Day", "start": start, "end": end,
+              "feed": feed, "limit": 10000, "adjustment": "all"}
+    try:
+        data = api("GET", "/v2/stocks/bars", base=DATA_BASE, params=params)
+    except RuntimeError as e:
+        print(f"  ! could not fetch SPY bars: {e}", file=sys.stderr)
+        return {}
+    bars = (data.get("bars") or {}).get("SPY") or []
+    return {b["t"][:10]: float(b["c"]) for b in bars if b.get("c")}
+
+
+def max_drawdown(series: list[float]) -> float:
+    peak, dd = series[0], 0.0
+    for v in series:
+        peak = max(peak, v)
+        dd = min(dd, (v - peak) / peak)
+    return dd * 100
+
+
+def cmd_chart(args):
+    import matplotlib
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+    import matplotlib.dates as mdates
+
+    cfg = load_config()
+    rows = snapshot_equity()
+
+    curve = fetch_portfolio_history()
+    if not curve:
+        # Fall back to our own record if Alpaca's history is unavailable.
+        curve = {r["date"]: float(r["equity"]) for r in rows}
+    if len(curve) < 2:
+        print("Not enough history to plot yet — need at least two sessions.")
+        return
+
+    dates = sorted(curve)
+    spy = fetch_spy(dates[0], dates[-1], cfg["data_feed"])
+
+    # Only compare on dates where both series exist.
+    common = [d for d in dates if d in spy]
+    use_bench = len(common) >= 2
+
+    d_desk = [datetime.strptime(d, "%Y-%m-%d") for d in dates]
+    v_desk = [curve[d] for d in dates]
+    n_desk = [v / v_desk[0] * 100 for v in v_desk]
+
+    if use_bench:
+        d_bench = [datetime.strptime(d, "%Y-%m-%d") for d in common]
+        v_bench = [spy[d] for d in common]
+        n_bench = [v / v_bench[0] * 100 for v in v_bench]
+
+    # ---- plot -----------------------------------------------------------
+    fig, ax = plt.subplots(figsize=(10, 4.2), dpi=160)
+    fig.patch.set_facecolor("white")
+    ax.set_facecolor("white")
+
+    ax.plot(d_desk, n_desk, color="#1a7f7a", linewidth=2.0, label="Desk", zorder=3)
+    if use_bench:
+        ax.plot(d_bench, n_bench, color="#9aa0a6", linewidth=1.6,
+                linestyle="--", label="S&P 500 (SPY, buy & hold)", zorder=2)
+
+    ax.axhline(100, color="#d0d0d0", linewidth=0.9, zorder=1)
+    ax.fill_between(d_desk, 100, n_desk,
+                    where=[v >= 100 for v in n_desk],
+                    color="#1a7f7a", alpha=0.08, zorder=0, interpolate=True)
+    ax.fill_between(d_desk, 100, n_desk,
+                    where=[v < 100 for v in n_desk],
+                    color="#c0392b", alpha=0.08, zorder=0, interpolate=True)
+
+    ax.set_ylabel("Normalised (start = 100)", fontsize=9, color="#444")
+    ax.legend(frameon=False, fontsize=9, loc="upper left")
+    ax.grid(True, axis="y", color="#eeeeee", linewidth=0.8)
+    ax.set_axisbelow(True)
+    for s in ("top", "right"):
+        ax.spines[s].set_visible(False)
+    for s in ("left", "bottom"):
+        ax.spines[s].set_color("#cccccc")
+    ax.tick_params(colors="#666", labelsize=8)
+    ax.xaxis.set_major_formatter(mdates.DateFormatter("%d %b"))
+    # Whole-day ticks only. The default locator drops to sub-day intervals on
+    # short ranges, which renders as the same date repeated.
+    span = max(1, (d_desk[-1] - d_desk[0]).days)
+    ax.xaxis.set_major_locator(mdates.DayLocator(interval=max(1, span // 8)))
+    fig.autofmt_xdate(rotation=0, ha="center")
+
+    closed = [r for r in read_journal() if r.get("r_multiple") not in ("", None)]
+    sessions = len(dates)
+
+    # Small samples are persuasive in a way they have no right to be. Say so
+    # on the image itself, because the image is what gets looked at.
+    if sessions < 30 or len(closed) < 20:
+        ax.text(0.5, 0.5,
+                f"PRELIMINARY\n{sessions} sessions, {len(closed)} closed "
+                f"{'trade' if len(closed) == 1 else 'trades'}\n"
+                "not yet a meaningful sample",
+                transform=ax.transAxes, ha="center", va="center",
+                fontsize=15, color="#b0b0b0", alpha=0.55, weight="bold",
+                linespacing=1.5, zorder=5)
+
+    ax.set_title("Paper desk vs. buy-and-hold", fontsize=11,
+                 color="#222", loc="left", pad=12)
+    fig.tight_layout()
+    out_png = HERE / "state" / "performance.png"
+    fig.savefig(out_png, facecolor="white")
+    plt.close(fig)
+    print(f"Wrote {out_png.relative_to(HERE)}")
+
+    # ---- stats ----------------------------------------------------------
+    desk_ret = (v_desk[-1] / v_desk[0] - 1) * 100
+    desk_dd = max_drawdown(v_desk)
+    exposures = [float(r["gross_exposure"]) / float(r["equity"]) * 100
+                 for r in rows if float(r.get("equity") or 0) > 0]
+    avg_exp = sum(exposures) / len(exposures) if exposures else 0.0
+
+    lines = [README_START, "", f"![Performance](state/performance.png)", ""]
+    lines.append(f"| | Desk | SPY buy & hold |")
+    lines.append("|---|---|---|")
+    if use_bench:
+        bench_ret = (v_bench[-1] / v_bench[0] - 1) * 100
+        bench_dd = max_drawdown(v_bench)
+        lines.append(f"| Return | {desk_ret:+.2f}% | {bench_ret:+.2f}% |")
+        lines.append(f"| Max drawdown | {desk_dd:.2f}% | {bench_dd:.2f}% |")
+    else:
+        lines.append(f"| Return | {desk_ret:+.2f}% | — |")
+        lines.append(f"| Max drawdown | {desk_dd:.2f}% | — |")
+    lines.append(f"| Avg. gross exposure | {avg_exp:.0f}% | 100% |")
+    lines.append("")
+    trade_word = "trade" if len(closed) == 1 else "trades"
+    lines.append(f"*{sessions} sessions, {len(closed)} closed {trade_word}, "
+                 f"updated {dates[-1]}.*")
+    lines.append("")
+    lines.append("The desk holds cash most of the time and SPY does not, so this "
+                 "is not a like-for-like comparison — read it alongside the "
+                 "exposure row rather than as a scoreboard. "
+                 "SPY is dividend- and split-adjusted.")
+    if sessions < 30 or len(closed) < 20:
+        lines.append("")
+        lines.append("**Sample is far too small to mean anything.** At this length "
+                     "the curve is dominated by noise; a rising line is not evidence "
+                     "of edge. See the calibration table for a measure that becomes "
+                     "informative sooner.")
+    lines.append("")
+    lines.append(README_END)
+    block = "\n".join(lines)
+
+    if args.update_readme:
+        readme = HERE / "README.md"
+        text = readme.read_text()
+        if README_START in text and README_END in text:
+            pre = text.split(README_START)[0]
+            post = text.split(README_END, 1)[1]
+            readme.write_text(pre + block + post)
+            print("Updated README.md performance block.")
+        else:
+            print(f"! README.md has no {README_START} / {README_END} markers - "
+                  f"add them where you want the chart.")
+    else:
+        print("\n" + block)
+
+
 def cmd_stale(args):
     orders = api("GET", "/v2/orders", params={"status": "open", "nested": "true"})
     unfilled = [o for o in orders if o.get("filled_qty") in ("0", 0, None)
@@ -905,6 +1124,11 @@ def main():
     p = sub.add_parser("prep", help="markdown book state for the brief request")
     p.add_argument("--out", help="write to this file instead of stdout")
     p.set_defaults(func=cmd_prep)
+
+    p = sub.add_parser("chart", help="equity curve vs SPY, and README stats block")
+    p.add_argument("--update-readme", action="store_true",
+                   help="rewrite the PERFORMANCE block in README.md")
+    p.set_defaults(func=cmd_chart)
 
     p = sub.add_parser("stale", help="list or cancel unfilled entry orders")
     p.add_argument("--confirm", action="store_true", help="cancel them")
