@@ -1,0 +1,98 @@
+name: trading desk
+
+on:
+  schedule:
+    # 12:00 UTC = 14:00 Stockholm in summer (CEST), 13:00 in winter (CET).
+    # GitHub delays scheduled runs 5-30 min under load, so this is deliberately
+    # well clear of the US open (13:30 UTC summer / 14:30 UTC winter).
+    - cron: '0 12 * * 1-5'
+  workflow_dispatch:        # lets you trigger a run by hand from the Actions tab
+
+# Only one session at a time. A delayed run must never overlap the next.
+concurrency:
+  group: trading-desk
+  cancel-in-progress: false
+
+permissions:
+  contents: write           # to commit the brief and journal back
+
+jobs:
+  session:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    env:
+      ALPACA_API_KEY_ID: ${{ secrets.ALPACA_API_KEY_ID }}
+      ALPACA_API_SECRET_KEY: ${{ secrets.ALPACA_API_SECRET_KEY }}
+      CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          npm install -g @anthropic-ai/claude-code
+          claude --version
+
+      # Heartbeat is written unconditionally. This commits on every run,
+      # including holidays, which keeps the 60-day inactivity timer from
+      # silently disabling the schedule during a quiet stretch.
+      - name: Heartbeat
+        run: |
+          mkdir -p state
+          date -u +"%Y-%m-%dT%H:%M:%SZ last run" > state/heartbeat.txt
+
+      - name: Is today a trading day?
+        id: guard
+        run: |
+          if python3 desk.py calendar; then
+            echo "trading=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "trading=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Run session
+        if: steps.guard.outputs.trading == 'true'
+        run: bash scripts/session.sh
+
+      - name: Commit results
+        run: |
+          git config user.name  "trading-desk[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A briefs state journal.csv 2>/dev/null || true
+          if git diff --staged --quiet; then
+            echo "Nothing to commit."
+          else
+            git commit -m "session $(date -u +%Y-%m-%d)"
+            # A delayed run may be behind if you pushed meanwhile.
+            git pull --rebase --autostash origin "${GITHUB_REF_NAME}"
+            git push
+          fi
+
+      - name: Session summary
+        if: always()
+        run: |
+          {
+            echo "## Session $(date -u +%Y-%m-%d)"
+            if [ "${{ steps.guard.outputs.trading }}" != "true" ]; then
+              echo "US market closed - stood down."
+            else
+              echo "### Validation"
+              echo '```'
+              cat "briefs/$(date -u +%Y-%m-%d).check.txt" 2>/dev/null || echo "(none)"
+              echo '```'
+              echo "### Book"
+              echo '```'
+              cat state/status.txt 2>/dev/null || echo "(none)"
+              echo '```'
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"

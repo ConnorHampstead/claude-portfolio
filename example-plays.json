@@ -1,0 +1,22 @@
+{
+  "date": "2026-08-05",
+  "no_trade": false,
+  "session_note": "Example file. Levels are illustrative, not live. Use `check` on this to confirm your setup works before trusting a real brief.",
+  "plays": [
+    {
+      "ticker": "AAPL",
+      "direction": "long",
+      "entry_type": "limit",
+      "entry": 200.00,
+      "stop": 195.00,
+      "targets": [212.00],
+      "time_horizon": "2-3 days",
+      "conviction": 4,
+      "p_target_first": 0.62,
+      "catalyst": "Illustrative only.",
+      "thesis": "Illustrative only.",
+      "invalidation": "Illustrative only.",
+      "bear_case": "Illustrative only."
+    }
+  ]
+}
