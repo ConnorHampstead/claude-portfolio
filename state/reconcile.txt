@@ -1,0 +1,5 @@
+  closed ANET   stop    -1.01R  $-758.40
+
+  1 trade(s) closed out. Journal updated.
+  Fill in `thesis_verdict` by hand: right/wrong thesis vs right/wrong outcome.
+

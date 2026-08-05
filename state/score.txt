@@ -1,0 +1,23 @@
+
+====================================================================
+  PERFORMANCE   1 closed trades
+====================================================================
+  Net P&L         $-758.40
+  Win rate        0.0%  (0W / 1L)
+  Avg loss        -1.01R
+  Expectancy      -1.01R per trade
+  Total R         -1.01R
+  Best / worst    -1.01R / -1.01R
+  Max drawdown    -1.01R
+
+  ----------------------------------------------------------------
+  CALIBRATION   1 trades with a stated probability
+  ----------------------------------------------------------------
+  stated           n   mean said    actual
+  0%-50%          1        45%        0%  <-- overconfident
+
+  Brier score     0.203   (0 = perfect, 0.25 = coin flip, lower is better)
+  ! Only 1 samples - treat this as directional, not conclusive.
+
+  Note: thesis_verdict column is empty. Fill it in to separate skill from luck.
+
