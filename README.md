@@ -2,7 +2,19 @@
 
 <!-- PERFORMANCE:START -->
 
-*The performance chart appears here after the first session.*
+![Performance](state/performance.png)
+
+| | Desk | SPY buy & hold |
+|---|---|---|
+| Return | -0.60% | -0.17% |
+| Max drawdown | -0.60% | -0.17% |
+| Avg. gross exposure | 30% | 100% |
+
+*3 sessions, 1 closed trade, updated 2026-08-06.*
+
+The desk holds cash most of the time and SPY does not, so this is not a like-for-like comparison — read it alongside the exposure row rather than as a scoreboard. SPY is dividend- and split-adjusted.
+
+**Sample is far too small to mean anything.** At this length the curve is dominated by noise; a rising line is not evidence of edge. See the calibration table for a measure that becomes informative sooner.
 
 <!-- PERFORMANCE:END -->
 
