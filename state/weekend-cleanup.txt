@@ -1,0 +1,23 @@
+
+  1 unfilled entry order(s):
+    LLY    sell  x25     limit  @1228  submitted 2026-08-05  id=d174a2d6
+    cancelled LLY
+
+
+  0 trade(s) closed out.
+
+====================================================================
+  BOOK STATE   market closed
+====================================================================
+  Equity          $99,793.03
+  Cash            $70,150.28
+  Day P&L         $-155.75  (-0.16%)
+  Gross exposure  $29,642.75  (29.7% of equity)
+  Net exposure    $+29,642.75  (+29.7%)
+  Positions       1 / 5
+  Loss-limit room 2.84% before the 3.0% kill switch
+
+  SYM    SIDE      QTY        AVG       LAST       P&L $    P&L %
+  ---------------------------------------------------------------
+  LLY    long       25    1163.64    1185.71     +551.75   +1.90%
+
