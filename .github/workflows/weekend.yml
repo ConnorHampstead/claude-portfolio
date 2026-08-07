@@ -44,7 +44,10 @@ jobs:
       DRY_RUN: ${{ inputs.dry_run && '1' || '' }}
 
     steps:
+      # Branch tip, not the frozen triggering SHA - see desk.yml for why.
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
 
       - uses: actions/setup-python@v5
         with:

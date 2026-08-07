@@ -27,7 +27,7 @@ import math
 import os
 import sys
 import uuid
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 try:
@@ -611,10 +611,12 @@ def cmd_reconcile(args):
     if not rows:
         print("Journal is empty.")
         return
-    updated = 0
+    updated, never_filled = 0, 0
     for row in rows:
         if row.get("r_multiple") not in ("", None):
             continue  # already closed out
+        if row.get("exit_reason") == "never filled":
+            continue  # already resolved as a non-trade
         oid = row.get("order_id")
         if not oid:
             continue
@@ -626,6 +628,19 @@ def cmd_reconcile(args):
 
         row["status"] = order.get("status", row.get("status", ""))
         entry_fill = order.get("filled_avg_price")
+
+        # An entry that was cancelled or expired without filling is a prediction
+        # that never became a trade. It must not sit in the journal looking like
+        # an open position, and it cannot be scored - you can't measure whether
+        # price hit a target from an entry you never took.
+        if not entry_fill and row["status"] in ("canceled", "cancelled",
+                                                "expired", "rejected"):
+            row["exit_reason"] = "never filled"
+            row["closed_at"] = order.get("canceled_at") or order.get("expired_at") or ""
+            never_filled += 1
+            print(f"  {row['ticker']:<6} never filled ({row['status']})")
+            continue
+
         if not entry_fill:
             continue
         entry_fill = float(entry_fill)
@@ -663,13 +678,27 @@ def cmd_reconcile(args):
               f"{r:+.2f}R  ${pnl:+,.2f}")
 
     write_journal(rows)
-    print(f"\n  {updated} trade(s) closed out. Journal updated.")
+    print(f"\n  {updated} trade(s) closed out"
+          + (f", {never_filled} never filled" if never_filled else "") + ".")
     if updated:
         print("  Fill in `thesis_verdict` by hand: right/wrong thesis vs right/wrong outcome.\n")
 
 
 def cmd_score(args):
-    rows = [r for r in read_journal() if r.get("r_multiple") not in ("", None)]
+    all_rows = read_journal()
+    rows = [r for r in all_rows if r.get("r_multiple") not in ("", None)]
+
+    unfilled = [r for r in all_rows if r.get("exit_reason") == "never filled"]
+    proposed = len(rows) + len(unfilled)
+    if proposed:
+        fill_rate = len(rows) / proposed * 100
+        print(f"\n  Entry fill rate  {fill_rate:.0f}%  "
+              f"({len(rows)} filled / {proposed} proposed, "
+              f"{len(unfilled)} never reached)")
+        if fill_rate < 50 and proposed >= 10:
+            print("  ! Over half of proposed entries never filled. The levels are "
+                  "probably unrealistic\n    rather than the theses being wrong.")
+
     if not rows:
         print("No closed trades yet. Run `reconcile` first.")
         return
@@ -740,16 +769,51 @@ def cmd_score(args):
 
 
 def cmd_calendar(args):
-    """Exit 0 if today is a US trading day, 1 if not. For CI guards."""
+    """Exit 0 if today is a US trading day, 1 if not. For CI guards.
+
+    With --before-open, also requires that the market has not yet opened (plus a
+    margin). A delayed run that lands after the open is writing a "pre-market"
+    brief with the market already trading — a different information set from
+    every other session, which quietly corrupts comparisons across the record.
+    Standing down costs one session; running anyway costs comparability.
+    """
     today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
     days = api("GET", "/v2/calendar", params={"start": today, "end": today})
-    if days:
-        d = days[0]
-        print(f"{today} is a trading day (open {d.get('open')} "
-              f"close {d.get('close')} ET)")
+    if not days:
+        print(f"{today} is not a US trading day - standing down.")
+        sys.exit(1)
+
+    d = days[0]
+    print(f"{today} is a trading day (open {d.get('open')} close {d.get('close')} ET)")
+
+    if args.before_open is None:
         sys.exit(0)
-    print(f"{today} is not a US trading day - standing down.")
-    sys.exit(1)
+
+    try:
+        from zoneinfo import ZoneInfo
+        hh, mm = (d.get("open") or "09:30").split(":")[:2]
+        open_et = datetime.strptime(d["date"], "%Y-%m-%d").replace(
+            hour=int(hh), minute=int(mm), tzinfo=ZoneInfo("America/New_York"))
+        open_utc = open_et.astimezone(timezone.utc)
+    except Exception as e:
+        print(f"  ! could not resolve the open time ({e}) - not enforcing deadline.")
+        sys.exit(0)
+
+    now = datetime.now(timezone.utc)
+    deadline = open_utc - timedelta(minutes=args.before_open)
+    mins = (open_utc - now).total_seconds() / 60
+
+    if now >= deadline:
+        state = f"{abs(mins):.0f} min after the open" if mins < 0 \
+            else f"only {mins:.0f} min before the open"
+        print(f"  DEADLINE MISSED: it is {state}, and the cutoff is "
+              f"{args.before_open} min before.")
+        print(f"  Standing down. A post-open brief is not comparable with the rest "
+              f"of the record.")
+        sys.exit(1)
+
+    print(f"  {mins:.0f} min before the open - inside the pre-market window.")
+    sys.exit(0)
 
 
 def cmd_prep(args):
@@ -1119,6 +1183,8 @@ def main():
     p.set_defaults(func=cmd_score)
 
     p = sub.add_parser("calendar", help="exit 0 if today is a US trading day, else 1")
+    p.add_argument("--before-open", type=int, metavar="MIN",
+                   help="also require at least MIN minutes remain before the open")
     p.set_defaults(func=cmd_calendar)
 
     p = sub.add_parser("prep", help="markdown book state for the brief request")

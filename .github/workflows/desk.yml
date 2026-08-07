@@ -7,13 +7,13 @@ on:
     # not merely delayed - which surfaces as total silence, since the trigger
     # never fires and there is no run to fail.
     #
-    # 12:07 UTC = 14:07 Stockholm in summer, 13:07 in winter.
-    - cron: '7 12 * * 1-5'
-    # Catch-up 34 minutes later, in case the first was dropped. It exits
-    # immediately if the primary run already completed, so on a normal day this
-    # costs a few seconds. Still comfortably before the US open (13:30 UTC in
-    # summer, 14:30 in winter).
-    - cron: '41 12 * * 1-5'
+    # Primary. 11:12 UTC = 13:12 Stockholm in summer, 12:12 in winter.
+    # Deliberately early: observed delays have reached ~110 minutes, and the US
+    # open is 13:30 UTC in summer. Even a two-hour delay lands pre-open here.
+    - cron: '12 11 * * 1-5'
+    # Two catch-ups. Each exits in seconds if the session already completed.
+    - cron: '12 12 * * 1-5'
+    - cron: '52 12 * * 1-5'
   workflow_dispatch:        # lets you trigger a run by hand from the Actions tab
     inputs:
       dry_run:
@@ -44,7 +44,15 @@ jobs:
       DRY_RUN: ${{ inputs.dry_run && '1' || '' }}
 
     steps:
+      # ref is set explicitly on purpose. With no ref, checkout takes the SHA
+      # that *triggered* the workflow, which for a scheduled run is frozen when
+      # the event is created — potentially hours before the job starts, given
+      # observed queue delays. That stale tree would not contain a completion
+      # marker pushed by a manual run in the meantime, and the session would be
+      # submitted twice. Taking the branch tip closes that window.
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
 
       # The completion marker is briefs/<date>.submit.txt, written only after a
       # real submit. Dry runs don't create it, so they never mask a missed
@@ -125,7 +133,9 @@ jobs:
         id: guard
         if: steps.ran.outputs.already == 'false'
         run: |
-          if python3 desk.py calendar; then
+          # --before-open makes a late run stand down rather than write a
+          # "pre-market" brief with the market already trading.
+          if python3 desk.py calendar --before-open 15; then
             echo "trading=true" >> "$GITHUB_OUTPUT"
           else
             echo "trading=false" >> "$GITHUB_OUTPUT"

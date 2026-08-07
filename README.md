@@ -2,19 +2,7 @@
 
 <!-- PERFORMANCE:START -->
 
-![Performance](state/performance.png)
-
-| | Desk | SPY buy & hold |
-|---|---|---|
-| Return | -0.60% | +0.02% |
-| Max drawdown | -0.60% | -0.17% |
-| Avg. gross exposure | 30% | 100% |
-
-*3 sessions, 1 closed trade, updated 2026-08-06.*
-
-The desk holds cash most of the time and SPY does not, so this is not a like-for-like comparison — read it alongside the exposure row rather than as a scoreboard. SPY is dividend- and split-adjusted.
-
-**Sample is far too small to mean anything.** At this length the curve is dominated by noise; a rising line is not evidence of edge. See the calibration table for a measure that becomes informative sooner.
+*The performance chart appears here after the first session.*
 
 <!-- PERFORMANCE:END -->
 
@@ -251,11 +239,19 @@ env block in `.github/workflows/desk.yml` to match.
 
 ### Schedule
 
-Two crons, `7 12` and `41 12`, weekdays. The first is the real run; the second is
+Three crons — `12 11`, `12 12`, `52 12` — weekdays. The first is the real run; the second is
 a catch-up that exits in seconds if the first already completed.
 
-Cron is always UTC — there is no timezone option. 12:07 UTC is 14:07 Stockholm in
-summer and 13:07 in winter, both well clear of the US open.
+Cron is always UTC — there is no timezone option. 11:12 UTC is 13:12 Stockholm in
+summer, 12:12 in winter.
+
+**This is deliberately earlier than feels necessary.** Observed delays on this
+repo have reached ~110 minutes, which pushed a run 20 minutes past the US open.
+The schedule now assumes a two-hour delay is possible, and the guard
+(`calendar --before-open 15`) stands the session down entirely rather than write a
+"pre-market" brief with the market already trading. A missed session costs one
+data point; an inconsistent information set costs the comparability of the whole
+record.
 
 **Neither is on the hour, deliberately.** GitHub's docs state that the start of
 every hour is a high-load window and that queued scheduled jobs may be *dropped*,
