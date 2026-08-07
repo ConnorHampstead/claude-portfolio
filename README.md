@@ -100,15 +100,17 @@ python3 desk.py score         # performance + calibration report
 python3 desk.py status        # current book
 ```
 
-**Weekly.**
+**Weekly.** Handled automatically once CI is running — the daily session cancels
+entries older than 5 days, and the Friday job clears the rest before the weekend
+(see section 10). To do it by hand:
 
 ```bash
-python3 desk.py stale           # entry orders that never filled
-python3 desk.py stale --confirm # cancel them
+python3 desk.py stale --older-than 5           # list
+python3 desk.py stale --older-than 5 --confirm # cancel
 ```
 
-Unfilled GTC limit orders accumulate and will fill weeks later on an unrelated
-move, wrecking your attribution. Clear them out when the thesis has expired.
+Unfilled GTC limit orders otherwise accumulate and fill weeks later on an
+unrelated move, wrecking your attribution.
 
 **Kill switch.** If `status` reports the daily loss limit breached:
 
@@ -249,10 +251,22 @@ env block in `.github/workflows/desk.yml` to match.
 
 ### Schedule
 
-`cron: '0 12 * * 1-5'` — 12:00 UTC, weekdays. That's 14:00 Stockholm in summer and
-13:00 in winter, both comfortably before the US open. Cron is always UTC, and
-GitHub delays scheduled runs by 5–30 minutes under load, which is why the slot
-sits well clear of the open rather than tight against it.
+Two crons, `7 12` and `41 12`, weekdays. The first is the real run; the second is
+a catch-up that exits in seconds if the first already completed.
+
+Cron is always UTC — there is no timezone option. 12:07 UTC is 14:07 Stockholm in
+summer and 13:07 in winter, both well clear of the US open.
+
+**Neither is on the hour, deliberately.** GitHub's docs state that the start of
+every hour is a high-load window and that queued scheduled jobs may be *dropped*,
+not merely delayed. A dropped run produces no failure, no notification and no
+entry in the Actions tab — the trigger simply never fires, so there is nothing to
+inspect. Any non-round minute materially reduces the odds; the catch-up covers
+the remainder.
+
+The catch-up keys off `briefs/<date>.submit.txt`, written only after a real
+submit, so it cannot double-submit. Dry runs don't create it. To force a re-run,
+delete that file.
 
 `workflow_dispatch` is also enabled, so you can trigger a run by hand from the
 Actions tab. **Do that first**, before trusting the schedule — it's the fastest
@@ -327,3 +341,48 @@ Even then, the equity curve is the *last* thing that becomes informative. The
 calibration table in `desk.py score` tells you whether the model knows what it
 knows, and it starts meaning something around twenty trades — long before the
 P&L does.
+
+---
+
+## 10. Weekend cleanup (`.github/workflows/weekend.yml`)
+
+A second workflow runs Fridays at 19:00 UTC — an hour before the US close in
+summer, two in winter — and cancels **every** unfilled entry order, regardless of
+age.
+
+This is a deliberately different policy from the daily session, which only
+cancels entries older than the 5-day holding horizon. The weekend case is
+specific: an order resting from Friday can fill on Monday's open into a thesis
+written before two days of news it never saw. The price gets honoured; the
+reasoning behind it doesn't. Cancelling and letting Monday's brief re-propose the
+idea, if it still holds, keeps every filled trade tied to reasoning that was
+current when it filled.
+
+It shares a `concurrency` group with the daily session, so the two can never run
+simultaneously. `workflow_dispatch` defaults to a dry run that lists what would
+be cancelled without touching anything.
+
+If you'd rather let entries survive the weekend, delete the file. The daily
+age-based cleanup is independent.
+
+### Never-filled entries
+
+Cancelling raises a question the journal has to answer: what is a play that was
+proposed but never entered?
+
+It's a prediction that didn't become a trade. `reconcile` now marks these with
+`exit_reason = "never filled"` so they don't sit in the journal looking like open
+positions, and they're excluded from win rate, expectancy, and calibration — you
+cannot score whether price hit a target from an entry you never took.
+
+But the *rate* is worth watching, so `score` reports it:
+
+```
+Entry fill rate  33%  (1 filled / 3 proposed, 2 never reached)
+```
+
+A low fill rate is diagnostic in a way the P&L isn't. It means the entry levels
+are being set somewhere price doesn't go — too far below the market on longs,
+waiting for pullbacks that never come. That's a fixable flaw in how the model
+picks levels, and it's entirely invisible if you only look at the trades that
+did fill.

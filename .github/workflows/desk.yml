@@ -2,10 +2,18 @@ name: trading desk
 
 on:
   schedule:
-    # 12:00 UTC = 14:00 Stockholm in summer (CEST), 13:00 in winter (CET).
-    # GitHub delays scheduled runs 5-30 min under load, so this is deliberately
-    # well clear of the US open (13:30 UTC summer / 14:30 UTC winter).
-    - cron: '0 12 * * 1-5'
+    # NOT on the hour. GitHub's docs are explicit that the start of every hour is
+    # a high-load window and that queued scheduled jobs may be dropped entirely,
+    # not merely delayed - which surfaces as total silence, since the trigger
+    # never fires and there is no run to fail.
+    #
+    # 12:07 UTC = 14:07 Stockholm in summer, 13:07 in winter.
+    - cron: '7 12 * * 1-5'
+    # Catch-up 34 minutes later, in case the first was dropped. It exits
+    # immediately if the primary run already completed, so on a normal day this
+    # costs a few seconds. Still comfortably before the US open (13:30 UTC in
+    # summer, 14:30 in winter).
+    - cron: '41 12 * * 1-5'
   workflow_dispatch:        # lets you trigger a run by hand from the Actions tab
     inputs:
       dry_run:
@@ -38,15 +46,33 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # The completion marker is briefs/<date>.submit.txt, written only after a
+      # real submit. Dry runs don't create it, so they never mask a missed
+      # session. To force a re-run, delete that file.
+      - name: Already ran today?
+        id: ran
+        run: |
+          D=$(date -u +%Y-%m-%d)
+          if [ -f "briefs/${D}.submit.txt" ]; then
+            echo "already=true" >> "$GITHUB_OUTPUT"
+            echo "Session for ${D} already completed - nothing to do."
+          else
+            echo "already=false" >> "$GITHUB_OUTPUT"
+            echo "No completed session for ${D} yet - proceeding."
+          fi
+
       - uses: actions/setup-python@v5
+        if: steps.ran.outputs.already == 'false'
         with:
           python-version: '3.12'
 
       - uses: actions/setup-node@v4
+        if: steps.ran.outputs.already == 'false'
         with:
           node-version: '20'
 
       - name: Install dependencies
+        if: steps.ran.outputs.already == 'false'
         run: |
           pip install -r requirements.txt
           npm install -g @anthropic-ai/claude-code
@@ -56,6 +82,7 @@ jobs:
       # including holidays, which keeps the 60-day inactivity timer from
       # silently disabling the schedule during a quiet stretch.
       - name: Preflight — auth
+        if: steps.ran.outputs.already == 'false'
         run: |
           echo "claude version: $(claude --version 2>&1 || echo 'NOT INSTALLED')"
 
@@ -89,12 +116,14 @@ jobs:
             --max-turns 1 --output-format text
 
       - name: Heartbeat
+        if: steps.ran.outputs.already == 'false'
         run: |
           mkdir -p state
           date -u +"%Y-%m-%dT%H:%M:%SZ last run" > state/heartbeat.txt
 
       - name: Is today a trading day?
         id: guard
+        if: steps.ran.outputs.already == 'false'
         run: |
           if python3 desk.py calendar; then
             echo "trading=true" >> "$GITHUB_OUTPUT"
@@ -107,6 +136,7 @@ jobs:
         run: bash scripts/session.sh
 
       - name: Commit results
+        if: steps.ran.outputs.already == 'false'
         run: |
           git config user.name  "trading-desk[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -125,7 +155,9 @@ jobs:
         run: |
           {
             echo "## Session $(date -u +%Y-%m-%d)"
-            if [ "${{ steps.guard.outputs.trading }}" != "true" ]; then
+            if [ "${{ steps.ran.outputs.already }}" = "true" ]; then
+              echo "Already completed earlier today — catch-up run exited without acting."
+            elif [ "${{ steps.guard.outputs.trading }}" != "true" ]; then
               echo "US market closed - stood down."
             else
               echo "### Validation"

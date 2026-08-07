@@ -1,0 +1,108 @@
+name: weekend cleanup
+
+# Cancels every unfilled entry order before the weekend.
+#
+# This is a different policy from the daily session, which only cancels entries
+# older than the 5-day holding horizon. The reasoning here is specific to the
+# weekend gap: a limit order left resting from Friday can fill on Monday's open
+# into a thesis written before two days of news it never saw. The entry price
+# would be honoured; the reasoning behind it would not be.
+#
+# If you would rather let entries survive the weekend, delete this file — the
+# daily age-based cleanup in session.sh is independent of it.
+
+on:
+  schedule:
+    # 19:23 UTC Friday ~= 15:23 ET. Off the hour deliberately: the top of the
+    # hour is a high-load window where GitHub may drop scheduled runs outright.
+    # Was 19:00 UTC Friday = 15:00 ET, an hour before the US close in summer and two
+    # in winter. Deliberately early: GitHub delays scheduled runs 5-30 minutes,
+    # and this must land before the close, not during the closing auction.
+    - cron: '23 19 * * 5'
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'List what would be cancelled without cancelling it'
+        type: boolean
+        default: true
+
+concurrency:
+  group: trading-desk        # never overlap the daily session
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    env:
+      ALPACA_API_KEY_ID: ${{ secrets.ALPACA_API_KEY_ID }}
+      ALPACA_API_SECRET_KEY: ${{ secrets.ALPACA_API_SECRET_KEY }}
+      DRY_RUN: ${{ inputs.dry_run && '1' || '' }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      # No Claude call and no chart, so requests alone is enough.
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Is today a trading day?
+        id: guard
+        run: |
+          if python3 desk.py calendar; then
+            echo "trading=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "trading=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Cancel resting entries
+        if: steps.guard.outputs.trading == 'true'
+        run: |
+          mkdir -p state
+          if [ -n "${DRY_RUN}" ]; then
+            echo "*** DRY RUN - listing only ***"
+            python3 desk.py stale | tee state/weekend-cleanup.txt
+          else
+            # No --older-than: everything unfilled goes, whatever its age.
+            python3 desk.py stale --confirm | tee state/weekend-cleanup.txt
+            # Mark the cancelled rows so they don't linger in the journal
+            # looking like open trades.
+            python3 desk.py reconcile | tee -a state/weekend-cleanup.txt
+          fi
+          python3 desk.py status | tee -a state/weekend-cleanup.txt
+
+      - name: Commit results
+        if: steps.guard.outputs.trading == 'true' && !inputs.dry_run
+        run: |
+          git config user.name  "trading-desk[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A state journal.csv 2>/dev/null || true
+          if git diff --staged --quiet; then
+            echo "Nothing to commit."
+          else
+            git commit -m "weekend cleanup $(date -u +%Y-%m-%d)"
+            git pull --rebase --autostash origin "${GITHUB_REF_NAME}"
+            git push
+          fi
+
+      - name: Summary
+        if: always()
+        run: |
+          {
+            echo "## Weekend cleanup $(date -u +%Y-%m-%d)"
+            if [ "${{ steps.guard.outputs.trading }}" != "true" ]; then
+              echo "US market closed today — nothing to do."
+            else
+              echo '```'
+              cat state/weekend-cleanup.txt 2>/dev/null || echo "(none)"
+              echo '```'
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
