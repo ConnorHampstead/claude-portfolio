@@ -768,6 +768,88 @@ def cmd_score(args):
     print()
 
 
+def market_hours_utc() -> tuple[dict, datetime, datetime] | None:
+    """Today's session as (calendar_day, open_utc, close_utc), or None.
+
+    None means today is not a US trading day. Both times come from Alpaca's
+    calendar rather than a hardcoded 09:30/16:00, so US daylight saving and
+    half-day early closes (the day after Thanksgiving, Christmas Eve) are
+    handled without this code knowing they exist.
+    """
+    from zoneinfo import ZoneInfo
+
+    today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    days = api("GET", "/v2/calendar", params={"start": today, "end": today})
+    if not days:
+        return None
+
+    d = days[0]
+    et = ZoneInfo("America/New_York")
+    base = datetime.strptime(d["date"], "%Y-%m-%d")
+
+    def et_to_utc(hhmm: str, fallback: str) -> datetime:
+        hh, mm = (hhmm or fallback).split(":")[:2]
+        return base.replace(hour=int(hh), minute=int(mm),
+                            tzinfo=et).astimezone(timezone.utc)
+
+    return d, et_to_utc(d.get("open"), "09:30"), et_to_utc(d.get("close"), "16:00")
+
+
+def cmd_wait(args):
+    """Sleep until a target time, then return. No-op if that time already passed.
+
+    Used to hold a CI job open so the work lands at a predictable time
+    regardless of when the triggering cron actually started. GitHub's scheduled
+    triggers are delayed unpredictably (observed: 2+ hours), but a job that is
+    already running can simply wait out the difference.
+
+    The target is either a fixed wall clock (--time/--tz) or, preferably,
+    derived from today's actual session (--before-open/--before-close). The
+    derived form is correct across daylight saving on both sides and on
+    half-day early closes; a fixed wall clock is not.
+    """
+    import time
+
+    if args.before_open is not None or args.before_close is not None:
+        hours = market_hours_utc()
+        if hours is None:
+            print("Not a US trading day - nothing to wait for, proceeding now.")
+            return
+        _, open_utc, close_utc = hours
+        if args.before_open is not None:
+            target_utc = open_utc - timedelta(minutes=args.before_open)
+            label = f"{args.before_open} min before the open ({open_utc:%H:%M} UTC)"
+        else:
+            target_utc = close_utc - timedelta(minutes=args.before_close)
+            label = f"{args.before_close} min before the close ({close_utc:%H:%M} UTC)"
+    else:
+        if not args.tz:
+            sys.exit("--time requires --tz (e.g. --tz Europe/Stockholm)")
+        from zoneinfo import ZoneInfo
+        tz = ZoneInfo(args.tz)
+        hh, mm = args.time.split(":")
+        # Anchored to today in --tz. It never rolls forward to tomorrow: a
+        # target that has already passed is a no-op, not a 23-hour sleep.
+        target_utc = datetime.now(tz).replace(
+            hour=int(hh), minute=int(mm), second=0, microsecond=0
+        ).astimezone(timezone.utc)
+        label = f"{args.time} {args.tz}"
+
+    now_utc = datetime.now(timezone.utc)
+    secs = (target_utc - now_utc).total_seconds()
+
+    if secs <= 0:
+        print(f"Already {abs(secs) / 60:.0f} min past {label} "
+              f"({target_utc.isoformat()}) - proceeding now.")
+        return
+
+    print(f"Holding open {secs / 60:.1f} min until {label} "
+          f"({target_utc.isoformat()})...")
+    sys.stdout.flush()          # so the log shows the wait before it starts
+    time.sleep(secs)
+    print("Target time reached.")
+
+
 def cmd_calendar(args):
     """Exit 0 if today is a US trading day, 1 if not. For CI guards.
 
@@ -778,25 +860,24 @@ def cmd_calendar(args):
     Standing down costs one session; running anyway costs comparability.
     """
     today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
-    days = api("GET", "/v2/calendar", params={"start": today, "end": today})
-    if not days:
+    # A RuntimeError here is an API failure and is deliberately NOT caught: it
+    # propagates to main(), which exits non-zero, and the CI guard stands the
+    # session down. Failing closed is the right default when we cannot confirm
+    # the market is open. Only a malformed calendar payload is tolerated below.
+    try:
+        hours = market_hours_utc()
+    except (ValueError, KeyError, TypeError) as e:
+        print(f"  ! could not resolve the session times ({e}) - not enforcing deadline.")
+        sys.exit(0)
+
+    if hours is None:
         print(f"{today} is not a US trading day - standing down.")
         sys.exit(1)
 
-    d = days[0]
+    d, open_utc, _close_utc = hours
     print(f"{today} is a trading day (open {d.get('open')} close {d.get('close')} ET)")
 
     if args.before_open is None:
-        sys.exit(0)
-
-    try:
-        from zoneinfo import ZoneInfo
-        hh, mm = (d.get("open") or "09:30").split(":")[:2]
-        open_et = datetime.strptime(d["date"], "%Y-%m-%d").replace(
-            hour=int(hh), minute=int(mm), tzinfo=ZoneInfo("America/New_York"))
-        open_utc = open_et.astimezone(timezone.utc)
-    except Exception as e:
-        print(f"  ! could not resolve the open time ({e}) - not enforcing deadline.")
         sys.exit(0)
 
     now = datetime.now(timezone.utc)
@@ -1181,6 +1262,18 @@ def main():
 
     p = sub.add_parser("score", help="performance and calibration report")
     p.set_defaults(func=cmd_score)
+
+    p = sub.add_parser("wait", help="hold open until a target time, no-op if already past")
+    g = p.add_mutually_exclusive_group(required=True)
+    g.add_argument("--before-open", type=int, metavar="MIN",
+                   help="wait until MIN minutes before today's open (preferred)")
+    g.add_argument("--before-close", type=int, metavar="MIN",
+                   help="wait until MIN minutes before today's close")
+    g.add_argument("--time", metavar="HH:MM",
+                   help="wait until this fixed wall-clock time; needs --tz")
+    p.add_argument("--tz", metavar="IANA_TZ",
+                   help="timezone for --time, e.g. Europe/Stockholm")
+    p.set_defaults(func=cmd_wait)
 
     p = sub.add_parser("calendar", help="exit 0 if today is a US trading day, else 1")
     p.add_argument("--before-open", type=int, metavar="MIN",

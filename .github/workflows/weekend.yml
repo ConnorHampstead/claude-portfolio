@@ -36,7 +36,10 @@ permissions:
 jobs:
   cleanup:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    # Must cover the hold plus the cleanup. The 19:23 UTC trigger is ~27 min
+    # before the target in summer but ~87 in winter, since the cron is fixed
+    # UTC and the close is not. Sized for the winter case with margin.
+    timeout-minutes: 120
 
     env:
       ALPACA_API_KEY_ID: ${{ secrets.ALPACA_API_KEY_ID }}
@@ -57,6 +60,8 @@ jobs:
       - name: Install dependencies
         run: pip install requests
 
+      # Killswitch before the wait, so a non-trading day exits in seconds
+      # instead of holding a runner open for up to ~30 min for nothing.
       - name: Is today a trading day?
         id: guard
         run: |
@@ -65,6 +70,18 @@ jobs:
           else
             echo "trading=false" >> "$GITHUB_OUTPUT"
           fi
+
+      # Hold until 10 minutes before the close, so the cancellations land just
+      # ahead of the bell rather than whenever the scheduler fired.
+      #
+      # Derived from Alpaca's calendar rather than a wall clock, which matters
+      # twice a year: the close is 20:00 UTC in summer and 21:00 in winter,
+      # and on the half-day session after Thanksgiving - always a Friday, so
+      # always this workflow - it is 18:00 UTC. A fixed target would sleep
+      # straight past that early close.
+      - name: Hold open until 10 min before the close
+        if: steps.guard.outputs.trading == 'true'
+        run: python3 desk.py wait --before-close 10
 
       - name: Cancel resting entries
         if: steps.guard.outputs.trading == 'true'
