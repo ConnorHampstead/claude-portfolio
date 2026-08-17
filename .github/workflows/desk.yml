@@ -7,13 +7,22 @@ on:
     # not merely delayed - which surfaces as total silence, since the trigger
     # never fires and there is no run to fail.
     #
-    # Primary. 11:12 UTC = 13:12 Stockholm in summer, 12:12 in winter.
-    # Deliberately early: observed delays have reached ~110 minutes, and the US
-    # open is 13:30 UTC in summer. Even a two-hour delay lands pre-open here.
+    # Three triggers, hourly, all converging on the same target: 25 minutes
+    # before the actual open (see "Hold open" below). These solve two
+    # different problems and it is worth keeping them straight.
+    #
+    #   Delay   - a trigger fires late. Solved by the job holding itself open
+    #             and waiting out the gap, not by the schedule.
+    #   Dropped - a trigger never fires at all, so there is no job to wait.
+    #             Only a later trigger can cover that, hence three.
+    #
+    # Whichever fires first does the work and holds the runner until the
+    # target; the others queue behind the concurrency group below and exit in
+    # seconds on the already-ran check. Earliest is 10:12 so the longest hold
+    # is ~3h, well inside the 6h ceiling GitHub puts on a single job.
+    - cron: '12 10 * * 1-5'
     - cron: '12 11 * * 1-5'
-    # Two catch-ups. Each exits in seconds if the session already completed.
     - cron: '12 12 * * 1-5'
-    - cron: '52 12 * * 1-5'
   workflow_dispatch:        # lets you trigger a run by hand from the Actions tab
     inputs:
       dry_run:
@@ -32,7 +41,11 @@ permissions:
 jobs:
   session:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    # Must cover the longest possible hold plus the session itself. The 10:12
+    # trigger firing on time waits ~3h for a 13:05 UTC target (summer), then
+    # runs for ~20 min. GitHub kills any single job at 6h regardless, so this
+    # sits just under that.
+    timeout-minutes: 330
 
     env:
       ALPACA_API_KEY_ID: ${{ secrets.ALPACA_API_KEY_ID }}
@@ -69,28 +82,90 @@ jobs:
             echo "No completed session for ${D} yet - proceeding."
           fi
 
+      # Heartbeat needs nothing but `date`, so it runs before any setup and
+      # unconditionally on every non-duplicate trigger, including holidays -
+      # that keeps the 60-day inactivity timer from silently disabling the
+      # schedule during a quiet stretch, regardless of what the guard below
+      # decides.
+      - name: Heartbeat
+        if: steps.ran.outputs.already == 'false'
+        run: |
+          mkdir -p state
+          date -u +"%Y-%m-%dT%H:%M:%SZ last run" > state/heartbeat.txt
+
       - uses: actions/setup-python@v5
         if: steps.ran.outputs.already == 'false'
         with:
           python-version: '3.12'
 
-      - uses: actions/setup-node@v4
+      # Just enough to run desk.py's guard checks below. The rest of
+      # requirements.txt (matplotlib etc.) and the npm install are deferred
+      # past the guard so a dead trigger (holiday, already ran) never pays
+      # for them.
+      - name: Install minimal dependencies for guard checks
         if: steps.ran.outputs.already == 'false'
+        run: pip install requests
+
+      # Cheap killswitch, deliberately WITHOUT --before-open. Its only job is
+      # to stop a holiday or weekend trigger from holding a runner open for
+      # hours and installing a toolchain it will never use. The pre-open
+      # deadline is a separate question and cannot be answered here - this
+      # runs up to three hours before the session actually starts, so any
+      # answer it gave would be stale by the time it mattered.
+      - name: Is today a trading day?
+        id: tradingday
+        if: steps.ran.outputs.already == 'false'
+        run: |
+          if python3 desk.py calendar; then
+            echo "trading=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "trading=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - uses: actions/setup-node@v4
+        if: steps.tradingday.outputs.trading == 'true'
         with:
           node-version: '20'
 
       - name: Install dependencies
-        if: steps.ran.outputs.already == 'false'
+        if: steps.tradingday.outputs.trading == 'true'
         run: |
           pip install -r requirements.txt
           npm install -g @anthropic-ai/claude-code
           claude --version
 
-      # Heartbeat is written unconditionally. This commits on every run,
-      # including holidays, which keeps the 60-day inactivity timer from
-      # silently disabling the schedule during a quiet stretch.
+      # The point of the whole exercise. GitHub's trigger time is unreliable,
+      # but a job that is already running can wait out the difference, so the
+      # session lands at a consistent point relative to the market rather than
+      # whenever the scheduler got round to us.
+      #
+      # 25 minutes before the open, not a fixed wall clock: the open is
+      # 13:30 UTC in summer and 14:30 in winter, and is earlier still on
+      # half-day sessions. Deriving it from Alpaca's calendar keeps this
+      # correct across both daylight-saving regimes without a table of dates.
+      # 25 min is chosen so the ~20 min session finishes just before the bell.
+      # A trigger that starts later than the target skips the wait entirely.
+      - name: Hold open until 25 min before the open
+        if: steps.tradingday.outputs.trading == 'true'
+        run: python3 desk.py wait --before-open 25
+
+      # The real deadline check, now that we are about to do the work. This is
+      # what stops a badly delayed run writing a "pre-market" brief with the
+      # market already trading. It has to be here, after the wait, because
+      # that is the only point where "how long until the open" is the number
+      # that actually governs the session.
+      - name: Still inside the pre-market window?
+        id: guard
+        if: steps.tradingday.outputs.trading == 'true'
+        run: |
+          if python3 desk.py calendar --before-open 15; then
+            echo "trading=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "trading=false" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Preflight — auth
-        if: steps.ran.outputs.already == 'false'
+        if: steps.guard.outputs.trading == 'true'
         run: |
           echo "claude version: $(claude --version 2>&1 || echo 'NOT INSTALLED')"
 
@@ -123,24 +198,6 @@ jobs:
           claude -p "Reply with exactly: PREFLIGHT_OK" \
             --max-turns 1 --output-format text
 
-      - name: Heartbeat
-        if: steps.ran.outputs.already == 'false'
-        run: |
-          mkdir -p state
-          date -u +"%Y-%m-%dT%H:%M:%SZ last run" > state/heartbeat.txt
-
-      - name: Is today a trading day?
-        id: guard
-        if: steps.ran.outputs.already == 'false'
-        run: |
-          # --before-open makes a late run stand down rather than write a
-          # "pre-market" brief with the market already trading.
-          if python3 desk.py calendar --before-open 15; then
-            echo "trading=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "trading=false" >> "$GITHUB_OUTPUT"
-          fi
-
       - name: Run session
         if: steps.guard.outputs.trading == 'true'
         run: bash scripts/session.sh
@@ -167,8 +224,11 @@ jobs:
             echo "## Session $(date -u +%Y-%m-%d)"
             if [ "${{ steps.ran.outputs.already }}" = "true" ]; then
               echo "Already completed earlier today — catch-up run exited without acting."
-            elif [ "${{ steps.guard.outputs.trading }}" != "true" ]; then
+            elif [ "${{ steps.tradingday.outputs.trading }}" != "true" ]; then
               echo "US market closed - stood down."
+            elif [ "${{ steps.guard.outputs.trading }}" != "true" ]; then
+              echo "Missed the pre-market deadline - stood down rather than write a"
+              echo "post-open brief that would not be comparable with the record."
             else
               echo "### Validation"
               echo '```'
