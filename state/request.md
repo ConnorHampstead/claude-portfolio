@@ -18,6 +18,10 @@ so everything below matters more than it would in a conversation:
   remaining slots wastes the whole brief; the harness rejects the excess.
 - **Do not size positions.** Give entry, stop, and target. Share count is derived
   from your stop against live equity.
+- **A stop or target change you only describe in prose does not happen.** Any
+  adjustment to an open position — new stop, new target, or an exit — must also
+  appear in the `manage` array of the JSON block, including on a `no_trade` day.
+  The stops shown in the book state below are the live resting orders.
 
 **You are writing before the 08:30 ET data drop.** The session is scheduled early
 so it reliably lands pre-open, which means the day's major scheduled releases —
@@ -38,20 +42,22 @@ what you actually believe rather than clustering everything near 60% — a brief
 where every play is 65% carries no information and will score no better than a
 coin flip.
 ## Current book state
-*Auto-generated 2026-08-20 13:05 UTC. These are live figures - use them, do not estimate.*
+*Auto-generated 2026-08-21 13:05 UTC. These are live figures - use them, do not estimate.*
 
-- Equity: **$101,975.28**
+- Equity: **$101,165.78**
 - Cash: $70,150.28
-- Session P&L so far: -0.18% (kill switch at -3.0%)
-- Gross exposure: $31,825 (31% of equity, cap 100%)
-- Net exposure: $+31,825 (+31%)
+- Session P&L so far: -0.09% (kill switch at -3.0%)
+- Gross exposure: $31,016 (31% of equity, cap 100%)
+- Net exposure: $+31,016 (+31%)
 - Open positions: 1 of 5 — you may open at most 4 more
 
 ### Open positions
 
+*Stop and target are the live resting orders. To change them, put the position in the `manage` array of your JSON block — prose alone does not move an order.*
+
 | Symbol | Side | Qty | Avg entry | Last | Unreal. P&L | Stop | Target | Original thesis |
 |---|---|---|---|---|---|---|---|---|
-| LLY | long | 25 | 1163.64 | 1273.00 | +2,734 (+9.4%) | 1126.0 | 1228.0 | The guidance raise is the specific variable the Street said would determine the reaction, and it came in more than doubl |
+| LLY | long | 25 | 1163.64 | 1240.62 | +1,924 (+6.6%) | 1126.0 (no live order) | 1228.0 (no live order) | The guidance raise is the specific variable the Street said would determine the reaction, and it came in more than doubl |
 
 ### Last 1 closed trades
 

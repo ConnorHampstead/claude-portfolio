@@ -1,0 +1,28 @@
+
+====================================================================
+  SESSION 2026-08-21   equity $101,150.28   day P&L -0.11%
+====================================================================
+
+  POSITION MANAGEMENT
+
+  [OK] LLY UPDATE x25 (long, avg 1163.64)
+      stop   none -> 1200.00
+      target none -> 1300.00
+      risk-at-stake $0.00 (0.00% of equity)
+      Position had no live orders; installing a live stop above entry (locks >=$909 gain) and lifting the target above the already-breached 1228 to just over the recent all-time high as the thesis matures.
+      ! no live stop order found - a new one will be created
+      ! no live take-profit order found - a new one will be created
+
+  ----------------------------------------------------------------
+
+  [OK] ROST LONG
+      entry 242.50 (limit)  stop 236.00  target 258.00  [2.38R]
+      qty 155  notional $37,588  risk $1,007.50 (1.00% of equity)
+      P(target first) 47%   conviction 3
+
+  ----------------------------------------------------------------
+  1 approved, 0 rejected.  Total new risk $1,007.50 (1.00% of equity)
+  1 position update(s) pending.
+
+  Dry run. Re-run with `submit --confirm` to send these.
+
