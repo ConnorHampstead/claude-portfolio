@@ -6,6 +6,11 @@ Takes a JSON block of proposed trades (emitted by Claude alongside its morning
 brief), enforces the risk rules, sizes positions from the stop, submits bracket
 orders to an Alpaca PAPER account, and logs everything for later scoring.
 
+The same JSON block may carry a "manage" array for positions that are already
+open - new stops, new targets, or a close. Those are applied to the live exit
+orders and run even on a "no_trade" day, since standing down applies to new
+entries only.
+
 Commands:
     check     Validate a plays file and print the sized plan. Sends nothing.
     submit    Same as check, then actually submit. Requires --confirm.
@@ -140,6 +145,50 @@ def get_snapshots(symbols: list[str], feed: str) -> dict:
         # Older/alternate endpoint shape
         data = api("GET", "/v2/stocks/snapshots", base=DATA_BASE, params=params)
     return data.get("snapshots", data)
+
+
+def get_open_orders(symbol: str | None = None) -> list:
+    params = {"status": "open", "nested": "true", "limit": 500}
+    if symbol:
+        params["symbols"] = symbol.upper()
+    return api("GET", "/v2/orders", params=params)
+
+
+def exit_legs(symbol: str, pos_side: str, orders: list | None = None) -> dict:
+    """Find the live take-profit / stop-loss orders protecting an open position.
+
+    After a bracket entry fills, its two children stay open as an OCO pair. They
+    come back either nested under the parent or as top-level orders, so walk both.
+    The exit legs are the ones facing opposite the position.
+    """
+    symbol = symbol.upper()
+    exit_side = "sell" if pos_side == "long" else "buy"
+    found = {"take_profit": None, "stop_loss": None}
+
+    def walk(nodes):
+        for o in nodes or []:
+            walk(o.get("legs"))
+            if (o.get("symbol") or "").upper() != symbol:
+                continue
+            if o.get("side") != exit_side:
+                continue
+            otype = o.get("type")
+            if otype == "limit" and not found["take_profit"]:
+                found["take_profit"] = o
+            elif otype in ("stop", "stop_limit", "trailing_stop") and not found["stop_loss"]:
+                found["stop_loss"] = o
+
+    walk(orders if orders is not None else get_open_orders(symbol))
+    return found
+
+
+def leg_price(order: dict | None) -> float | None:
+    if not order:
+        return None
+    for field in ("stop_price", "limit_price"):
+        if order.get(field):
+            return float(order[field])
+    return None
 
 
 def last_price(snap: dict) -> float | None:
@@ -304,6 +353,191 @@ def validate_play(play: dict, ctx: dict) -> tuple[list[str], list[str], dict]:
     return errors, warnings, enriched
 
 
+def validate_manage(item: dict, ctx: dict) -> tuple[list[str], list[str], dict]:
+    """Validate one position-management instruction against the live book.
+
+    These act on positions that already exist, so nothing here is sized: the
+    share count is whatever is open. Returns (errors, warnings, enriched).
+    """
+    errors, warnings = [], []
+    cfg, equity = ctx["cfg"], ctx["equity"]
+
+    if not item.get("ticker"):
+        return ["missing required field 'ticker'"], warnings, {}
+    symbol = str(item["ticker"]).upper().strip()
+
+    action = str(item.get("action", "update")).lower().strip()
+    if action not in ("update", "close"):
+        return [f"action must be update or close, got '{action}'"], warnings, {}
+
+    pos = next((p for p in ctx["positions"] if p["symbol"].upper() == symbol), None)
+    if pos is None:
+        return [f"no open {symbol} position to manage - use 'plays' to open one"], warnings, {}
+
+    pos_side = "long" if float(pos["qty"]) > 0 else "short"
+    qty = abs(int(float(pos["qty"])))
+    avg_entry = float(pos["avg_entry_price"])
+    ref = ctx["prices"].get(symbol) or float(pos.get("current_price") or 0) or None
+
+    stop = target = None
+    try:
+        if item.get("stop") is not None:
+            stop = float(item["stop"])
+        if item.get("target") is not None:
+            target = float(item["target"])
+        elif item.get("targets"):
+            target = float(item["targets"][0])
+    except (TypeError, ValueError):
+        return ["stop/target must be numbers"], warnings, {}
+
+    if action == "update" and stop is None and target is None:
+        errors.append("update needs at least one of 'stop' or 'target'")
+
+    if action == "update" and ref:
+        # A stop on the wrong side of the market fires the moment it is accepted.
+        if pos_side == "long":
+            if stop is not None and stop >= ref:
+                errors.append(
+                    f"long stop {stop:.2f} is at or above last price {ref:.2f} - "
+                    "it would trigger immediately; close the position instead"
+                )
+            if target is not None and target <= ref:
+                errors.append(
+                    f"long target {target:.2f} is at or below last price {ref:.2f} - "
+                    "it would fill immediately; close the position instead"
+                )
+        else:
+            if stop is not None and stop <= ref:
+                errors.append(
+                    f"short stop {stop:.2f} is at or below last price {ref:.2f} - "
+                    "it would trigger immediately; close the position instead"
+                )
+            if target is not None and target >= ref:
+                errors.append(
+                    f"short target {target:.2f} is at or above last price {ref:.2f} - "
+                    "it would fill immediately; close the position instead"
+                )
+        for label, level in (("stop", stop), ("target", target)):
+            if level is not None and abs(level - ref) / ref > 0.25:
+                errors.append(
+                    f"{label} {level:.2f} is {abs(level - ref) / ref:.0%} away from "
+                    f"last price {ref:.2f} - verify this level, it looks stale"
+                )
+    elif action == "update" and not ref:
+        warnings.append(f"no reference price for {symbol} - could not sanity-check levels")
+
+    if stop is not None and target is not None:
+        if pos_side == "long" and stop >= target:
+            errors.append(f"long stop {stop:.2f} is not below target {target:.2f}")
+        if pos_side == "short" and stop <= target:
+            errors.append(f"short stop {stop:.2f} is not above target {target:.2f}")
+
+    # Rule 1 still binds: widening a stop must not put more than the risk budget
+    # back at stake, measured entry-to-stop like any other trade.
+    risk_usd = 0.0
+    if stop is not None:
+        per_share = (avg_entry - stop) if pos_side == "long" else (stop - avg_entry)
+        risk_usd = max(0.0, per_share) * qty
+        budget = equity * cfg["risk_per_trade_pct"] / 100.0
+        if risk_usd > budget:
+            errors.append(
+                f"stop {stop:.2f} puts ${risk_usd:,.2f} "
+                f"({risk_usd / equity * 100:.2f}% of equity) at risk against the "
+                f"{avg_entry:.2f} average entry, over the "
+                f"{cfg['risk_per_trade_pct']}% per-trade cap"
+            )
+
+    try:
+        legs = exit_legs(symbol, pos_side)
+    except RuntimeError as e:
+        errors.append(f"could not read open orders for {symbol}: {e}")
+        legs = {"take_profit": None, "stop_loss": None}
+
+    if action == "update":
+        if stop is not None and not legs["stop_loss"]:
+            warnings.append("no live stop order found - a new one will be created")
+        if target is not None and not legs["take_profit"]:
+            warnings.append("no live take-profit order found - a new one will be created")
+
+    enriched = {
+        "symbol": symbol, "action": action, "side": pos_side, "qty": qty,
+        "avg_entry": avg_entry, "ref": ref, "stop": stop, "target": target,
+        "old_stop": leg_price(legs["stop_loss"]),
+        "old_target": leg_price(legs["take_profit"]),
+        "legs": legs, "risk_usd": risk_usd,
+        "reason": item.get("reason", ""),
+    }
+    return errors, warnings, enriched
+
+
+def apply_manage(m: dict, tif: str) -> list[str]:
+    """Push one validated management instruction to Alpaca. Returns log lines."""
+    symbol, side, qty = m["symbol"], m["side"], m["qty"]
+    exit_side = "sell" if side == "long" else "buy"
+    log = []
+
+    if m["action"] == "close":
+        for leg in ("take_profit", "stop_loss"):
+            order = m["legs"][leg]
+            if order:
+                try:
+                    api("DELETE", f"/v2/orders/{order['id']}")
+                except RuntimeError as e:
+                    log.append(f"could not cancel {leg} ({e})")
+        resp = api("DELETE", f"/v2/positions/{symbol}")
+        log.append(f"close order sent x{qty} [{resp.get('status', 'submitted')}]")
+        return log
+
+    replaced = {"stop_loss": m["stop"], "take_profit": m["target"]}
+    missing = {}
+    for leg, level in replaced.items():
+        if level is None:
+            continue
+        order = m["legs"][leg]
+        if not order:
+            missing[leg] = level
+            continue
+        field = "stop_price" if leg == "stop_loss" else "limit_price"
+        resp = api("PATCH", f"/v2/orders/{order['id']}", json={field: f"{level:.2f}"})
+        m["legs"][leg] = resp or order
+        label = "stop" if leg == "stop_loss" else "target"
+        log.append(f"{label} -> {level:.2f} [{resp.get('status', 'replaced')}]")
+
+    if not missing:
+        return log
+
+    # Nothing live to amend on this side, so place fresh protection. Both sides
+    # missing means one OCO pair; one side means a single standalone order.
+    if len(missing) == 2:
+        body = {
+            "symbol": symbol, "qty": str(qty), "side": exit_side,
+            "type": "limit", "time_in_force": tif, "order_class": "oco",
+            "take_profit": {"limit_price": f"{missing['take_profit']:.2f}"},
+            "stop_loss": {"stop_price": f"{missing['stop_loss']:.2f}"},
+        }
+        resp = api("POST", "/v2/orders", json=body)
+        log.append(
+            f"new OCO stop {missing['stop_loss']:.2f} / target "
+            f"{missing['take_profit']:.2f} [{resp.get('status', 'submitted')}]"
+        )
+        return log
+
+    leg, level = next(iter(missing.items()))
+    body = {
+        "symbol": symbol, "qty": str(qty), "side": exit_side,
+        "time_in_force": tif,
+    }
+    if leg == "stop_loss":
+        body.update({"type": "stop", "stop_price": f"{level:.2f}"})
+        label = "stop"
+    else:
+        body.update({"type": "limit", "limit_price": f"{level:.2f}"})
+        label = "target"
+    resp = api("POST", "/v2/orders", json=body)
+    log.append(f"new {label} {level:.2f} [{resp.get('status', 'submitted')}]")
+    return log
+
+
 def portfolio_checks(planned: list[dict], ctx: dict) -> list[str]:
     """Rules that apply across the whole book, not to individual plays."""
     problems = []
@@ -394,6 +628,32 @@ def write_journal(rows: list[dict]):
             w.writerow({k: r.get(k, "") for k in JOURNAL_FIELDS})
 
 
+def update_journal_levels(symbol: str, stop=None, target=None, note: str = "") -> bool:
+    """Rewrite the stop/target on the open journal row for a symbol.
+
+    Keeps the journal (and therefore `prep`, which the brief is written from)
+    honest about where the live orders actually sit.
+    """
+    rows = read_journal()
+    hit = None
+    for row in rows:
+        if row.get("ticker", "").upper() != symbol.upper():
+            continue
+        if row.get("r_multiple") not in ("", None):
+            continue  # already closed out
+        hit = row
+    if hit is None:
+        return False
+    if stop is not None:
+        hit["stop"] = stop
+    if target is not None:
+        hit["target"] = target
+    if note:
+        hit["notes"] = " | ".join(x for x in (hit.get("notes", ""), note) if x)
+    write_journal(rows)
+    return True
+
+
 def append_journal(row: dict):
     ensure_journal()
     with JOURNAL.open("a", newline="") as f:
@@ -459,21 +719,59 @@ def load_plays(path: str) -> dict:
 def cmd_check(args, submit: bool = False):
     doc = load_plays(args.file)
     plays = doc.get("plays", [])
+    manage = doc.get("manage", []) or []
     session_date = doc.get("date") or datetime.now(timezone.utc).strftime("%Y-%m-%d")
 
-    if doc.get("no_trade") or not plays:
+    if doc.get("no_trade"):
+        plays = []  # no_trade governs new entries only, never position management
+
+    if not plays and not manage:
         print(f"\n{session_date}: no trades proposed.")
         if doc.get("session_note"):
             print(f"  {doc['session_note']}")
         return
 
-    ctx = build_context([p.get("ticker", "") for p in plays if p.get("ticker")])
+    symbols = [p.get("ticker", "") for p in plays if p.get("ticker")]
+    symbols += [m.get("ticker", "") for m in manage if m.get("ticker")]
+    ctx = build_context(symbols)
     cfg = ctx["cfg"]
 
     print(f"\n{'=' * 68}")
     print(f"  SESSION {session_date}   equity ${ctx['equity']:,.2f}   "
           f"day P&L {ctx['daily_pnl_pct']:+.2f}%")
     print(f"{'=' * 68}")
+
+    managed = []
+    if manage:
+        print(f"\n  POSITION MANAGEMENT")
+        for item in manage:
+            errors, warnings, m = validate_manage(item, ctx)
+            tag = item.get("ticker", "?")
+            if errors:
+                print(f"\n  [REJECTED] {tag}")
+                for err in errors:
+                    print(f"      x {err}")
+                continue
+            managed.append(m)
+            if m["action"] == "close":
+                print(f"\n  [OK] {m['symbol']} CLOSE x{m['qty']}")
+            else:
+                print(f"\n  [OK] {m['symbol']} UPDATE x{m['qty']} "
+                      f"({m['side']}, avg {m['avg_entry']:.2f})")
+                if m["stop"] is not None:
+                    old = f"{m['old_stop']:.2f}" if m["old_stop"] else "none"
+                    print(f"      stop   {old} -> {m['stop']:.2f}")
+                if m["target"] is not None:
+                    old = f"{m['old_target']:.2f}" if m["old_target"] else "none"
+                    print(f"      target {old} -> {m['target']:.2f}")
+                if m["stop"] is not None:
+                    print(f"      risk-at-stake ${m['risk_usd']:,.2f} "
+                          f"({m['risk_usd'] / ctx['equity'] * 100:.2f}% of equity)")
+            if m["reason"]:
+                print(f"      {m['reason']}")
+            for w in warnings:
+                print(f"      ! {w}")
+        print(f"\n  {'-' * 64}")
 
     approved, rejected = [], []
     for play in plays:
@@ -500,20 +798,30 @@ def cmd_check(args, submit: bool = False):
         for w in warnings:
             print(f"      ! {w}")
 
-    problems = portfolio_checks(approved, ctx)
+    problems = portfolio_checks(approved, ctx) if approved else []
     if problems:
         print(f"\n  {'-' * 64}\n  BOOK-LEVEL VIOLATIONS")
         for pr in problems:
             print(f"      x {pr}")
-        print("\n  Nothing submitted. Fix the brief and re-run.")
-        return
+        # Book-level caps govern new exposure. Management of positions that are
+        # already open is unaffected, so it still goes through.
+        print("\n  No new orders submitted. Fix the brief and re-run.")
+        blocked, approved = len(approved), []
 
     total_risk = sum(p["risk_usd"] for p in approved)
     print(f"\n  {'-' * 64}")
-    print(f"  {len(approved)} approved, {len(rejected)} rejected.  "
-          f"Total new risk ${total_risk:,.2f} "
-          f"({total_risk / ctx['equity'] * 100:.2f}% of equity)")
+    if plays:
+        print(f"  {len(approved)} approved, {len(rejected)} rejected"
+              + (f", {blocked} blocked by book-level rules" if problems else "")
+              + f".  Total new risk ${total_risk:,.2f} "
+                f"({total_risk / ctx['equity'] * 100:.2f}% of equity)")
+    elif doc.get("no_trade"):
+        print(f"  No new positions today.")
+    if managed:
+        print(f"  {len(managed)} position update(s) pending.")
 
+    if not approved and not managed:
+        return
     if not submit:
         print("\n  Dry run. Re-run with `submit --confirm` to send these.\n")
         return
@@ -527,6 +835,28 @@ def cmd_check(args, submit: bool = False):
         print("    Orders will queue. Market orders will fill at the next open.")
 
     print()
+    for m in managed:
+        try:
+            lines = apply_manage(m, cfg["time_in_force"])
+        except RuntimeError as e:
+            print(f"  x {m['symbol']} MANAGE REJECTED BY ALPACA: {e}")
+            continue
+        for line in lines:
+            print(f"  ~ {m['symbol']} {line}")
+        if m["action"] == "close":
+            update_journal_levels(
+                m["symbol"],
+                note=f"{session_date}: close requested"
+                     + (f" - {m['reason']}" if m["reason"] else ""),
+            )
+        else:
+            note = f"{session_date}: levels updated"
+            if m["reason"]:
+                note += f" - {m['reason']}"
+            if not update_journal_levels(m["symbol"], m["stop"], m["target"], note):
+                print(f"  ! {m['symbol']} has no open journal row - "
+                      "orders updated, journal not")
+
     for p in approved:
         order_body = build_order(p, cfg["time_in_force"])
         play_id = uuid.uuid4().hex[:8]
@@ -929,17 +1259,29 @@ def cmd_prep(args):
                f"— you may open at most {max(0, cfg['max_positions'] - len(positions))} more")
 
     if positions:
+        try:
+            live_orders = get_open_orders()
+        except RuntimeError:
+            live_orders = []
         out.append(f"\n### Open positions\n")
+        out.append("*Stop and target are the live resting orders. To change them, put the "
+                   "position in the `manage` array of your JSON block — prose alone does "
+                   "not move an order.*\n")
         out.append("| Symbol | Side | Qty | Avg entry | Last | Unreal. P&L | Stop | Target | Original thesis |")
         out.append("|---|---|---|---|---|---|---|---|---|")
         for p in positions:
             j = by_symbol.get(p["symbol"], {})
             thesis = (j.get("thesis") or "-").replace("|", "/")[:120]
+            legs = exit_legs(p["symbol"], p["side"], live_orders)
+            stop = leg_price(legs["stop_loss"])
+            target = leg_price(legs["take_profit"])
+            stop_s = f"{stop:.2f}" if stop else f"{j.get('stop', '-')} (no live order)"
+            target_s = f"{target:.2f}" if target else f"{j.get('target', '-')} (no live order)"
             out.append(
                 f"| {p['symbol']} | {p['side']} | {abs(int(float(p['qty'])))} "
                 f"| {float(p['avg_entry_price']):.2f} | {float(p['current_price']):.2f} "
                 f"| {float(p['unrealized_pl']):+,.0f} ({float(p['unrealized_plpc']) * 100:+.1f}%) "
-                f"| {j.get('stop', '-')} | {j.get('target', '-')} | {thesis} |"
+                f"| {stop_s} | {target_s} | {thesis} |"
             )
     else:
         out.append(f"\n*No open positions.*")

@@ -127,6 +127,15 @@ dropped, so the schema is not optional.
       "invalidation": "What you'd have to see to admit you were wrong, other than the stop.",
       "bear_case": "The strongest argument against this trade."
     }
+  ],
+  "manage": [
+    {
+      "ticker": "MSFT",
+      "action": "update",
+      "stop": 402.00,
+      "target": 455.00,
+      "reason": "Thesis matured; trailing the stop above entry to lock the gain."
+    }
   ]
 }
 ```
@@ -151,6 +160,29 @@ Field rules:
 **Do not calculate position size.** The harness derives share count from your stop
 distance and the account's live equity. Proposing a size will be ignored, and
 doing your own arithmetic here only introduces errors.
+
+### Managing positions you already hold
+
+`plays` opens new positions. It cannot touch an existing one — sending an open
+name back through `plays` is a *second* position, not an edit. Every change to a
+position that is already open goes in `manage`, and **prose alone changes
+nothing**: if section 3 of your brief says you are raising a stop or lifting a
+target and there is no matching `manage` entry, the live order does not move and
+the position stays on its original levels. Write both, every time.
+
+- `ticker` — must be an open position, or the entry is rejected.
+- `action` — `"update"` (default; amend stop and/or target) or `"close"` (exit
+  the whole position now at market and cancel its resting orders).
+- `stop`, `target` — the new levels. Give either or both on an `"update"`;
+  whichever you omit is left as it is. Verified current levels only — a stop on
+  the wrong side of the last price is rejected, since it would fire on arrival.
+- `reason` — one line, recorded in the journal against the position.
+
+Rule 1 still binds here: widening a stop so that entry-to-stop risks more than
+1% of equity is rejected. Tightening a stop is always allowed.
+
+`manage` is applied **even when `no_trade` is `true`** — standing down means
+opening nothing new, not leaving open risk unmanaged.
 
 On a no-trade day, set `"no_trade": true`, give an empty `"plays": []`, and use
 `session_note` to say what would change your mind. This is a valid and expected

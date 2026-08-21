@@ -92,6 +92,29 @@ Each play goes in as a bracket order: entry, plus an attached take-profit and
 stop-loss that execute unattended. This is the point of the Alpaca route — you're
 asleep or at work for most of the US session and the exits still happen.
 
+**Managing positions already open.** `plays` only opens new positions. To move a
+stop, lift a target, or exit early, the brief's JSON block carries a `manage`
+array alongside `plays`:
+
+```json
+"manage": [
+  {"ticker": "LLY", "action": "update", "stop": 1242.00, "target": 1293.00,
+   "reason": "Thesis matured; trailing the stop above entry to lock the gain."}
+]
+```
+
+`check` prints the old level next to the new one; `submit --confirm` replaces the
+live exit orders on Alpaca (creating them if the position has none) and writes the
+new levels back to `journal.csv`. `"action": "close"` cancels the resting orders
+and exits at market instead.
+
+Two things this deliberately does *not* do. It does not act on the prose brief —
+section 3 saying "raise the stop to 1242" moves nothing on its own, so the model
+is instructed to write both. And `no_trade: true` does not suppress it: standing
+down means opening nothing new, not leaving open risk unmanaged. Rule 1 still
+applies, so widening a stop past 1% entry-to-stop risk is rejected; tightening
+one always passes.
+
 **Evening or next morning.**
 
 ```bash

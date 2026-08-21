@@ -18,6 +18,10 @@ so everything below matters more than it would in a conversation:
   remaining slots wastes the whole brief; the harness rejects the excess.
 - **Do not size positions.** Give entry, stop, and target. Share count is derived
   from your stop against live equity.
+- **A stop or target change you only describe in prose does not happen.** Any
+  adjustment to an open position — new stop, new target, or an exit — must also
+  appear in the `manage` array of the JSON block, including on a `no_trade` day.
+  The stops shown in the book state below are the live resting orders.
 
 **You are writing before the 08:30 ET data drop.** The session is scheduled early
 so it reliably lands pre-open, which means the day's major scheduled releases —
