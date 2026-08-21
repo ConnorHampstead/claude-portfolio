@@ -1,21 +1,26 @@
 
-  No unfilled entry orders.
+  1 unfilled entry order(s):
+    LLY    sell  x25     limit  @1300  submitted 2026-08-21  id=fce52f52
+    cancelled LLY
 
+  closed ROST   stop    -1.18R  $-335.85
 
-  0 trade(s) closed out.
+  1 trade(s) closed out.
+  Fill in `thesis_verdict` by hand: right/wrong thesis vs right/wrong outcome.
+
 
 ====================================================================
-  BOOK STATE   market closed
+  BOOK STATE   market OPEN
 ====================================================================
-  Equity          $99,660.16
-  Cash            $70,150.28
-  Day P&L         $-715.12  (-0.71%)
-  Gross exposure  $29,509.88  (29.6% of equity)
-  Net exposure    $+29,509.88  (+29.6%)
+  Equity          $101,201.93
+  Cash            $69,814.43
+  Day P&L         $-58.35  (-0.06%)
+  Gross exposure  $31,387.50  (31.0% of equity)
+  Net exposure    $+31,387.50  (+31.0%)
   Positions       1 / 5
-  Loss-limit room 2.29% before the 3.0% kill switch
+  Loss-limit room 2.94% before the 3.0% kill switch
 
   SYM    SIDE      QTY        AVG       LAST       P&L $    P&L %
   ---------------------------------------------------------------
-  LLY    long       25    1163.64    1180.39     +418.88   +1.44%
+  LLY    long       25    1163.64    1255.50    +2296.50   +7.89%
 
