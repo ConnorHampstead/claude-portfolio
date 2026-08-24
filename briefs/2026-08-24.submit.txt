@@ -1,0 +1,28 @@
+
+====================================================================
+  SESSION 2026-08-24   equity $101,290.37   day P&L +0.09%
+====================================================================
+
+  POSITION MANAGEMENT
+
+  [OK] LLY UPDATE x25 (long, avg 1163.64)
+      stop   none -> 1230.00
+      target none -> 1300.00
+      risk-at-stake $0.00 (0.00% of equity)
+      Book flagged stop/target as 'no live order' — making both live and raising stop 1200->1230 to lock ~+5.7% into an event week (NVDA Wed, Jackson Hole Fri). Thesis matured; keeping 1300 target at consensus.
+      ! no live stop order found - a new one will be created
+      ! no live take-profit order found - a new one will be created
+
+  ----------------------------------------------------------------
+
+  ----------------------------------------------------------------
+  No new positions today.
+  1 position update(s) pending.
+
+  ! Market is closed. Next open: 2026-08-24T09:30:00-04:00
+    Orders will queue. Market orders will fill at the next open.
+
+  ~ LLY new OCO stop 1230.00 / target 1300.00 [pending_new]
+
+  Logged to journal.csv
+

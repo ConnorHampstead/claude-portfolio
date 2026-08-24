@@ -1,25 +1,25 @@
 
-  Entry fill rate  100%  (1 filled / 1 proposed, 0 never reached)
+  Entry fill rate  100%  (2 filled / 2 proposed, 0 never reached)
 
 ====================================================================
-  PERFORMANCE   1 closed trades
+  PERFORMANCE   2 closed trades
 ====================================================================
-  Net P&L         $-758.40
-  Win rate        0.0%  (0W / 1L)
-  Avg loss        -1.01R
-  Expectancy      -1.01R per trade
-  Total R         -1.01R
-  Best / worst    -1.01R / -1.01R
-  Max drawdown    -1.01R
+  Net P&L         $-1,094.25
+  Win rate        0.0%  (0W / 2L)
+  Avg loss        -1.09R
+  Expectancy      -1.09R per trade
+  Total R         -2.19R
+  Best / worst    -1.01R / -1.18R
+  Max drawdown    -2.19R
 
   ----------------------------------------------------------------
-  CALIBRATION   1 trades with a stated probability
+  CALIBRATION   2 trades with a stated probability
   ----------------------------------------------------------------
   stated           n   mean said    actual
-  0%-50%          1        45%        0%  <-- overconfident
+  0%-50%          2        46%        0%  <-- overconfident
 
-  Brier score     0.203   (0 = perfect, 0.25 = coin flip, lower is better)
-  ! Only 1 samples - treat this as directional, not conclusive.
+  Brier score     0.212   (0 = perfect, 0.25 = coin flip, lower is better)
+  ! Only 2 samples - treat this as directional, not conclusive.
 
   Note: thesis_verdict column is empty. Fill it in to separate skill from luck.
 
