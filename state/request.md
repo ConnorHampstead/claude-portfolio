@@ -42,7 +42,7 @@ what you actually believe rather than clustering everything near 60% — a brief
 where every play is 65% carries no information and will score no better than a
 coin flip.
 ## Current book state
-*Auto-generated 2026-08-26 13:05 UTC. These are live figures - use them, do not estimate.*
+*Auto-generated 2026-09-01 13:09 UTC. These are live figures - use them, do not estimate.*
 
 - Equity: **$100,557.71**
 - Cash: $100,557.71
