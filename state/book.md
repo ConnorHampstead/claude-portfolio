@@ -1,5 +1,5 @@
 ## Current book state
-*Auto-generated 2026-09-01 13:09 UTC. These are live figures - use them, do not estimate.*
+*Auto-generated 2026-09-03 13:23 UTC. These are live figures - use them, do not estimate.*
 
 - Equity: **$100,557.71**
 - Cash: $100,557.71
