@@ -158,7 +158,7 @@ jobs:
         id: guard
         if: steps.tradingday.outputs.trading == 'true'
         run: |
-          if python3 desk.py calendar --before-open 15; then
+          if python3 desk.py calendar --before-open 5; then
             echo "trading=true" >> "$GITHUB_OUTPUT"
           else
             echo "trading=false" >> "$GITHUB_OUTPUT"
