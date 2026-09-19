@@ -52,10 +52,12 @@ it the curl below sends a live dispatch.
 
 ```sh
 printf 'GH_TOKEN=github_pat_...\nDISPATCH_DRY_RUN=true\n' > .dev.vars
-npm run dev
-# another terminal; `time` (epoch ms) must fall in the 07:xx ET hour or the
-# Worker skips it as the other DST slot. 1790075100000 = Tue 2026-09-22 11:05 UTC.
-curl "http://localhost:8787/__scheduled?cron=5+11,12+*+*+1-5&time=1790075100000"
+npm run dev          # delete .dev.vars when done - it holds a live token
+# another terminal; `time` is epoch *milliseconds* and must fall in the 07:xx ET
+# hour, or the Worker skips it as the other DST slot. The older /__scheduled
+# route ignores `time` and uses the real clock.
+# 1790075100000 = Tue 2026-09-22 11:05 UTC = 07:05 ET.
+curl "http://localhost:8787/cdn-cgi/handler/scheduled?cron=5+11,12+*+*+1-5&time=1790075100000"
 ```
 
 After it runs for real, check Worker → Observability → Logs for
