@@ -1,0 +1,44 @@
+name: prune runs
+
+# Deletes desk/weekend runs that exited without doing any work, so the Actions
+# tab shows the sessions that matter. See scripts/prune_runs.py for the rule.
+#
+# This is the one job left on GitHub's own cron: it has no deadline, so it
+# doesn't matter if the trigger fires hours late or skips a day.
+
+on:
+  schedule:
+    - cron: '37 4 * * *'    # off the hour; GitHub drops top-of-hour triggers
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'List what would be deleted without deleting it'
+        type: boolean
+        default: true
+
+concurrency:
+  group: prune-runs         # not trading-desk: must not queue behind a hold
+  cancel-in-progress: false
+
+permissions:
+  actions: write            # to delete runs
+
+jobs:
+  prune:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      DRY_RUN: ${{ inputs.dry_run && '1' || '' }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: scripts
+
+      - name: Prune
+        run: |
+          if [ -n "${DRY_RUN}" ]; then
+            python3 scripts/prune_runs.py
+          else
+            python3 scripts/prune_runs.py --confirm
+          fi
