@@ -44,7 +44,7 @@ enforces the cash-like constraints itself.
 **Install.**
 
 ```bash
-pip install -r requirements.txt
+pip install --require-hashes -r requirements.txt
 
 export ALPACA_API_KEY_ID='PK...'
 export ALPACA_API_SECRET_KEY='...'
