@@ -1,0 +1,15 @@
+{
+  "name": "daytrade-dispatch",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev --test-scheduled",
+    "deploy": "wrangler deploy",
+    "typecheck": "tsc"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^5.20260919.1",
+    "typescript": "^7.0.2",
+    "wrangler": "^4.135.0"
+  }
+}

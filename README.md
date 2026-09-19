@@ -274,34 +274,29 @@ env block in `.github/workflows/desk.yml` to match.
 
 ### Schedule
 
-Three crons — `12 11`, `12 12`, `52 12` — weekdays. The first is the real run; the second is
-a catch-up that exits in seconds if the first already completed.
+GitHub's own `schedule` trigger is not used. On this repo it fired 4-6 hours
+late every day, which put every scheduled session past the open. The workflows
+are started by `workflow_dispatch` from [`dispatch/`](dispatch/README.md)
+instead, which begins within seconds:
 
-Cron is always UTC — there is no timezone option. 11:12 UTC is 13:12 Stockholm in
-summer, 12:12 in winter.
+- **Cloudflare Worker cron** (primary): desk at 07:05 ET weekdays, weekend
+  cleanup at 13:50 ET Fridays - 2h ahead of each job's target.
+- **systemd user timer** (backup): 08:05 ET and 14:50 ET - 1h ahead.
 
-**This is deliberately earlier than feels necessary.** Observed delays on this
-repo have reached ~110 minutes, which pushed a run 20 minutes past the US open.
-The schedule now assumes a two-hour delay is possible, and the guard
-(`calendar --before-open 15`) stands the session down entirely rather than write a
-"pre-market" brief with the market already trading. A missed session costs one
-data point; an inconsistent information set costs the comparability of the whole
-record.
+The desk job then holds until 25 minutes before the open, derived from
+Alpaca's calendar, and the guard (`calendar --before-open 5`) stands the session
+down rather than write a "pre-market" brief with the market already trading. A
+missed session costs one data point; an inconsistent information set costs the
+comparability of the whole record.
 
-**Neither is on the hour, deliberately.** GitHub's docs state that the start of
-every hour is a high-load window and that queued scheduled jobs may be *dropped*,
-not merely delayed. A dropped run produces no failure, no notification and no
-entry in the Actions tab — the trigger simply never fires, so there is nothing to
-inspect. Any non-round minute materially reduces the odds; the catch-up covers
-the remainder.
+Duplicate triggers are harmless. They queue behind the `trading-desk`
+concurrency group and exit on `briefs/<date>.submit.txt`, which is written only
+after a real submit. Dry runs don't create it. To force a re-run, delete that
+file.
 
-The catch-up keys off `briefs/<date>.submit.txt`, written only after a real
-submit, so it cannot double-submit. Dry runs don't create it. To force a re-run,
-delete that file.
-
-`workflow_dispatch` is also enabled, so you can trigger a run by hand from the
-Actions tab. **Do that first**, before trusting the schedule — it's the fastest
-way to find a missing secret.
+`workflow_dispatch` also lets you trigger a run by hand from the Actions tab
+(dry run by default). **Do that first**, before trusting the dispatchers - it's
+the fastest way to find a missing secret.
 
 ### What each run commits
 
@@ -310,7 +305,7 @@ briefs/2026-08-05.md          full prose brief + JSON block
 briefs/2026-08-05.check.txt   validation: what was approved, what was rejected, why
 briefs/2026-08-05.submit.txt  what actually reached the account
 journal.csv                   updated with fills and R multiples
-state/                        book state, score, heartbeat
+state/                        book state, score
 ```
 
 The brief is committed **before** outcomes are known. That timestamp is the whole
@@ -318,10 +313,6 @@ value of running this in public — it's a preregistration you can't quietly rev
 Don't rewrite history in this repo, even to fix a typo in a thesis.
 
 ### Failure modes to watch
-
-The heartbeat file is written on every run, trading day or not, so the daily
-commit keeps GitHub's 60-day inactivity auto-disable from silently killing the
-schedule during a quiet stretch.
 
 The `calendar` guard checks Alpaca's market calendar and stands the session down
 on US holidays, so you won't get briefs written into a closed market.

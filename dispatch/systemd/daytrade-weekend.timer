@@ -1,0 +1,11 @@
+[Unit]
+Description=Backup trigger: weekend cleanup
+
+[Timer]
+# 1h ahead of the 15:50 ET target, 1h after the Cloudflare dispatch.
+OnCalendar=Fri 14:50 America/New_York
+Persistent=true
+Unit=daytrade-dispatch@weekend.service
+
+[Install]
+WantedBy=timers.target
