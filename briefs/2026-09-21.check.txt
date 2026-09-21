@@ -1,0 +1,15 @@
+
+====================================================================
+  SESSION 2026-09-21   equity $100,557.71   day P&L +0.00%
+====================================================================
+
+  [OK] DAL LONG
+      entry 80.40 (limit)  stop 78.20  target 84.90  [2.05R]
+      qty 457  notional $36,743  risk $1,005.40 (1.00% of equity)
+      P(target first) 46%   conviction 3
+
+  ----------------------------------------------------------------
+  1 approved, 0 rejected.  Total new risk $1,005.40 (1.00% of equity)
+
+  Dry run. Re-run with `submit --confirm` to send these.
+
