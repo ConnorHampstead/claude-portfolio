@@ -528,6 +528,8 @@ def validate_manage(item: dict, ctx: dict) -> tuple[list[str], list[str], dict]:
         # Filled in by apply_manage with the levels that actually landed, so
         # the journal records the live orders rather than the intent.
         "applied": {"stop": None, "target": None},
+        # Failures apply_manage can recover from but must not hide.
+        "failures": [],
         "reason": item.get("reason", ""),
     }
     return errors, warnings, enriched
@@ -554,6 +556,9 @@ def apply_manage(m: dict, tif: str) -> list[str]:
                     api("DELETE", f"/v2/orders/{order['id']}")
                 except RuntimeError as e:
                     log.append(f"could not cancel {leg} ({e})")
+                    m["failures"].append(
+                        f"{leg} still resting after the close - it can open a "
+                        f"reverse position ({e})")
         resp = api("DELETE", f"/v2/positions/{symbol}")
         log.append(f"close order sent x{qty} [{resp.get('status', 'submitted')}]")
         return log
@@ -966,14 +971,25 @@ def cmd_check(args, submit: bool = False):
         print("    Orders will queue. Market orders will fill at the next open.")
 
     print()
+    # Anything the brief decided, that validation passed, and that then failed
+    # to reach Alpaca. A session that does not place the stop it called for has
+    # not done its job, however tidy the rest of the output looks.
+    failures = []
     for m in managed:
         try:
             lines = apply_manage(m, cfg["time_in_force"])
         except RuntimeError as e:
             print(f"  x {m['symbol']} MANAGE REJECTED BY ALPACA: {e}")
+            failures.append(f"{m['symbol']}: manage instruction rejected ({e})")
             continue
         for line in lines:
             print(f"  ~ {m['symbol']} {line}")
+        failures.extend(f"{m['symbol']}: {f}" for f in m["failures"])
+        if m["action"] == "update":
+            for label, want in (("stop", m["stop"]), ("target", m["target"])):
+                if want is not None and m["applied"][label] is None:
+                    failures.append(
+                        f"{m['symbol']}: {label} {want:.2f} is not resting at Alpaca")
         if m["action"] == "close":
             update_journal_levels(
                 m["symbol"],
@@ -1003,6 +1019,7 @@ def cmd_check(args, submit: bool = False):
             resp = api("POST", "/v2/orders", json=order_body)
         except RuntimeError as e:
             print(f"  x {p['symbol']} REJECTED BY ALPACA: {e}")
+            failures.append(f"{p['symbol']}: entry order rejected ({e})")
             continue
         raw = p["raw"]
         append_journal({
@@ -1027,6 +1044,18 @@ def cmd_check(args, submit: bool = False):
         print(f"  > {p['symbol']} {p['direction']} x{p['qty']} "
               f"submitted [{resp.get('status')}]  id={resp.get('id', '')[:8]}")
     print(f"\n  Logged to {JOURNAL.name}\n")
+
+    if failures:
+        # Non-zero so the workflow goes red. Everything above has already run,
+        # including the journal writes, so the record of what was attempted
+        # survives - the exit code exists to make the gap impossible to miss,
+        # not to abandon the session.
+        print(f"  {'-' * 64}")
+        print("  THE BOOK DOES NOT MATCH THE BRIEF")
+        for f in failures:
+            print(f"      x {f}")
+        print()
+        sys.exit(1)
 
 
 def cmd_submit(args):

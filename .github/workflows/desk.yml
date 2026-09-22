@@ -185,6 +185,7 @@ jobs:
             --max-turns 1 --output-format text
 
       - name: Run session
+        id: session
         if: steps.guard.outputs.trading == 'true'
         env:
           ALPACA_API_KEY_ID: ${{ secrets.ALPACA_API_KEY_ID }}
@@ -193,8 +194,12 @@ jobs:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: bash scripts/session.sh
 
+      # Runs even when the session step failed. `desk.py submit` exits non-zero
+      # when an order did not reach Alpaca, and that is exactly the run whose
+      # brief, journal and status you most need committed - the record of what
+      # was attempted is what tells you what to repair by hand.
       - name: Commit results
-        if: steps.ran.outputs.already == 'false'
+        if: ${{ !cancelled() && steps.ran.outputs.already == 'false' }}
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
@@ -226,6 +231,12 @@ jobs:
               echo "Missed the pre-market deadline - stood down rather than write a"
               echo "post-open brief that would not be comparable with the record."
             else
+              if [ "${{ steps.session.outcome }}" = "failure" ]; then
+                echo "> **Not every order reached Alpaca.** The book does not"
+                echo "> match the brief - see the Submit group in the log and"
+                echo "> check the book state below before the open."
+                echo
+              fi
               echo "### Validation"
               echo '```'
               D=$(date -u +%Y-%m-%d)

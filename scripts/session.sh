@@ -14,6 +14,7 @@ done
 
 DATE="$(date -u +%Y-%m-%d)"
 DRY_RUN="${DRY_RUN:-}"
+SUBMIT_RC=0
 mkdir -p briefs state
 
 if [ -n "$DRY_RUN" ]; then
@@ -79,7 +80,13 @@ if [ -n "$DRY_RUN" ]; then
   echo "::endgroup::"
 else
   echo "::group::Submit"
-  python3 desk.py submit "${BRIEF}" --confirm | tee "briefs/${DATE}.submit.txt"
+  # Not fatal on the spot. An order that did not reach Alpaca must fail the
+  # run, but the scoring, status and chart below are how you find out what the
+  # book actually looks like afterwards - so they still run, and the exit code
+  # is carried to the end of the script.
+  SUBMIT_RC=0
+  python3 desk.py submit "${BRIEF}" --confirm | tee "briefs/${DATE}.submit.txt" \
+    || SUBMIT_RC=$?
   echo "::endgroup::"
 fi
 
@@ -93,3 +100,9 @@ echo "::group::Performance chart"
 # between the PERFORMANCE markers in README.md.
 python3 desk.py chart --update-readme
 echo "::endgroup::"
+
+if [ "${SUBMIT_RC}" -ne 0 ]; then
+  echo "::error::Not every order reached Alpaca - see the Submit group. The"\
+       "book does not match the brief; check state/status.txt before the open."
+  exit "${SUBMIT_RC}"
+fi
