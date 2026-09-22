@@ -1,0 +1,13 @@
+[Unit]
+Description=Backup trigger: trading desk post-open review
+
+[Timer]
+# 5 min ahead of the 10:05 ET target, 5 min after the Cloudflare dispatch. If
+# the Cloudflare dispatch already ran, this waits in the queue (no runner held)
+# and exits on the already-ran marker.
+OnCalendar=Mon..Fri 10:00 America/New_York
+Persistent=true
+Unit=daytrade-dispatch-open.service
+
+[Install]
+WantedBy=timers.target

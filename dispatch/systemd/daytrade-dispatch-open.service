@@ -1,0 +1,16 @@
+# Backup trigger for the Cloudflare dispatcher's post-open review. A separate
+# unit rather than an instance of daytrade-dispatch@: it runs the same workflow
+# as the pre-market session with a different input. See dispatch/README.md.
+[Unit]
+Description=Dispatch desk.yml post-open review (backup trigger)
+StartLimitIntervalSec=20min
+StartLimitBurst=10
+
+[Service]
+Type=oneshot
+# GH_TOKEN=<fine-grained PAT, Actions: read/write on this repo only>
+EnvironmentFile=%h/.config/daytrade/dispatch.env
+ExecStart=%h/.local/bin/gh workflow run desk.yml --repo ConnorHampstead/claude-portfolio --ref main -f dry_run=false -f session=open
+# Covers waking from sleep before the network is back.
+Restart=on-failure
+RestartSec=60

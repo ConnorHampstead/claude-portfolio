@@ -145,16 +145,21 @@ python3 desk.py flatten --confirm
 
 ## 3. How sizing works
 
-You never specify position size; Claude never specifies position size. The
-harness derives it:
+You never specify position size; Claude never specifies position size. Claude
+picks a risk tier per play (`risk_pct`: 1.0 core, 0.5 half, 0.25 probe) and the
+harness derives the size from it:
 
 ```
-shares = floor( (equity × risk_per_trade_pct) / |entry − stop| )
+shares = floor( (equity × risk_pct) / |entry − stop| )
 ```
 
 At $100k equity and 1% risk, a $5-wide stop gives 200 shares — $1,000 at risk
 regardless of the share price. This removes an entire class of arithmetic error
-from the model and makes rule 1 structural rather than advisory.
+from the model and makes rule 1 structural rather than advisory. `risk_pct` above
+`risk_per_trade_pct` is cut to it; omitted, it defaults to it. The smaller tiers
+exist so the model can put a lower-conviction view on as a small scored position
+instead of passing on it, and so that rule 8's "halve size into the event" is
+something it can actually do.
 
 The consequence worth understanding: **tight stops produce large notionals.** A
 2% stop at 1% risk is a 50% position. That's correct stop-based sizing, not a
@@ -171,9 +176,18 @@ stop), untradable or unshortable symbols, entry levels more than 10% from the
 last traded price, sizing below one share, single-name notional over 50% of
 equity, and malformed or missing probabilities.
 
-Across the book — max 5 concurrent positions, gross exposure ≤ 100% of equity,
-no duplicate symbols in one brief, no adding to a name already held, and the 3%
-daily loss limit, which blocks all new submissions once breached.
+Across the book — max 8 positions, gross exposure ≤ 150% of equity, net
+exposure within ±100%, total risk at stake (entry to stop) ≤ 4% of equity, one
+position per name (no adding to a name already held or resting, no duplicates in
+one brief), and the 3% daily loss limit, which blocks all new submissions once
+breached. Entries still resting unfilled count towards every one of these as if
+they had filled.
+
+Plays are admitted highest conviction first. A play that would breach a cap is
+dropped on its own; the plays behind it are still considered, so a small probe
+can go in where a full-size trade did not fit. `prep` tells the model how much
+room is left, including how tight a stop the remaining gross and net room allow,
+since it never sees the notional its own plays will carry.
 
 Edit `config.json` to change any of these. Change them between runs, not
 mid-experiment.
@@ -192,7 +206,12 @@ stated           n   mean said    actual
 Brier score     0.427   (0.25 = coin flip)
 ```
 
-Sorted by what Claude *said* would happen against what *did*. Systematic
+Sorted by what Claude *said* would happen against what *did*. The statement
+was about the target and stop the play was submitted with, so that is what it is
+scored against: `stop_initial` and `target_initial` in the journal, not the live
+levels `manage` may have moved since. When the levels were moved and the exit
+does not show which initial level price reached first, the trade still counts for
+P&L and R but is left out of calibration, and `score` says how many. Systematic
 overconfidence shows up here in twenty trades, long before P&L says anything
 reliable. A Brier score above 0.25 means the stated probabilities are worse than
 a coin flip and the model's conviction carries no information.
@@ -202,6 +221,25 @@ fill in by hand, with one of: `right thesis right outcome`, `right thesis wrong
 outcome`, `wrong thesis right outcome`, `wrong thesis wrong outcome`. No script
 can judge this, and the third category — profitable trades for reasons that
 weren't real — is the one that will fool you if you only watch the equity curve.
+
+### The shadow book
+
+A trade that is never taken can never be wrong on the record, which makes
+standing aside free and pushes the model towards it. So the brief puts every
+idea it passes on with real levels in a `passed` array, and plays the caps drop
+are added automatically. `desk.py shadow` (run at the start of every session)
+replays each one against five-minute bars as if its bracket had been live: the
+entry fills at its level, or at the bar's open on a gap through it, and the
+exits the same way, over at most 5 sessions for the entry and 10 in total.
+Where one bar holds both levels the order cannot be read and the idea is marked
+ambiguous rather than guessed. Bars are consolidated (SIP) history, which the
+free plan serves once it is 15 minutes old, falling back to IEX.
+
+`score` reports the shadow book next to the real trades, with its own
+calibration table and one combined with the trades; `prep` shows the model how
+its recent passes turned out. Two things to read from it: calibration fills up
+several times faster than from trades alone, and a shadow book that out-earns
+the trades actually taken says the filter is turning down the better ideas.
 
 ---
 
@@ -240,9 +278,12 @@ price — which on a gap is nowhere near where Claude thought it was entering. P
 |---|---|
 | `desk.py` | The harness. All commands. |
 | `config.json` | Risk limits. Edit here, not in code. |
-| `prompt-addendum.md` | Append to your system prompt so Claude emits parseable JSON. |
+| `prompts/system.md` | System prompt: rules, brief format, JSON schema. |
+| `prompts/daily-request.md` | The pre-market request, followed by the book state. |
+| `prompts/open-request.md` | The post-open request, followed by the morning brief and the book state. |
 | `example-plays.json` | Shape reference; use with `check` to test setup. |
 | `journal.csv` | Created on first submit. Your permanent decision record. |
+| `shadow.csv` | Ideas passed on with levels, and plays the caps dropped, replayed against the tape. |
 
 Back up `journal.csv`. It's the experiment.
 
@@ -279,20 +320,34 @@ late every day, which put every scheduled session past the open. The workflows
 are started by `workflow_dispatch` from [`dispatch/`](dispatch/README.md)
 instead, which begins within seconds:
 
-- **Cloudflare Worker cron** (primary): desk at 08:55 ET weekdays, weekend
-  cleanup at 13:50 ET Fridays - 10 min and 2h ahead of each job's target.
-- **systemd user timer** (backup): 09:00 ET and 14:50 ET - 5 min and 1h ahead.
+- **Cloudflare Worker cron** (primary): the pre-market brief at 08:55 ET and the
+  post-open review at 09:55 ET weekdays, weekend cleanup at 13:50 ET Fridays -
+  10 min, 10 min and 2h ahead of each job's target.
+- **systemd user timer** (backup): 09:00, 10:00 and 14:50 ET - 5 min, 5 min and
+  1h ahead.
 
-The desk job then holds until 25 minutes before the open, derived from
-Alpaca's calendar, and the guard (`calendar --before-open 5`) stands the session
-down rather than write a "pre-market" brief with the market already trading. A
-missed session costs one data point; an inconsistent information set costs the
-comparability of the whole record.
+Both desk sessions run `desk.yml`, told apart by its `session` input. The
+pre-market brief holds until 25 minutes before the open, derived from Alpaca's
+calendar, and the guard (`calendar --before-open 5`) stands it down rather than
+write a "pre-market" brief with the market already trading. The post-open
+review holds until 35 minutes after the open, once the 10:00 ET releases are out
+and the opening range has formed, and its guard (`calendar --open-window 30
+120`) stands it down outside that stretch. A missed session costs one data
+point; an inconsistent information set costs the comparability of the whole
+record.
+
+The review reads the morning's brief, sees the fills and the open, and can
+manage, cancel and open positions under the same rules. After it nothing looks
+at the book until the next morning.
+
+The model is pinned (`DESK_MODEL` in `desk.yml`, `claude-opus-5-5`), not the
+`opus` alias, and every journal and shadow row records it. Changing it is a
+change to the experiment: note it in section 11.
 
 Duplicate triggers are harmless. They queue behind the `trading-desk`
-concurrency group and exit on `briefs/<date>.submit.txt`, which is written only
-after a real submit. Dry runs don't create it. To force a re-run, delete that
-file.
+concurrency group and exit on `briefs/<date>.submit.txt` (or
+`briefs/<date>-open.submit.txt` for the review), which is written only after a
+real submit. Dry runs don't create it. To force a re-run, delete that file.
 
 `workflow_dispatch` also lets you trigger a run by hand from the Actions tab
 (dry run by default). **Do that first**, before trusting the dispatchers - it's
@@ -304,8 +359,10 @@ the fastest way to find a missing secret.
 briefs/2026-08-05.md          full prose brief + JSON block
 briefs/2026-08-05.check.txt   validation: what was approved, what was rejected, why
 briefs/2026-08-05.submit.txt  what actually reached the account
+briefs/2026-08-05-open.*      the same three for the post-open review
 journal.csv                   updated with fills and R multiples
-state/                        book state, score
+shadow.csv                    passed ideas and dropped plays, replayed and scored
+state/                        book state, request, score
 ```
 
 The brief is committed **before** outcomes are known. That timestamp is the whole
@@ -408,3 +465,44 @@ are being set somewhere price doesn't go — too far below the market on longs,
 waiting for pullbacks that never come. That's a fixable flaw in how the model
 picks levels, and it's entirely invisible if you only look at the trades that
 did fill.
+
+---
+
+## 11. Changes to the experiment
+
+Changes to the prompt, the rules or the harness make sessions before and after
+them different experiments. They are listed here by the first session they
+apply to, so the record can be read in segments.
+
+**2026-09-23**
+
+- *Timing.* Since 2026-08-18 the brief has run at 09:05 ET, but the request still
+  told the model it was writing before the 08:30 ET releases, and it discarded
+  prints it found as a result (CPI on 2026-09-11). `prep` now states the current
+  time and that anything scheduled before it has printed.
+- *Rule 8* now covers the company's own binaries only. Macro releases, FOMC and
+  other companies' earnings are ambient risk, handled with stop and tier. It had
+  been read as covering any macro event inside five days, which is nearly always.
+- *Risk tiers* (`risk_pct` 1.0 / 0.5 / 0.25), gross 150% with net ±100%, total
+  open risk ≤ 4%, 8 slots, admission by conviction. Previously 1% flat, gross
+  100%, 5 slots, and one cap breach blocked every new play in the brief.
+- *Prompt.* Both sides named every session; conditional plans are placed as
+  orders, or left for the post-open review with their levels; standing aside is
+  no longer framed as the default-correct answer; the account is described as
+  margin, not cash.
+- *Scoring fix.* `reconcile` missed any exit that `manage` had replaced or
+  re-placed, and measured R against the live stop instead of the one submitted.
+  LLY (2026-08-05, stopped at about 1229.76 on 2026-08-25, about +1.76R) was
+  missing from the record the model was shown each morning, which read 0W/2L.
+- *Model pinned* to `claude-opus-5-5` (previously the `opus` alias, which
+  resolved to whatever the pinned CLI version shipped with). Journal rows now
+  record `model` and `session`.
+- *Market data.* `prep` appends an Alpaca table to the book state: last trade,
+  prior close, ATR, 20/50-day averages, 20-day range and 5-day change for held
+  and resting names, a watchlist (`config.json`), and the day's movers filtered to
+  the tradable universe. Until now the model found every price by web search.
+- *Shadow book.* Passed ideas and dropped plays are replayed and scored
+  (section 5).
+- *Post-open review.* A second session at 10:05 ET (section 8). Before this the
+  brief was the only decision point, and 19 of 24 no-trade briefs deferred their
+  decision to "after the open or the data", which nothing ever acted on.

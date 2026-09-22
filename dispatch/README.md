@@ -4,20 +4,22 @@ Triggers the GitHub Actions workflows on a clock that keeps time. GitHub's
 `schedule` event ran 4-6 hours late on this repo, every day; `workflow_dispatch`
 starts in seconds. So the clock lives here and GitHub only supplies the runner.
 
-| Trigger | Desk (`desk.yml`) | Weekend (`weekend.yml`) |
-|---|---|---|
-| Cloudflare Worker cron (primary) | 08:55 ET, Mon-Fri | 13:50 ET, Fri |
-| systemd user timer (backup) | 09:00 ET, Mon-Fri | 14:50 ET, Fri |
+| Trigger | Pre-market brief (`desk.yml`) | Post-open review (`desk.yml`, `session=open`) | Weekend (`weekend.yml`) |
+|---|---|---|---|
+| Cloudflare Worker cron (primary) | 08:55 ET, Mon-Fri | 09:55 ET, Mon-Fri | 13:50 ET, Fri |
+| systemd user timer (backup) | 09:00 ET, Mon-Fri | 10:00 ET, Mon-Fri | 14:50 ET, Fri |
 
-Each workflow has a target (desk: 25 min before the open, 09:05 ET; weekend:
-10 min before the close) and holds its runner until then. The desk's primary
+Each job has a target (pre-market: 25 min before the open, 09:05 ET; post-open:
+35 min after it, 10:05 ET; weekend: 10 min before the close) and holds its
+runner until then. The desk's primary
 dispatch now sits 10 min ahead of that target rather than 2h, and the backup
 5 min ahead of it rather than 1h. Both holds are short enough that a runner is
 never tied up for long, and the session still finishes before the bell.
 
-Both call `workflow_dispatch` with `dry_run=false`. Whichever lands second queues
-behind the `trading-desk` concurrency group and exits on the workflow's
-already-ran check. It waits in the queue without holding a runner, so a
+Both call `workflow_dispatch` with `dry_run=false` (and `session` for the two
+desk jobs; the workflow defaults it to `pre-market`). Whichever lands second
+queues behind the `trading-desk` concurrency group and exits on the workflow's
+already-ran check, which is per session. It waits in the queue without holding a runner, so a
 duplicate costs a few seconds of runner time.
 
 The workflows' `dry_run` input defaults to `true`, so anything else that
@@ -45,7 +47,7 @@ and the pre-market guard cap that at one session per day inside the window.
 
 ## Cloudflare Worker
 
-Cron Triggers work on the Workers free plan (5 per account; this uses 2).
+Cron Triggers work on the Workers free plan (5 per account; this uses 3).
 Cloudflare cron is UTC-only, so each cron lists both the EDT and EST hour and
 `src/index.ts` dispatches only on the one matching New York time.
 
@@ -82,19 +84,19 @@ chmod 600 ~/.config/daytrade/dispatch.env
 cp systemd/* ~/.config/systemd/user/
 loginctl enable-linger "$USER"      # fire even when logged out
 systemctl --user daemon-reload
-systemctl --user enable --now daytrade-desk.timer daytrade-weekend.timer
+systemctl --user enable --now daytrade-desk.timer daytrade-desk-open.timer daytrade-weekend.timer
 systemctl --user list-timers 'daytrade-*'
 ```
 
-`systemctl --user start daytrade-dispatch@desk.service` sends a **live**
-dispatch. To test the token without trading:
+`systemctl --user start daytrade-dispatch@desk.service` (or
+`daytrade-dispatch-open.service`) sends a **live** dispatch. To test the token without trading:
 
 ```sh
 env $(cat ~/.config/daytrade/dispatch.env) \
   gh workflow run desk.yml --repo ConnorHampstead/claude-portfolio -f dry_run=true
 ```
 
-Firing history: `journalctl --user -u 'daytrade-dispatch@*'`.
+Firing history: `journalctl --user -u 'daytrade-dispatch*'`.
 
 A user timer does not wake a suspended machine. `Persistent=true` fires on
 resume instead; if that is after the window, the workflow's guard stands down.

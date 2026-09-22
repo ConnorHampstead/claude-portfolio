@@ -3,16 +3,25 @@ name: trading desk
 on:
   # No `schedule` trigger. GitHub's cron fired 4-6 hours late on this repo, every
   # day, which put every scheduled run past the open. The clock now lives in
-  # dispatch/ - a Cloudflare Worker cron (primary, 08:55 ET) and a systemd
-  # timer (backup, 09:00 ET) - both of which call workflow_dispatch below with
-  # dry_run=false. Dispatch events start in seconds. The backup queues behind
-  # the concurrency group and exits on the already-ran check.
+  # dispatch/ - a Cloudflare Worker cron (primary: 08:55 ET pre-market, 09:55
+  # ET open) and a systemd timer (backup: 09:00 and 10:00 ET) - both of which
+  # call workflow_dispatch below with dry_run=false. Dispatch events start in
+  # seconds. The backup queues behind the concurrency group and exits on the
+  # already-ran check.
+  #
+  # Two sessions a day run through this one workflow: the pre-market brief
+  # (09:05 ET) and the post-open review (10:05 ET), chosen by `session`.
   workflow_dispatch:        # the dispatchers, or by hand from the Actions tab
     inputs:
       dry_run:
         description: 'Dry run: generate and validate the brief, submit nothing'
         type: boolean
         default: true
+      session:
+        description: 'pre-market (brief before the open) or open (review after it)'
+        type: choice
+        options: [pre-market, open]
+        default: pre-market
 
 # Only one session at a time. A delayed run must never overlap the next.
 concurrency:
@@ -40,6 +49,11 @@ jobs:
       # API (the Worker and `gh workflow run -f`). A bare `inputs.dry_run` is
       # truthy for that string, which silently made every dispatched run a dry run.
       DRY_RUN: ${{ (inputs.dry_run == true || inputs.dry_run == 'true') && '1' || '' }}
+      SESSION: ${{ inputs.session || 'pre-market' }}
+      # Pinned, not the `opus` alias: a model change is a change to the
+      # experiment. Preflight uses it too, so a model the CLI cannot serve
+      # fails there, before any session work.
+      DESK_MODEL: claude-opus-5-5
 
     steps:
       # ref is set explicitly on purpose. With no ref, checkout takes the SHA
@@ -53,19 +67,21 @@ jobs:
           persist-credentials: false
           ref: ${{ github.ref_name }}
 
-      # The completion marker is briefs/<date>.submit.txt, written only after a
-      # real submit. Dry runs don't create it, so they never mask a missed
-      # session. To force a re-run, delete that file.
+      # The completion marker is briefs/<date>.submit.txt (pre-market) or
+      # briefs/<date>-open.submit.txt (open), written only after a real submit.
+      # Dry runs don't create it, so they never mask a missed session. To force
+      # a re-run, delete that file.
       - name: Already ran today?
         id: ran
         run: |
           D=$(date -u +%Y-%m-%d)
-          if [ -f "briefs/${D}.submit.txt" ]; then
+          SFX=""; [ "$SESSION" = open ] && SFX="-open"
+          if [ -f "briefs/${D}${SFX}.submit.txt" ]; then
             echo "already=true" >> "$GITHUB_OUTPUT"
-            echo "Session for ${D} already completed - nothing to do."
+            echo "${SESSION} session for ${D} already completed - nothing to do."
           else
             echo "already=false" >> "$GITHUB_OUTPUT"
-            echo "No completed session for ${D} yet - proceeding."
+            echo "No completed ${SESSION} session for ${D} yet - proceeding."
           fi
 
       - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
@@ -123,26 +139,43 @@ jobs:
       # correct across both daylight-saving regimes without a table of dates.
       # 25 min is chosen so the ~20 min session finishes just before the bell.
       # A trigger that starts later than the target skips the wait entirely.
-      - name: Hold open until 25 min before the open
+      #
+      # The post-open review holds until 35 min after the open instead: late
+      # enough that the 10:00 ET releases have printed and the opening range
+      # has formed.
+      - name: Hold until the session's target time
         if: steps.tradingday.outputs.trading == 'true'
         env:
           ALPACA_API_KEY_ID: ${{ secrets.ALPACA_API_KEY_ID }}
           ALPACA_API_SECRET_KEY: ${{ secrets.ALPACA_API_SECRET_KEY }}
-        run: python3 desk.py wait --before-open 25
+        run: |
+          if [ "$SESSION" = open ]; then
+            python3 desk.py wait --after-open 35
+          else
+            python3 desk.py wait --before-open 25
+          fi
 
       # The real deadline check, now that we are about to do the work. This is
       # what stops a badly delayed run writing a "pre-market" brief with the
       # market already trading. It has to be here, after the wait, because
       # that is the only point where "how long until the open" is the number
       # that actually governs the session.
-      - name: Still inside the pre-market window?
+      #
+      # The post-open review has its own window, 30-120 min after the open: a
+      # review written at noon is not the same session as one written at 10:05.
+      - name: Still inside the session's window?
         id: guard
         if: steps.tradingday.outputs.trading == 'true'
         env:
           ALPACA_API_KEY_ID: ${{ secrets.ALPACA_API_KEY_ID }}
           ALPACA_API_SECRET_KEY: ${{ secrets.ALPACA_API_SECRET_KEY }}
         run: |
-          if python3 desk.py calendar --before-open 5; then
+          if [ "$SESSION" = open ]; then
+            WINDOW="--open-window 30 120"
+          else
+            WINDOW="--before-open 5"
+          fi
+          if python3 desk.py calendar $WINDOW; then
             echo "trading=true" >> "$GITHUB_OUTPUT"
           else
             echo "trading=false" >> "$GITHUB_OUTPUT"
@@ -184,7 +217,7 @@ jobs:
 
           echo "--- live auth test (1 turn, negligible cost) ---"
           claude -p "Reply with exactly: PREFLIGHT_OK" \
-            --max-turns 1 --output-format text
+            --model "$DESK_MODEL" --max-turns 1 --output-format text
 
       - name: Run session
         id: session
@@ -207,11 +240,12 @@ jobs:
         run: |
           git config user.name  "trading-desk[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A briefs state journal.csv README.md 2>/dev/null || true
+          git add -A briefs state journal.csv shadow.csv README.md 2>/dev/null || true
           if git diff --staged --quiet; then
             echo "Nothing to commit."
           else
-            git commit -m "session $(date -u +%Y-%m-%d)"
+            if [ "$SESSION" = open ]; then MSG="open session"; else MSG="session"; fi
+            git commit -m "${MSG} $(date -u +%Y-%m-%d)"
             # A delayed run may be behind if you pushed meanwhile.
             # checkout runs with persist-credentials: false, so the token is
             # passed here only, never left in .git/config for earlier steps.
@@ -224,14 +258,14 @@ jobs:
         if: always()
         run: |
           {
-            echo "## Session $(date -u +%Y-%m-%d)"
+            echo "## ${SESSION} session $(date -u +%Y-%m-%d)"
             if [ "${{ steps.ran.outputs.already }}" = "true" ]; then
               echo "Already completed earlier today — duplicate trigger exited without acting."
             elif [ "${{ steps.tradingday.outputs.trading }}" != "true" ]; then
               echo "US market closed - stood down."
             elif [ "${{ steps.guard.outputs.trading }}" != "true" ]; then
-              echo "Missed the pre-market deadline - stood down rather than write a"
-              echo "post-open brief that would not be comparable with the record."
+              echo "Outside the ${SESSION} session's window - stood down rather than"
+              echo "write a brief that would not be comparable with the record."
             else
               if [ "${{ steps.session.outcome }}" = "failure" ]; then
                 echo "> **Not every order reached Alpaca.** The book does not"
@@ -242,7 +276,8 @@ jobs:
               echo "### Validation"
               echo '```'
               D=$(date -u +%Y-%m-%d)
-              cat "state/dryrun/${D}.check.txt" "briefs/${D}.check.txt" 2>/dev/null \
+              SFX=""; [ "$SESSION" = open ] && SFX="-open"
+              cat "state/dryrun/${D}${SFX}.check.txt" "briefs/${D}${SFX}.check.txt" 2>/dev/null \
                 || echo "(none)"
               echo '```'
               echo "### Book"

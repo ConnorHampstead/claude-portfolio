@@ -17,6 +17,7 @@ Commands:
     status    Account state: equity, exposure, positions, loss-limit headroom.
     reconcile Pull fills from Alpaca and update the journal with outcomes.
     score     Performance and calibration report from the journal.
+    shadow    Replay passed ideas against the tape and score them.
     stale     List (and optionally cancel) unfilled entry orders.
     flatten   Close all open positions and cancel all orders. Requires --confirm.
 
@@ -52,25 +53,54 @@ JOURNAL = HERE / "journal.csv"
 CONFIG = HERE / "config.json"
 
 DEFAULT_CONFIG = {
-    "risk_per_trade_pct": 1.0,      # max % of equity risked entry-to-stop
-    "max_positions": 5,             # max concurrent open positions
-    "max_gross_exposure_pct": 100,  # max gross notional as % of equity
+    "risk_per_trade_pct": 1.0,      # max % of equity risked entry-to-stop, per trade
+    "min_risk_pct": 0.1,            # smallest per-play risk_pct accepted
+    "max_open_risk_pct": 4.0,       # entry-to-stop risk across the whole book
+    "max_positions": 8,             # open positions + resting entries
+    "max_gross_exposure_pct": 150,  # longs + |shorts|, % of equity
+    "max_net_exposure_pct": 100,    # |longs - shorts|, % of equity
     "max_position_pct": 50,         # max notional in any single name, % of equity
     "daily_loss_limit_pct": 3.0,    # flatten + stand down past this
     "min_conviction": 1,            # reject plays below this
     "time_in_force": "gtc",         # gtc or day
     "data_feed": "iex",             # iex (free) or sip (paid)
     "allow_shorts": True,
+    # Market data table in `prep`: watchlist groups, then the day's movers
+    # filtered to the tradable universe.
+    "watchlist": {},
+    "movers_show": 8,               # per side, after filtering
+    "min_price": 5.0,
+    "min_avg_volume": 1_000_000,
+    # Shadow book replay windows, in trading sessions from the session date.
+    "shadow_entry_sessions": 5,     # an entry not reached by then never filled
+    "shadow_exit_sessions": 10,     # neither level by then: expired
 }
 
+# stop / target are the live levels and move with `manage`. The *_initial
+# columns are the levels the play was submitted with and never change: R is
+# measured against the initial stop, and p_target_first was a statement about
+# the initial target and stop.
 JOURNAL_FIELDS = [
     "play_id", "logged_at", "session_date", "ticker", "direction",
-    "entry_type", "entry_planned", "stop", "target", "qty",
+    "entry_type", "entry_planned", "stop", "target",
+    "stop_initial", "target_initial", "qty",
     "risk_usd", "risk_pct_equity", "conviction", "p_target_first",
     "time_horizon", "catalyst", "thesis", "invalidation", "bear_case",
     "order_id", "status", "entry_fill", "exit_fill", "exit_reason",
     "pnl_usd", "r_multiple", "hit_target_first", "closed_at",
-    "thesis_verdict", "notes",
+    "thesis_verdict", "notes", "session", "model",
+]
+
+# Ideas the brief looked at with real levels and did not take, plus plays the
+# caps dropped. No orders: each is replayed against intraday bars afterwards,
+# so standing aside is scored the same way a trade is.
+SHADOW = HERE / "shadow.csv"
+SHADOW_FIELDS = [
+    "shadow_id", "logged_at", "session_date", "session", "model", "source",
+    "ticker", "direction", "entry_type", "entry", "stop", "target",
+    "p_target_first", "reason", "status", "entry_fill", "filled_at",
+    "exit_price", "exit_at", "outcome", "r_multiple", "hit_target_first",
+    "evaluated_through",
 ]
 
 
@@ -213,6 +243,311 @@ def leg_price(order: dict | None) -> float | None:
     return None
 
 
+def split_resting(orders: list, positions: list) -> tuple[list, list]:
+    """Split unfilled top-level orders into (entries, exits).
+
+    Exit orders look exactly like entries from here: both rest unfilled at the
+    top level once they are not nested under a bracket parent. An order facing
+    an open position is protecting it, never opening one, and an OCO pair is an
+    exit by construction.
+    """
+    held = {p["symbol"].upper(): ("long" if float(p["qty"]) > 0 else "short")
+            for p in positions}
+
+    def is_exit(o):
+        if o.get("order_class") == "oco":
+            return True
+        side = held.get((o.get("symbol") or "").upper())
+        if side is None:
+            return False
+        return o.get("side") == ("sell" if side == "long" else "buy")
+
+    unfilled = [o for o in orders if o.get("filled_qty") in ("0", 0, None)
+                and not o.get("parent_id")]
+    return ([o for o in unfilled if not is_exit(o)],
+            [o for o in unfilled if is_exit(o)])
+
+
+def book_commitments(cfg: dict, equity: float, positions: list, orders: list,
+                     journal: list[dict], prices: dict | None = None) -> dict:
+    """What the book already has on, counting resting entries as if filled.
+
+    An entry resting from an earlier session is a position waiting to happen:
+    it takes a slot, and when it fills it adds its notional and its risk. The
+    caps have to see it, or two briefs a day apart can jointly overshoot them.
+    Risk is entry-to-stop per rule 1, floored at zero - a stop trailed past
+    entry has nothing left at stake.
+    """
+    prices = prices or {}
+    open_rows = {r["ticker"].upper(): r for r in journal
+                 if r.get("r_multiple") in ("", None)
+                 and r.get("exit_reason") != "never filled"}
+    budget = equity * cfg["risk_per_trade_pct"] / 100.0
+
+    book = {"count": 0, "gross": 0.0, "net": 0.0, "risk": 0.0,
+            "held": set(), "resting": [], "resting_symbols": set()}
+
+    for p in positions:
+        sym = p["symbol"].upper()
+        mv = float(p["market_value"])
+        qty = abs(float(p["qty"]))
+        side = "long" if float(p["qty"]) > 0 else "short"
+        avg = float(p["avg_entry_price"])
+        stop = leg_price(exit_legs(sym, side, orders)["stop_loss"])
+        if stop is None:
+            try:
+                stop = float(open_rows.get(sym, {}).get("stop") or "")
+            except ValueError:
+                stop = None
+        if stop is None:
+            risk = budget  # unprotected and unknown: assume a full trade's risk
+        else:
+            risk = qty * max(0.0, (avg - stop) if side == "long" else (stop - avg))
+        book["count"] += 1
+        book["gross"] += abs(mv)
+        book["net"] += mv
+        book["risk"] += risk
+        book["held"].add(sym)
+
+    entries, _ = split_resting(orders, positions)
+    for o in entries:
+        sym = (o.get("symbol") or "").upper()
+        side = "long" if o.get("side") == "buy" else "short"
+        qty = abs(float(o.get("qty") or 0))
+        entry = float(o.get("limit_price") or o.get("stop_price")
+                      or prices.get(sym) or 0)
+        stop = target = None
+        for leg in o.get("legs") or []:
+            if leg.get("type") in ("stop", "stop_limit", "trailing_stop"):
+                stop = leg_price(leg)
+            elif leg.get("type") == "limit":
+                target = leg_price(leg)
+        risk = qty * abs(entry - stop) if (stop is not None and entry) else budget
+        notional = qty * entry
+        book["count"] += 1
+        book["gross"] += notional
+        book["net"] += notional if side == "long" else -notional
+        book["risk"] += risk
+        book["resting_symbols"].add(sym)
+        book["resting"].append({
+            "symbol": sym, "side": side, "qty": qty, "type": o.get("type"),
+            "entry": entry, "stop": stop, "target": target,
+            "submitted": (o.get("submitted_at") or "")[:10],
+        })
+    return book
+
+
+def parse_ts(value: str | None) -> datetime | None:
+    """Alpaca timestamp -> aware datetime. Tolerates nanosecond fractions."""
+    if not value:
+        return None
+    s = value.replace("Z", "+00:00")
+    if "." in s:
+        head, rest = s.split(".", 1)
+        frac = "".join(ch for ch in rest if ch.isdigit())
+        tz = rest[len(frac):]
+        s = f"{head}.{frac[:6]}{tz}"
+    try:
+        return datetime.fromisoformat(s)
+    except ValueError:
+        return None
+
+
+ET = "America/New_York"
+
+
+def et_today() -> str:
+    from zoneinfo import ZoneInfo
+    return datetime.now(ZoneInfo(ET)).strftime("%Y-%m-%d")
+
+
+def fetch_bars(symbols: list[str], timeframe: str, start: str, end: str | None,
+               feed: str, adjustment: str = "all") -> dict[str, list[dict]]:
+    """Historical bars per symbol, oldest first, following pagination."""
+    out: dict[str, list[dict]] = {}
+    for i in range(0, len(symbols), 100):
+        params = {"symbols": ",".join(symbols[i:i + 100]), "timeframe": timeframe,
+                  "start": start, "adjustment": adjustment, "feed": feed,
+                  "limit": 10000}
+        if end:
+            params["end"] = end
+        while True:
+            data = api("GET", "/v2/stocks/bars", base=DATA_BASE, params=params)
+            for sym, bars in (data.get("bars") or {}).items():
+                out.setdefault(sym.upper(), []).extend(bars or [])
+            token = data.get("next_page_token")
+            if not token:
+                break
+            params["page_token"] = token
+    return out
+
+
+def history_bars(symbols: list[str], feed: str, end: str,
+                 timeframe: str = "1Day", start: str | None = None,
+                 adjustment: str = "all") -> tuple[dict, str]:
+    """Bars up to `end`, consolidated (SIP) when the plan allows it.
+
+    The free plan serves SIP history as long as it stops more than 15 minutes
+    ago, and SIP is the whole tape: IEX alone is a couple of percent of volume,
+    which makes its averages useless for a volume filter and its highs and
+    lows narrower than what actually traded. Falls back to the configured
+    feed. Returns (bars, feed used).
+    """
+    if start is None:
+        start = (datetime.fromisoformat(end[:10]) - timedelta(days=110)).strftime("%Y-%m-%d")
+    for f in dict.fromkeys(("sip", feed)):
+        try:
+            return fetch_bars(symbols, timeframe, start, end, f, adjustment), f
+        except RuntimeError:
+            continue
+    raise RuntimeError(f"no bars for {len(symbols)} symbols on sip or {feed}")
+
+
+def fetch_movers(top: int = 50) -> dict:
+    """Alpaca's movers screener: {"gainers": [...], "losers": [...], "last_updated"}."""
+    return api("GET", "/v1beta1/screener/stocks/movers", base=DATA_BASE,
+               params={"top": top})
+
+
+def market_stats(bars: list[dict], snap: dict, today: str) -> dict | None:
+    """Levels a brief needs, from completed daily bars plus today's snapshot."""
+    hist = [b for b in bars if b["t"][:10] < today]
+    if len(hist) < 2:
+        return None
+    closes = [b["c"] for b in hist]
+    trs = [max(b["h"] - b["l"], abs(b["h"] - p["c"]), abs(b["l"] - p["c"]))
+           for p, b in zip(hist, hist[1:])]
+    mean = lambda xs: sum(xs) / len(xs) if xs else None
+    s = {
+        "prev": closes[-1],
+        "atr": mean(trs[-14:]),
+        "sma20": mean(closes[-20:]) if len(closes) >= 20 else None,
+        "sma50": mean(closes[-50:]) if len(closes) >= 50 else None,
+        "hi20": max(b["h"] for b in hist[-20:]),
+        "lo20": min(b["l"] for b in hist[-20:]),
+        "chg5": closes[-1] / closes[-6] - 1 if len(closes) >= 6 else None,
+        "adv": mean([b["v"] for b in hist[-20:]]),
+        "last": None, "last_t": None, "today": None,
+    }
+    trade = (snap or {}).get("latestTrade") or {}
+    t = parse_ts(trade.get("t"))
+    if t and trade.get("p"):
+        from zoneinfo import ZoneInfo
+        t_et = t.astimezone(ZoneInfo(ET))
+        if t_et.strftime("%Y-%m-%d") == today:
+            s["last"], s["last_t"] = float(trade["p"]), t_et
+    day = (snap or {}).get("dailyBar") or {}
+    if (day.get("t") or "")[:10] == today and day.get("o"):
+        s["today"] = {k: float(day[k]) for k in ("o", "h", "l")}
+    return s
+
+
+def market_data_section(cfg: dict, held: list[str], resting: list[str],
+                        market_open: bool) -> list[str]:
+    """Markdown tables of prices and levels for the brief, grouped.
+
+    Never raises: the brief is better written without this table than not
+    written at all.
+    """
+    today = et_today()
+    groups: list[tuple[str, list[str]]] = []
+    mine = list(dict.fromkeys(held + resting))
+    if mine:
+        groups.append(("Your positions and resting entries", mine))
+    for name, syms in (cfg.get("watchlist") or {}).items():
+        groups.append((name, [s.upper() for s in syms]))
+
+    movers, movers_note = {"gainers": [], "losers": []}, ""
+    try:
+        m = fetch_movers()
+        for side in ("gainers", "losers"):
+            movers[side] = [x for x in m.get(side) or []
+                            if float(x.get("price") or 0) >= cfg["min_price"]
+                            and str(x.get("symbol", "")).isalpha()]
+        ts = parse_ts(m.get("last_updated"))
+        if ts:
+            from zoneinfo import ZoneInfo
+            movers_note = f", screener as of {ts.astimezone(ZoneInfo(ET)):%Y-%m-%d %H:%M} ET"
+    except RuntimeError as e:
+        movers_note = f" - screener unavailable ({str(e)[:80]})"
+    mover_syms = [x["symbol"].upper() for side in ("gainers", "losers")
+                  for x in movers[side]]
+
+    everything = list(dict.fromkeys([s for _, g in groups for s in g] + mover_syms))
+    out = ["\n### Market data\n"]
+    try:
+        from zoneinfo import ZoneInfo
+        midnight = datetime.strptime(today, "%Y-%m-%d").replace(tzinfo=ZoneInfo(ET))
+        bars, used = history_bars(everything, cfg["data_feed"],
+                                  midnight.astimezone(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"))
+        snaps = get_snapshots(everything, cfg["data_feed"]) or {}
+    except RuntimeError as e:
+        return out + [f"*Unavailable this session: {str(e)[:200]}. Search for levels.*"]
+    stats = {s: market_stats(bars.get(s, []), snaps.get(s) or {}, today) for s in everything}
+
+    vol_note = ("consolidated volume" if used == "sip"
+                else f"{used.upper()} volume only, a small slice of the tape")
+    out.append(
+        f"*From Alpaca. History and averages are completed sessions ({used.upper()}, "
+        f"{vol_note}); last is today's latest {cfg['data_feed'].upper()} trade, which "
+        "pre-market is a thin single-venue print - confirm it for anything you trade. "
+        "A level taken from this table counts as verified. ATR is the 14-session "
+        "average true range: a stop inside one ATR of entry is inside ordinary "
+        "daily noise.*")
+
+    def pct(x):
+        return f"{x * 100:+.1f}%" if x is not None else "-"
+
+    def fmt(x):
+        return "-" if x is None else f"{x:,.2f}"
+
+    def row(sym):
+        s = stats.get(sym)
+        if not s:
+            return f"| {sym} | no data |" + " |" * (8 if market_open else 7)
+        last = s["last"]
+        cells = [
+            sym,
+            f"{last:,.2f} ({s['last_t']:%H:%M})" if last else "no trade today",
+            pct(last / s["prev"] - 1) if last else "-",
+            fmt(s["prev"]),
+        ]
+        if market_open:
+            d = s["today"]
+            cells.append(f"{d['o']:,.2f} / {d['l']:,.2f}-{d['h']:,.2f}" if d else "-")
+        cells += [
+            f"{s['atr']:,.2f} ({s['atr'] / s['prev'] * 100:.1f}%)" if s["atr"] else "-",
+            f"{s['lo20']:,.2f}-{s['hi20']:,.2f}",
+            " / ".join(pct(s["prev"] / m - 1) if m else "-" for m in (s["sma20"], s["sma50"])),
+            pct(s["chg5"]),
+            f"{s['adv'] / 1e6:,.1f}M" if s["adv"] else "-",
+        ]
+        return "| " + " | ".join(cells) + " |"
+
+    head = ["Symbol", "Last (ET)", "vs prev", "Prev close"]
+    if market_open:
+        head.append("Today open / low-high")
+    head += ["ATR14", "20d low-high", "Prev vs 20d / 50d avg", "5d", "Avg vol 20d"]
+    header = ["| " + " | ".join(head) + " |", "|" + "---|" * len(head)]
+
+    for name, syms in groups:
+        out += [f"\n#### {name}\n"] + header + [row(s) for s in syms]
+
+    liquid = lambda sym: ((stats.get(sym) or {}).get("adv") or 0) >= cfg["min_avg_volume"] \
+        if used == "sip" else True
+    shown = {side: [x for x in movers[side] if liquid(x["symbol"].upper())][:cfg["movers_show"]]
+             for side in ("gainers", "losers")}
+    out.append(f"\n#### Movers (at least ${cfg['min_price']:g}"
+               + (f" and {cfg['min_avg_volume'] / 1e6:g}M average volume" if used == "sip" else "")
+               + f"{movers_note})\n")
+    if shown["gainers"] or shown["losers"]:
+        out += header + [row(x["symbol"].upper()) for side in ("gainers", "losers")
+                         for x in shown[side]]
+    else:
+        out.append("*None passed the filter.*")
+    return out
+
+
 def last_price(snap: dict) -> float | None:
     """Best available reference price from a snapshot payload."""
     for key, field in (
@@ -269,6 +604,16 @@ def validate_play(play: dict, ctx: dict) -> tuple[list[str], list[str], dict]:
 
     target = targets[0]
 
+    # A market entry fills wherever the market is, not at the level the brief
+    # wrote down, so size and check it from the last price when there is one.
+    if str(play.get("entry_type", "limit")).lower() == "market":
+        ref = ctx["prices"].get(symbol)
+        if ref:
+            if abs(entry - ref) / ref > 0.005:
+                warnings.append(f"market entry sized from the last price {ref:.2f}, "
+                                f"not the stated {entry}")
+            entry = ref
+
     # Geometry
     if direction == "long":
         if stop >= entry:
@@ -316,8 +661,28 @@ def validate_play(play: dict, ctx: dict) -> tuple[list[str], list[str], dict]:
             p = None
 
     conviction = play.get("conviction")
-    if conviction is not None and float(conviction) < cfg["min_conviction"]:
-        errors.append(f"conviction {conviction} below floor {cfg['min_conviction']}")
+    try:
+        if conviction is not None and float(conviction) < cfg["min_conviction"]:
+            errors.append(f"conviction {conviction} below floor {cfg['min_conviction']}")
+    except (TypeError, ValueError):
+        errors.append(f"conviction must be a number 1-5, got '{conviction}'")
+
+    # Risk tier. The play picks how much of the budget it spends; the harness
+    # still derives the share count and never lets it exceed rule 1.
+    cap_pct = cfg["risk_per_trade_pct"]
+    risk_pct = cap_pct
+    if play.get("risk_pct") not in (None, ""):
+        try:
+            risk_pct = float(play["risk_pct"])
+        except (TypeError, ValueError):
+            errors.append(f"risk_pct must be a number, got '{play['risk_pct']}'")
+            risk_pct = cap_pct
+        if risk_pct > cap_pct:
+            warnings.append(f"risk_pct {risk_pct} is over the {cap_pct}% per-trade cap "
+                            f"- sized at {cap_pct}%")
+            risk_pct = cap_pct
+        elif risk_pct < cfg["min_risk_pct"]:
+            errors.append(f"risk_pct {risk_pct} is below the {cfg['min_risk_pct']}% floor")
 
     # Tradability
     try:
@@ -335,11 +700,11 @@ def validate_play(play: dict, ctx: dict) -> tuple[list[str], list[str], dict]:
         errors.append(f"could not look up {symbol}: {e}")
 
     # Sizing
-    qty, risk_usd = size_position(equity, entry, stop, cfg["risk_per_trade_pct"])
+    qty, risk_usd = size_position(equity, entry, stop, risk_pct)
     if qty < 1:
         errors.append(
             f"stop is too wide to take even 1 share within "
-            f"{cfg['risk_per_trade_pct']}% of equity (per-share risk "
+            f"{risk_pct}% of equity (per-share risk "
             f"${abs(entry - stop):.2f})"
         )
 
@@ -366,11 +731,26 @@ def validate_play(play: dict, ctx: dict) -> tuple[list[str], list[str], dict]:
     else:
         warnings.append(f"no reference price for {symbol} - could not sanity-check entry")
 
+    # An entry on the wrong side of the market is not the order it looks like:
+    # a stop trigger already passed fires at the open, and a limit through the
+    # market fills there. Warnings only - the reference can be a stale IEX print.
+    entry_type = str(play.get("entry_type", "limit")).lower()
+    if ref:
+        long = direction == "long"
+        if entry_type == "stop" and (entry <= ref if long else entry >= ref):
+            warnings.append(
+                f"stop entry {entry} is already {'below' if long else 'above'} the "
+                f"last price {ref:.2f} - it triggers at the open like a market order")
+        if entry_type == "limit" and (entry > ref if long else entry < ref):
+            warnings.append(
+                f"limit {entry} is through the last price {ref:.2f} - it will fill "
+                "at the open, not at a pullback")
+
     enriched = {
         "symbol": symbol, "direction": direction, "entry": entry, "stop": stop,
         "target": target, "qty": qty, "risk_usd": risk_usd, "notional": notional,
-        "rr": rr, "p": p, "ref": ref,
-        "entry_type": str(play.get("entry_type", "limit")).lower(),
+        "rr": rr, "p": p, "ref": ref, "risk_pct": risk_pct,
+        "entry_type": entry_type,
     }
     return errors, warnings, enriched
 
@@ -674,44 +1054,119 @@ def apply_manage(m: dict, tif: str) -> list[str]:
     return log
 
 
-def portfolio_checks(planned: list[dict], ctx: dict) -> list[str]:
-    """Rules that apply across the whole book, not to individual plays."""
-    problems = []
+def conviction_of(p: dict) -> float:
+    try:
+        return float(p["raw"].get("conviction") or 0)
+    except (TypeError, ValueError):
+        return 0.0
+
+
+def admit_plays(planned: list[dict], ctx: dict) -> tuple[list[dict], list[tuple], str | None]:
+    """Admit plays against the book-level caps, highest conviction first.
+
+    Returns (admitted, dropped, blocker). Each play is checked against what is
+    already on the book plus everything admitted ahead of it, so one play too
+    many costs that play, not the whole brief - and a smaller play further down
+    can still fit where a larger one did not. Ties keep the brief's order.
+    blocker is set when nothing may be admitted at all (the daily loss limit).
+    """
     cfg, equity = ctx["cfg"], ctx["equity"]
-    open_count = len(ctx["positions"])
-
-    if open_count + len(planned) > cfg["max_positions"]:
-        problems.append(
-            f"would hold {open_count + len(planned)} positions, cap is "
-            f"{cfg['max_positions']} ({open_count} already open)"
-        )
-
-    open_notional = sum(abs(float(p["market_value"])) for p in ctx["positions"])
-    new_notional = sum(p["notional"] for p in planned)
-    gross_pct = (open_notional + new_notional) / equity * 100 if equity else 0
-    if gross_pct > cfg["max_gross_exposure_pct"]:
-        problems.append(
-            f"gross exposure would be {gross_pct:.0f}% of equity, cap is "
-            f"{cfg['max_gross_exposure_pct']}%"
-        )
-
-    held = {p["symbol"] for p in ctx["positions"]}
-    for p in planned:
-        if p["symbol"] in held:
-            problems.append(f"{p['symbol']} is already held - no adding via this path")
-
-    seen = set()
-    for p in planned:
-        if p["symbol"] in seen:
-            problems.append(f"{p['symbol']} appears twice in the same brief")
-        seen.add(p["symbol"])
-
     if ctx["daily_pnl_pct"] <= -cfg["daily_loss_limit_pct"]:
-        problems.append(
-            f"DAILY LOSS LIMIT HIT ({ctx['daily_pnl_pct']:.2f}%) - "
-            "no new positions until next session"
-        )
-    return problems
+        return [], [], (f"DAILY LOSS LIMIT HIT ({ctx['daily_pnl_pct']:.2f}%) - "
+                        "no new positions until next session")
+
+    book = ctx["book"]
+    count, gross, net, risk = book["count"], book["gross"], book["net"], book["risk"]
+    gross_cap = equity * cfg["max_gross_exposure_pct"] / 100.0
+    net_cap = equity * cfg["max_net_exposure_pct"] / 100.0
+    risk_cap = equity * cfg["max_open_risk_pct"] / 100.0
+    pct = (lambda x: x / equity * 100) if equity else (lambda x: 0.0)
+
+    admitted, dropped, seen = [], [], set()
+    order = sorted(enumerate(planned), key=lambda ip: (-conviction_of(ip[1]), ip[0]))
+    for _, p in order:
+        sym = p["symbol"]
+        signed = p["notional"] if p["direction"] == "long" else -p["notional"]
+        why = None
+        if sym in book["held"]:
+            why = "already held - one position per name; use manage to change it"
+        elif sym in book["resting_symbols"]:
+            why = ("already has a resting entry - use manage to amend or cancel "
+                   "it instead of stacking a second")
+        elif sym in seen:
+            why = "appears twice in the same brief"
+        elif count + 1 > cfg["max_positions"]:
+            why = (f"would be {count + 1} positions and resting entries, cap is "
+                   f"{cfg['max_positions']}")
+        elif gross + p["notional"] > gross_cap:
+            why = (f"gross exposure would be {pct(gross + p['notional']):.0f}% of "
+                   f"equity, cap is {cfg['max_gross_exposure_pct']}%")
+        elif abs(net + signed) > net_cap:
+            why = (f"net exposure would be {pct(net + signed):+.0f}% of equity, cap is "
+                   f"+/-{cfg['max_net_exposure_pct']}%")
+        elif risk + p["risk_usd"] > risk_cap:
+            why = (f"risk at stake would be {pct(risk + p['risk_usd']):.2f}% of equity, "
+                   f"cap is {cfg['max_open_risk_pct']}%")
+        seen.add(sym)
+        if why:
+            dropped.append((p, why))
+            continue
+        count += 1
+        gross += p["notional"]
+        net += signed
+        risk += p["risk_usd"]
+        p["book_after"] = {"gross": pct(gross), "net": pct(net), "risk": pct(risk)}
+        admitted.append(p)
+    return admitted, dropped, None
+
+
+def validate_passed(item: dict, ctx: dict) -> tuple[list[str], dict]:
+    """Check one passed idea well enough to score it. Returns (errors, enriched).
+
+    No order is placed, so there is nothing to size or borrow - but the levels
+    still have to be real, or the replay scores an idea that never existed.
+    """
+    errors = []
+    for field in ("ticker", "direction", "entry", "stop"):
+        if item.get(field) in (None, ""):
+            errors.append(f"missing '{field}'")
+    if errors:
+        return errors, {}
+    symbol = str(item["ticker"]).upper().strip()
+    direction = str(item["direction"]).lower().strip()
+    entry_type = str(item.get("entry_type", "limit")).lower()
+    try:
+        entry, stop = float(item["entry"]), float(item["stop"])
+        target = float(item["target"] if item.get("target") is not None
+                       else item["targets"][0])
+    except (KeyError, IndexError, TypeError, ValueError):
+        return ["entry, stop and target must be numbers"], {}
+    if direction not in ("long", "short"):
+        return [f"direction must be long or short, got '{direction}'"], {}
+    if entry_type not in ("limit", "stop", "market"):
+        return [f"entry_type must be limit, stop or market, got '{entry_type}'"], {}
+    long = direction == "long"
+    if (stop >= entry or target <= entry) if long else (stop <= entry or target >= entry):
+        errors.append(f"{direction} levels out of order: entry {entry}, stop {stop}, "
+                      f"target {target}")
+    ref = ctx["prices"].get(symbol)
+    if ref and abs(entry - ref) / ref > 0.10:
+        errors.append(f"entry {entry} is {abs(entry - ref) / ref:.0%} from last price "
+                      f"{ref:.2f} - not a real level")
+    p = item.get("p_target_first")
+    try:
+        p = float(p) if p not in (None, "") else None
+        if p is not None and 2 <= p <= 100:
+            p /= 100.0
+        if p is not None and not 0 < p < 1:
+            errors.append(f"p_target_first {item['p_target_first']} is not a probability")
+    except (TypeError, ValueError):
+        errors.append(f"p_target_first must be a number, got '{p}'")
+    return errors, {
+        "symbol": symbol, "direction": direction, "entry_type": entry_type,
+        "entry": entry, "stop": stop, "target": target, "p": p,
+        "reason": str(item.get("reason", "")),
+    }
 
 
 # --------------------------------------------------------------------------
@@ -748,6 +1203,67 @@ def ensure_journal():
     if not JOURNAL.exists():
         with JOURNAL.open("w", newline="") as f:
             csv.DictWriter(f, fieldnames=JOURNAL_FIELDS).writeheader()
+        return
+    with JOURNAL.open(newline="") as f:
+        reader = csv.DictReader(f)
+        if reader.fieldnames == JOURNAL_FIELDS:
+            return
+        rows = list(reader)
+    # Older header. Rewrite it before anything appends, or new rows land under
+    # the wrong columns. Rows from before the *_initial columns existed get them
+    # filled in from what they were submitted with.
+    for row in rows:
+        stop0, target0 = submitted_levels(row)
+        if row.get("stop_initial") in ("", None) and stop0 is not None:
+            row["stop_initial"] = stop0
+        if row.get("target_initial") in ("", None) and target0 is not None:
+            row["target_initial"] = target0
+    write_journal(rows)
+
+
+def submitted_levels(row: dict) -> tuple[float | None, float | None]:
+    """The stop and target a journal row was submitted with, recovered for rows
+    logged before stop_initial / target_initial were recorded.
+
+    The brief that proposed the play is the source. Failing that, the stop is
+    exact from the sizing (risk_usd = qty x entry-to-stop distance), and the
+    target falls back to whatever the row holds now.
+    """
+    stop0 = target0 = None
+    brief = HERE / "briefs" / f"{row.get('session_date', '')}.md"
+    try:
+        doc = parse_plays(brief.read_text())
+        for p in doc.get("plays", []):
+            if str(p.get("ticker", "")).upper().strip() == row["ticker"].upper():
+                stop0, target0 = float(p["stop"]), float(p["targets"][0])
+                break
+    except (OSError, ValueError, KeyError, TypeError, IndexError):
+        pass
+    try:
+        if stop0 is None:
+            entry, qty = float(row["entry_planned"]), float(row["qty"])
+            dist = float(row["risk_usd"]) / qty
+            stop0 = round(entry - dist if row["direction"] == "long" else entry + dist, 2)
+        if target0 is None and row.get("target"):
+            target0 = float(row["target"])
+    except (KeyError, ValueError, ZeroDivisionError):
+        pass
+    return stop0, target0
+
+
+def initial_levels(row: dict) -> tuple[float | None, float | None]:
+    """(stop, target) the play was submitted with - what R and calibration use."""
+    out = []
+    for key, live in (("stop_initial", "stop"), ("target_initial", "target")):
+        for k in (key, live):
+            try:
+                out.append(float(row[k]))
+                break
+            except (KeyError, TypeError, ValueError):
+                continue
+        else:
+            out.append(None)
+    return out[0], out[1]
 
 
 def read_journal() -> list[dict]:
@@ -798,6 +1314,26 @@ def append_journal(row: dict):
         )
 
 
+def read_shadow() -> list[dict]:
+    if not SHADOW.exists():
+        return []
+    with SHADOW.open(newline="") as f:
+        return list(csv.DictReader(f))
+
+
+def write_shadow(rows: list[dict]):
+    with SHADOW.open("w", newline="") as f:
+        w = csv.DictWriter(f, fieldnames=SHADOW_FIELDS)
+        w.writeheader()
+        for r in rows:
+            w.writerow({k: r.get(k, "") for k in SHADOW_FIELDS})
+
+
+def append_shadow(new: list[dict]):
+    if new:
+        write_shadow(read_shadow() + new)
+
+
 # --------------------------------------------------------------------------
 # Context
 # --------------------------------------------------------------------------
@@ -820,10 +1356,16 @@ def build_context(symbols: list[str]) -> dict:
     except RuntimeError as e:
         print(f"  ! could not fetch reference prices: {e}", file=sys.stderr)
 
+    positions = get_positions()
+    # Not caught: without the open orders the caps cannot see resting entries,
+    # and admitting new risk blind is worse than failing the run.
+    orders = get_open_orders()
+    book = book_commitments(cfg, equity, positions, orders, read_journal(), prices)
+
     return {
         "cfg": cfg, "account": acct, "equity": equity,
         "daily_pnl": daily_pnl, "daily_pnl_pct": daily_pnl_pct,
-        "positions": get_positions(), "prices": prices,
+        "positions": positions, "prices": prices, "orders": orders, "book": book,
     }
 
 
@@ -831,11 +1373,8 @@ def build_context(symbols: list[str]) -> dict:
 # Commands
 # --------------------------------------------------------------------------
 
-def load_plays(path: str) -> dict:
-    p = Path(path)
-    if not p.exists():
-        sys.exit(f"No such file: {path}")
-    text = p.read_text()
+def parse_plays(text: str) -> dict:
+    """The JSON block from a brief. Raises ValueError if there is none."""
     # Tolerate the JSON being wrapped in a markdown fence
     if "```" in text:
         chunks = text.split("```")
@@ -846,8 +1385,15 @@ def load_plays(path: str) -> dict:
             if chunk.startswith("{"):
                 text = chunk
                 break
+    return json.loads(text)
+
+
+def load_plays(path: str) -> dict:
+    p = Path(path)
+    if not p.exists():
+        sys.exit(f"No such file: {path}")
     try:
-        return json.loads(text)
+        return parse_plays(p.read_text())
     except json.JSONDecodeError as e:
         sys.exit(f"{path} is not valid JSON: {e}")
 
@@ -856,12 +1402,15 @@ def cmd_check(args, submit: bool = False):
     doc = load_plays(args.file)
     plays = doc.get("plays", [])
     manage = doc.get("manage", []) or []
+    passed = doc.get("passed", []) or []
     session_date = doc.get("date") or datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    session = getattr(args, "session", None) or "pre-market"
+    model = getattr(args, "model", None) or ""
 
     if doc.get("no_trade"):
         plays = []  # no_trade governs new entries only, never position management
 
-    if not plays and not manage:
+    if not plays and not manage and not passed:
         print(f"\n{session_date}: no trades proposed.")
         if doc.get("session_note"):
             print(f"  {doc['session_note']}")
@@ -869,6 +1418,7 @@ def cmd_check(args, submit: bool = False):
 
     symbols = [p.get("ticker", "") for p in plays if p.get("ticker")]
     symbols += [m.get("ticker", "") for m in manage if m.get("ticker")]
+    symbols += [x.get("ticker", "") for x in passed if x.get("ticker")]
     ctx = build_context(symbols)
     cfg = ctx["cfg"]
 
@@ -927,36 +1477,81 @@ def cmd_check(args, submit: bool = False):
               + (f"  [{e['rr']:.2f}R]" if e["rr"] else ""))
         print(f"      qty {e['qty']}  notional ${e['notional']:,.0f}  "
               f"risk ${e['risk_usd']:,.2f} "
-              f"({e['risk_usd'] / ctx['equity'] * 100:.2f}% of equity)")
+              f"({e['risk_usd'] / ctx['equity'] * 100:.2f}% of equity, "
+              f"tier {e['risk_pct']:g}%)")
         if e["p"] is not None:
             print(f"      P(target first) {e['p']:.0%}   "
                   f"conviction {play.get('conviction', '-')}")
         for w in warnings:
             print(f"      ! {w}")
 
-    problems = portfolio_checks(approved, ctx) if approved else []
-    if problems:
-        print(f"\n  {'-' * 64}\n  BOOK-LEVEL VIOLATIONS")
-        for pr in problems:
-            print(f"      x {pr}")
-        # Book-level caps govern new exposure. Management of positions that are
-        # already open is unaffected, so it still goes through.
-        print("\n  No new orders submitted. Fix the brief and re-run.")
-        blocked, approved = len(approved), []
+    # Book-level caps govern new exposure only. Management of positions that
+    # are already open is unaffected, so it goes through whatever happens here.
+    dropped, blocker = [], None
+    if approved:
+        approved, dropped, blocker = admit_plays(approved, ctx)
+        book = ctx["book"]
+        eq = ctx["equity"] or 1
+        print(f"\n  {'-' * 64}")
+        print(f"  BOOK-LEVEL ADMISSION   highest conviction first")
+        print(f"      book now: {book['count']} positions/resting entries, "
+              f"gross {book['gross'] / eq * 100:.0f}%, net {book['net'] / eq * 100:+.0f}%, "
+              f"risk at stake {book['risk'] / eq * 100:.2f}%")
+        if blocker:
+            print(f"      x {blocker}")
+        for p in approved:
+            after = p["book_after"]
+            print(f"      + {p['symbol']:<6} admitted  -> gross {after['gross']:.0f}%, "
+                  f"net {after['net']:+.0f}%, risk {after['risk']:.2f}%")
+        for p, why in dropped:
+            print(f"      x {p['symbol']:<6} dropped: {why}")
+
+    # The shadow book: ideas passed on with real levels, plus plays the caps
+    # dropped. No orders - they are replayed against the tape afterwards.
+    logged_at = datetime.now(timezone.utc).isoformat(timespec="seconds")
+    shadow_rows = []
+
+    def shadow_row(e, source, p, reason):
+        return {
+            "shadow_id": uuid.uuid4().hex[:8], "logged_at": logged_at,
+            "session_date": session_date, "session": session, "model": model,
+            "source": source, "ticker": e["symbol"], "direction": e["direction"],
+            "entry_type": e["entry_type"], "entry": e["entry"], "stop": e["stop"],
+            "target": e["target"], "p_target_first": "" if p is None else p,
+            "reason": reason, "status": "pending",
+        }
+
+    for p, why in dropped:
+        shadow_rows.append(shadow_row(p, "dropped", p["p"], f"dropped by the caps: {why}"))
+    if passed:
+        print(f"\n  {'-' * 64}")
+        print(f"  PASSED IDEAS   logged to the shadow book and scored later, no orders")
+        for item in passed:
+            errors, e = validate_passed(item, ctx)
+            if errors:
+                print(f"      x {item.get('ticker', '?'):<6} not logged: {'; '.join(errors)}")
+                continue
+            shadow_rows.append(shadow_row(e, "passed", e["p"], e["reason"]))
+            print(f"      . {e['symbol']:<6} {e['direction']:<5} {e['entry_type']} "
+                  f"{e['entry']:.2f}  stop {e['stop']:.2f}  target {e['target']:.2f}"
+                  + (f"  P {e['p']:.0%}" if e["p"] is not None else ""))
 
     total_risk = sum(p["risk_usd"] for p in approved)
     print(f"\n  {'-' * 64}")
     if plays:
+        n_dropped = len(dropped) or (len(plays) - len(rejected) if blocker else 0)
         print(f"  {len(approved)} approved, {len(rejected)} rejected"
-              + (f", {blocked} blocked by book-level rules" if problems else "")
+              + (f", {n_dropped} dropped by book-level caps" if n_dropped else "")
               + f".  Total new risk ${total_risk:,.2f} "
                 f"({total_risk / ctx['equity'] * 100:.2f}% of equity)")
     elif doc.get("no_trade"):
         print(f"  No new positions today.")
     if managed:
         print(f"  {len(managed)} position update(s) pending.")
+    if shadow_rows:
+        print(f"  {len(shadow_rows)} idea(s) for the shadow book.")
 
-    if not approved and not managed:
+    if not approved and not managed and not shadow_rows:
         return
     if not submit:
         print("\n  Dry run. Re-run with `submit --confirm` to send these.\n")
@@ -965,8 +1560,12 @@ def cmd_check(args, submit: bool = False):
         print("\n  Add --confirm to actually submit.\n")
         return
 
+    # Written first: it needs nothing from Alpaca, and the record of what was
+    # passed on should not depend on whether an order went through.
+    append_shadow(shadow_rows)
+
     clock = get_clock()
-    if not clock.get("is_open"):
+    if (approved or managed) and not clock.get("is_open"):
         print(f"\n  ! Market is closed. Next open: {clock.get('next_open')}")
         print("    Orders will queue. Market orders will fill at the next open.")
 
@@ -1028,7 +1627,9 @@ def cmd_check(args, submit: bool = False):
             "session_date": session_date,
             "ticker": p["symbol"], "direction": p["direction"],
             "entry_type": p["entry_type"], "entry_planned": p["entry"],
-            "stop": p["stop"], "target": p["target"], "qty": p["qty"],
+            "stop": p["stop"], "target": p["target"],
+            "stop_initial": p["stop"], "target_initial": p["target"],
+            "qty": p["qty"],
             "risk_usd": round(p["risk_usd"], 2),
             "risk_pct_equity": round(p["risk_usd"] / ctx["equity"] * 100, 3),
             "conviction": raw.get("conviction", ""),
@@ -1040,6 +1641,7 @@ def cmd_check(args, submit: bool = False):
             "bear_case": raw.get("bear_case", ""),
             "order_id": resp.get("id", ""),
             "status": resp.get("status", "submitted"),
+            "session": session, "model": model,
         })
         print(f"  > {p['symbol']} {p['direction']} x{p['qty']} "
               f"submitted [{resp.get('status')}]  id={resp.get('id', '')[:8]}")
@@ -1104,6 +1706,50 @@ def cmd_status(args):
     print()
 
 
+def exit_fills(entry: dict, symbol: str, exit_side: str) -> list[dict]:
+    """Every filled order that closed part of a position, oldest first.
+
+    The exit is not always a leg of the bracket that opened the position.
+    `manage` replaces legs (a replace is a new order with a new id), places
+    fresh OCO pairs when protection is missing, and closes at market - none of
+    which appear under the entry's `legs`. So take the bracket's own legs, then
+    every closed order in the symbol submitted after the entry filled. Without
+    nested=true each leg of an OCO comes back as an order of its own.
+    """
+    since = parse_ts(entry.get("filled_at"))
+    seen, out = set(), []
+
+    def take(nodes):
+        for o in nodes or []:
+            take(o.get("legs"))
+            if o.get("id") in seen:
+                continue
+            seen.add(o.get("id"))
+            if (o.get("symbol") or "").upper() != symbol:
+                continue
+            if o.get("side") != exit_side or not o.get("filled_avg_price"):
+                continue
+            if float(o.get("filled_qty") or 0) <= 0:
+                continue
+            filled = parse_ts(o.get("filled_at"))
+            if since and filled and filled < since:
+                continue
+            out.append(o)
+
+    take(entry.get("legs"))
+    if since:
+        # `after` filters on submission time. A second of slack costs nothing:
+        # the fill-time check above is what actually decides.
+        after = (since - timedelta(seconds=1)).strftime("%Y-%m-%dT%H:%M:%SZ")
+        take(api("GET", "/v2/orders", params={
+            "status": "closed", "symbols": symbol, "after": after,
+            "direction": "asc", "limit": 500,
+        }))
+    epoch = datetime.min.replace(tzinfo=timezone.utc)
+    out.sort(key=lambda o: parse_ts(o.get("filled_at")) or epoch)
+    return out
+
+
 def cmd_reconcile(args):
     rows = read_journal()
     if not rows:
@@ -1144,42 +1790,319 @@ def cmd_reconcile(args):
         entry_fill = float(entry_fill)
         row["entry_fill"] = round(entry_fill, 4)
 
-        exit_fill, exit_reason, closed_at = None, None, None
-        for leg in order.get("legs") or []:
-            if leg.get("status") == "filled" and leg.get("filled_avg_price"):
-                exit_fill = float(leg["filled_avg_price"])
-                exit_reason = "target" if leg.get("type") == "limit" else "stop"
-                closed_at = leg.get("filled_at", "")
-        if exit_fill is None:
+        long = row["direction"] == "long"
+        symbol = row["ticker"].upper()
+        qty = float(order.get("filled_qty") or row["qty"])
+        try:
+            fills = exit_fills(order, symbol, "sell" if long else "buy")
+        except RuntimeError as e:
+            print(f"  ! {row['ticker']}: could not read its exit orders: {e}")
             continue
 
-        qty = int(float(row["qty"]))
-        stop = float(row["stop"])
-        if row["direction"] == "long":
-            pnl = (exit_fill - entry_fill) * qty
-            denom = entry_fill - stop
+        # Walk the exits oldest first until they account for the whole
+        # position. Positions in one name never overlap (the harness will not
+        # open a name already held), so the first `qty` shares sold after the
+        # entry filled are this trade's.
+        remaining, proceeds, last = qty, 0.0, None
+        for o in fills:
+            take = min(float(o["filled_qty"]), remaining)
+            proceeds += take * float(o["filled_avg_price"])
+            remaining -= take
+            last = o
+            if remaining <= 1e-9:
+                break
+        if last is None or remaining > 1e-9:
+            continue  # still open, or not fully out yet
+
+        exit_fill = proceeds / qty
+        otype = last.get("type")
+        exit_reason = ("target" if otype == "limit"
+                       else "stop" if otype in ("stop", "stop_limit", "trailing_stop")
+                       else "close")
+
+        # Measured against the levels the play was submitted with. The live
+        # stop may have been trailed past entry, and dividing by that turns a
+        # winner into a loss.
+        stop0, target0 = initial_levels(row)
+        pnl = ((exit_fill - entry_fill) if long else (entry_fill - exit_fill)) * qty
+        denom = ((entry_fill - stop0) if long else (stop0 - entry_fill)) if stop0 else 0
+        r = (pnl / qty / denom) if denom > 0 else 0.0
+
+        # p_target_first was about the initial target and stop. On an untouched
+        # bracket the exit answers that directly. Once `manage` has moved the
+        # levels, the fills only answer it when the exit was at or past the
+        # initial target; otherwise which level price reached first is not
+        # visible here, and the trade is left out of calibration.
+        stop_now, target_now = row.get("stop"), row.get("target")
+        moved = any(
+            now not in ("", None) and init is not None
+            and abs(float(now) - init) >= 0.005
+            for now, init in ((stop_now, stop0), (target_now, target0)))
+        if target0 is not None and (exit_fill >= target0 if long else exit_fill <= target0):
+            hit = "1"
+        elif exit_reason == "stop" and not moved:
+            hit = "0"
         else:
-            pnl = (entry_fill - exit_fill) * qty
-            denom = stop - entry_fill
-        r = (pnl / qty / denom) if denom else 0.0
+            hit = ""
 
         row.update({
             "exit_fill": round(exit_fill, 4),
             "exit_reason": exit_reason,
             "pnl_usd": round(pnl, 2),
             "r_multiple": round(r, 3),
-            "hit_target_first": "1" if exit_reason == "target" else "0",
-            "closed_at": closed_at or "",
+            "hit_target_first": hit,
+            "closed_at": last.get("filled_at", "") or "",
         })
         updated += 1
         print(f"  closed {row['ticker']:<6} {exit_reason:<7} "
-              f"{r:+.2f}R  ${pnl:+,.2f}")
+              f"{r:+.2f}R  ${pnl:+,.2f}"
+              + ("" if hit else "  (levels were moved - not scored for calibration)"))
 
     write_journal(rows)
     print(f"\n  {updated} trade(s) closed out"
           + (f", {never_filled} never filled" if never_filled else "") + ".")
     if updated:
         print("  Fill in `thesis_verdict` by hand: right/wrong thesis vs right/wrong outcome.\n")
+
+
+def replay_idea(row: dict, bars: list[dict], sessions: list[tuple], cfg: dict,
+                now_limit: datetime) -> dict:
+    """Replay one shadow idea against regular-session 5-minute bars.
+
+    Fills and exits follow what the live bracket would have done: a limit
+    fills at its price, or at the bar's open when the bar opens through it (a
+    gap); a stop entry likewise; a market entry at the first bar's open; the
+    exits the same way. Where one bar holds more than the order of events can
+    be read from, the idea is marked ambiguous and left out of calibration
+    rather than guessed. R is measured against the planned entry-to-stop
+    distance. Returns the fields to update; status stays "pending" until the
+    windows have closed or a level has been hit.
+    """
+    long = row["direction"] == "long"
+    entry, stop, target = float(row["entry"]), float(row["stop"]), float(row["target"])
+    etype = row.get("entry_type") or "limit"
+    risk = abs(entry - stop) or 1e-9
+    live_from = parse_ts(row["logged_at"])
+    entry_days = sessions[:cfg["shadow_entry_sessions"]]
+    exit_days = sessions[:cfg["shadow_exit_sessions"]]
+    entry_set = {d for d, _, _ in entry_days}
+    windows = {d: (o, c) for d, o, c in exit_days}
+
+    from zoneinfo import ZoneInfo
+    et = ZoneInfo(ET)
+    usable = []
+    for b in bars:
+        t = parse_ts(b["t"])
+        if t is None or t < live_from or t >= now_limit:
+            continue
+        day = t.astimezone(et).strftime("%Y-%m-%d")
+        if day in windows and windows[day][0] <= t < windows[day][1]:
+            usable.append((t, day, b))
+    usable.sort(key=lambda x: x[0])
+
+    def done(outcome, exit_px=None, exit_t=None):
+        r = ""
+        if exit_px is not None:
+            r = round(((exit_px - fill) if long else (fill - exit_px)) / risk, 3)
+        return {"status": "resolved", "outcome": outcome,
+                "entry_fill": "" if fill is None else round(fill, 4),
+                "filled_at": filled_at.isoformat() if filled_at else "",
+                "exit_price": "" if exit_px is None else round(exit_px, 4),
+                "exit_at": exit_t.isoformat() if exit_t else "",
+                "r_multiple": r,
+                "hit_target_first": {"target": "1", "stop": "0"}.get(outcome, ""),
+                "evaluated_through": now_limit.isoformat(timespec="minutes")}
+
+    def beyond_stop(px):
+        return px <= stop if long else px >= stop
+
+    def beyond_target(px):
+        return px >= target if long else px <= target
+
+    fill = filled_at = None
+    for t, day, b in usable:
+        o, h, l, c = (float(b[k]) for k in ("o", "h", "l", "c"))
+        lo_hit, hi_hit = (l, h) if long else (h, l)  # adverse, favourable extremes
+        if fill is None:
+            if day not in entry_set:
+                break
+            at_open = False
+            if etype == "market":
+                fill, at_open = o, True
+            elif etype == "stop":  # trigger in the favourable direction
+                if (o >= entry) if long else (o <= entry):
+                    fill, at_open = o, True
+                elif (h >= entry) if long else (l <= entry):
+                    fill = entry
+            else:
+                if (o <= entry) if long else (o >= entry):
+                    fill, at_open = o, True
+                elif (l <= entry) if long else (h >= entry):
+                    fill = entry
+            if fill is None:
+                continue
+            filled_at = t
+            s_hit, t_hit = beyond_stop(lo_hit), beyond_target(hi_hit)
+            stop_px = min(stop, fill) if long else max(stop, fill)
+            tgt_px = max(target, fill) if long else min(target, fill)
+            if at_open:
+                if s_hit and t_hit:
+                    return done("ambiguous")
+                if s_hit:
+                    return done("stop", stop_px, t)
+                if t_hit:
+                    return done("target", tgt_px, t)
+            else:
+                # Mid-bar fill. A limit is reached on the way towards the stop,
+                # so a stop in the same bar came after it; a target may have
+                # come before. A stop entry is the mirror image.
+                if etype == "limit" and s_hit and not t_hit:
+                    return done("stop", stop, t)
+                if etype == "stop" and t_hit and not s_hit:
+                    return done("target", target, t)
+                if s_hit or t_hit:
+                    return done("ambiguous")
+            continue
+        if beyond_stop(o):
+            return done("stop", o, t)
+        if beyond_target(o):
+            return done("target", o, t)
+        s_hit, t_hit = beyond_stop(lo_hit), beyond_target(hi_hit)
+        if s_hit and t_hit:
+            return done("ambiguous")
+        if s_hit:
+            return done("stop", stop, t)
+        if t_hit:
+            return done("target", target, t)
+
+    pending = {"status": "pending", "evaluated_through": now_limit.isoformat(timespec="minutes")}
+    if fill is None:
+        if entry_days and entry_days[-1][2] <= now_limit:
+            return done("never filled")
+        return pending
+    if exit_days and len(exit_days) == cfg["shadow_exit_sessions"] \
+            and exit_days[-1][2] <= now_limit:
+        return done("expired", float(usable[-1][2]["c"]), usable[-1][0])
+    return {**pending, "entry_fill": round(fill, 4), "filled_at": filled_at.isoformat()}
+
+
+def cmd_shadow(args):
+    """Replay pending shadow ideas against the tape and record what happened."""
+    rows = read_shadow()
+    pending = [r for r in rows if r.get("status") != "resolved"]
+    if not pending:
+        print("  No pending ideas in the shadow book.")
+        return
+    cfg = load_config()
+    # Consolidated history is free once it is 15 minutes old.
+    now_limit = datetime.now(timezone.utc) - timedelta(minutes=16)
+
+    first = min(r["session_date"] for r in pending)
+    last = (now_limit + timedelta(days=1)).strftime("%Y-%m-%d")
+    end_cal = (datetime.strptime(last, "%Y-%m-%d") + timedelta(days=30)).strftime("%Y-%m-%d")
+    cal = api("GET", "/v2/calendar", params={"start": first, "end": end_cal})
+    all_sessions = [(d["date"], *session_bounds(d)) for d in cal]
+
+    by_symbol: dict[str, list[dict]] = {}
+    for r in pending:
+        by_symbol.setdefault(r["ticker"].upper(), []).append(r)
+
+    resolved = 0
+    for sym, group in by_symbol.items():
+        start = min(parse_ts(r["logged_at"]) for r in group)
+        if start >= now_limit:
+            continue
+        try:
+            bars, _ = history_bars([sym], cfg["data_feed"],
+                                   now_limit.strftime("%Y-%m-%dT%H:%M:%SZ"),
+                                   timeframe="5Min", adjustment="raw",
+                                   start=start.strftime("%Y-%m-%dT%H:%M:%SZ"))
+        except RuntimeError as e:
+            print(f"  ! {sym}: {e}")
+            continue
+        for r in group:
+            sessions = [s for s in all_sessions if s[0] >= r["session_date"]]
+            r.update(replay_idea(r, bars.get(sym, []), sessions, cfg, now_limit))
+            if r["status"] == "resolved":
+                resolved += 1
+                print(f"  {r['ticker']:<6} {r['direction']:<5} {r['outcome']:<12} "
+                      + (f"{float(r['r_multiple']):+.2f}R" if r["r_multiple"] != "" else "")
+                      + f"  ({r['source']} {r['session_date']})")
+    write_shadow(rows)
+    print(f"\n  {resolved} idea(s) resolved, "
+          f"{sum(1 for r in rows if r.get('status') != 'resolved')} still pending.")
+
+
+def calibration_rows(rows: list[dict]) -> list[dict]:
+    return [r for r in rows if r.get("p_target_first") not in ("", None)
+            and r.get("hit_target_first") not in ("", None)]
+
+
+def print_calibration(scored: list[dict], what: str):
+    """Stated probability against outcome, bucketed, with a Brier score."""
+    print(f"\n  {'-' * 64}")
+    print(f"  CALIBRATION   {len(scored)} {what} with a stated probability")
+    print(f"  {'-' * 64}")
+    buckets = [(0, .5), (.5, .6), (.6, .7), (.7, .8), (.8, .9), (.9, 1.01)]
+    print(f"  {'stated':<14}{'n':>4}{'mean said':>12}{'actual':>10}")
+    brier = 0.0
+    for lo, hi in buckets:
+        in_b = [r for r in scored if lo <= float(r["p_target_first"]) < hi]
+        if not in_b:
+            continue
+        said = sum(float(r["p_target_first"]) for r in in_b) / len(in_b)
+        hit = sum(int(r["hit_target_first"]) for r in in_b) / len(in_b)
+        flag = "  <-- overconfident" if said - hit > 0.15 else ""
+        print(f"  {lo:.0%}-{hi if hi <= 1 else 1:.0%}{'':<7}{len(in_b):>4}"
+              f"{said:>11.0%}{hit:>10.0%}{flag}")
+    for r in scored:
+        brier += (float(r["p_target_first"]) - int(r["hit_target_first"])) ** 2
+    brier /= len(scored)
+    print(f"\n  Brier score     {brier:.3f}   "
+          f"(0 = perfect, 0.25 = coin flip, lower is better)")
+    if len(scored) < 20:
+        print(f"  ! Only {len(scored)} samples - treat this as directional, not conclusive.")
+
+
+def shadow_summary(rows: list[dict]) -> dict:
+    """Counts and hypothetical R for the resolved part of the shadow book."""
+    done = [r for r in rows if r.get("status") == "resolved"]
+    by = lambda o: [r for r in done if r.get("outcome") == o]
+    rs = [float(r["r_multiple"]) for r in done if r.get("r_multiple") not in ("", None)]
+    return {
+        "logged": len(rows), "resolved": len(done),
+        "never": len(by("never filled")), "target": len(by("target")),
+        "stop": len(by("stop")), "expired": len(by("expired")),
+        "ambiguous": len(by("ambiguous")),
+        "avg_r": sum(rs) / len(rs) if rs else None, "n_r": len(rs),
+    }
+
+
+def print_shadow_report(trades: list[dict]):
+    shadow = read_shadow()
+    if not shadow:
+        return
+    s = shadow_summary(shadow)
+    print(f"\n{'=' * 68}")
+    print(f"  SHADOW BOOK   {s['logged']} ideas passed on or dropped, {s['resolved']} resolved")
+    print(f"{'=' * 68}")
+    print(f"  Never filled    {s['never']}")
+    print(f"  Target first    {s['target']}")
+    print(f"  Stop first      {s['stop']}")
+    print(f"  Expired         {s['expired']}   (neither level inside the window)")
+    print(f"  Ambiguous       {s['ambiguous']}   (both in one bar - not scored)")
+    if s["avg_r"] is not None:
+        taken = [float(r["r_multiple"]) for r in trades]
+        print(f"  Avg R if taken  {s['avg_r']:+.2f}R over {s['n_r']} filled ideas"
+              + (f"   (trades actually taken: {sum(taken) / len(taken):+.2f}R)" if taken else ""))
+        print("  A shadow book that out-earns the trades taken says the filter is "
+              "rejecting\n  the better ideas.")
+    scored = calibration_rows(shadow)
+    if scored:
+        print_calibration(scored, "passed ideas")
+    both = calibration_rows(trades) + scored
+    if scored and calibration_rows(trades):
+        print_calibration(both, "trades and passed ideas together")
 
 
 def cmd_score(args):
@@ -1199,6 +2122,7 @@ def cmd_score(args):
 
     if not rows:
         print("No closed trades yet. Run `reconcile` first.")
+        print_shadow_report(rows)
         return
 
     rs = [float(r["r_multiple"]) for r in rows]
@@ -1229,31 +2153,14 @@ def cmd_score(args):
     print(f"  Max drawdown    {dd:.2f}R")
 
     # Calibration
-    scored = [r for r in rows if r.get("p_target_first") not in ("", None)
-              and r.get("hit_target_first") not in ("", None)]
+    scored = calibration_rows(rows)
+    unscorable = sum(1 for r in rows if r.get("hit_target_first") in ("", None))
+    if unscorable:
+        print(f"\n  {unscorable} closed trade(s) left out of calibration: their levels "
+              "were moved\n  or they were closed by hand, so the fills do not show "
+              "whether the\n  initial target or the initial stop came first.")
     if scored:
-        print(f"\n  {'-' * 64}")
-        print(f"  CALIBRATION   {len(scored)} trades with a stated probability")
-        print(f"  {'-' * 64}")
-        buckets = [(0, .5), (.5, .6), (.6, .7), (.7, .8), (.8, .9), (.9, 1.01)]
-        print(f"  {'stated':<14}{'n':>4}{'mean said':>12}{'actual':>10}")
-        brier = 0.0
-        for lo, hi in buckets:
-            in_b = [r for r in scored if lo <= float(r["p_target_first"]) < hi]
-            if not in_b:
-                continue
-            said = sum(float(r["p_target_first"]) for r in in_b) / len(in_b)
-            hit = sum(int(r["hit_target_first"]) for r in in_b) / len(in_b)
-            flag = "  <-- overconfident" if said - hit > 0.15 else ""
-            print(f"  {lo:.0%}-{hi if hi <= 1 else 1:.0%}{'':<7}{len(in_b):>4}"
-                  f"{said:>11.0%}{hit:>10.0%}{flag}")
-        for r in scored:
-            brier += (float(r["p_target_first"]) - int(r["hit_target_first"])) ** 2
-        brier /= len(scored)
-        print(f"\n  Brier score     {brier:.3f}   "
-              f"(0 = perfect, 0.25 = coin flip, lower is better)")
-        if len(scored) < 20:
-            print(f"  ! Only {len(scored)} samples - treat this as directional, not conclusive.")
+        print_calibration(scored, "trades")
 
     verdicts = [r.get("thesis_verdict", "").strip().lower() for r in rows]
     lucky = sum(1 for v in verdicts if v in ("wrong thesis right outcome", "lucky"))
@@ -1263,6 +2170,7 @@ def cmd_score(args):
     if not any(verdicts):
         print(f"\n  Note: thesis_verdict column is empty. Fill it in to separate "
               f"skill from luck.")
+    print_shadow_report(rows)
     print()
 
 
@@ -1274,23 +2182,25 @@ def market_hours_utc() -> tuple[dict, datetime, datetime] | None:
     half-day early closes (the day after Thanksgiving, Christmas Eve) are
     handled without this code knowing they exist.
     """
-    from zoneinfo import ZoneInfo
-
     today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
     days = api("GET", "/v2/calendar", params={"start": today, "end": today})
     if not days:
         return None
+    return (days[0], *session_bounds(days[0]))
 
-    d = days[0]
-    et = ZoneInfo("America/New_York")
-    base = datetime.strptime(d["date"], "%Y-%m-%d")
+
+def session_bounds(day: dict) -> tuple[datetime, datetime]:
+    """(open_utc, close_utc) for one entry of Alpaca's calendar."""
+    from zoneinfo import ZoneInfo
+
+    base = datetime.strptime(day["date"], "%Y-%m-%d")
 
     def et_to_utc(hhmm: str, fallback: str) -> datetime:
         hh, mm = (hhmm or fallback).split(":")[:2]
         return base.replace(hour=int(hh), minute=int(mm),
-                            tzinfo=et).astimezone(timezone.utc)
+                            tzinfo=ZoneInfo(ET)).astimezone(timezone.utc)
 
-    return d, et_to_utc(d.get("open"), "09:30"), et_to_utc(d.get("close"), "16:00")
+    return et_to_utc(day.get("open"), "09:30"), et_to_utc(day.get("close"), "16:00")
 
 
 def cmd_wait(args):
@@ -1302,13 +2212,13 @@ def cmd_wait(args):
     already running can simply wait out the difference.
 
     The target is either a fixed wall clock (--time/--tz) or, preferably,
-    derived from today's actual session (--before-open/--before-close). The
-    derived form is correct across daylight saving on both sides and on
-    half-day early closes; a fixed wall clock is not.
+    derived from today's actual session (--before-open/--after-open/
+    --before-close). The derived form is correct across daylight saving on
+    both sides and on half-day early closes; a fixed wall clock is not.
     """
     import time
 
-    if args.before_open is not None or args.before_close is not None:
+    if any(x is not None for x in (args.before_open, args.after_open, args.before_close)):
         hours = market_hours_utc()
         if hours is None:
             print("Not a US trading day - nothing to wait for, proceeding now.")
@@ -1317,6 +2227,9 @@ def cmd_wait(args):
         if args.before_open is not None:
             target_utc = open_utc - timedelta(minutes=args.before_open)
             label = f"{args.before_open} min before the open ({open_utc:%H:%M} UTC)"
+        elif args.after_open is not None:
+            target_utc = open_utc + timedelta(minutes=args.after_open)
+            label = f"{args.after_open} min after the open ({open_utc:%H:%M} UTC)"
         else:
             target_utc = close_utc - timedelta(minutes=args.before_close)
             label = f"{args.before_close} min before the close ({close_utc:%H:%M} UTC)"
@@ -1372,8 +2285,21 @@ def cmd_calendar(args):
         print(f"{today} is not a US trading day - standing down.")
         sys.exit(1)
 
-    d, open_utc, _close_utc = hours
+    d, open_utc, close_utc = hours
     print(f"{today} is a trading day (open {d.get('open')} close {d.get('close')} ET)")
+
+    if args.open_window is not None:
+        # The post-open review is written from the first stretch of the
+        # session. Too early and the open has not settled; too late and it is
+        # a different session from every other review in the record.
+        lo, hi = args.open_window
+        mins = (datetime.now(timezone.utc) - open_utc).total_seconds() / 60
+        if lo <= mins <= hi and datetime.now(timezone.utc) < close_utc:
+            print(f"  {mins:.0f} min after the open - inside the {lo}-{hi} min window.")
+            sys.exit(0)
+        print(f"  OUTSIDE THE WINDOW: {mins:.0f} min after the open, window is "
+              f"{lo}-{hi} min. Standing down.")
+        sys.exit(1)
 
     if args.before_open is None:
         sys.exit(0)
@@ -1397,40 +2323,94 @@ def cmd_calendar(args):
 
 def cmd_prep(args):
     """Markdown block of current book state, to paste into the brief request."""
+    from zoneinfo import ZoneInfo
+
     cfg = load_config()
     acct = get_account()
     positions = get_positions()
     equity = float(acct["equity"])
     last_equity = float(acct.get("last_equity") or equity)
     daily_pnl_pct = ((equity - last_equity) / last_equity * 100) if last_equity else 0
-    gross = sum(abs(float(p["market_value"])) for p in positions)
-    net = sum(float(p["market_value"]) for p in positions)
 
     journal = read_journal()
     by_symbol = {}
     for r in journal:
-        if r.get("r_multiple") in ("", None):
+        if r.get("r_multiple") in ("", None) and r.get("exit_reason") != "never filled":
             by_symbol[r["ticker"]] = r
+
+    try:
+        live_orders = get_open_orders()
+    except RuntimeError:
+        live_orders = []
+    book = book_commitments(cfg, equity, positions, live_orders, journal)
+    pct = lambda x: x / equity * 100 if equity else 0.0
+
+    # The clock, stated outright. The brief used to be told it was written
+    # before the 08:30 ET releases, and after the session moved to 09:05 ET it
+    # kept discarding prints it had found because the prompt said they could
+    # not exist yet.
+    now = datetime.now(timezone.utc)
+    et = ZoneInfo("America/New_York")
+    now_et = now.astimezone(et)
+    try:
+        hours = market_hours_utc()
+    except (RuntimeError, ValueError, KeyError, TypeError):
+        hours = None
+    clock = f"**{now_et:%H:%M} ET** ({now:%H:%M} UTC), {now_et:%A %Y-%m-%d}"
+    if hours is None:
+        clock += ". The US market is closed today."
+    else:
+        _, open_utc, close_utc = hours
+        mins = (open_utc - now).total_seconds() / 60
+        if mins > 0:
+            clock += (f". The cash session opens at {open_utc.astimezone(et):%H:%M} ET, "
+                      f"in {mins:.0f} min, and closes at {close_utc.astimezone(et):%H:%M} ET. "
+                      f"Anything scheduled before {now_et:%H:%M} ET today has already "
+                      "been released: look up the actual figure and the market's "
+                      "reaction, not the consensus.")
+        elif now < close_utc:
+            clock += (f". The cash session opened {-mins:.0f} min ago and closes at "
+                      f"{close_utc.astimezone(et):%H:%M} ET.")
+        else:
+            clock += ". Today's cash session has closed."
 
     out = []
     out.append(f"## Current book state")
-    out.append(f"*Auto-generated {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M')} UTC. "
-               f"These are live figures - use them, do not estimate.*\n")
+    out.append(f"*Auto-generated. These are live figures - use them, do not estimate.*\n")
+    out.append(f"- Time now: {clock}")
     out.append(f"- Equity: **${equity:,.2f}**")
     out.append(f"- Cash: ${float(acct['cash']):,.2f}")
     out.append(f"- Session P&L so far: {daily_pnl_pct:+.2f}% "
-               f"(kill switch at -{cfg['daily_loss_limit_pct']}%)")
-    out.append(f"- Gross exposure: ${gross:,.0f} ({gross / equity * 100:.0f}% of equity, "
-               f"cap {cfg['max_gross_exposure_pct']}%)")
-    out.append(f"- Net exposure: ${net:+,.0f} ({net / equity * 100:+.0f}%)")
-    out.append(f"- Open positions: {len(positions)} of {cfg['max_positions']} "
-               f"— you may open at most {max(0, cfg['max_positions'] - len(positions))} more")
+               f"(new entries are blocked at -{cfg['daily_loss_limit_pct']}%)")
+    out.append(f"- Gross exposure: ${book['gross']:,.0f} ({pct(book['gross']):.0f}% of "
+               f"equity, cap {cfg['max_gross_exposure_pct']}%)")
+    out.append(f"- Net exposure: ${book['net']:+,.0f} ({pct(book['net']):+.0f}%, "
+               f"cap +/-{cfg['max_net_exposure_pct']}%)")
+    risk_left = max(0.0, cfg["max_open_risk_pct"] - pct(book["risk"]))
+    out.append(f"- Risk at stake (entry to stop): ${book['risk']:,.0f} "
+               f"({pct(book['risk']):.2f}% of equity, cap {cfg['max_open_risk_pct']}%) "
+               f"— {risk_left:.2f}% left for new plays")
+    slots = max(0, cfg["max_positions"] - book["count"])
+    out.append(f"- Slots: {len(positions)} open + {len(book['resting'])} resting "
+               f"entries of {cfg['max_positions']} — you may add at most {slots} more")
+    if book["resting"] or positions:
+        out.append("- *Gross, net, risk and slots count resting entries as if filled.*")
+
+    # Sizing is derived, so the model cannot see notional. Tell it how tight a
+    # stop the remaining room allows, or it proposes plays the caps then drop.
+    gross_room = pct(cfg["max_gross_exposure_pct"] * equity / 100 - book["gross"])
+    net_now = pct(book["net"])
+    for side, net_room in (("long", cfg["max_net_exposure_pct"] - net_now),
+                           ("short", cfg["max_net_exposure_pct"] + net_now)):
+        room = min(cfg["max_position_pct"], gross_room, net_room)
+        if room <= 0:
+            out.append(f"- A new {side} does not fit: no gross or net room left.")
+        else:
+            out.append(f"- A new {side} can be up to {room:.0f}% of equity in notional: "
+                       f"at 1% risk its stop must be at least {100 / room:.1f}% from "
+                       f"entry (half that at 0.5%, a quarter at 0.25%).")
 
     if positions:
-        try:
-            live_orders = get_open_orders()
-        except RuntimeError:
-            live_orders = []
         out.append(f"\n### Open positions\n")
         out.append("*Stop and target are the live resting orders. To change them, put the "
                    "position in the `manage` array of your JSON block — prose alone does "
@@ -1454,7 +2434,29 @@ def cmd_prep(args):
     else:
         out.append(f"\n*No open positions.*")
 
+    if book["resting"]:
+        out.append(f"\n### Resting entries (unfilled, carried from earlier sessions)\n")
+        out.append("*These are live GTC orders and fill without you. Re-proposing the name "
+                   "in `plays` is rejected; to change the levels use `manage` with "
+                   "`update`, to withdraw the idea use `manage` with `close`. Unfilled "
+                   "entries are cancelled after 5 days and before every weekend.*\n")
+        out.append("| Symbol | Side | Qty | Entry | Type | Stop | Target | Submitted |")
+        out.append("|---|---|---|---|---|---|---|---|")
+        fmt = lambda x: f"{x:.2f}" if x else "-"
+        for e in book["resting"]:
+            out.append(f"| {e['symbol']} | {e['side']} | {e['qty']:g} | {fmt(e['entry'])} "
+                       f"| {e['type']} | {fmt(e['stop'])} | {fmt(e['target'])} "
+                       f"| {e['submitted']} |")
+
     closed = [r for r in journal if r.get("r_multiple") not in ("", None)]
+    if closed:
+        rs = [float(r["r_multiple"]) for r in closed]
+        wins = sum(1 for x in rs if x > 0)
+        out.append(f"\n### Record\n")
+        out.append(f"{len(closed)} closed trades: {wins}W / {len(closed) - wins}L, "
+                   f"total {sum(rs):+.2f}R, net ${sum(float(r['pnl_usd']) for r in closed):+,.0f} "
+                   f"realized. Shorts taken: "
+                   f"{sum(1 for r in journal if r.get('direction') == 'short')}.")
     recent = sorted(closed, key=lambda r: r.get("closed_at", ""), reverse=True)[:5]
     if recent:
         out.append(f"\n### Last {len(recent)} closed trades\n")
@@ -1467,6 +2469,35 @@ def cmd_prep(args):
                 f"| {r['ticker']} | {r['direction']} | {r.get('exit_reason', '-')} "
                 f"| {float(r['r_multiple']):+.2f}R | ${float(r['pnl_usd']):+,.0f} | {p_str} |"
             )
+
+    # What the ideas it passed on went on to do. Without this a pass can never
+    # be wrong on the record, and standing aside is free.
+    shadow = read_shadow()
+    done = [r for r in shadow if r.get("status") == "resolved"]
+    if done:
+        s = shadow_summary(shadow)
+        out.append(f"\n### Ideas you passed on, replayed against the tape\n")
+        out.append(f"{s['resolved']} resolved: {s['target']} reached target first, "
+                   f"{s['stop']} stop first, {s['never']} never reached the entry, "
+                   f"{s['expired']} expired, {s['ambiguous']} ambiguous."
+                   + (f" Average {s['avg_r']:+.2f}R across the {s['n_r']} that would "
+                      "have filled." if s["avg_r"] is not None else ""))
+        recent = sorted(done, key=lambda r: r.get("exit_at") or r.get("evaluated_through", ""),
+                        reverse=True)[:5]
+        out.append("\n| Session | Symbol | Direction | Why passed | Outcome | R | You said |")
+        out.append("|---|---|---|---|---|---|---|")
+        for r in recent:
+            p, rm = r.get("p_target_first"), r.get("r_multiple")
+            why = (r.get("reason") or "-").replace("|", "/")[:80]
+            out.append(
+                f"| {r['session_date']} {r.get('session', '')} | {r['ticker']} "
+                f"| {r['direction']} | {why} | {r['outcome']} "
+                f"| {f'{float(rm):+.2f}R' if rm not in ('', None) else '-'} "
+                f"| {f'{float(p):.0%}' if p not in ('', None) else '-'} |")
+
+    market_open = bool(hours) and hours[1] <= now < hours[2]
+    out += market_data_section(cfg, [p["symbol"].upper() for p in positions],
+                               [e["symbol"] for e in book["resting"]], market_open)
 
     text = "\n".join(out) + "\n"
     if args.out:
@@ -1697,28 +2728,12 @@ def cmd_chart(args):
 
 def cmd_stale(args):
     orders = api("GET", "/v2/orders", params={"status": "open", "nested": "true"})
-    unfilled = [o for o in orders if o.get("filled_qty") in ("0", 0, None)
-                and not o.get("parent_id")]
 
-    # Exit orders look exactly like entries from here: both rest unfilled at
-    # the top level once they are not nested under a bracket parent. Cancelling
-    # one does not abandon a thesis, it strips an open position of its stop -
-    # and weekend.yml runs this with no age filter, so without this the Friday
-    # cleanup would take every protective order off the book before two days
-    # of news. An order facing an open position is protecting it, never opening
-    # one, and an OCO pair is an exit by construction.
-    held = {p["symbol"].upper(): ("long" if float(p["qty"]) > 0 else "short")
-            for p in get_positions()}
-    def is_exit(o):
-        if o.get("order_class") == "oco":
-            return True
-        side = held.get((o.get("symbol") or "").upper())
-        if side is None:
-            return False
-        return o.get("side") == ("sell" if side == "long" else "buy")
-
-    protecting = [o for o in unfilled if is_exit(o)]
-    unfilled = [o for o in unfilled if not is_exit(o)]
+    # Cancelling an exit does not abandon a thesis, it strips an open position
+    # of its stop - and weekend.yml runs this with no age filter, so without
+    # the split the Friday cleanup would take every protective order off the
+    # book before two days of news.
+    unfilled, protecting = split_resting(orders, get_positions())
     if protecting:
         print(f"\n  {len(protecting)} resting exit order(s) left alone "
               "(protecting an open position):")
@@ -1789,6 +2804,10 @@ def main():
     p = sub.add_parser("submit", help="validate, size, and submit a plays file")
     p.add_argument("file")
     p.add_argument("--confirm", action="store_true", help="actually send the orders")
+    p.add_argument("--session", choices=["pre-market", "open"], default="pre-market",
+                   help="which session wrote the brief, recorded in the journal")
+    p.add_argument("--model", default=os.environ.get("DESK_MODEL", ""),
+                   help="model that wrote the brief, recorded in the journal")
     p.set_defaults(func=cmd_submit)
 
     p = sub.add_parser("status", help="account, exposure, positions, loss-limit room")
@@ -1800,10 +2819,15 @@ def main():
     p = sub.add_parser("score", help="performance and calibration report")
     p.set_defaults(func=cmd_score)
 
+    p = sub.add_parser("shadow", help="replay passed ideas against the tape and score them")
+    p.set_defaults(func=cmd_shadow)
+
     p = sub.add_parser("wait", help="hold open until a target time, no-op if already past")
     g = p.add_mutually_exclusive_group(required=True)
     g.add_argument("--before-open", type=int, metavar="MIN",
                    help="wait until MIN minutes before today's open (preferred)")
+    g.add_argument("--after-open", type=int, metavar="MIN",
+                   help="wait until MIN minutes after today's open")
     g.add_argument("--before-close", type=int, metavar="MIN",
                    help="wait until MIN minutes before today's close")
     g.add_argument("--time", metavar="HH:MM",
@@ -1815,6 +2839,8 @@ def main():
     p = sub.add_parser("calendar", help="exit 0 if today is a US trading day, else 1")
     p.add_argument("--before-open", type=int, metavar="MIN",
                    help="also require at least MIN minutes remain before the open")
+    p.add_argument("--open-window", type=int, nargs=2, metavar=("FROM", "TO"),
+                   help="also require it to be FROM-TO minutes after today's open")
     p.set_defaults(func=cmd_calendar)
 
     p = sub.add_parser("prep", help="markdown book state for the brief request")

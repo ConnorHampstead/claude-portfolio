@@ -5,8 +5,8 @@ compatibility_date = "2026-09-01"
 [triggers]
 # Cron here is UTC-only, so each job is listed at both its summer (EDT) and
 # winter (EST) hour; src/index.ts dispatches only on the one that matches New
-# York time. Two expressions, well inside the free plan's 5 per account.
-crons = ["55 12,13 * * 1-5", "50 17,18 * * 5"]
+# York time. Three expressions, inside the free plan's 5 per account.
+crons = ["55 12,13 * * 1-5", "55 13,14 * * 1-5", "50 17,18 * * 5"]
 
 [observability]
 enabled = true

@@ -15,9 +15,12 @@ const REPO = "ConnorHampstead/claude-portfolio";
 // Each cron carries both its EDT and EST UTC hour; `etHour` picks the one
 // that is correct today, so the job lands at the same New York time all year
 // and each runner hold stays put rather than growing by an hour every winter.
-const JOBS: Record<string, { workflow: string; etHour: number }> = {
-  // 08:55 ET, 10 min ahead of desk.yml's target (25 min before the open, 09:05 ET).
-  "55 12,13 * * 1-5": { workflow: "desk.yml", etHour: 8 },
+// `inputs` are passed through to workflow_dispatch alongside dry_run.
+const JOBS: Record<string, { workflow: string; etHour: number; inputs?: Record<string, string> }> = {
+  // 08:55 ET, 10 min ahead of the pre-market brief's target (25 min before the open, 09:05 ET).
+  "55 12,13 * * 1-5": { workflow: "desk.yml", etHour: 8, inputs: { session: "pre-market" } },
+  // 09:55 ET, 10 min ahead of the post-open review's target (35 min after the open, 10:05 ET).
+  "55 13,14 * * 1-5": { workflow: "desk.yml", etHour: 9, inputs: { session: "open" } },
   // 13:50 ET Fridays, 2h ahead of weekend.yml's target (10 min before the close).
   "50 17,18 * * 5": { workflow: "weekend.yml", etHour: 13 },
 };
@@ -54,14 +57,17 @@ export default {
         },
         body: JSON.stringify({
           ref: "main",
-          // Must be explicit: both workflows default dry_run to true.
-          inputs: { dry_run: env.DISPATCH_DRY_RUN === "true" ? "true" : "false" },
+          // dry_run must be explicit: both workflows default it to true.
+          inputs: {
+            ...job.inputs,
+            dry_run: env.DISPATCH_DRY_RUN === "true" ? "true" : "false",
+          },
         }),
       },
     );
 
     // Throwing marks the invocation failed in the Cloudflare dashboard.
     if (!res.ok) throw new Error(`${job.workflow}: ${res.status} ${await res.text()}`);
-    console.log(`dispatched ${job.workflow}`);
+    console.log(`dispatched ${job.workflow}${job.inputs?.session ? ` (${job.inputs.session})` : ""}`);
   },
 } satisfies ExportedHandler<Env>;
