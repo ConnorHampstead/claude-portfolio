@@ -3,8 +3,8 @@ name: trading desk
 on:
   # No `schedule` trigger. GitHub's cron fired 4-6 hours late on this repo, every
   # day, which put every scheduled run past the open. The clock now lives in
-  # dispatch/ - a Cloudflare Worker cron (primary, 07:05 ET) and a systemd
-  # timer (backup, 08:05 ET) - both of which call workflow_dispatch below with
+  # dispatch/ - a Cloudflare Worker cron (primary, 08:55 ET) and a systemd
+  # timer (backup, 09:00 ET) - both of which call workflow_dispatch below with
   # dry_run=false. Dispatch events start in seconds. The backup queues behind
   # the concurrency group and exits on the already-ran check.
   workflow_dispatch:        # the dispatchers, or by hand from the Actions tab
@@ -25,9 +25,10 @@ permissions:
 jobs:
   session:
     runs-on: ubuntu-latest
-    # Must cover the hold plus the session. The 07:05 ET dispatch holds 2h and
-    # the session runs ~20 min. A manual dispatch started before ~06:30 ET
-    # would time out in the wait step.
+    # Must cover the hold plus the session. The 08:55 ET dispatch holds 10 min
+    # and the session runs ~20 min; the headroom is for a manual dispatch
+    # started early, which would otherwise time out in the wait step waiting
+    # for the same 09:05 ET target (anything before ~06:30 ET still will).
     timeout-minutes: 165
 
     # Secrets are scoped per step, not set here, so the install steps and
@@ -113,7 +114,8 @@ jobs:
 
       # Lands the session at a consistent point relative to the market rather
       # than whenever the job happened to start. With the Cloudflare dispatch
-      # this is a 2h wait, or 1h if the systemd backup is the one doing it.
+      # this is a 10 min wait, or 5 min if the systemd backup is the one doing
+      # it.
       #
       # 25 minutes before the open, not a fixed wall clock: the open is
       # 13:30 UTC in summer and 14:30 in winter, and is earlier still on

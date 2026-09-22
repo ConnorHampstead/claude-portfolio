@@ -14,10 +14,10 @@ const REPO = "ConnorHampstead/claude-portfolio";
 
 // Each cron carries both its EDT and EST UTC hour; `etHour` picks the one
 // that is correct today, so the job lands at the same New York time all year
-// and the runner hold stays at 2h rather than growing to 3h every winter.
+// and each runner hold stays put rather than growing by an hour every winter.
 const JOBS: Record<string, { workflow: string; etHour: number }> = {
-  // 07:05 ET, 2h ahead of desk.yml's target (25 min before the open, 09:05 ET).
-  "5 11,12 * * 1-5": { workflow: "desk.yml", etHour: 7 },
+  // 08:55 ET, 10 min ahead of desk.yml's target (25 min before the open, 09:05 ET).
+  "55 12,13 * * 1-5": { workflow: "desk.yml", etHour: 8 },
   // 13:50 ET Fridays, 2h ahead of weekend.yml's target (10 min before the close).
   "50 17,18 * * 5": { workflow: "weekend.yml", etHour: 13 },
 };

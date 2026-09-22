@@ -279,9 +279,9 @@ late every day, which put every scheduled session past the open. The workflows
 are started by `workflow_dispatch` from [`dispatch/`](dispatch/README.md)
 instead, which begins within seconds:
 
-- **Cloudflare Worker cron** (primary): desk at 07:05 ET weekdays, weekend
-  cleanup at 13:50 ET Fridays - 2h ahead of each job's target.
-- **systemd user timer** (backup): 08:05 ET and 14:50 ET - 1h ahead.
+- **Cloudflare Worker cron** (primary): desk at 08:55 ET weekdays, weekend
+  cleanup at 13:50 ET Fridays - 10 min and 2h ahead of each job's target.
+- **systemd user timer** (backup): 09:00 ET and 14:50 ET - 5 min and 1h ahead.
 
 The desk job then holds until 25 minutes before the open, derived from
 Alpaca's calendar, and the guard (`calendar --before-open 5`) stands the session

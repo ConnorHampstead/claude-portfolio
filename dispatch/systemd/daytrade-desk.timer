@@ -2,10 +2,11 @@
 Description=Backup trigger: trading desk
 
 [Timer]
-# 1h ahead of the 09:05 ET target, 1h after the Cloudflare dispatch. If that
-# one ran, this waits in the queue (no runner held) and exits on the
-# already-ran marker; if not, it does the session with an hour to spare.
-OnCalendar=Mon..Fri 08:05 America/New_York
+# 5 min ahead of the 09:05 ET target, 5 min after the Cloudflare dispatch. A
+# short hold, so the ~20 min session still finishes a few minutes before the
+# bell. If the Cloudflare dispatch already ran, this waits in the queue (no
+# runner held) and exits on the already-ran marker.
+OnCalendar=Mon..Fri 09:00 America/New_York
 Persistent=true
 Unit=daytrade-dispatch@desk.service
 

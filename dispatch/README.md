@@ -6,11 +6,14 @@ starts in seconds. So the clock lives here and GitHub only supplies the runner.
 
 | Trigger | Desk (`desk.yml`) | Weekend (`weekend.yml`) |
 |---|---|---|
-| Cloudflare Worker cron (primary) | 07:05 ET, Mon-Fri | 13:50 ET, Fri |
-| systemd user timer (backup) | 08:05 ET, Mon-Fri | 14:50 ET, Fri |
+| Cloudflare Worker cron (primary) | 08:55 ET, Mon-Fri | 13:50 ET, Fri |
+| systemd user timer (backup) | 09:00 ET, Mon-Fri | 14:50 ET, Fri |
 
-That is 2h and 1h ahead of each workflow's target (desk: 25 min before the
-open; weekend: 10 min before the close). The job holds its runner until then.
+Each workflow has a target (desk: 25 min before the open, 09:05 ET; weekend:
+10 min before the close) and holds its runner until then. The desk's primary
+dispatch now sits 10 min ahead of that target rather than 2h, and the backup
+5 min ahead of it rather than 1h. Both holds are short enough that a runner is
+never tied up for long, and the session still finishes before the bell.
 
 Both call `workflow_dispatch` with `dry_run=false`. Whichever lands second queues
 behind the `trading-desk` concurrency group and exits on the workflow's
@@ -60,11 +63,11 @@ it the curl below sends a live dispatch.
 ```sh
 printf 'GH_TOKEN=github_pat_...\nDISPATCH_DRY_RUN=true\n' > .dev.vars
 npm run dev          # delete .dev.vars when done - it holds a live token
-# another terminal; `time` is epoch *milliseconds* and must fall in the 07:xx ET
+# another terminal; `time` is epoch *milliseconds* and must fall in the 08:xx ET
 # hour, or the Worker skips it as the other DST slot. The older /__scheduled
 # route ignores `time` and uses the real clock.
-# 1790075100000 = Tue 2026-09-22 11:05 UTC = 07:05 ET.
-curl "http://localhost:8787/cdn-cgi/handler/scheduled?cron=5+11,12+*+*+1-5&time=1790075100000"
+# 1790081700000 = Tue 2026-09-22 12:55 UTC = 08:55 ET.
+curl "http://localhost:8787/cdn-cgi/handler/scheduled?cron=55+12,13+*+*+1-5&time=1790081700000"
 ```
 
 After it runs for real, check Worker → Observability → Logs for
