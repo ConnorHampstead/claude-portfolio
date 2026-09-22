@@ -525,6 +525,9 @@ def validate_manage(item: dict, ctx: dict) -> tuple[list[str], list[str], dict]:
         "old_stop": leg_price(legs["stop_loss"]),
         "old_target": leg_price(legs["take_profit"]),
         "legs": legs, "risk_usd": risk_usd,
+        # Filled in by apply_manage with the levels that actually landed, so
+        # the journal records the live orders rather than the intent.
+        "applied": {"stop": None, "target": None},
         "reason": item.get("reason", ""),
     }
     return errors, warnings, enriched
@@ -558,16 +561,33 @@ def apply_manage(m: dict, tif: str) -> list[str]:
     replaced = {"stop_loss": m["stop"], "take_profit": m["target"]}
     missing = {}
     for leg, level in replaced.items():
+        label = "stop" if leg == "stop_loss" else "target"
         if level is None:
             continue
         order = m["legs"][leg]
         if not order:
             missing[leg] = level
             continue
+        # A brief that moves one level restates the other unchanged. Alpaca
+        # rejects a replace that changes nothing (422 "order parameters are not
+        # changed"), so send only the legs that actually move - otherwise the
+        # restated one fails the whole instruction and takes the real change,
+        # or the missing protection below, down with it.
+        current = leg_price(order)
+        if current is not None and abs(current - level) < 0.005:
+            log.append(f"{label} already at {level:.2f}, left alone")
+            m["applied"][label] = level
+            continue
         field = "stop_price" if leg == "stop_loss" else "limit_price"
-        resp = api("PATCH", f"/v2/orders/{order['id']}", json={field: f"{level:.2f}"})
+        # One leg failing must not abort the other, and must not stop the
+        # missing-protection step below from running.
+        try:
+            resp = api("PATCH", f"/v2/orders/{order['id']}", json={field: f"{level:.2f}"})
+        except RuntimeError as e:
+            log.append(f"x {label} -> {level:.2f} REJECTED BY ALPACA: {e}")
+            continue
         m["legs"][leg] = resp or order
-        label = "stop" if leg == "stop_loss" else "target"
+        m["applied"][label] = level
         log.append(f"{label} -> {level:.2f} [{resp.get('status', 'replaced')}]")
 
     if not missing:
@@ -583,6 +603,8 @@ def apply_manage(m: dict, tif: str) -> list[str]:
             "stop_loss": {"stop_price": f"{missing['stop_loss']:.2f}"},
         }
         resp = api("POST", "/v2/orders", json=body)
+        m["applied"].update({"stop": missing["stop_loss"],
+                             "target": missing["take_profit"]})
         log.append(
             f"new OCO stop {missing['stop_loss']:.2f} / target "
             f"{missing['take_profit']:.2f} [{resp.get('status', 'submitted')}]"
@@ -601,6 +623,7 @@ def apply_manage(m: dict, tif: str) -> list[str]:
         body.update({"type": "limit", "limit_price": f"{level:.2f}"})
         label = "target"
     resp = api("POST", "/v2/orders", json=body)
+    m["applied"][label] = level
     log.append(f"new {label} {level:.2f} [{resp.get('status', 'submitted')}]")
     return log
 
@@ -917,10 +940,18 @@ def cmd_check(args, submit: bool = False):
                      + (f" - {m['reason']}" if m["reason"] else ""),
             )
         else:
+            applied = m["applied"]
+            if applied["stop"] is None and applied["target"] is None:
+                print(f"  x {m['symbol']} no level changed - journal left as it was")
+                continue
             note = f"{session_date}: levels updated"
             if m["reason"]:
                 note += f" - {m['reason']}"
-            if not update_journal_levels(m["symbol"], m["stop"], m["target"], note):
+            # Only what Alpaca accepted, so a half-applied update cannot leave
+            # the journal (and tomorrow's brief, written from it) claiming a
+            # stop that is not resting anywhere.
+            if not update_journal_levels(m["symbol"], applied["stop"],
+                                         applied["target"], note):
                 print(f"  ! {m['symbol']} has no open journal row - "
                       "orders updated, journal not")
 
