@@ -593,38 +593,79 @@ def apply_manage(m: dict, tif: str) -> list[str]:
     if not missing:
         return log
 
-    # Nothing live to amend on this side, so place fresh protection. Both sides
-    # missing means one OCO pair; one side means a single standalone order.
-    if len(missing) == 2:
-        body = {
+    label_of = {"stop_loss": "stop", "take_profit": "target"}
+
+    def oco_body(stop_level, target_level):
+        return {
             "symbol": symbol, "qty": str(qty), "side": exit_side,
             "type": "limit", "time_in_force": tif, "order_class": "oco",
-            "take_profit": {"limit_price": f"{missing['take_profit']:.2f}"},
-            "stop_loss": {"stop_price": f"{missing['stop_loss']:.2f}"},
+            "take_profit": {"limit_price": f"{target_level:.2f}"},
+            "stop_loss": {"stop_price": f"{stop_level:.2f}"},
         }
-        resp = api("POST", "/v2/orders", json=body)
-        m["applied"].update({"stop": missing["stop_loss"],
-                             "target": missing["take_profit"]})
-        log.append(
-            f"new OCO stop {missing['stop_loss']:.2f} / target "
-            f"{missing['take_profit']:.2f} [{resp.get('status', 'submitted')}]"
-        )
-        return log
 
-    leg, level = next(iter(missing.items()))
-    body = {
-        "symbol": symbol, "qty": str(qty), "side": exit_side,
-        "time_in_force": tif,
-    }
-    if leg == "stop_loss":
-        body.update({"type": "stop", "stop_price": f"{level:.2f}"})
-        label = "stop"
-    else:
-        body.update({"type": "limit", "limit_price": f"{level:.2f}"})
-        label = "target"
-    resp = api("POST", "/v2/orders", json=body)
-    m["applied"][label] = level
-    log.append(f"new {label} {level:.2f} [{resp.get('status', 'submitted')}]")
+    def single_body(leg, level):
+        body = {"symbol": symbol, "qty": str(qty), "side": exit_side,
+                "time_in_force": tif}
+        if leg == "stop_loss":
+            body.update({"type": "stop", "stop_price": f"{level:.2f}"})
+        else:
+            body.update({"type": "limit", "limit_price": f"{level:.2f}"})
+        return body
+
+    # Nothing live to amend on this side, so place fresh protection. If the
+    # other side IS live, it gets folded into the new pair rather than left
+    # beside it: two independent exits for one position means whichever fills
+    # first leaves the other resting, and that opens a reverse position.
+    survivor = survivor_leg = None
+    if len(missing) == 1:
+        other = "take_profit" if "stop_loss" in missing else "stop_loss"
+        level = leg_price(m["legs"][other])
+        if m["legs"][other] and level is not None:
+            survivor, survivor_leg = m["legs"][other], other
+            missing[other] = level
+
+    if survivor is not None:
+        # Alpaca will not accept a second exit for quantity this one holds, so
+        # the pair has to replace it.
+        try:
+            api("DELETE", f"/v2/orders/{survivor['id']}")
+            # It is gone until the pair below replaces it, so it stops counting
+            # as applied - nothing should record a level that is not resting.
+            m["applied"][label_of[survivor_leg]] = None
+        except RuntimeError as e:
+            log.append(f"x could not cancel the live {label_of[survivor_leg]} to "
+                       f"pair it ({e}) - leaving it and placing the other side alone")
+            missing.pop(survivor_leg)
+            survivor = None
+
+    if len(missing) == 2:
+        try:
+            resp = api("POST", "/v2/orders",
+                       json=oco_body(missing["stop_loss"], missing["take_profit"]))
+        except RuntimeError as e:
+            # The survivor, if there was one, is already cancelled - so fall
+            # through and place both sides standalone. Unlinked protection
+            # beats none while the position is open.
+            log.append(f"x OCO pair REJECTED BY ALPACA: {e} - placing each "
+                       "side on its own instead")
+        else:
+            m["applied"].update({"stop": missing["stop_loss"],
+                                 "target": missing["take_profit"]})
+            log.append(
+                f"new OCO stop {missing['stop_loss']:.2f} / target "
+                f"{missing['take_profit']:.2f} [{resp.get('status', 'submitted')}]"
+            )
+            return log
+
+    for leg, level in missing.items():
+        label = label_of[leg]
+        try:
+            resp = api("POST", "/v2/orders", json=single_body(leg, level))
+        except RuntimeError as e:
+            log.append(f"x new {label} {level:.2f} REJECTED BY ALPACA: {e}")
+            continue
+        m["applied"][label] = level
+        log.append(f"new {label} {level:.2f} [{resp.get('status', 'submitted')}]")
     return log
 
 
