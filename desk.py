@@ -1671,6 +1671,33 @@ def cmd_stale(args):
     unfilled = [o for o in orders if o.get("filled_qty") in ("0", 0, None)
                 and not o.get("parent_id")]
 
+    # Exit orders look exactly like entries from here: both rest unfilled at
+    # the top level once they are not nested under a bracket parent. Cancelling
+    # one does not abandon a thesis, it strips an open position of its stop -
+    # and weekend.yml runs this with no age filter, so without this the Friday
+    # cleanup would take every protective order off the book before two days
+    # of news. An order facing an open position is protecting it, never opening
+    # one, and an OCO pair is an exit by construction.
+    held = {p["symbol"].upper(): ("long" if float(p["qty"]) > 0 else "short")
+            for p in get_positions()}
+    def is_exit(o):
+        if o.get("order_class") == "oco":
+            return True
+        side = held.get((o.get("symbol") or "").upper())
+        if side is None:
+            return False
+        return o.get("side") == ("sell" if side == "long" else "buy")
+
+    protecting = [o for o in unfilled if is_exit(o)]
+    unfilled = [o for o in unfilled if not is_exit(o)]
+    if protecting:
+        print(f"\n  {len(protecting)} resting exit order(s) left alone "
+              "(protecting an open position):")
+        for o in protecting:
+            print(f"    {o['symbol']:<7}{o['side']:<6}x{o['qty']:<6} "
+                  f"{o.get('order_class') or o['type']:<8}"
+                  f"@{o.get('limit_price') or o.get('stop_price') or '-'}")
+
     if args.older_than is not None:
         now = datetime.now(timezone.utc)
         aged = []
