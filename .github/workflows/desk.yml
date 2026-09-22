@@ -34,7 +34,11 @@ jobs:
     # third-party actions never see them.
     env:
       # The dispatchers pass dry_run=false explicitly; by hand it defaults to true.
-      DRY_RUN: ${{ inputs.dry_run && '1' || '' }}
+      # Compared against both forms on purpose: a boolean input arrives as a real
+      # boolean from the Actions tab, but as the STRING "false" from the dispatch
+      # API (the Worker and `gh workflow run -f`). A bare `inputs.dry_run` is
+      # truthy for that string, which silently made every dispatched run a dry run.
+      DRY_RUN: ${{ (inputs.dry_run == true || inputs.dry_run == 'true') && '1' || '' }}
 
     steps:
       # ref is set explicitly on purpose. With no ref, checkout takes the SHA

@@ -39,7 +39,9 @@ jobs:
     # Secrets are scoped per step, not set here, so the install steps and
     # third-party actions never see them.
     env:
-      DRY_RUN: ${{ inputs.dry_run && '1' || '' }}
+      # Both forms compared on purpose - see desk.yml for why a bare
+      # `inputs.dry_run` makes every API-dispatched run a dry run.
+      DRY_RUN: ${{ (inputs.dry_run == true || inputs.dry_run == 'true') && '1' || '' }}
 
     steps:
       # Branch tip, not the frozen triggering SHA - see desk.yml for why.
@@ -121,7 +123,7 @@ jobs:
           python3 desk.py status | tee -a state/weekend-cleanup.txt
 
       - name: Commit results
-        if: steps.guard.outputs.trading == 'true' && !inputs.dry_run
+        if: steps.guard.outputs.trading == 'true' && env.DRY_RUN == ''
         env:
           GH_TOKEN: ${{ github.token }}
         run: |

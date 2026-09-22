@@ -170,12 +170,16 @@ nothing**: if section 3 of your brief says you are raising a stop or lifting a
 target and there is no matching `manage` entry, the live order does not move and
 the position stays on its original levels. Write both, every time.
 
-- `ticker` — must be an open position, or the entry is rejected.
+- `ticker` — must be an open position, or an entry order of yours still resting
+  unfilled; anything else is rejected.
 - `action` — `"update"` (default; amend stop and/or target) or `"close"` (exit
-  the whole position now at market and cancel its resting orders).
+  the whole position now at market and cancel its resting orders — on an
+  unfilled entry, `"close"` cancels the entry itself).
 - `stop`, `target` — the new levels. Give either or both on an `"update"`;
   whichever you omit is left as it is. Verified current levels only — a stop on
   the wrong side of the last price is rejected, since it would fire on arrival.
+  On an entry that has not filled, the levels are checked against the entry
+  price instead: nothing is live yet, so the market price does not bind them.
 - `reason` — one line, recorded in the journal against the position.
 
 Rule 1 still binds here: widening a stop so that entry-to-stop risks more than

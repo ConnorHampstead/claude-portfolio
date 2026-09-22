@@ -20,6 +20,13 @@ duplicate costs a few seconds of runner time.
 The workflows' `dry_run` input defaults to `true`, so anything else that
 dispatches them must pass `dry_run=false` explicitly or it will never trade.
 
+Passing it is not enough on its own. A `type: boolean` input arrives as a real
+boolean from the Actions tab, but as the **string** `"false"` from the dispatch
+API - which is what both triggers here use, and what `gh workflow run -f` sends.
+A bare `${{ inputs.dry_run }}` is truthy for that string, so every dispatched
+run came out a dry run while manual ones traded. The workflows compare against
+both forms; do not simplify that expression.
+
 ## Tokens
 
 Create **two** fine-grained PATs (GitHub → Settings → Developer settings →

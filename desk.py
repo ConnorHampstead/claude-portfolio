@@ -182,6 +182,28 @@ def exit_legs(symbol: str, pos_side: str, orders: list | None = None) -> dict:
     return found
 
 
+def pending_entry(symbol: str, orders: list | None = None) -> dict | None:
+    """The resting, still-unfilled entry order for a symbol, if there is one.
+
+    A bracket entry that has not filled yet holds its stop and target as child
+    legs, so its levels are amendable even though no position exists. Without
+    this, a brief that moves a stop the morning after submitting the entry is
+    rejected as "no position to manage" and the stop silently never moves.
+    """
+    symbol = symbol.upper()
+    for o in orders if orders is not None else get_open_orders(symbol):
+        if (o.get("symbol") or "").upper() != symbol:
+            continue
+        if o.get("parent_id"):
+            continue  # a child leg, not the entry
+        if o.get("filled_qty") not in ("0", 0, None):
+            continue  # partially filled: a position exists, manage that instead
+        if o.get("order_class") == "oco":
+            continue  # a leftover exit pair, never an entry
+        return o
+    return None
+
+
 def leg_price(order: dict | None) -> float | None:
     if not order:
         return None
@@ -371,13 +393,36 @@ def validate_manage(item: dict, ctx: dict) -> tuple[list[str], list[str], dict]:
         return [f"action must be update or close, got '{action}'"], warnings, {}
 
     pos = next((p for p in ctx["positions"] if p["symbol"].upper() == symbol), None)
+    resting = None
     if pos is None:
-        return [f"no open {symbol} position to manage - use 'plays' to open one"], warnings, {}
+        try:
+            resting = pending_entry(symbol)
+        except RuntimeError as e:
+            return [f"could not read open orders for {symbol}: {e}"], warnings, {}
+        if resting is None:
+            return ([f"no open {symbol} position and no resting entry order to "
+                     "manage - use 'plays' to open one"], warnings, {})
 
-    pos_side = "long" if float(pos["qty"]) > 0 else "short"
-    qty = abs(int(float(pos["qty"])))
-    avg_entry = float(pos["avg_entry_price"])
-    ref = ctx["prices"].get(symbol) or float(pos.get("current_price") or 0) or None
+    if pos is not None:
+        pos_side = "long" if float(pos["qty"]) > 0 else "short"
+        qty = abs(int(float(pos["qty"])))
+        avg_entry = float(pos["avg_entry_price"])
+        ref = ctx["prices"].get(symbol) or float(pos.get("current_price") or 0) or None
+        # Levels are checked against the market: a stop on the wrong side of it
+        # fires the moment it is accepted.
+        guard_ref, guard_label = ref, "last price"
+    else:
+        pos_side = "long" if resting.get("side") == "buy" else "short"
+        qty = abs(int(float(resting.get("qty") or 0)))
+        avg_entry = float(resting.get("limit_price") or resting.get("stop_price") or 0)
+        ref = ctx["prices"].get(symbol) or None
+        # Nothing is filled yet and the legs are held until it is, so the market
+        # price does not constrain them - the entry they hang off does.
+        guard_ref, guard_label = (avg_entry or None), "entry"
+        warnings.append(
+            f"{symbol} entry is still resting unfilled at {avg_entry:.2f} - "
+            + ("cancelling it" if action == "close"
+               else "amending the bracket legs it will open with"))
 
     stop = target = None
     try:
@@ -393,37 +438,41 @@ def validate_manage(item: dict, ctx: dict) -> tuple[list[str], list[str], dict]:
     if action == "update" and stop is None and target is None:
         errors.append("update needs at least one of 'stop' or 'target'")
 
-    if action == "update" and ref:
-        # A stop on the wrong side of the market fires the moment it is accepted.
+    if action == "update" and guard_ref:
+        # A level on the wrong side of the reference is one that resolves the
+        # moment it goes live: against the market for an open position, against
+        # the entry for a bracket that has not filled yet.
+        fix = "close the position instead" if pos is not None else "re-enter instead"
         if pos_side == "long":
-            if stop is not None and stop >= ref:
+            if stop is not None and stop >= guard_ref:
                 errors.append(
-                    f"long stop {stop:.2f} is at or above last price {ref:.2f} - "
-                    "it would trigger immediately; close the position instead"
+                    f"long stop {stop:.2f} is at or above {guard_label} "
+                    f"{guard_ref:.2f} - it would trigger immediately; {fix}"
                 )
-            if target is not None and target <= ref:
+            if target is not None and target <= guard_ref:
                 errors.append(
-                    f"long target {target:.2f} is at or below last price {ref:.2f} - "
-                    "it would fill immediately; close the position instead"
+                    f"long target {target:.2f} is at or below {guard_label} "
+                    f"{guard_ref:.2f} - it would fill immediately; {fix}"
                 )
         else:
-            if stop is not None and stop <= ref:
+            if stop is not None and stop <= guard_ref:
                 errors.append(
-                    f"short stop {stop:.2f} is at or below last price {ref:.2f} - "
-                    "it would trigger immediately; close the position instead"
+                    f"short stop {stop:.2f} is at or below {guard_label} "
+                    f"{guard_ref:.2f} - it would trigger immediately; {fix}"
                 )
-            if target is not None and target >= ref:
+            if target is not None and target >= guard_ref:
                 errors.append(
-                    f"short target {target:.2f} is at or above last price {ref:.2f} - "
-                    "it would fill immediately; close the position instead"
+                    f"short target {target:.2f} is at or above {guard_label} "
+                    f"{guard_ref:.2f} - it would fill immediately; {fix}"
                 )
         for label, level in (("stop", stop), ("target", target)):
-            if level is not None and abs(level - ref) / ref > 0.25:
+            if level is not None and abs(level - guard_ref) / guard_ref > 0.25:
                 errors.append(
-                    f"{label} {level:.2f} is {abs(level - ref) / ref:.0%} away from "
-                    f"last price {ref:.2f} - verify this level, it looks stale"
+                    f"{label} {level:.2f} is {abs(level - guard_ref) / guard_ref:.0%} "
+                    f"away from {guard_label} {guard_ref:.2f} - verify this level, "
+                    "it looks stale"
                 )
-    elif action == "update" and not ref:
+    elif action == "update" and not guard_ref:
         warnings.append(f"no reference price for {symbol} - could not sanity-check levels")
 
     if stop is not None and target is not None:
@@ -454,14 +503,25 @@ def validate_manage(item: dict, ctx: dict) -> tuple[list[str], list[str], dict]:
         legs = {"take_profit": None, "stop_loss": None}
 
     if action == "update":
-        if stop is not None and not legs["stop_loss"]:
-            warnings.append("no live stop order found - a new one will be created")
-        if target is not None and not legs["take_profit"]:
-            warnings.append("no live take-profit order found - a new one will be created")
+        for leg, level, label in (("stop_loss", stop, "stop"),
+                                  ("take_profit", target, "take-profit")):
+            if level is None or legs[leg]:
+                continue
+            if resting is not None:
+                # Placing a fresh exit against an unfilled entry would be a
+                # naked order in the opposite direction, not protection.
+                errors.append(
+                    f"the resting {symbol} entry has no {label} leg to amend - "
+                    "cancel it and re-enter with the levels you want"
+                )
+            else:
+                warnings.append(
+                    f"no live {label} order found - a new one will be created")
 
     enriched = {
         "symbol": symbol, "action": action, "side": pos_side, "qty": qty,
-        "avg_entry": avg_entry, "ref": ref, "stop": stop, "target": target,
+        "entry_order": resting, "avg_entry": avg_entry, "ref": ref,
+        "stop": stop, "target": target,
         "old_stop": leg_price(legs["stop_loss"]),
         "old_target": leg_price(legs["take_profit"]),
         "legs": legs, "risk_usd": risk_usd,
@@ -475,6 +535,13 @@ def apply_manage(m: dict, tif: str) -> list[str]:
     symbol, side, qty = m["symbol"], m["side"], m["qty"]
     exit_side = "sell" if side == "long" else "buy"
     log = []
+
+    if m["action"] == "close" and m.get("entry_order"):
+        # Nothing is filled, so there is no position to close - killing the
+        # entry takes its held legs with it.
+        api("DELETE", f"/v2/orders/{m['entry_order']['id']}")
+        log.append(f"resting entry cancelled x{qty}")
+        return log
 
     if m["action"] == "close":
         for leg in ("take_profit", "stop_loss"):
