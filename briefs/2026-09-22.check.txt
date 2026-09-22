@@ -1,0 +1,22 @@
+
+====================================================================
+  SESSION 2026-09-22   equity $102,598.41   day P&L +1.06%
+====================================================================
+
+  POSITION MANAGEMENT
+
+  [OK] DAL UPDATE x457 (long, avg 80.38)
+      stop   none -> 82.40
+      target 84.90 -> 84.90
+      risk-at-stake $0.00 (0.00% of equity)
+      Position had no live stop order - fixing a rule 6 breach. 82.40 sits below Monday's 82.50 close, the origin of the oil de-escalation move, so it only fires on genuine thesis invalidation. Locks >= +$923. Target left at the original 84.90; not extending a target on a winner after the fact.
+      ! no live stop order found - a new one will be created
+
+  ----------------------------------------------------------------
+
+  ----------------------------------------------------------------
+  No new positions today.
+  1 position update(s) pending.
+
+  Dry run. Re-run with `submit --confirm` to send these.
+
