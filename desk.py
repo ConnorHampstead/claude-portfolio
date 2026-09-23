@@ -1617,6 +1617,21 @@ def cmd_check(args, submit: bool = False):
         try:
             resp = api("POST", "/v2/orders", json=order_body)
         except RuntimeError as e:
+            # A stop entry whose trigger the market has already crossed is
+            # refused outright ("stop price must be less than current
+            # price"). That is the market moving before the open, not the
+            # harness failing, so it does not fail the run: the idea goes to
+            # the shadow book to be scored, and the post-open review sees it
+            # in the book state and can decide it again with the market open.
+            if p["entry_type"] == "stop" and "stop price must be" in str(e):
+                import re
+                mkt = re.search(r'"market_price":"([0-9.]+)"', str(e))
+                why = (f"stop entry {p['entry']:.2f} not placed: the market "
+                       + (f"({mkt.group(1)}) " if mkt else "")
+                       + "had already crossed the trigger")
+                print(f"  - {p['symbol']} {why}")
+                append_shadow([shadow_row(p, "not placed", p["p"], why)])
+                continue
             print(f"  x {p['symbol']} REJECTED BY ALPACA: {e}")
             failures.append(f"{p['symbol']}: entry order rejected ({e})")
             continue
@@ -2447,6 +2462,20 @@ def cmd_prep(args):
             out.append(f"| {e['symbol']} | {e['side']} | {e['qty']:g} | {fmt(e['entry'])} "
                        f"| {e['type']} | {fmt(e['stop'])} | {fmt(e['target'])} "
                        f"| {e['submitted']} |")
+
+    unplaced = [r for r in read_shadow() if r.get("source") == "not placed"
+                and r.get("session_date") == et_today()]
+    if unplaced:
+        out.append(f"\n### Plays from earlier today that were not placed\n")
+        out.append("*The broker refused these: the market had already crossed the stop "
+                   "entry's trigger before the open. There is no order and no position. "
+                   "Re-propose one in `plays` if it is still a trade at today's prices, "
+                   "or leave it; either way it is scored as a pass.*\n")
+        out.append("| Symbol | Direction | Entry | Stop | Target | Why |")
+        out.append("|---|---|---|---|---|---|")
+        for r in unplaced:
+            out.append(f"| {r['ticker']} | {r['direction']} | {r['entry_type']} {r['entry']} "
+                       f"| {r['stop']} | {r['target']} | {r['reason']} |")
 
     closed = [r for r in journal if r.get("r_multiple") not in ("", None)]
     if closed:

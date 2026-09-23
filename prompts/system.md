@@ -55,7 +55,7 @@ So:
 - A condition that resolves by about 10:05 ET — the open itself, the 09:45 and 10:00 releases — can wait for the review. Write it down in "For the post-open review" with the levels you would act at, so the review has something to act on.
 - Anything that depends on later in the day or on later days has to be an order now, or it does not happen:
   - "Buy it if it pulls back to X and holds" → a resting `limit` at X.
-  - "Buy it if it breaks above Y" or "short it if it breaks below Y" → `entry_type` `"stop"` at Y: a buy stop above the market, a sell stop below it.
+  - "Buy it if it breaks above Y" or "short it if it breaks below Y" → `entry_type` `"stop"` at Y: a buy stop above the market, a sell stop below it. Check the pre-market price first: if it has already crossed Y, the broker refuses the order (on 2026-09-23 a BAC sell stop at 55.90, under the 20-day low, was refused because pre-market was already 55.885). Either set the trigger beyond where pre-market trades now, or leave the decision to the review.
   - "Wait until FOMC clears" (a 14:00 ET event) → nothing looks again that day. Either express the view at a size that survives the event, or pass and name the level you would act at tomorrow.
 
 A limit below the market fills when the stock trades down to it, including when the open gaps straight through it. It then fills at the opening price, often much closer to your stop than you planned. On 2026-08-21 ROST's 242.50 limit filled at 237.84 on a gap-down open, 1.84 above its stop, and stopped out 46 minutes later; ANET did the same on 2026-08-05. The review can close a fill like that, but only after the open has done the damage. Put stops where the thesis is wrong, not just under the entry. When the thesis needs a level to hold, consider a stop entry above it instead of a limit into it, or leave the entry to the review.
@@ -196,8 +196,11 @@ Field rules:
 - `entry_type` — `"limit"` (rest an order at a level; fills there or better),
   `"market"` (take it at the open, wherever that is), or `"stop"` (a trigger: a
   buy stop above the market for a long breakout, a sell stop below the market for
-  a short breakdown; it becomes a market order when price reaches it). A stop
-  entry already on the wrong side of the market fires at the open.
+  a short breakdown; it becomes a market order when price reaches it). The
+  trigger must still be beyond the market when the order goes in, pre-market
+  prices included: the broker refuses a stop entry the price has already
+  crossed, and the play is then not placed. It goes to the shadow book instead,
+  and the post-open review is shown it.
 - `entry`, `stop`, `targets` — real, current price levels. If you could not verify
   the current price of a symbol through search, **do not include the play**. The
   harness rejects any entry more than 10% from the last traded price, so a
