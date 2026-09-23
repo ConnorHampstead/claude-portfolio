@@ -1,0 +1,42 @@
+
+====================================================================
+  SESSION 2026-09-23   equity $101,570.48   day P&L -0.59%
+====================================================================
+
+  [OK] BAC SHORT
+      entry 55.90 (stop)  stop 57.70  target 52.90  [1.67R]
+      qty 282  notional $15,764  risk $507.60 (0.50% of equity, tier 0.5%)
+      P(target first) 38%   conviction 3
+
+  [OK] AAPL LONG
+      entry 346.00 (stop)  stop 338.50  target 358.00  [1.60R]
+      qty 67  notional $23,182  risk $502.50 (0.49% of equity, tier 0.5%)
+      P(target first) 40%   conviction 3
+
+  ----------------------------------------------------------------
+  BOOK-LEVEL ADMISSION   highest conviction first
+      book now: 1 positions/resting entries, gross 37%, net +37%, risk at stake 0.00%
+      + BAC    admitted  -> gross 53%, net +22%, risk 0.50%
+      + AAPL   admitted  -> gross 76%, net +44%, risk 0.99%
+
+  ----------------------------------------------------------------
+  PASSED IDEAS   logged to the shadow book and scored later, no orders
+      . KRE    short stop 70.80  stop 72.90  target 67.60  P 35%
+      . SMH    long  limit 590.00  stop 572.00  target 620.00  P 40%
+
+  ----------------------------------------------------------------
+  2 approved, 0 rejected.  Total new risk $1,010.10 (0.99% of equity)
+  2 idea(s) for the shadow book.
+
+  ! Market is closed. Next open: 2026-09-23T09:30:00-04:00
+    Orders will queue. Market orders will fill at the next open.
+
+  x BAC REJECTED BY ALPACA: POST /v2/orders -> 422: {"code":42210000,"market_price":"55.885","message":"stop price must be less than current price","stop_price":"55.9"}
+  > AAPL long x67 submitted [pending_new]  id=956d4d4d
+
+  Logged to journal.csv
+
+  ----------------------------------------------------------------
+  THE BOOK DOES NOT MATCH THE BRIEF
+      x BAC: entry order rejected (POST /v2/orders -> 422: {"code":42210000,"market_price":"55.885","message":"stop price must be less than current price","stop_price":"55.9"})
+

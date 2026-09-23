@@ -1,3 +1,6 @@
 
+  1 resting exit order(s) left alone (protecting an open position):
+    DAL    sell  x457    oco     @84.9
+
   No unfilled entry orders older than 5d.
 

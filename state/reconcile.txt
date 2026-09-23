@@ -1,2 +1,5 @@
+  closed LLY    stop    +1.76R  $+1,653.75
 
-  0 trade(s) closed out.
+  1 trade(s) closed out.
+  Fill in `thesis_verdict` by hand: right/wrong thesis vs right/wrong outcome.
+
