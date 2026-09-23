@@ -1634,7 +1634,7 @@ def cmd_check(args, submit: bool = False):
     if not approved and not managed and not shadow_rows:
         return
     if not submit:
-        print("\n  Dry run. Re-run with `submit --confirm` to send these.\n")
+        print("\n  Validation only - `check` never sends. `submit --confirm` sends these.\n")
         return
     if not args.confirm:
         print("\n  Add --confirm to actually submit.\n")

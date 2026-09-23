@@ -268,17 +268,28 @@ jobs:
               echo "write a brief that would not be comparable with the record."
             else
               if [ "${{ steps.session.outcome }}" = "failure" ]; then
-                echo "> **Not every order reached Alpaca.** The book does not"
-                echo "> match the brief - see the Submit group in the log and"
-                echo "> check the book state below before the open."
+                echo "> **The session failed.** If it got as far as submitting, not"
+                echo "> every order reached Alpaca and the book does not match the"
+                echo "> brief - see the log, and check the book state below."
                 echo
               fi
-              echo "### Validation"
-              echo '```'
               D=$(date -u +%Y-%m-%d)
               SFX=""; [ "$SESSION" = open ] && SFX="-open"
-              cat "state/dryrun/${D}${SFX}.check.txt" "briefs/${D}${SFX}.check.txt" 2>/dev/null \
-                || echo "(none)"
+              # A live run shows what reached Alpaca. The check output ends with
+              # check's own "nothing sent" note, which reads as if the session
+              # had been a dry run when it was not.
+              if [ -n "${DRY_RUN}" ]; then
+                echo "### Validation (dry run - nothing sent)"
+                F="state/dryrun/${D}${SFX}.check.txt"
+              elif [ -f "briefs/${D}${SFX}.submit.txt" ]; then
+                echo "### Submitted"
+                F="briefs/${D}${SFX}.submit.txt"
+              else
+                echo "### Validation (the session stopped before submitting)"
+                F="briefs/${D}${SFX}.check.txt"
+              fi
+              echo '```'
+              cat "$F" 2>/dev/null || echo "(none)"
               echo '```'
               echo "### Book"
               echo '```'
