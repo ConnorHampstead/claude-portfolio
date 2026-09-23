@@ -506,3 +506,11 @@ apply to, so the record can be read in segments.
 - *Post-open review.* A second session at 10:05 ET (section 8). Before this the
   brief was the only decision point, and 19 of 24 no-trade briefs deferred their
   decision to "after the open or the data", which nothing ever acted on.
+- *Stop entries past their trigger* (from the 2026-09-23 run). A sell stop at
+  BAC 55.90 was refused because pre-market had already traded 55.885; the run
+  failed and the prompt had wrongly said such an order fires at the open. It is
+  now recorded as not placed, scored in the shadow book and shown to the
+  post-open review. The market table's last price now also comes from the
+  consolidated tape 15 minutes delayed (free on the basic plan) when that is
+  more recent than the IEX print, which is thin before the open, and the movers
+  screener is labelled when it is still the previous session's.

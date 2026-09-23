@@ -403,6 +403,45 @@ def history_bars(symbols: list[str], feed: str, end: str,
     raise RuntimeError(f"no bars for {len(symbols)} symbols on sip or {feed}")
 
 
+def sip_today(symbols: list[str], today: str,
+              open_utc: datetime | None = None) -> dict[str, dict]:
+    """Today's consolidated tape so far, at least 15 minutes old.
+
+    IEX alone barely trades before the open - on 2026-09-23 most of the
+    watchlist showed no IEX print at 09:20 ET, and a BAC stop entry went in
+    at a trigger pre-market had already crossed. The free plan serves SIP
+    once it is 15 minutes old, so the latest 5-minute bar from 04:00 ET is a
+    real pre-market price, if a slightly late one. With open_utc, also the
+    regular session's open, high and low so far. Returns {} on any failure.
+    """
+    from zoneinfo import ZoneInfo
+    start = datetime.strptime(today, "%Y-%m-%d").replace(hour=4, tzinfo=ZoneInfo(ET))
+    end = datetime.now(timezone.utc) - timedelta(minutes=16)
+    if not symbols or end <= start:
+        return {}
+    try:
+        bars = fetch_bars(symbols, "5Min", start.astimezone(timezone.utc).strftime(
+            "%Y-%m-%dT%H:%M:%SZ"), end.strftime("%Y-%m-%dT%H:%M:%SZ"), "sip", "raw")
+    except RuntimeError:
+        return {}
+    out = {}
+    for sym, bs in bars.items():
+        bs = sorted(bs, key=lambda b: b["t"])
+        if not bs:
+            continue
+        # A bar is stamped with its start; its close is the price at its end.
+        t = min(parse_ts(bs[-1]["t"]) + timedelta(minutes=5), end)
+        entry = {"last": float(bs[-1]["c"]), "last_t": t.astimezone(ZoneInfo(ET))}
+        if open_utc:
+            reg = [b for b in bs if parse_ts(b["t"]) >= open_utc]
+            if reg:
+                entry["today"] = {"o": float(reg[0]["o"]),
+                                  "h": max(float(b["h"]) for b in reg),
+                                  "l": min(float(b["l"]) for b in reg)}
+        out[sym] = entry
+    return out
+
+
 def fetch_movers(top: int = 50) -> dict:
     """Alpaca's movers screener: {"gainers": [...], "losers": [...], "last_updated"}."""
     return api("GET", "/v1beta1/screener/stocks/movers", base=DATA_BASE,
@@ -443,13 +482,17 @@ def market_stats(bars: list[dict], snap: dict, today: str) -> dict | None:
 
 
 def market_data_section(cfg: dict, held: list[str], resting: list[str],
-                        market_open: bool) -> list[str]:
+                        hours: tuple | None) -> list[str]:
     """Markdown tables of prices and levels for the brief, grouped.
 
-    Never raises: the brief is better written without this table than not
-    written at all.
+    hours is today's (calendar_day, open_utc, close_utc), or None. Never
+    raises: the brief is better written without this table than not written
+    at all.
     """
     today = et_today()
+    now = datetime.now(timezone.utc)
+    open_utc = hours[1] if hours else None
+    market_open = bool(hours) and hours[1] <= now < hours[2]
     groups: list[tuple[str, list[str]]] = []
     mine = list(dict.fromkeys(held + resting))
     if mine:
@@ -467,7 +510,12 @@ def market_data_section(cfg: dict, held: list[str], resting: list[str],
         ts = parse_ts(m.get("last_updated"))
         if ts:
             from zoneinfo import ZoneInfo
-            movers_note = f", screener as of {ts.astimezone(ZoneInfo(ET)):%Y-%m-%d %H:%M} ET"
+            ts_et = ts.astimezone(ZoneInfo(ET))
+            movers_note = f", screener as of {ts_et:%Y-%m-%d %H:%M} ET"
+            if ts_et.strftime("%Y-%m-%d") < today:
+                # It does not refresh before the open: these are yesterday's.
+                movers_note += (" - the PREVIOUS session's movers; the screener "
+                                "does not update before the open")
     except RuntimeError as e:
         movers_note = f" - screener unavailable ({str(e)[:80]})"
     mover_syms = [x["symbol"].upper() for side in ("gainers", "losers")
@@ -484,16 +532,39 @@ def market_data_section(cfg: dict, held: list[str], resting: list[str],
     except RuntimeError as e:
         return out + [f"*Unavailable this session: {str(e)[:200]}. Search for levels.*"]
     stats = {s: market_stats(bars.get(s, []), snaps.get(s) or {}, today) for s in everything}
+    feed = cfg["data_feed"]
+    for s in stats.values():
+        if s and s["last"]:
+            s["src"] = feed
+    # Whichever is more recent: the live single-venue print, or the whole tape
+    # as of 15 minutes ago. Today's range takes the consolidated open and the
+    # widest high and low either source has seen.
+    delayed = sip_today(everything, today, open_utc) if used == "sip" else {}
+    for sym, d in delayed.items():
+        s = stats.get(sym)
+        if not s:
+            continue
+        if s["last"] is None or d["last_t"] > s["last_t"]:
+            s["last"], s["last_t"], s["src"] = d["last"], d["last_t"], "sip"
+        if d.get("today"):
+            t = s["today"]
+            s["today"] = d["today"] if not t else {
+                "o": d["today"]["o"], "h": max(t["h"], d["today"]["h"]),
+                "l": min(t["l"], d["today"]["l"])}
 
     vol_note = ("consolidated volume" if used == "sip"
                 else f"{used.upper()} volume only, a small slice of the tape")
+    last_note = (f"last is the more recent of today's latest {feed.upper()} trade and "
+                 "the consolidated tape as of 15 minutes ago, marked which; "
+                 if delayed else
+                 f"last is today's latest {feed.upper()} trade, which pre-market is a "
+                 "thin single-venue print - confirm it for anything you trade; ")
     out.append(
         f"*From Alpaca. History and averages are completed sessions ({used.upper()}, "
-        f"{vol_note}); last is today's latest {cfg['data_feed'].upper()} trade, which "
-        "pre-market is a thin single-venue print - confirm it for anything you trade. "
-        "A level taken from this table counts as verified. ATR is the 14-session "
-        "average true range: a stop inside one ATR of entry is inside ordinary "
-        "daily noise.*")
+        f"{vol_note}); {last_note}a stop entry's trigger has to be beyond it when the "
+        "order goes in. A level taken from this table counts as verified. ATR is the "
+        "14-session average true range: a stop inside one ATR of entry is inside "
+        "ordinary daily noise.*")
 
     def pct(x):
         return f"{x * 100:+.1f}%" if x is not None else "-"
@@ -508,7 +579,7 @@ def market_data_section(cfg: dict, held: list[str], resting: list[str],
         last = s["last"]
         cells = [
             sym,
-            f"{last:,.2f} ({s['last_t']:%H:%M})" if last else "no trade today",
+            f"{last:,.2f} ({s['last_t']:%H:%M} {s['src']})" if last else "no trade today",
             pct(last / s["prev"] - 1) if last else "-",
             fmt(s["prev"]),
         ]
@@ -1354,7 +1425,16 @@ def build_context(symbols: list[str]) -> dict:
             if price:
                 prices[sym.upper()] = price
     except RuntimeError as e:
+        snaps = {}
         print(f"  ! could not fetch reference prices: {e}", file=sys.stderr)
+    # The snapshot's last trade can be yesterday's when IEX has not printed
+    # yet today, which let a stop entry through that pre-market had already
+    # crossed. The consolidated tape as of 15 minutes ago wins when newer.
+    for sym, d in sip_today([s.upper() for s in symbols if s], et_today()).items():
+        trade = ((snaps or {}).get(sym) or {}).get("latestTrade") or {}
+        t = parse_ts(trade.get("t"))
+        if t is None or d["last_t"] > t:
+            prices[sym] = d["last"]
 
     positions = get_positions()
     # Not caught: without the open orders the caps cannot see resting entries,
@@ -2524,9 +2604,8 @@ def cmd_prep(args):
                 f"| {f'{float(rm):+.2f}R' if rm not in ('', None) else '-'} "
                 f"| {f'{float(p):.0%}' if p not in ('', None) else '-'} |")
 
-    market_open = bool(hours) and hours[1] <= now < hours[2]
     out += market_data_section(cfg, [p["symbol"].upper() for p in positions],
-                               [e["symbol"] for e in book["resting"]], market_open)
+                               [e["symbol"] for e in book["resting"]], hours)
 
     text = "\n".join(out) + "\n"
     if args.out:
