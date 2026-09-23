@@ -125,7 +125,7 @@ jobs:
         if: steps.tradingday.outputs.trading == 'true'
         run: |
           pip install --require-hashes -r requirements.txt
-          npm install -g @anthropic-ai/claude-code@2.1.278
+          npm install -g @anthropic-ai/claude-code@2.1.280
           claude --version
 
       # Lands the session at a consistent point relative to the market rather
