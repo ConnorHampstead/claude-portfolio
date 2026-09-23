@@ -1,0 +1,22 @@
+
+====================================================================
+  SESSION 2026-09-23   equity $101,556.45   day P&L -0.60%
+====================================================================
+
+  [OK] BAC SHORT
+      entry 55.80 (stop)  stop 57.70  target 52.90  [1.53R]
+      qty 267  notional $14,899  risk $507.30 (0.50% of equity, tier 0.5%)
+      P(target first) 36%   conviction 3
+
+  ----------------------------------------------------------------
+  BOOK-LEVEL ADMISSION   highest conviction first
+      book now: 1 positions/resting entries, gross 23%, net +23%, risk at stake 0.49%
+      + BAC    admitted  -> gross 37%, net +8%, risk 0.99%
+
+  ----------------------------------------------------------------
+  1 approved, 0 rejected.  Total new risk $507.30 (0.50% of equity)
+
+  > BAC short x267 submitted [pending_new]  id=cee71ed3
+
+  Logged to journal.csv
+

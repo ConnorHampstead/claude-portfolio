@@ -1,17 +1,21 @@
 
-  Entry fill rate  100%  (3 filled / 3 proposed, 0 never reached)
+  Entry fill rate  100%  (4 filled / 4 proposed, 0 never reached)
 
 ====================================================================
-  PERFORMANCE   3 closed trades
+  PERFORMANCE   4 closed trades
 ====================================================================
-  Net P&L         $+559.50
-  Win rate        33.3%  (1W / 2L)
-  Avg win         +1.76R
+  Net P&L         $+1,558.24
+  Win rate        50.0%  (2W / 2L)
+  Avg win         +1.38R
   Avg loss        -1.09R
-  Expectancy      -0.14R per trade
-  Total R         -0.43R
+  Expectancy      +0.14R per trade
+  Total R         +0.57R
   Best / worst    +1.76R / -1.18R
   Max drawdown    -2.19R
+
+  1 closed trade(s) left out of calibration: their levels were moved
+  or they were closed by hand, so the fills do not show whether the
+  initial target or the initial stop came first.
 
   ----------------------------------------------------------------
   CALIBRATION   3 trades with a stated probability
@@ -26,7 +30,7 @@
   Note: thesis_verdict column is empty. Fill it in to separate skill from luck.
 
 ====================================================================
-  SHADOW BOOK   2 ideas passed on or dropped, 0 resolved
+  SHADOW BOOK   3 ideas passed on or dropped, 0 resolved
 ====================================================================
   Never filled    0
   Target first    0
