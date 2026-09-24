@@ -842,15 +842,17 @@ def validate_play(play: dict, ctx: dict) -> tuple[list[str], list[str], dict]:
         warnings.append(f"no reference price for {symbol} - could not sanity-check entry")
 
     # An entry on the wrong side of the market is not the order it looks like:
-    # a stop trigger already passed fires at the open, and a limit through the
-    # market fills there. Warnings only - the reference can be a stale IEX print.
+    # the broker refuses a stop trigger the price has already crossed (BAC,
+    # 2026-09-23), and a limit through the market fills at the open. Warnings
+    # only - the price can move back before the order goes in.
     entry_type = str(play.get("entry_type", "limit")).lower()
     if ref:
         long = direction == "long"
         if entry_type == "stop" and (entry <= ref if long else entry >= ref):
             warnings.append(
                 f"stop entry {entry} is already {'below' if long else 'above'} the "
-                f"last price {ref:.2f} - it triggers at the open like a market order")
+                f"last price {ref:.2f} - the broker refuses a crossed trigger, so "
+                "unless price moves back it will be logged as not placed")
         if entry_type == "limit" and (entry > ref if long else entry < ref):
             warnings.append(
                 f"limit {entry} is through the last price {ref:.2f} - it will fill "
