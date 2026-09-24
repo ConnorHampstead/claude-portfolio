@@ -1,0 +1,4 @@
+play_id,logged_at,session_date,ticker,direction,entry_type,entry_planned,stop,target,qty,risk_usd,risk_pct_equity,conviction,p_target_first,time_horizon,catalyst,thesis,invalidation,bear_case,order_id,status,entry_fill,exit_fill,exit_reason,pnl_usd,r_multiple,hit_target_first,closed_at,thesis_verdict,notes
+9e49ac24,2026-08-05T12:47:58+00:00,2026-08-05,LLY,long,limit,1165.0,1230.0,1300.0,25,975.0,,4,0.52,,,,,,lly-entry,filled,1163.64,,,,,,,,2026-08-24: levels updated
+9205e6bc,2026-08-05T12:47:59+00:00,2026-08-05,ANET,long,limit,207.0,193.2,228.0,72,993.6,,3,0.45,,,,,,anet-entry,filled,203.6333,193.1,stop,-758.4,-1.01,0,2026-08-05T14:01:04.436478948Z,,
+4cc4d46c,2026-09-21T13:12:10+00:00,2026-09-21,DAL,long,limit,80.4,82.4,84.9,457,1005.4,,3,0.46,,,,,,dal-entry,filled,80.3846,,,,,,,,

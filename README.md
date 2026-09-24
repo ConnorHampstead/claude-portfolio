@@ -284,8 +284,25 @@ price — which on a gap is nowhere near where Claude thought it was entering. P
 | `example-plays.json` | Shape reference; use with `check` to test setup. |
 | `journal.csv` | Created on first submit. Your permanent decision record. |
 | `shadow.csv` | Ideas passed on with levels, and plays the caps dropped, replayed against the tape. |
+| `tests/` | Harness tests against a fake Alpaca; `.github/workflows/tests.yml` runs them on every push. |
 
 Back up `journal.csv`. It's the experiment.
+
+### Tests
+
+```bash
+python3 -m unittest discover -s tests -t .
+```
+
+Standard library only, no network, no keys, a few seconds. They run against
+`tests/fake_alpaca.py`, which reproduces what the live paper API actually
+returns - including the details that broke sessions in September 2026:
+nanosecond timestamps, bracket stop legs held out of the open-orders list,
+stop entries refused once crossed, and SIP refused inside 15 minutes. The
+clock is frozen and every file lives in a temporary directory, so nothing
+touches `journal.csv`, `shadow.csv`, `config.json` or `state/`. When the live
+API surprises the desk again, teach the fake the new behaviour first and add
+the test that would have caught it.
 
 ---
 

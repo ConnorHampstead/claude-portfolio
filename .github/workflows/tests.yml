@@ -1,0 +1,40 @@
+name: tests
+
+# Runs the harness tests on every push, so a change that would break the next
+# session fails here instead of at 09:05 ET. The session's own commits are
+# pushed with GITHUB_TOKEN, which does not trigger workflows, so this runs for
+# your pushes only.
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: tests-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  unittest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          persist-credentials: false
+
+      # Same interpreter as the session, and only what desk.py imports at the
+      # top. The tests use the standard library's unittest, so there is
+      # nothing else to install.
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install --require-hashes -r requirements-min.txt
+
+      - name: Run tests
+        run: python -m unittest discover -s tests -t . -v

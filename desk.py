@@ -1747,7 +1747,7 @@ def cmd_check(args, submit: bool = False):
             # in the book state and can decide it again with the market open.
             if p["entry_type"] == "stop" and "stop price must be" in str(e):
                 import re
-                mkt = re.search(r'"market_price":"([0-9.]+)"', str(e))
+                mkt = re.search(r'"market_price"\s*:\s*"([0-9.]+)"', str(e))
                 why = (f"stop entry {p['entry']:.2f} not placed: the market "
                        + (f"({mkt.group(1)}) " if mkt else "")
                        + "had already crossed the trigger")
