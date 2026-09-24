@@ -1,5 +1,2 @@
-  closed DAL    stop    +1.00R  $+998.74  (levels were moved - not scored for calibration)
 
-  1 trade(s) closed out.
-  Fill in `thesis_verdict` by hand: right/wrong thesis vs right/wrong outcome.
-
+  0 trade(s) closed out.
