@@ -1,17 +1,27 @@
+run 2026-09-24
 
-  No unfilled entry orders.
+  1 resting exit order(s) left alone (protecting an open position):
+    BAC    buy   x267    bracket @52.9
+
+  1 unfilled entry order(s):
+    AAPL   buy   x67     stop   @346  submitted 2026-09-23  id=956d4d4d
+    cancelled AAPL
 
 
   0 trade(s) closed out.
 
 ====================================================================
-  BOOK STATE   market closed
+  BOOK STATE   market OPEN
 ====================================================================
-  Equity          $100,557.71
-  Cash            $100,557.71
-  Day P&L         $+0.00  (+0.00%)
-  Gross exposure  $0.00  (0.0% of equity)
-  Net exposure    $+0.00  (+0.0%)
-  Positions       0 / 5
-  Loss-limit room 3.00% before the 3.0% kill switch
+  Equity          $101,459.00
+  Cash            $116,455.05
+  Day P&L         $-44.05  (-0.04%)
+  Gross exposure  $14,996.06  (14.8% of equity)
+  Net exposure    $-14,996.06  (-14.8%)
+  Positions       1 / 8
+  Loss-limit room 2.96% before the 3.0% kill switch
+
+  SYM    SIDE      QTY        AVG       LAST       P&L $    P&L %
+  ---------------------------------------------------------------
+  BAC    short     267      55.80      56.16      -97.45   -0.65%
 
