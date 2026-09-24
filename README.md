@@ -514,3 +514,13 @@ apply to, so the record can be read in segments.
   consolidated tape 15 minutes delayed (free on the basic plan) when that is
   more recent than the IEX print, which is thin before the open, and the movers
   screener is labelled when it is still the previous session's.
+
+**2026-09-24 - nothing executed**
+
+Both sessions ran and wrote briefs, but `check` crashed before submitting (a
+timestamp-parsing bug from the 2026-09-23 changes), so none of that day's plays
+or `manage` instructions reached Alpaca. The briefs stay in the record as
+written. Fixed the same day. The book state had also been reporting filled
+brackets' stops as "no live order": Alpaca holds a bracket's stop leg while the
+take-profit works, and the open-orders list does not return it, so missing legs
+are now looked up on the entry order.

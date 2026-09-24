@@ -184,23 +184,37 @@ def get_open_orders(symbol: str | None = None) -> list:
     return api("GET", "/v2/orders", params=params)
 
 
-def exit_legs(symbol: str, pos_side: str, orders: list | None = None) -> dict:
+# Not filled, cancelled, expired, replaced or rejected: still able to execute.
+LIVE_STATUSES = {"new", "accepted", "held", "pending_new", "partially_filled",
+                 "pending_replace", "accepted_for_bidding", "calculated"}
+
+
+def exit_legs(symbol: str, pos_side: str, orders: list | None = None,
+              entry_id: str | None = None) -> dict:
     """Find the live take-profit / stop-loss orders protecting an open position.
 
     After a bracket entry fills, its two children stay open as an OCO pair. They
     come back either nested under the parent or as top-level orders, so walk both.
     The exit legs are the ones facing opposite the position.
+
+    The open-orders list does not return a filled bracket's stop leg, which
+    Alpaca holds ("held") while the take-profit works: DAL on 2026-09-22 and
+    BAC on 2026-09-24 both read "no live order" with the stop in place. So a
+    leg missing from the list is looked up on the entry order itself
+    (entry_id), which lists both legs with their real status.
     """
     symbol = symbol.upper()
     exit_side = "sell" if pos_side == "long" else "buy"
     found = {"take_profit": None, "stop_loss": None}
 
-    def walk(nodes):
+    def walk(nodes, live_only=False):
         for o in nodes or []:
-            walk(o.get("legs"))
+            walk(o.get("legs"), live_only)
             if (o.get("symbol") or "").upper() != symbol:
                 continue
             if o.get("side") != exit_side:
+                continue
+            if live_only and o.get("status") not in LIVE_STATUSES:
                 continue
             otype = o.get("type")
             if otype == "limit" and not found["take_profit"]:
@@ -209,7 +223,22 @@ def exit_legs(symbol: str, pos_side: str, orders: list | None = None) -> dict:
                 found["stop_loss"] = o
 
     walk(orders if orders is not None else get_open_orders(symbol))
+    if entry_id and not (found["take_profit"] and found["stop_loss"]):
+        try:
+            entry = api("GET", f"/v2/orders/{entry_id}", params={"nested": "true"})
+        except RuntimeError:
+            entry = {}
+        walk(entry.get("legs"), live_only=True)
     return found
+
+
+def open_entry_id(symbol: str, journal: list[dict] | None = None) -> str | None:
+    """Order id of the journal's open row for a symbol - the bracket that opened it."""
+    rows = [r for r in (journal if journal is not None else read_journal())
+            if r.get("ticker", "").upper() == symbol.upper()
+            and r.get("r_multiple") in ("", None)
+            and r.get("exit_reason") != "never filled" and r.get("order_id")]
+    return rows[-1]["order_id"] if rows else None
 
 
 def pending_entry(symbol: str, orders: list | None = None) -> dict | None:
@@ -293,7 +322,8 @@ def book_commitments(cfg: dict, equity: float, positions: list, orders: list,
         qty = abs(float(p["qty"]))
         side = "long" if float(p["qty"]) > 0 else "short"
         avg = float(p["avg_entry_price"])
-        stop = leg_price(exit_legs(sym, side, orders)["stop_loss"])
+        stop = leg_price(exit_legs(sym, side, orders,
+                                   open_entry_id(sym, journal))["stop_loss"])
         if stop is None:
             try:
                 stop = float(open_rows.get(sym, {}).get("stop") or "")
@@ -338,19 +368,28 @@ def book_commitments(cfg: dict, equity: float, positions: list, orders: list,
 
 
 def parse_ts(value: str | None) -> datetime | None:
-    """Alpaca timestamp -> aware datetime. Tolerates nanosecond fractions."""
+    """Alpaca timestamp -> UTC-aware datetime. Tolerates nanosecond fractions.
+
+    Always aware: comparing a naive datetime with an aware one raises, and
+    that took down `check` in both sessions on 2026-09-24. Alpaca's
+    timestamps are UTC, so one without an offset is read as UTC.
+    """
     if not value:
         return None
     s = value.replace("Z", "+00:00")
     if "." in s:
+        # The fraction is the digits up to the offset - not every digit left
+        # in the string, which swallowed the "+00:00" and dropped the zone.
         head, rest = s.split(".", 1)
-        frac = "".join(ch for ch in rest if ch.isdigit())
-        tz = rest[len(frac):]
-        s = f"{head}.{frac[:6]}{tz}"
+        n = 0
+        while n < len(rest) and rest[n].isdigit():
+            n += 1
+        s = f"{head}.{rest[:n][:6].ljust(6, '0')}{rest[n:]}"
     try:
-        return datetime.fromisoformat(s)
+        dt = datetime.fromisoformat(s)
     except ValueError:
         return None
+    return dt if dt.tzinfo else dt.replace(tzinfo=timezone.utc)
 
 
 ET = "America/New_York"
@@ -948,7 +987,8 @@ def validate_manage(item: dict, ctx: dict) -> tuple[list[str], list[str], dict]:
             )
 
     try:
-        legs = exit_legs(symbol, pos_side)
+        legs = exit_legs(symbol, pos_side,
+                         entry_id=open_entry_id(symbol) if pos is not None else None)
     except RuntimeError as e:
         errors.append(f"could not read open orders for {symbol}: {e}")
         legs = {"take_profit": None, "stop_loss": None}
@@ -2515,7 +2555,8 @@ def cmd_prep(args):
         for p in positions:
             j = by_symbol.get(p["symbol"], {})
             thesis = (j.get("thesis") or "-").replace("|", "/")[:120]
-            legs = exit_legs(p["symbol"], p["side"], live_orders)
+            legs = exit_legs(p["symbol"], p["side"], live_orders,
+                             open_entry_id(p["symbol"], journal))
             stop = leg_price(legs["stop_loss"])
             target = leg_price(legs["take_profit"])
             stop_s = f"{stop:.2f}" if stop else f"{j.get('stop', '-')} (no live order)"
