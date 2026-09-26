@@ -1,9 +1,11 @@
 """Session timing: calendar guards, the wait, and DST."""
 
+import re
+import tomllib
 import unittest
 from datetime import datetime, timezone
 
-from tests.support import POST_OPEN, DeskCase, desk
+from tests.support import POST_OPEN, REPO, DeskCase, desk
 
 
 class Calendar(DeskCase):
@@ -52,6 +54,40 @@ class DaylightSaving(unittest.TestCase):
     def test_half_day(self):
         _, close = desk.session_bounds({"date": "2026-11-27", "open": "09:30", "close": "13:00"})
         self.assertEqual(close, datetime(2026, 11, 27, 18, 0, tzinfo=timezone.utc))
+
+
+
+class DispatchSchedule(unittest.TestCase):
+    """Cloudflare numbers weekdays 1 = Sunday .. 7 = Saturday. "1-5" and "5",
+    written for standard cron, skipped the Friday session and ran the Friday
+    cleanup on Thursday (2026-09-24/25)."""
+
+    def setUp(self):
+        self.crons = tomllib.loads((REPO / "dispatch/wrangler.toml").read_text())["triggers"]["crons"]
+        self.worker = (REPO / "dispatch/src/index.ts").read_text()
+
+    def test_weekdays_are_names_not_numbers(self):
+        for cron in self.crons:
+            with self.subTest(cron):
+                fields = cron.split()
+                self.assertEqual(len(fields), 5)
+                self.assertRegex(fields[4], r"^[A-Za-z]{3}(-[A-Za-z]{3})?(,[A-Za-z]{3}(-[A-Za-z]{3})?)*$")
+
+    def test_every_cron_maps_to_a_job(self):
+        for cron in self.crons:
+            with self.subTest(cron):
+                self.assertIn(f'"{cron}"', self.worker)
+
+    def test_the_friday_jobs(self):
+        self.assertIn("55 12,13 * * MON-FRI", self.crons)
+        self.assertIn("55 13,14 * * MON-FRI", self.crons)
+        self.assertIn("50 17,18 * * FRI", self.crons)
+
+    def test_systemd_backups_name_their_days(self):
+        for timer in (REPO / "dispatch/systemd").glob("*.timer"):
+            with self.subTest(timer.name):
+                cal = re.search(r"^OnCalendar=(\S+)", timer.read_text(), re.M).group(1)
+                self.assertRegex(cal, r"^(Mon\.\.Fri|Fri)$")
 
 
 if __name__ == "__main__":

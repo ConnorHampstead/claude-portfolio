@@ -541,3 +541,13 @@ written. Fixed the same day. The book state had also been reporting filled
 brackets' stops as "no live order": Alpaca holds a bracket's stop leg while the
 take-profit works, and the open-orders list does not return it, so missing legs
 are now looked up on the entry order.
+
+**2026-09-25 - no Friday session, and the Friday cleanup ran on Thursday**
+
+The Cloudflare crons used numeric weekdays, which Cloudflare counts from
+1 = Sunday: `1-5` was Sunday-Thursday and `5` was Thursday. Neither Friday
+session dispatched (the systemd backup was off, and caught up on Saturday,
+where the calendar guard stood it down), and the weekend cleanup ran on
+2026-09-24 instead, cancelling AAPL's resting 346 breakout entry a day early.
+The crons now name their days. Every Friday since the move to Cloudflare
+(2026-09-19) was affected; 2026-09-25 was the first.

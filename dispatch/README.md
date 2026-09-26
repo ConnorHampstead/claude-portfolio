@@ -51,6 +51,13 @@ Cron Triggers work on the Workers free plan (5 per account; this uses 3).
 Cloudflare cron is UTC-only, so each cron lists both the EDT and EST hour and
 `src/index.ts` dispatches only on the one matching New York time.
 
+Weekdays are written as names (`MON-FRI`, `FRI`), never numbers. Cloudflare
+counts 1 = Sunday .. 7 = Saturday, not standard cron's 0 = Sunday, so the
+original `1-5` ran Sunday-Thursday: the Friday session never dispatched and the
+Friday cleanup ran on Thursday (2026-09-24/25). The Worker also checks the
+weekday in New York before dispatching, and `tests/test_schedule.py` fails on
+a numeric weekday.
+
 ```sh
 cd dispatch
 npm install
@@ -69,7 +76,7 @@ npm run dev          # delete .dev.vars when done - it holds a live token
 # hour, or the Worker skips it as the other DST slot. The older /__scheduled
 # route ignores `time` and uses the real clock.
 # 1790081700000 = Tue 2026-09-22 12:55 UTC = 08:55 ET.
-curl "http://localhost:8787/cdn-cgi/handler/scheduled?cron=55+12,13+*+*+1-5&time=1790081700000"
+curl "http://localhost:8787/cdn-cgi/handler/scheduled?cron=55+12,13+*+*+MON-FRI&time=1790081700000"
 ```
 
 After it runs for real, check Worker → Observability → Logs for

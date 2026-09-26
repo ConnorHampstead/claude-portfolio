@@ -16,30 +16,53 @@ const REPO = "ConnorHampstead/claude-portfolio";
 // that is correct today, so the job lands at the same New York time all year
 // and each runner hold stays put rather than growing by an hour every winter.
 // `inputs` are passed through to workflow_dispatch alongside dry_run.
-const JOBS: Record<string, { workflow: string; etHour: number; inputs?: Record<string, string> }> = {
+//
+// Weekdays are written as names, never numbers: Cloudflare counts 1 = Sunday,
+// so "1-5" meant Sunday-Thursday and "5" Thursday. That skipped every Friday
+// session and ran the Friday cleanup on Thursday (2026-09-24/25). `etDays` is
+// checked in New York time as well, so a cron mistake skips a run rather than
+// dispatching on the wrong day.
+const WEEKDAYS = ["Mon", "Tue", "Wed", "Thu", "Fri"];
+type Job = { workflow: string; etHour: number; etDays: string[]; inputs?: Record<string, string> };
+const JOBS: Record<string, Job> = {
   // 08:55 ET, 10 min ahead of the pre-market brief's target (25 min before the open, 09:05 ET).
-  "55 12,13 * * 1-5": { workflow: "desk.yml", etHour: 8, inputs: { session: "pre-market" } },
+  "55 12,13 * * MON-FRI": {
+    workflow: "desk.yml", etHour: 8, etDays: WEEKDAYS, inputs: { session: "pre-market" },
+  },
   // 09:55 ET, 10 min ahead of the post-open review's target (35 min after the open, 10:05 ET).
-  "55 13,14 * * 1-5": { workflow: "desk.yml", etHour: 9, inputs: { session: "open" } },
+  "55 13,14 * * MON-FRI": {
+    workflow: "desk.yml", etHour: 9, etDays: WEEKDAYS, inputs: { session: "open" },
+  },
   // 13:50 ET Fridays, 2h ahead of weekend.yml's target (10 min before the close).
-  "50 17,18 * * 5": { workflow: "weekend.yml", etHour: 13 },
+  "50 17,18 * * FRI": { workflow: "weekend.yml", etHour: 13, etDays: ["Fri"] },
 };
 
-function newYorkHour(ms: number): number {
-  const h = new Intl.DateTimeFormat("en-US", {
+// event.cron is the expression as configured; compare it the way Cloudflare
+// reads it, case-insensitively, so "fri" and "FRI" are the same job.
+const normalize = (cron: string) => cron.trim().replace(/\s+/g, " ").toUpperCase();
+const BY_CRON = new Map(Object.entries(JOBS).map(([cron, job]) => [normalize(cron), job]));
+
+function newYork(ms: number): { hour: number; weekday: string } {
+  const parts = new Intl.DateTimeFormat("en-US", {
     timeZone: "America/New_York",
     hour: "numeric",
     hourCycle: "h23",
-  }).format(new Date(ms));
-  return Number(h);
+    weekday: "short",
+  }).formatToParts(new Date(ms));
+  const get = (type: string) => parts.find((p) => p.type === type)?.value ?? "";
+  return { hour: Number(get("hour")), weekday: get("weekday") };
 }
 
 export default {
   async scheduled(event: ScheduledController, env: Env): Promise<void> {
-    const job = JOBS[event.cron];
+    const job = BY_CRON.get(normalize(event.cron));
     if (!job) throw new Error(`no workflow mapped for cron "${event.cron}"`);
 
-    const hour = newYorkHour(event.scheduledTime);
+    const { hour, weekday } = newYork(event.scheduledTime);
+    if (!job.etDays.includes(weekday)) {
+      console.log(`${job.workflow}: ${weekday} in New York is not a ${job.etDays.join("/")} run, skipping`);
+      return;
+    }
     if (hour !== job.etHour) {
       console.log(`${job.workflow}: ${hour}h ET is the other DST slot, skipping`);
       return;
