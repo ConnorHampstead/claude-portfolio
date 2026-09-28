@@ -1,13 +1,13 @@
 name: trading desk
+run-name: "${{ inputs.session || 'pre-market' }} session${{ (inputs.dry_run == true || inputs.dry_run == 'true') && ' (dry run)' || '' }}"
 
 on:
   # No `schedule` trigger. GitHub's cron fired 4-6 hours late on this repo, every
   # day, which put every scheduled run past the open. The clock now lives in
-  # dispatch/ - a Cloudflare Worker cron (primary: 08:55 ET pre-market, 09:55
-  # ET open) and a systemd timer (backup: 09:00 and 10:00 ET) - both of which
-  # call workflow_dispatch below with dry_run=false. Dispatch events start in
-  # seconds. The backup queues behind the concurrency group and exits on the
-  # already-ran check.
+  # dispatch/ - a Cloudflare Worker cron (08:55 ET pre-market, 09:55 ET open)
+  # that calls workflow_dispatch below with dry_run=false. Dispatch events
+  # start in seconds. A duplicate dispatch queues behind the concurrency group
+  # and exits on the already-ran check.
   #
   # Two sessions a day run through this one workflow: the pre-market brief
   # (09:05 ET) and the post-open review (10:05 ET), chosen by `session`.
@@ -57,11 +57,10 @@ jobs:
 
     steps:
       # ref is set explicitly on purpose. With no ref, checkout takes the SHA
-      # that *triggered* the workflow, frozen when the event is created. The
-      # backup dispatch queues behind the primary for ~80 min, so that stale
-      # tree would not contain the completion marker the primary pushed in the
-      # meantime, and the session would be submitted twice. Taking the branch
-      # tip closes that window.
+      # that *triggered* the workflow, frozen when the event is created. A
+      # duplicate dispatch queued behind a running session would get a tree
+      # without the completion marker that session pushed in the meantime,
+      # and submit twice. Taking the branch tip closes that window.
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           persist-credentials: false
@@ -130,8 +129,7 @@ jobs:
 
       # Lands the session at a consistent point relative to the market rather
       # than whenever the job happened to start. With the Cloudflare dispatch
-      # this is a 10 min wait, or 5 min if the systemd backup is the one doing
-      # it.
+      # this is a 10 min wait.
       #
       # 25 minutes before the open, not a fixed wall clock: the open is
       # 13:30 UTC in summer and 14:30 in winter, and is earlier still on

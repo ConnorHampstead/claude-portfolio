@@ -4,46 +4,49 @@ Triggers the GitHub Actions workflows on a clock that keeps time. GitHub's
 `schedule` event ran 4-6 hours late on this repo, every day; `workflow_dispatch`
 starts in seconds. So the clock lives here and GitHub only supplies the runner.
 
-| Trigger | Pre-market brief (`desk.yml`) | Post-open review (`desk.yml`, `session=open`) | Weekend (`weekend.yml`) |
-|---|---|---|---|
-| Cloudflare Worker cron (primary) | 08:55 ET, Mon-Fri | 09:55 ET, Mon-Fri | 13:50 ET, Fri |
-| systemd user timer (backup) | 09:00 ET, Mon-Fri | 10:00 ET, Mon-Fri | 14:50 ET, Fri |
+| Job | Workflow | Cloudflare cron |
+|---|---|---|
+| Pre-market brief | `desk.yml` | 08:55 ET, Mon-Fri |
+| Post-open review | `desk.yml`, `session=open` | 09:55 ET, Mon-Fri |
+| Weekend cleanup | `weekend.yml` | 13:50 ET, Fri |
 
 Each job has a target (pre-market: 25 min before the open, 09:05 ET; post-open:
 35 min after it, 10:05 ET; weekend: 10 min before the close) and holds its
-runner until then. The desk's primary
-dispatch now sits 10 min ahead of that target rather than 2h, and the backup
-5 min ahead of it rather than 1h. Both holds are short enough that a runner is
-never tied up for long, and the session still finishes before the bell.
+runner until then. The desk dispatches sit 10 min ahead of their targets, short
+enough that a runner is never tied up for long.
 
-Both call `workflow_dispatch` with `dry_run=false` (and `session` for the two
-desk jobs; the workflow defaults it to `pre-market`). Whichever lands second
-queues behind the `trading-desk` concurrency group and exits on the workflow's
-already-ran check, which is per session. It waits in the queue without holding a runner, so a
-duplicate costs a few seconds of runner time.
+Each call passes `dry_run=false`, and `session` for the two desk jobs (the
+workflow defaults it to `pre-market`). A duplicate dispatch - a manual one on
+top of the scheduled one - queues behind the `trading-desk` concurrency group
+and exits on the workflow's already-ran check, which is per session.
 
-The workflows' `dry_run` input defaults to `true`, so anything else that
+There is no second trigger. A systemd timer on a desktop served as a backup
+until 2026-09-28; it was removed because a machine that was off caught up on
+waking, once per timer, and a weekend cleanup that catches up midweek cancels
+every resting entry. If a Cloudflare dispatch fails, that session is missed -
+re-run it by hand from the Actions tab if it is still inside its window.
+
+The workflows' `dry_run` input defaults to `true`, so anything that
 dispatches them must pass `dry_run=false` explicitly or it will never trade.
 
 Passing it is not enough on its own. A `type: boolean` input arrives as a real
 boolean from the Actions tab, but as the **string** `"false"` from the dispatch
-API - which is what both triggers here use, and what `gh workflow run -f` sends.
+API - which is what the Worker uses, and what `gh workflow run -f` sends.
 A bare `${{ inputs.dry_run }}` is truthy for that string, so every dispatched
 run came out a dry run while manual ones traded. The workflows compare against
 both forms; do not simplify that expression.
 
-## Tokens
+## Token
 
-Create **two** fine-grained PATs (GitHub → Settings → Developer settings →
-Fine-grained tokens), one per trigger, so one expiring or leaking does not take
-out both:
+The Worker needs one fine-grained PAT (GitHub → Settings → Developer settings →
+Fine-grained tokens):
 
 - Repository access: only `claude-portfolio`
 - Permissions: **Actions: Read and write**
 - Set an expiry and a calendar reminder a week before it.
 
-Anyone holding either token can start a live session. The already-ran marker
-and the pre-market guard cap that at one session per day inside the window.
+Anyone holding it can start a live session. The already-ran marker and the
+session windows cap that at one of each session per day.
 
 ## Cloudflare Worker
 
@@ -62,7 +65,7 @@ a numeric weekday.
 cd dispatch
 npm install
 npx wrangler login
-npx wrangler secret put GH_TOKEN     # first PAT
+npx wrangler secret put GH_TOKEN
 npx wrangler deploy
 ```
 
@@ -81,29 +84,3 @@ curl "http://localhost:8787/cdn-cgi/handler/scheduled?cron=55+12,13+*+*+MON-FRI&
 
 After it runs for real, check Worker → Observability → Logs for
 `dispatched desk.yml`. A 401 means the token expired.
-
-## systemd backup
-
-```sh
-mkdir -p ~/.config/daytrade ~/.config/systemd/user
-printf 'GH_TOKEN=%s\n' 'github_pat_...' > ~/.config/daytrade/dispatch.env   # second PAT
-chmod 600 ~/.config/daytrade/dispatch.env
-cp systemd/* ~/.config/systemd/user/
-loginctl enable-linger "$USER"      # fire even when logged out
-systemctl --user daemon-reload
-systemctl --user enable --now daytrade-desk.timer daytrade-desk-open.timer daytrade-weekend.timer
-systemctl --user list-timers 'daytrade-*'
-```
-
-`systemctl --user start daytrade-dispatch@desk.service` (or
-`daytrade-dispatch-open.service`) sends a **live** dispatch. To test the token without trading:
-
-```sh
-env $(cat ~/.config/daytrade/dispatch.env) \
-  gh workflow run desk.yml --repo ConnorHampstead/claude-portfolio -f dry_run=true
-```
-
-Firing history: `journalctl --user -u 'daytrade-dispatch*'`.
-
-A user timer does not wake a suspended machine. `Persistent=true` fires on
-resume instead; if that is after the window, the workflow's guard stands down.

@@ -1,4 +1,5 @@
 name: weekend cleanup
+run-name: "weekend cleanup${{ (inputs.dry_run == true || inputs.dry_run == 'true') && ' (dry run)' || '' }}"
 
 # Cancels every unfilled entry order before the weekend.
 #
@@ -14,8 +15,8 @@ name: weekend cleanup
 on:
   # No `schedule` trigger - GitHub's cron fired hours late, after the close.
   # dispatch/ calls workflow_dispatch with dry_run=false instead: a Cloudflare
-  # Worker cron at 13:50 ET Friday (primary) and a systemd timer at 14:50 ET
-  # (backup, exits on the already-ran check below).
+  # Worker cron at 13:50 ET Friday. A duplicate dispatch exits on the
+  # already-ran check below.
   workflow_dispatch:
     inputs:
       dry_run:

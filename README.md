@@ -337,11 +337,11 @@ late every day, which put every scheduled session past the open. The workflows
 are started by `workflow_dispatch` from [`dispatch/`](dispatch/README.md)
 instead, which begins within seconds:
 
-- **Cloudflare Worker cron** (primary): the pre-market brief at 08:55 ET and the
-  post-open review at 09:55 ET weekdays, weekend cleanup at 13:50 ET Fridays -
-  10 min, 10 min and 2h ahead of each job's target.
-- **systemd user timer** (backup): 09:00, 10:00 and 14:50 ET - 5 min, 5 min and
-  1h ahead.
+a **Cloudflare Worker cron**: the pre-market brief at 08:55 ET and the post-open
+review at 09:55 ET on weekdays, and the weekend cleanup at 13:50 ET on Fridays -
+10 min, 10 min and 2h ahead of each job's target. There is no backup trigger;
+a failed dispatch is a missed session unless you re-run it by hand inside its
+window. In the Actions tab each run is titled with its session.
 
 Both desk sessions run `desk.yml`, told apart by its `session` input. The
 pre-market brief holds until 25 minutes before the open, derived from Alpaca's
@@ -367,7 +367,7 @@ concurrency group and exit on `briefs/<date>.submit.txt` (or
 real submit. Dry runs don't create it. To force a re-run, delete that file.
 
 `workflow_dispatch` also lets you trigger a run by hand from the Actions tab
-(dry run by default). **Do that first**, before trusting the dispatchers - it's
+(dry run by default). **Do that first**, before trusting the dispatcher - it's
 the fastest way to find a missing secret.
 
 ### What each run commits
@@ -551,3 +551,10 @@ where the calendar guard stood it down), and the weekend cleanup ran on
 2026-09-24 instead, cancelling AAPL's resting 346 breakout entry a day early.
 The crons now name their days. Every Friday since the move to Cloudflare
 (2026-09-19) was affected; 2026-09-25 was the first.
+
+**2026-09-28 - systemd backup trigger removed**
+
+Cloudflare is the only dispatcher. The systemd timers on the operator's
+desktop caught up on waking - once per timer, not once per missed day - and a
+weekend-cleanup catch-up landing midweek would cancel every resting entry.
+Desk runs in the Actions tab are now titled by session.

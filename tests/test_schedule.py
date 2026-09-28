@@ -1,6 +1,5 @@
 """Session timing: calendar guards, the wait, and DST."""
 
-import re
 import tomllib
 import unittest
 from datetime import datetime, timezone
@@ -82,12 +81,6 @@ class DispatchSchedule(unittest.TestCase):
         self.assertIn("55 12,13 * * MON-FRI", self.crons)
         self.assertIn("55 13,14 * * MON-FRI", self.crons)
         self.assertIn("50 17,18 * * FRI", self.crons)
-
-    def test_systemd_backups_name_their_days(self):
-        for timer in (REPO / "dispatch/systemd").glob("*.timer"):
-            with self.subTest(timer.name):
-                cal = re.search(r"^OnCalendar=(\S+)", timer.read_text(), re.M).group(1)
-                self.assertRegex(cal, r"^(Mon\.\.Fri|Fri)$")
 
 
 if __name__ == "__main__":
