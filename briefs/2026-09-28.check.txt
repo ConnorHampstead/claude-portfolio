@@ -1,0 +1,39 @@
+
+====================================================================
+  SESSION 2026-09-28   equity $101,367.09   day P&L +0.05%
+====================================================================
+
+  [OK] HD SHORT
+      entry 289.40 (stop)  stop 297.60  target 278.00  [1.39R]
+      qty 61  notional $17,653  risk $500.20 (0.49% of equity, tier 0.5%)
+      P(target first) 40%   conviction 3
+
+  [OK] ORCL SHORT
+      entry 130.90 (stop)  stop 138.60  target 119.00  [1.55R]
+      qty 65  notional $8,508  risk $500.50 (0.49% of equity, tier 0.5%)
+      P(target first) 38%   conviction 3
+
+  [OK] NVDA LONG
+      entry 234.70 (stop)  stop 227.40  target 246.00  [1.55R]
+      qty 69  notional $16,194  risk $503.70 (0.50% of equity, tier 0.5%)
+      P(target first) 40%   conviction 3
+
+  ----------------------------------------------------------------
+  BOOK-LEVEL ADMISSION   highest conviction first
+      book now: 1 positions/resting entries, gross 15%, net -15%, risk at stake 0.50%
+      + HD     admitted  -> gross 32%, net -32%, risk 0.99%
+      + ORCL   admitted  -> gross 41%, net -41%, risk 1.49%
+      + NVDA   admitted  -> gross 57%, net -25%, risk 1.98%
+
+  ----------------------------------------------------------------
+  PASSED IDEAS   logged to the shadow book and scored later, no orders
+      . CRM    short stop 221.50  stop 232.00  target 205.00  P 38%
+      . UAL    short limit 114.00  stop 118.50  target 106.00  P 36%
+      . XOM    long  limit 161.00  stop 156.50  target 169.00  P 38%
+
+  ----------------------------------------------------------------
+  3 approved, 0 rejected.  Total new risk $1,504.40 (1.48% of equity)
+  3 idea(s) for the shadow book.
+
+  Validation only - `check` never sends. `submit --confirm` sends these.
+
