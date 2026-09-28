@@ -1,0 +1,22 @@
+
+====================================================================
+  SESSION 2026-09-28   equity $101,244.47   day P&L -0.07%
+====================================================================
+
+  [OK] BA SHORT
+      entry 187.30 (stop)  stop 194.90  target 176.00  [1.49R]
+      qty 33  notional $6,181  risk $250.80 (0.25% of equity, tier 0.25%)
+      P(target first) 35%   conviction 2
+
+  ----------------------------------------------------------------
+  BOOK-LEVEL ADMISSION   highest conviction first
+      book now: 4 positions/resting entries, gross 57%, net -25%, risk at stake 1.99%
+      + BA     admitted  -> gross 63%, net -31%, risk 2.24%
+
+  ----------------------------------------------------------------
+  1 approved, 0 rejected.  Total new risk $250.80 (0.25% of equity)
+
+  > BA short x33 submitted [pending_new]  id=c15944ca
+
+  Logged to journal.csv
+
