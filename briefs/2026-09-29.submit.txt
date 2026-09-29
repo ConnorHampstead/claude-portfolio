@@ -1,0 +1,39 @@
+
+====================================================================
+  SESSION 2026-09-29   equity $101,547.63   day P&L -0.15%
+====================================================================
+
+  [OK] DAL LONG
+      entry 85.80 (stop)  stop 82.40  target 90.50  [1.38R]
+      qty 149  notional $12,784  risk $506.60 (0.50% of equity, tier 0.5%)
+      P(target first) 42%   conviction 3
+
+  [OK] XLU SHORT
+      entry 38.95 (stop)  stop 40.15  target 37.55  [1.17R]
+      qty 423  notional $16,476  risk $507.60 (0.50% of equity, tier 0.5%)
+      P(target first) 45%   conviction 3
+
+  ----------------------------------------------------------------
+  BOOK-LEVEL ADMISSION   highest conviction first
+      book now: 5 positions/resting entries, gross 62%, net -31%, risk at stake 2.23%
+      + DAL    admitted  -> gross 75%, net -18%, risk 2.73%
+      + XLU    admitted  -> gross 91%, net -34%, risk 3.23%
+
+  ----------------------------------------------------------------
+  PASSED IDEAS   logged to the shadow book and scored later, no orders
+      . AMD    long  stop 640.00  stop 612.00  target 680.00  P 40%
+      . SMH    long  stop 610.50  stop 592.00  target 640.00  P 45%
+      . CVX    short stop 200.50  stop 207.50  target 190.00  P 38%
+
+  ----------------------------------------------------------------
+  2 approved, 0 rejected.  Total new risk $1,014.20 (1.00% of equity)
+  3 idea(s) for the shadow book.
+
+  ! Market is closed. Next open: 2026-09-29T09:30:00-04:00
+    Orders will queue. Market orders will fill at the next open.
+
+  > DAL long x149 submitted [pending_new]  id=d54c6d88
+  > XLU short x423 submitted [pending_new]  id=9c72a4a6
+
+  Logged to journal.csv
+

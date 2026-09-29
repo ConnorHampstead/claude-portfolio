@@ -1,5 +1,7 @@
 
-  1 resting exit order(s) left alone (protecting an open position):
+  3 resting exit order(s) left alone (protecting an open position):
+    BA     buy   x33     bracket @176
+    HD     buy   x61     bracket @278
     BAC    buy   x267    bracket @52.9
 
   No unfilled entry orders older than 5d.

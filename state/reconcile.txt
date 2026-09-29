@@ -1,3 +1,2 @@
-  AAPL   never filled (canceled)
 
-  0 trade(s) closed out, 1 never filled.
+  0 trade(s) closed out.
