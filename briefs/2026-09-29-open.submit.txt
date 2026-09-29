@@ -1,0 +1,3 @@
+
+2026-09-29: no trades proposed.
+  Post-open: data prints unverified but TLT at new 20d low (yields up), index bounce faded, semis lead. No morning cancel/act conditions triggered; all positions and resting stops kept. Would add only on a verified catalyst with a stop >=1 ATR within the remaining 0.77% risk and one slot.

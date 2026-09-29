@@ -6,7 +6,7 @@
 
 | | Desk | SPY buy & hold |
 |---|---|---|
-| Return | +1.70% | +0.28% |
+| Return | +1.70% | -0.54% |
 | Max drawdown | -1.57% | -3.06% |
 | Avg. gross exposure | 18% | 100% |
 
