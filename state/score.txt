@@ -1,19 +1,19 @@
 
-  Entry fill rate  80%  (4 filled / 5 proposed, 1 never reached)
+  Entry fill rate  83%  (5 filled / 6 proposed, 1 never reached)
 
 ====================================================================
-  PERFORMANCE   4 closed trades
+  PERFORMANCE   5 closed trades
 ====================================================================
-  Net P&L         $+1,558.24
-  Win rate        50.0%  (2W / 2L)
+  Net P&L         $+1,428.39
+  Win rate        40.0%  (2W / 3L)
   Avg win         +1.38R
-  Avg loss        -1.09R
-  Expectancy      +0.14R per trade
-  Total R         +0.57R
+  Avg loss        -0.90R
+  Expectancy      +0.01R per trade
+  Total R         +0.05R
   Best / worst    +1.76R / -1.18R
   Max drawdown    -2.19R
 
-  1 closed trade(s) left out of calibration: their levels were moved
+  2 closed trade(s) left out of calibration: their levels were moved
   or they were closed by hand, so the fills do not show whether the
   initial target or the initial stop came first.
 

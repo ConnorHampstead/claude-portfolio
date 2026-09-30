@@ -1,0 +1,22 @@
+
+====================================================================
+  SESSION 2026-09-30   equity $101,761.33   day P&L -0.08%
+====================================================================
+
+  [OK] UNH SHORT
+      entry 363.50 (stop)  stop 375.50  target 345.00  [1.54R]
+      qty 21  notional $7,634  risk $252.00 (0.25% of equity, tier 0.25%)
+      P(target first) 36%   conviction 2
+
+  ----------------------------------------------------------------
+  BOOK-LEVEL ADMISSION   highest conviction first
+      book now: 7 positions/resting entries, gross 100%, net -13%, risk at stake 3.47%
+      + UNH    admitted  -> gross 107%, net -20%, risk 3.72%
+
+  ----------------------------------------------------------------
+  1 approved, 0 rejected.  Total new risk $252.00 (0.25% of equity)
+
+  > UNH short x21 submitted [pending_new]  id=2c8ca9d1
+
+  Logged to journal.csv
+

@@ -1,2 +1,5 @@
+  closed BA     close   -0.52R  $-129.85  (levels were moved - not scored for calibration)
 
-  0 trade(s) closed out.
+  1 trade(s) closed out.
+  Fill in `thesis_verdict` by hand: right/wrong thesis vs right/wrong outcome.
+
