@@ -1,0 +1,34 @@
+
+====================================================================
+  SESSION 2026-09-30   equity $101,540.88   day P&L -0.30%
+====================================================================
+
+  POSITION MANAGEMENT
+
+  [OK] BA CLOSE x33
+      Thesis invalidated: Pentagon awarded Boeing the $20B+ F/A-XX fighter over NOC; BA +2.5% pre-market near stop. Thesis exit, not stop-out.
+
+  ----------------------------------------------------------------
+
+  [OK] CAT LONG
+      entry 840.00 (stop)  stop 812.00  target 885.00  [1.61R]
+      qty 18  notional $15,120  risk $504.00 (0.50% of equity, tier 0.5%)
+      P(target first) 40%   conviction 3
+
+  ----------------------------------------------------------------
+  BOOK-LEVEL ADMISSION   highest conviction first
+      book now: 7 positions/resting entries, gross 91%, net -34%, risk at stake 3.23%
+      + CAT    admitted  -> gross 106%, net -19%, risk 3.73%
+
+  ----------------------------------------------------------------
+  PASSED IDEAS   logged to the shadow book and scored later, no orders
+      . TSLA   short stop 347.50  stop 362.00  target 325.00  P 38%
+      . XHB    long  stop 99.50  stop 95.80  target 104.50  P 35%
+
+  ----------------------------------------------------------------
+  1 approved, 0 rejected.  Total new risk $504.00 (0.50% of equity)
+  1 position update(s) pending.
+  2 idea(s) for the shadow book.
+
+  Validation only - `check` never sends. `submit --confirm` sends these.
+
