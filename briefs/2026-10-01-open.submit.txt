@@ -1,0 +1,48 @@
+
+====================================================================
+  SESSION 2026-10-01   equity $102,895.02   day P&L +0.79%
+====================================================================
+
+  POSITION MANAGEMENT
+
+  [REJECTED] BAC
+      x no open BAC position and no resting entry order to manage - use 'plays' to open one
+
+  [OK] CAT CLOSE x18
+      Failed the morning's 'hold above 815' test (now 805.52), ISM unverified, trigger 4.3% away before Friday clear; frees slot and ~0.49% risk.
+      ! CAT entry is still resting unfilled at 840.00 - cancelling it
+
+  ----------------------------------------------------------------
+
+  [OK] XLRE SHORT
+      entry 40.47 (market)  stop 41.15  target 39.40  [1.55R]
+      qty 751  notional $30,389  risk $514.43 (0.50% of equity, tier 0.5%)
+      P(target first) 40%   conviction 3
+
+  [OK] MSFT LONG
+      entry 523.00 (stop)  stop 509.00  target 547.00  [1.71R]
+      qty 18  notional $9,414  risk $252.00 (0.24% of equity, tier 0.25%)
+      P(target first) 38%   conviction 2
+
+  ----------------------------------------------------------------
+  BOOK-LEVEL ADMISSION   highest conviction first
+      book now: 5 positions/resting entries, gross 66%, net +19%, risk at stake 2.21%
+      + XLRE   admitted  -> gross 96%, net -10%, risk 2.71%
+      + MSFT   admitted  -> gross 105%, net -1%, risk 2.95%
+
+  ----------------------------------------------------------------
+  PASSED IDEAS   logged to the shadow book and scored later, no orders
+      . KRE    short market 68.09  stop 69.40  target 66.00  P 40%
+      . CAT    long  stop 840.00  stop 812.00  target 885.00  P 30%
+
+  ----------------------------------------------------------------
+  2 approved, 0 rejected.  Total new risk $766.43 (0.74% of equity)
+  1 position update(s) pending.
+  2 idea(s) for the shadow book.
+
+  ~ CAT resting entry cancelled x18
+  > XLRE short x751 submitted [pending_new]  id=7ff4dabc
+  > MSFT long x18 submitted [pending_new]  id=a800592e
+
+  Logged to journal.csv
+

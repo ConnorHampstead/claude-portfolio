@@ -1,5 +1,6 @@
-  closed BA     close   -0.52R  $-129.85  (levels were moved - not scored for calibration)
+  closed HD     target  +1.36R  $+690.52
+  ORCL   never filled (canceled)
 
-  1 trade(s) closed out.
+  1 trade(s) closed out, 1 never filled.
   Fill in `thesis_verdict` by hand: right/wrong thesis vs right/wrong outcome.
 
