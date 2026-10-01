@@ -1,6 +1,5 @@
 
-  3 resting exit order(s) left alone (protecting an open position):
-    BA     buy   x33     bracket @176
+  2 resting exit order(s) left alone (protecting an open position):
     HD     buy   x61     bracket @278
     BAC    buy   x267    bracket @52.9
 

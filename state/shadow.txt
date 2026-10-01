@@ -1,2 +1,3 @@
+  CRM    short stop         -1.00R  (passed 2026-09-28)
 
-  0 idea(s) resolved, 9 still pending.
+  1 idea(s) resolved, 10 still pending.
