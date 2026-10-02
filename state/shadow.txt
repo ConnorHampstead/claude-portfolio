@@ -1,3 +1,5 @@
-  CRM    short stop         -1.00R  (passed 2026-09-28)
+  KRE    short stop         -0.99R  (passed 2026-10-01)
+  SMH    long  target       +1.67R  (passed 2026-09-23)
+  BAC    short target       +1.67R  (not placed 2026-09-23)
 
-  1 idea(s) resolved, 10 still pending.
+  3 idea(s) resolved, 12 still pending.

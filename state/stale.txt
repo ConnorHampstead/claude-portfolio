@@ -1,7 +1,7 @@
 
   2 resting exit order(s) left alone (protecting an open position):
-    HD     buy   x61     bracket @278
-    BAC    buy   x267    bracket @52.9
+    XLRE   buy   x751    bracket @39.4
+    UNH    buy   x21     bracket @345
 
   No unfilled entry orders older than 5d.
 

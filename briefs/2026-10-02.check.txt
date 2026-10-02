@@ -1,0 +1,40 @@
+
+====================================================================
+  SESSION 2026-10-02   equity $102,430.91   day P&L -0.25%
+====================================================================
+
+  POSITION MANAGEMENT
+
+  [OK] XLU CLOSE x423
+      Rising-rates short contradicted by 15bp yield drop on weak payrolls; trigger 2.5% away and order would be weekend-cleared anyway. Frees risk and a slot.
+      ! XLU entry is still resting unfilled at 38.95 - cancelling it
+
+  ----------------------------------------------------------------
+
+  [OK] IWM LONG
+      entry 281.50 (limit)  stop 276.90  target 289.50  [1.74R]
+      qty 111  notional $31,246  risk $510.60 (0.50% of equity, tier 0.5%)
+      P(target first) 40%   conviction 3
+
+  [OK] XLE SHORT
+      entry 60.85 (stop)  stop 62.60  target 58.30  [1.46R]
+      qty 146  notional $8,884  risk $255.50 (0.25% of equity, tier 0.25%)
+      P(target first) 33%   conviction 2
+
+  ----------------------------------------------------------------
+  BOOK-LEVEL ADMISSION   highest conviction first
+      book now: 6 positions/resting entries, gross 91%, net -16%, risk at stake 2.48%
+      + IWM    admitted  -> gross 122%, net +14%, risk 2.98%
+      + XLE    admitted  -> gross 130%, net +6%, risk 3.23%
+
+  ----------------------------------------------------------------
+  PASSED IDEAS   logged to the shadow book and scored later, no orders
+      . XHB    long  limit 97.80  stop 95.40  target 101.80  P 38%
+
+  ----------------------------------------------------------------
+  2 approved, 0 rejected.  Total new risk $766.10 (0.75% of equity)
+  1 position update(s) pending.
+  1 idea(s) for the shadow book.
+
+  Validation only - `check` never sends. `submit --confirm` sends these.
+
