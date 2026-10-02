@@ -1,2 +1,4 @@
+  KRE    short stop         -1.00R  (passed 2026-10-01)
+  TSLA   short stop         -1.00R  (passed 2026-09-30)
 
-  0 idea(s) resolved, 13 still pending.
+  2 idea(s) resolved, 11 still pending.

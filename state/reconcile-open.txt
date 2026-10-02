@@ -1,5 +1,5 @@
-  closed HD     target  +1.36R  $+690.52
-  ORCL   never filled (canceled)
+  XLU    never filled (canceled)
+  closed XLRE   stop    -1.01R  $-528.56
 
   1 trade(s) closed out, 1 never filled.
   Fill in `thesis_verdict` by hand: right/wrong thesis vs right/wrong outcome.

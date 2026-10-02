@@ -1,0 +1,38 @@
+
+====================================================================
+  SESSION 2026-10-02   equity $102,064.73   day P&L -0.61%
+====================================================================
+
+  POSITION MANAGEMENT
+
+  [OK] DAL CLOSE x149
+      Breakout failed: filled 86.06, now 84.14, below the 85.00 failure line set in the morning plan, despite oil -4.4%.
+
+  ----------------------------------------------------------------
+
+  [OK] NKE SHORT
+      entry 34.90 (stop)  stop 36.40  target 32.60  [1.53R]
+      qty 170  notional $5,933  risk $255.00 (0.25% of equity, tier 0.25%)
+      P(target first) 35%   conviction 2
+      ! entry 34.9 is 5.1% from last price 33.20
+      ! stop entry 34.9 is already above the last price 33.20 - the broker refuses a crossed trigger, so unless price moves back it will be logged as not placed
+
+  ----------------------------------------------------------------
+  BOOK-LEVEL ADMISSION   highest conviction first
+      book now: 6 positions/resting entries, gross 84%, net +52%, risk at stake 2.39%
+      + NKE    admitted  -> gross 90%, net +46%, risk 2.64%
+
+  ----------------------------------------------------------------
+  PASSED IDEAS   logged to the shadow book and scored later, no orders
+      . XHB    long  limit 97.80  stop 95.40  target 101.80  P 38%
+
+  ----------------------------------------------------------------
+  1 approved, 0 rejected.  Total new risk $255.00 (0.25% of equity)
+  1 position update(s) pending.
+  1 idea(s) for the shadow book.
+
+  ~ DAL close order sent x149 [pending_new]
+  - NKE stop entry 34.90 not placed: the market (33.21) had already crossed the trigger
+
+  Logged to journal.csv
+
