@@ -8,7 +8,7 @@
 |---|---|---|
 | Return | +1.73% | +0.06% |
 | Max drawdown | -1.57% | -3.06% |
-| Avg. gross exposure | 21% | 100% |
+| Avg. gross exposure | 22% | 100% |
 
 *44 sessions, 9 closed trades, updated 2026-10-03.*
 

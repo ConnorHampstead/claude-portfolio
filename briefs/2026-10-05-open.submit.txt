@@ -1,0 +1,16 @@
+
+====================================================================
+  SESSION 2026-10-05   equity $101,868.96   day P&L +0.14%
+====================================================================
+
+  ----------------------------------------------------------------
+  PASSED IDEAS   logged to the shadow book and scored later, no orders
+      . GS     short stop 879.50  stop 906.00  target 840.00  P 35%
+
+  ----------------------------------------------------------------
+  No new positions today.
+  1 idea(s) for the shadow book.
+
+
+  Logged to journal.csv
+

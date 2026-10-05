@@ -30,33 +30,33 @@
   Note: thesis_verdict column is empty. Fill it in to separate skill from luck.
 
 ====================================================================
-  SHADOW BOOK   20 ideas passed on or dropped, 6 resolved
+  SHADOW BOOK   21 ideas passed on or dropped, 8 resolved
 ====================================================================
   Never filled    0
   Target first    2
-  Stop first      4
+  Stop first      6
   Expired         0   (neither level inside the window)
   Ambiguous       0   (both in one bar - not scored)
-  Avg R if taken  -0.11R over 6 filled ideas   (trades actually taken: +0.15R)
+  Avg R if taken  -0.33R over 8 filled ideas   (trades actually taken: +0.15R)
   A shadow book that out-earns the trades taken says the filter is rejecting
   the better ideas.
 
   ----------------------------------------------------------------
-  CALIBRATION   6 passed ideas with a stated probability
+  CALIBRATION   8 passed ideas with a stated probability
   ----------------------------------------------------------------
   stated           n   mean said    actual
-  0%-50%          6        39%       33%
+  0%-50%          8        39%       25%
 
-  Brier score     0.226   (0 = perfect, 0.25 = coin flip, lower is better)
-  ! Only 6 samples - treat this as directional, not conclusive.
+  Brier score     0.205   (0 = perfect, 0.25 = coin flip, lower is better)
+  ! Only 8 samples - treat this as directional, not conclusive.
 
   ----------------------------------------------------------------
-  CALIBRATION   12 trades and passed ideas together with a stated probability
+  CALIBRATION   14 trades and passed ideas together with a stated probability
   ----------------------------------------------------------------
   stated           n   mean said    actual
-  0%-50%         11        40%       36%
+  0%-50%         13        40%       31%
   50%-60%          1        52%      100%
 
-  Brier score     0.245   (0 = perfect, 0.25 = coin flip, lower is better)
-  ! Only 12 samples - treat this as directional, not conclusive.
+  Brier score     0.230   (0 = perfect, 0.25 = coin flip, lower is better)
+  ! Only 14 samples - treat this as directional, not conclusive.
 

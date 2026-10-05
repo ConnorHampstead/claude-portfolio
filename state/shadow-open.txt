@@ -1,4 +1,4 @@
-  KRE    short stop         -1.00R  (passed 2026-10-01)
-  TSLA   short stop         -1.00R  (passed 2026-09-30)
+  XHB    long  stop         -1.00R  (passed 2026-10-02)
+  XHB    long  stop         -0.98R  (passed 2026-10-02)
 
-  2 idea(s) resolved, 11 still pending.
+  2 idea(s) resolved, 12 still pending.
