@@ -1,6 +1,7 @@
 
-  2 resting exit order(s) left alone (protecting an open position):
-    XLRE   buy   x751    bracket @39.4
+  3 resting exit order(s) left alone (protecting an open position):
+    IWM    sell  x111    bracket @289.5
+    NVDA   sell  x69     bracket @246
     UNH    buy   x21     bracket @345
 
   No unfilled entry orders older than 5d.

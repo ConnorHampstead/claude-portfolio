@@ -1,6 +1,2 @@
-  closed BAC    target  +1.53R  $+774.30
-  CAT    never filled (canceled)
 
-  1 trade(s) closed out, 1 never filled.
-  Fill in `thesis_verdict` by hand: right/wrong thesis vs right/wrong outcome.
-
+  0 trade(s) closed out.

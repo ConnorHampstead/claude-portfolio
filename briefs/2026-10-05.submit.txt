@@ -1,0 +1,44 @@
+
+====================================================================
+  SESSION 2026-10-05   equity $101,839.33   day P&L +0.11%
+====================================================================
+
+  [OK] MSFT LONG
+      entry 524.00 (stop)  stop 510.00  target 548.00  [1.71R]
+      qty 36  notional $18,864  risk $504.00 (0.49% of equity, tier 0.5%)
+      P(target first) 38%   conviction 3
+
+  [OK] JNJ SHORT
+      entry 254.80 (stop)  stop 259.90  target 247.10  [1.51R]
+      qty 99  notional $25,225  risk $504.90 (0.50% of equity, tier 0.5%)
+      P(target first) 38%   conviction 3
+
+  [OK] WMT SHORT
+      entry 103.40 (stop)  stop 105.60  target 100.10  [1.50R]
+      qty 115  notional $11,891  risk $253.00 (0.25% of equity, tier 0.25%)
+      P(target first) 34%   conviction 2
+
+  ----------------------------------------------------------------
+  BOOK-LEVEL ADMISSION   highest conviction first
+      book now: 3 positions/resting entries, gross 54%, net +39%, risk at stake 1.36%
+      + MSFT   admitted  -> gross 73%, net +57%, risk 1.85%
+      + JNJ    admitted  -> gross 98%, net +33%, risk 2.35%
+      + WMT    admitted  -> gross 109%, net +21%, risk 2.60%
+
+  ----------------------------------------------------------------
+  PASSED IDEAS   logged to the shadow book and scored later, no orders
+      . NFLX   short stop 66.50  stop 69.00  target 62.80  P 33%
+
+  ----------------------------------------------------------------
+  3 approved, 0 rejected.  Total new risk $1,261.90 (1.24% of equity)
+  1 idea(s) for the shadow book.
+
+  ! Market is closed. Next open: 2026-10-05T09:30:00-04:00
+    Orders will queue. Market orders will fill at the next open.
+
+  > MSFT long x36 submitted [pending_new]  id=15520b5b
+  > JNJ short x99 submitted [pending_new]  id=5f7414f1
+  > WMT short x115 submitted [pending_new]  id=84f4ca1f
+
+  Logged to journal.csv
+
