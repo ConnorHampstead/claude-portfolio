@@ -10,7 +10,7 @@ compatibility_date = "2026-09-01"
 # Weekdays by name only. Cloudflare numbers them 1 = Sunday .. 7 = Saturday,
 # unlike standard cron, so "1-5" is Sunday-Thursday - which is how the Friday
 # session went missing and the Friday cleanup ran on Thursday (2026-09-24/25).
-crons = ["55 12,13 * * MON-FRI", "55 13,14 * * MON-FRI", "50 17,18 * * FRI"]
+crons = ["55 12,13 * * MON-FRI", "55 13,14 * * MON-FRI", "40 19,20 * * FRI"]
 
 [observability]
 enabled = true

@@ -338,8 +338,8 @@ are started by `workflow_dispatch` from [`dispatch/`](dispatch/README.md)
 instead, which begins within seconds:
 
 a **Cloudflare Worker cron**: the pre-market brief at 08:55 ET and the post-open
-review at 09:55 ET on weekdays, and the weekend cleanup at 13:50 ET on Fridays -
-10 min, 10 min and 2h ahead of each job's target. There is no backup trigger;
+review at 09:55 ET on weekdays, and the weekend cleanup at 15:40 ET on Fridays -
+each 10 min ahead of its job's target. There is no backup trigger;
 a failed dispatch is a missed session unless you re-run it by hand inside its
 window. In the Actions tab each run is titled with its session.
 
@@ -442,9 +442,10 @@ P&L does.
 
 ## 10. Weekend cleanup (`.github/workflows/weekend.yml`)
 
-A second workflow runs Fridays at 19:00 UTC — an hour before the US close in
-summer, two in winter — and cancels **every** unfilled entry order, regardless of
-age.
+A second workflow runs Fridays 10 minutes before the US close (15:50 ET) and
+cancels **every** unfilled entry order, regardless of age. On the half-day after
+Thanksgiving it runs after the 13:00 ET close instead, which still clears the
+book before Monday.
 
 This is a deliberately different policy from the daily session, which only
 cancels entries older than the 5-day holding horizon. The weekend case is

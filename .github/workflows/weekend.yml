@@ -15,7 +15,7 @@ run-name: "weekend cleanup${{ (inputs.dry_run == true || inputs.dry_run == 'true
 on:
   # No `schedule` trigger - GitHub's cron fired hours late, after the close.
   # dispatch/ calls workflow_dispatch with dry_run=false instead: a Cloudflare
-  # Worker cron at 13:50 ET Friday. A duplicate dispatch exits on the
+  # Worker cron at 15:40 ET Friday. A duplicate dispatch exits on the
   # already-ran check below.
   workflow_dispatch:
     inputs:
@@ -34,8 +34,8 @@ permissions:
 jobs:
   cleanup:
     runs-on: ubuntu-latest
-    # Must cover the hold plus the cleanup. The 13:50 ET dispatch holds 2h.
-    timeout-minutes: 150
+    # Must cover the hold plus the cleanup. The 15:40 ET dispatch holds 10 min.
+    timeout-minutes: 30
 
     # Secrets are scoped per step, not set here, so the install steps and
     # third-party actions never see them.
@@ -95,7 +95,10 @@ jobs:
       # twice a year: the close is 20:00 UTC in summer and 21:00 in winter,
       # and on the half-day session after Thanksgiving - always a Friday, so
       # always this workflow - it is 18:00 UTC. A fixed target would sleep
-      # straight past that early close.
+      # straight past that early close. The 15:40 ET dispatch arrives after
+      # that close, so the wait is a no-op and the cancellations land after
+      # the bell instead - still well before Monday's open, which is what
+      # matters.
       - name: Hold open until 10 min before the close
         if: steps.guard.outputs.trading == 'true'
         env:
