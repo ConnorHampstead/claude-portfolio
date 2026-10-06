@@ -1,4 +1,2 @@
-  XHB    long  stop         -1.00R  (passed 2026-10-02)
-  XHB    long  stop         -0.98R  (passed 2026-10-02)
 
-  2 idea(s) resolved, 12 still pending.
+  0 idea(s) resolved, 15 still pending.

@@ -1,0 +1,25 @@
+
+====================================================================
+  SESSION 2026-10-06   equity $102,672.60   day P&L +0.59%
+====================================================================
+
+  POSITION MANAGEMENT
+
+  [OK] CAT UPDATE x10 (long, avg 861.00)
+      stop   836.00 -> 849.00
+      risk-at-stake $120.00 (0.12% of equity)
+      Breakout through 858.87 confirmed (high 875.90); stop raised under today's 851.47 low and the 850 invalidation level, halving risk.
+
+  ----------------------------------------------------------------
+
+  ----------------------------------------------------------------
+  PASSED IDEAS   logged to the shadow book and scored later, no orders
+      . AVGO   long  limit 370.00  stop 360.00  target 390.00  P 40%
+
+  ----------------------------------------------------------------
+  No new positions today.
+  1 position update(s) pending.
+  1 idea(s) for the shadow book.
+
+  Validation only - `check` never sends. `submit --confirm` sends these.
+
