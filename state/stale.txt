@@ -1,8 +1,10 @@
 
-  3 resting exit order(s) left alone (protecting an open position):
+  5 resting exit order(s) left alone (protecting an open position):
+    WMT    buy   x115    bracket @100.1
+    MSFT   sell  x36     bracket @548
+    JNJ    buy   x99     bracket @247.1
     IWM    sell  x111    bracket @289.5
     NVDA   sell  x69     bracket @246
-    UNH    buy   x21     bracket @345
 
   No unfilled entry orders older than 5d.
 

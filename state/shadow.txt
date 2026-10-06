@@ -1,2 +1,3 @@
+  CVX    short never filled   (passed 2026-09-29)
 
-  0 idea(s) resolved, 13 still pending.
+  1 idea(s) resolved, 12 still pending.

@@ -1,0 +1,56 @@
+
+====================================================================
+  SESSION 2026-10-06   equity $102,591.77   day P&L +0.51%
+====================================================================
+
+  POSITION MANAGEMENT
+
+  [OK] NVDA UPDATE x69 (long, avg 236.40)
+      stop   227.40 -> 233.00
+      risk-at-stake $234.60 (0.23% of equity)
+      Breakout through 20d high holding; stop moved under the 234.50 pivot to cut risk to near break-even.
+
+  [OK] MSFT UPDATE x36 (long, avg 527.65)
+      stop   510.00 -> 515.00
+      risk-at-stake $455.56 (0.44% of equity)
+      At top of 20d range; stop raised under the 522.85 breakout level with ~1.2 ATR buffer to reduce risk.
+
+  ----------------------------------------------------------------
+
+  [OK] XLE SHORT
+      entry 62.20 (stop)  stop 64.10  target 59.60  [1.37R]
+      qty 269  notional $16,732  risk $511.10 (0.50% of equity, tier 0.5%)
+      P(target first) 37%   conviction 3
+
+  [OK] CAT LONG
+      entry 860.00 (stop)  stop 836.00  target 896.00  [1.50R]
+      qty 10  notional $8,600  risk $240.00 (0.23% of equity, tier 0.25%)
+      P(target first) 36%   conviction 2
+
+  ----------------------------------------------------------------
+  BOOK-LEVEL ADMISSION   highest conviction first
+      book now: 5 positions/resting entries, gross 102%, net +29%, risk at stake 2.49%
+      + XLE    admitted  -> gross 118%, net +13%, risk 2.99%
+      + CAT    admitted  -> gross 127%, net +22%, risk 3.23%
+
+  ----------------------------------------------------------------
+  PASSED IDEAS   logged to the shadow book and scored later, no orders
+      . AMD    long  stop 647.00  stop 618.00  target 690.00  P 40%
+      . DAL    long  stop 86.30  stop 82.40  target 91.00  P 35%
+      . GS     short stop 879.00  stop 915.00  target 835.00  P 34%
+
+  ----------------------------------------------------------------
+  2 approved, 0 rejected.  Total new risk $751.10 (0.73% of equity)
+  2 position update(s) pending.
+  3 idea(s) for the shadow book.
+
+  ! Market is closed. Next open: 2026-10-06T09:30:00-04:00
+    Orders will queue. Market orders will fill at the next open.
+
+  ~ NVDA stop -> 233.00 [held]
+  ~ MSFT stop -> 515.00 [held]
+  > XLE short x269 submitted [pending_new]  id=a67f749f
+  > CAT long x10 submitted [pending_new]  id=683e0a20
+
+  Logged to journal.csv
+
