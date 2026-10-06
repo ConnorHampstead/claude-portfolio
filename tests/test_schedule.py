@@ -80,7 +80,7 @@ class DispatchSchedule(unittest.TestCase):
     def test_the_friday_jobs(self):
         self.assertIn("55 12,13 * * MON-FRI", self.crons)
         self.assertIn("55 13,14 * * MON-FRI", self.crons)
-        self.assertIn("50 17,18 * * FRI", self.crons)
+        self.assertIn("40 19,20 * * FRI", self.crons)
 
 
 if __name__ == "__main__":

@@ -8,12 +8,14 @@ starts in seconds. So the clock lives here and GitHub only supplies the runner.
 |---|---|---|
 | Pre-market brief | `desk.yml` | 08:55 ET, Mon-Fri |
 | Post-open review | `desk.yml`, `session=open` | 09:55 ET, Mon-Fri |
-| Weekend cleanup | `weekend.yml` | 13:50 ET, Fri |
+| Weekend cleanup | `weekend.yml` | 15:40 ET, Fri |
 
 Each job has a target (pre-market: 25 min before the open, 09:05 ET; post-open:
 35 min after it, 10:05 ET; weekend: 10 min before the close) and holds its
-runner until then. The desk dispatches sit 10 min ahead of their targets, short
-enough that a runner is never tied up for long.
+runner until then. Each dispatch sits 10 min ahead of its target, short enough
+that a runner is never tied up for long. On the half-day after Thanksgiving the
+close is 13:00 ET, so the weekend cleanup arrives after it and cancels straight
+away; that is still well before Monday's open.
 
 Each call passes `dry_run=false`, and `session` for the two desk jobs (the
 workflow defaults it to `pre-market`). A duplicate dispatch - a manual one on
