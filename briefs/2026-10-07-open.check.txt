@@ -1,0 +1,18 @@
+
+====================================================================
+  SESSION 2026-10-07   equity $100,556.30   day P&L -1.22%
+====================================================================
+
+  POSITION MANAGEMENT
+
+  [OK] JNJ CLOSE x42
+      Relative-weakness thesis contradicted at the open: JNJ +1.6% at HOD with XLV leading a red tape, 0.92 under the stop, and it must exit before 10/13 earnings anyway.
+
+  ----------------------------------------------------------------
+
+  ----------------------------------------------------------------
+  No new positions today.
+  1 position update(s) pending.
+
+  Validation only - `check` never sends. `submit --confirm` sends these.
+

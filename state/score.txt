@@ -1,19 +1,19 @@
 
-  Entry fill rate  65%  (11 filled / 17 proposed, 6 never reached)
+  Entry fill rate  63%  (12 filled / 19 proposed, 7 never reached)
 
 ====================================================================
-  PERFORMANCE   11 closed trades
+  PERFORMANCE   12 closed trades
 ====================================================================
-  Net P&L         $+1,567.41
-  Win rate        36.4%  (4W / 7L)
+  Net P&L         $+1,342.91
+  Win rate        33.3%  (4W / 8L)
   Avg win         +1.41R
   Avg loss        -0.90R
-  Expectancy      -0.06R per trade
-  Total R         -0.62R
+  Expectancy      -0.13R per trade
+  Total R         -1.52R
   Best / worst    +1.76R / -1.18R
-  Max drawdown    -4.08R
+  Max drawdown    -4.98R
 
-  3 closed trade(s) left out of calibration: their levels were moved
+  4 closed trade(s) left out of calibration: their levels were moved
   or they were closed by hand, so the fills do not show whether the
   initial target or the initial stop came first.
 
@@ -37,7 +37,7 @@
   Stop first      6
   Expired         1   (neither level inside the window)
   Ambiguous       0   (both in one bar - not scored)
-  Avg R if taken  -0.25R over 9 filled ideas   (trades actually taken: -0.06R)
+  Avg R if taken  -0.25R over 9 filled ideas   (trades actually taken: -0.13R)
   A shadow book that out-earns the trades taken says the filter is rejecting
   the better ideas.
 

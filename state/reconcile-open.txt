@@ -1,5 +1,6 @@
-  closed WMT    stop    -1.00R  $-254.15
+  XLE    never filled (canceled)
+  closed CAT    stop    -0.90R  $-224.50  (levels were moved - not scored for calibration)
 
-  1 trade(s) closed out.
+  1 trade(s) closed out, 1 never filled.
   Fill in `thesis_verdict` by hand: right/wrong thesis vs right/wrong outcome.
 
