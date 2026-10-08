@@ -1,19 +1,19 @@
 
-  Entry fill rate  65%  (13 filled / 20 proposed, 7 never reached)
+  Entry fill rate  67%  (14 filled / 21 proposed, 7 never reached)
 
 ====================================================================
-  PERFORMANCE   13 closed trades
+  PERFORMANCE   14 closed trades
 ====================================================================
-  Net P&L         $+792.44
-  Win rate        30.8%  (4W / 9L)
+  Net P&L         $+202.19
+  Win rate        28.6%  (4W / 10L)
   Avg win         +1.41R
-  Avg loss        -0.91R
-  Expectancy      -0.20R per trade
-  Total R         -2.54R
+  Avg loss        -0.93R
+  Expectancy      -0.26R per trade
+  Total R         -3.70R
   Best / worst    +1.76R / -1.18R
-  Max drawdown    -6.00R
+  Max drawdown    -7.15R
 
-  4 closed trade(s) left out of calibration: their levels were moved
+  5 closed trade(s) left out of calibration: their levels were moved
   or they were closed by hand, so the fills do not show whether the
   initial target or the initial stop came first.
 
@@ -30,14 +30,14 @@
   Note: thesis_verdict column is empty. Fill it in to separate skill from luck.
 
 ====================================================================
-  SHADOW BOOK   30 ideas passed on or dropped, 12 resolved
+  SHADOW BOOK   31 ideas passed on or dropped, 12 resolved
 ====================================================================
   Never filled    2
   Target first    2
   Stop first      7
   Expired         1   (neither level inside the window)
   Ambiguous       0   (both in one bar - not scored)
-  Avg R if taken  -0.33R over 10 filled ideas   (trades actually taken: -0.20R)
+  Avg R if taken  -0.33R over 10 filled ideas   (trades actually taken: -0.26R)
   A shadow book that out-earns the trades taken says the filter is rejecting
   the better ideas.
 

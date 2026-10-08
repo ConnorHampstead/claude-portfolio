@@ -1,6 +1,5 @@
-  XLE    never filled (canceled)
-  closed CAT    stop    -0.90R  $-224.50  (levels were moved - not scored for calibration)
+  closed IWM    close   -1.16R  $-590.25  (levels were moved - not scored for calibration)
 
-  1 trade(s) closed out, 1 never filled.
+  1 trade(s) closed out.
   Fill in `thesis_verdict` by hand: right/wrong thesis vs right/wrong outcome.
 

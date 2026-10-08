@@ -1,0 +1,25 @@
+
+====================================================================
+  SESSION 2026-10-08   equity $100,231.09   day P&L -0.28%
+====================================================================
+
+  POSITION MANAGEMENT
+
+  [OK] COST CLOSE x20
+      Gap-and-fade: opened 953.29 (high) and gave back the entire Sept-comp gap to 941.8, below the prior close. The market has priced the print; the breakout premise failed before the trigger.
+      ! COST entry is still resting unfilled at 956.00 - cancelling it
+
+  ----------------------------------------------------------------
+
+  ----------------------------------------------------------------
+  PASSED IDEAS   logged to the shadow book and scored later, no orders
+      . COST   long  stop 956.00  stop 931.00  target 995.00  P 28%
+
+  ----------------------------------------------------------------
+  1 position update(s) pending.
+  1 idea(s) for the shadow book.
+
+  ~ COST resting entry cancelled x20
+
+  Logged to journal.csv
+
