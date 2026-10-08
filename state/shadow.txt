@@ -1,4 +1,3 @@
-  KRE    short expired      +0.36R  (passed 2026-09-23)
-  XHB    long  never filled   (passed 2026-09-30)
+  CAT    long  stop         -1.03R  (passed 2026-10-01)
 
-  2 idea(s) resolved, 14 still pending.
+  1 idea(s) resolved, 16 still pending.

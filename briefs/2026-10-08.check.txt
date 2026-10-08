@@ -1,0 +1,40 @@
+
+====================================================================
+  SESSION 2026-10-08   equity $100,145.41   day P&L -0.37%
+====================================================================
+
+  POSITION MANAGEMENT
+
+  [OK] IWM CLOSE x111
+      Rates-reversal thesis invalidated: 10y back toward 5.35% on an oil shock; IWM 275.59 pre-market is already through the 276.90 stop at its 20d low.
+
+  ----------------------------------------------------------------
+
+  [OK] COST LONG
+      entry 956.00 (stop)  stop 931.00  target 995.00  [1.56R]
+      qty 20  notional $19,120  risk $500.00 (0.50% of equity, tier 0.5%)
+      P(target first) 38%   conviction 3
+
+  [OK] TLT SHORT
+      entry 76.35 (stop)  stop 77.95  target 73.50  [1.78R]
+      qty 312  notional $23,821  risk $499.20 (0.50% of equity, tier 0.5%)
+      P(target first) 36%   conviction 2
+
+  ----------------------------------------------------------------
+  BOOK-LEVEL ADMISSION   highest conviction first
+      book now: 5 positions/resting entries, gross 86%, net +60%, risk at stake 1.95%
+      + COST   admitted  -> gross 105%, net +79%, risk 2.45%
+      + TLT    admitted  -> gross 128%, net +55%, risk 2.95%
+
+  ----------------------------------------------------------------
+  PASSED IDEAS   logged to the shadow book and scored later, no orders
+      . UAL    short stop 104.40  stop 110.50  target 97.00  P 33%
+      . XLRE   short stop 40.30  stop 41.40  target 38.60  P 33%
+
+  ----------------------------------------------------------------
+  2 approved, 0 rejected.  Total new risk $999.20 (1.00% of equity)
+  1 position update(s) pending.
+  2 idea(s) for the shadow book.
+
+  Validation only - `check` never sends. `submit --confirm` sends these.
+

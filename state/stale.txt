@@ -1,8 +1,6 @@
 
-  5 resting exit order(s) left alone (protecting an open position):
-    CAT    sell  x10     bracket @896
+  3 resting exit order(s) left alone (protecting an open position):
     MSFT   sell  x36     bracket @548
-    JNJ    buy   x99     bracket @247.1
     IWM    sell  x111    bracket @289.5
     NVDA   sell  x69     bracket @246
 
