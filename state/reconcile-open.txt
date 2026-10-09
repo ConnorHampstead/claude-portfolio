@@ -1,5 +1,3 @@
-  closed IWM    close   -1.16R  $-590.25  (levels were moved - not scored for calibration)
+  XOM    never filled (canceled)
 
-  1 trade(s) closed out.
-  Fill in `thesis_verdict` by hand: right/wrong thesis vs right/wrong outcome.
-
+  0 trade(s) closed out, 1 never filled.

@@ -1,2 +1,3 @@
+  XLRE   short stop         -1.00R  (passed 2026-10-08)
 
-  0 idea(s) resolved, 18 still pending.
+  1 idea(s) resolved, 16 still pending.

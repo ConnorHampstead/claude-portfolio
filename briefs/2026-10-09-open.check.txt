@@ -1,0 +1,24 @@
+
+====================================================================
+  SESSION 2026-10-09   equity $99,974.37   day P&L +0.19%
+====================================================================
+
+  POSITION MANAGEMENT
+
+  [OK] NVDA CLOSE x28
+      Morning invalidation met early: SMH gave back its +1.4% pre-market gain by 10:00 and NVDA erased its gap (233.85 open to 230.98); a 237.60 fill would chase a reversal.
+      ! NVDA entry is still resting unfilled at 237.60 - cancelling it
+
+  ----------------------------------------------------------------
+
+  ----------------------------------------------------------------
+  PASSED IDEAS   logged to the shadow book and scored later, no orders
+      . NVDA   long  stop 237.60  stop 228.80  target 251.00  P 30%
+      . AAPL   short market 332.25  stop 336.50  target 312.00  P 30%
+
+  ----------------------------------------------------------------
+  1 position update(s) pending.
+  2 idea(s) for the shadow book.
+
+  Validation only - `check` never sends. `submit --confirm` sends these.
+
