@@ -1,5 +1,6 @@
-  closed JNJ    stop    -1.02R  $-550.47
+  closed NVDA   stop    -0.38R  $-234.53  (levels were moved - not scored for calibration)
+  COST   never filled (canceled)
 
-  1 trade(s) closed out.
+  1 trade(s) closed out, 1 never filled.
   Fill in `thesis_verdict` by hand: right/wrong thesis vs right/wrong outcome.
 

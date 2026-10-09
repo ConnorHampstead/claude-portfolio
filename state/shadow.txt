@@ -1,3 +1,6 @@
-  CAT    long  stop         -1.03R  (passed 2026-10-01)
+  UAL    short target       +1.94R  (passed 2026-09-28)
+  XOM    long  target       +1.95R  (passed 2026-09-28)
+  AMD    long  stop         -1.03R  (passed 2026-10-06)
+  AVGO   long  stop         -1.00R  (passed 2026-10-06)
 
-  1 idea(s) resolved, 16 still pending.
+  4 idea(s) resolved, 15 still pending.

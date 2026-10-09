@@ -1,8 +1,6 @@
 
-  3 resting exit order(s) left alone (protecting an open position):
+  1 resting exit order(s) left alone (protecting an open position):
     MSFT   sell  x36     bracket @548
-    IWM    sell  x111    bracket @289.5
-    NVDA   sell  x69     bracket @246
 
   No unfilled entry orders older than 5d.
 

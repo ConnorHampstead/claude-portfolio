@@ -1,0 +1,41 @@
+
+====================================================================
+  SESSION 2026-10-09   equity $99,982.47   day P&L +0.20%
+====================================================================
+
+  POSITION MANAGEMENT
+
+  [OK] XOM CLOSE x40
+      Oil-breakout thesis decayed: Brent -1.6% on Trump saying no Iran strike before midterms; buying a 20d-high breakout into falling crude is the wrong location.
+      ! XOM entry is still resting unfilled at 169.80 - cancelling it
+
+  ----------------------------------------------------------------
+
+  [OK] AAPL SHORT
+      entry 325.40 (stop)  stop 336.50  target 312.00  [1.21R]
+      qty 45  notional $14,643  risk $499.50 (0.50% of equity, tier 0.5%)
+      P(target first) 40%   conviction 3
+
+  [OK] NVDA LONG
+      entry 237.60 (stop)  stop 228.80  target 251.00  [1.52R]
+      qty 28  notional $6,653  risk $246.40 (0.25% of equity, tier 0.25%)
+      P(target first) 36%   conviction 2
+
+  ----------------------------------------------------------------
+  BOOK-LEVEL ADMISSION   highest conviction first
+      book now: 4 positions/resting entries, gross 63%, net -11%, risk at stake 1.71%
+      + AAPL   admitted  -> gross 77%, net -26%, risk 2.20%
+      + NVDA   admitted  -> gross 84%, net -19%, risk 2.45%
+
+  ----------------------------------------------------------------
+  PASSED IDEAS   logged to the shadow book and scored later, no orders
+      . DAL    short stop 76.70  stop 82.60  target 70.00  P 33%
+      . XLE    long  limit 64.20  stop 62.60  target 67.40  P 35%
+
+  ----------------------------------------------------------------
+  2 approved, 0 rejected.  Total new risk $745.90 (0.75% of equity)
+  1 position update(s) pending.
+  2 idea(s) for the shadow book.
+
+  Validation only - `check` never sends. `submit --confirm` sends these.
+
