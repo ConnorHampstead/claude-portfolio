@@ -1,0 +1,38 @@
+
+====================================================================
+  SESSION 2026-10-12   equity $100,384.77   day P&L +0.15%
+====================================================================
+
+  POSITION MANAGEMENT
+
+  [OK] MSFT UPDATE x36 (long, avg 527.65)
+      stop   515.00 -> 528.00
+      risk-at-stake $0.00 (0.00% of equity)
+      Broke above 20d high on Melius upgrade; trail stop to ~breakeven under today's low since nothing reviews the book until tomorrow.
+
+  ----------------------------------------------------------------
+
+  [OK] XOM LONG
+      entry 171.94 (market)  stop 167.80  target 179.00  [1.71R]
+      qty 121  notional $20,805  risk $500.94 (0.50% of equity, tier 0.5%)
+      P(target first) 42%   conviction 3
+
+  ----------------------------------------------------------------
+  BOOK-LEVEL ADMISSION   highest conviction first
+      book now: 1 positions/resting entries, gross 19%, net +19%, risk at stake 0.45%
+      + XOM    admitted  -> gross 40%, net +40%, risk 0.95%
+
+  ----------------------------------------------------------------
+  PASSED IDEAS   logged to the shadow book and scored later, no orders
+      . SMH    short market 592.90  stop 608.00  target 570.00  P 35%
+
+  ----------------------------------------------------------------
+  1 approved, 0 rejected.  Total new risk $500.94 (0.50% of equity)
+  1 position update(s) pending.
+  1 idea(s) for the shadow book.
+
+  ~ MSFT stop -> 528.00 [held]
+  > XOM long x121 submitted [pending_new]  id=b81a437a
+
+  Logged to journal.csv
+

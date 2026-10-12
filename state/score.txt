@@ -1,5 +1,5 @@
 
-  Entry fill rate  62%  (15 filled / 24 proposed, 9 never reached)
+  Entry fill rate  54%  (15 filled / 28 proposed, 13 never reached)
 
 ====================================================================
   PERFORMANCE   15 closed trades
@@ -30,32 +30,32 @@
   Note: thesis_verdict column is empty. Fill it in to separate skill from luck.
 
 ====================================================================
-  SHADOW BOOK   35 ideas passed on or dropped, 17 resolved
+  SHADOW BOOK   36 ideas passed on or dropped, 21 resolved
 ====================================================================
-  Never filled    2
+  Never filled    3
   Target first    4
-  Stop first      10
+  Stop first      13
   Expired         1   (neither level inside the window)
   Ambiguous       0   (both in one bar - not scored)
-  Avg R if taken  -0.16R over 15 filled ideas   (trades actually taken: -0.27R)
+  Avg R if taken  -0.30R over 18 filled ideas   (trades actually taken: -0.27R)
   A shadow book that out-earns the trades taken says the filter is rejecting
   the better ideas.
 
   ----------------------------------------------------------------
-  CALIBRATION   14 passed ideas with a stated probability
+  CALIBRATION   17 passed ideas with a stated probability
   ----------------------------------------------------------------
   stated           n   mean said    actual
-  0%-50%         14        38%       29%
+  0%-50%         17        38%       24%
 
-  Brier score     0.211   (0 = perfect, 0.25 = coin flip, lower is better)
-  ! Only 14 samples - treat this as directional, not conclusive.
+  Brier score     0.200   (0 = perfect, 0.25 = coin flip, lower is better)
+  ! Only 17 samples - treat this as directional, not conclusive.
 
   ----------------------------------------------------------------
-  CALIBRATION   23 trades and passed ideas together with a stated probability
+  CALIBRATION   26 trades and passed ideas together with a stated probability
   ----------------------------------------------------------------
   stated           n   mean said    actual
-  0%-50%         22        38%       27%
+  0%-50%         25        38%       24%
   50%-60%          1        52%      100%
 
-  Brier score     0.214   (0 = perfect, 0.25 = coin flip, lower is better)
+  Brier score     0.207   (0 = perfect, 0.25 = coin flip, lower is better)
 

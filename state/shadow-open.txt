@@ -1,3 +1,6 @@
-  XLRE   short stop         -1.00R  (passed 2026-10-08)
+  AMD    long  stop         -1.00R  (passed 2026-09-29)
+  SMH    long  stop         -1.00R  (passed 2026-09-29)
+  NFLX   short never filled   (passed 2026-10-05)
+  AAPL   short stop         -0.93R  (passed 2026-10-09)
 
-  1 idea(s) resolved, 16 still pending.
+  4 idea(s) resolved, 14 still pending.
