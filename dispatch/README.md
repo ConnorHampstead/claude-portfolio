@@ -25,8 +25,14 @@ and exits on the workflow's already-ran check, which is per session.
 There is no second trigger. A systemd timer on a desktop served as a backup
 until 2026-09-28; it was removed because a machine that was off caught up on
 waking, once per timer, and a weekend cleanup that catches up midweek cancels
-every resting entry. If a Cloudflare dispatch fails, that session is missed -
-re-run it by hand from the Actions tab if it is still inside its window.
+every resting entry.
+
+Instead the Worker retries its own dispatch. GitHub answers 5xx during Actions
+incidents - on 2026-10-12 a single 500 cost the pre-market session - so a 5xx
+or a network error retries once a minute for 12 min, which keeps every job
+inside its window. A 4xx (expired token, bad input) fails at once. If it still
+fails, that session is missed - re-run it by hand from the Actions tab if it is
+still inside its window. `npm test` covers the retry rules.
 
 The workflows' `dry_run` input defaults to `true`, so anything that
 dispatches them must pass `dry_run=false` explicitly or it will never trade.

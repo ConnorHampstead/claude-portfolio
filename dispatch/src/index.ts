@@ -42,6 +42,17 @@ const JOBS: Record<string, Job> = {
 const normalize = (cron: string) => cron.trim().replace(/\s+/g, " ").toUpperCase();
 const BY_CRON = new Map(Object.entries(JOBS).map(([cron, job]) => [normalize(cron), job]));
 
+// GitHub answers 5xx while it has an Actions incident: on 2026-10-12 a single
+// 500 "Failed to run workflow dispatch" cost the pre-market session. So 5xx and
+// network errors retry once a minute for 12 min, inside the 15 min of wall time
+// a Cron Trigger gets. The last retry is still inside every job's window
+// (pre-market: 09:07 ET, the guard stands down after 09:25). A 5xx may have
+// queued the run anyway, so a retry can start a duplicate, which exits on the
+// workflow's already-ran check like any other duplicate dispatch.
+// A 4xx (expired token, bad input) won't fix itself and fails at once.
+const RETRY_EVERY_MS = 60_000;
+const RETRY_FOR_MS = 12 * 60_000;
+
 function newYork(ms: number): { hour: number; weekday: string } {
   const parts = new Intl.DateTimeFormat("en-US", {
     timeZone: "America/New_York",
@@ -68,29 +79,49 @@ export default {
       return;
     }
 
-    const res = await fetch(
-      `https://api.github.com/repos/${REPO}/actions/workflows/${job.workflow}/dispatches`,
-      {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${env.GH_TOKEN}`,
-          Accept: "application/vnd.github+json",
-          "X-GitHub-Api-Version": "2022-11-28",
-          "User-Agent": "daytrade-dispatch", // GitHub rejects requests without one
-        },
-        body: JSON.stringify({
-          ref: "main",
-          // dry_run must be explicit: both workflows default it to true.
-          inputs: {
-            ...job.inputs,
-            dry_run: env.DISPATCH_DRY_RUN === "true" ? "true" : "false",
+    const deadline = Date.now() + RETRY_FOR_MS;
+    for (let attempt = 1; ; attempt++) {
+      let res: Response | undefined;
+      let failure: string;
+      try {
+        res = await fetch(
+          `https://api.github.com/repos/${REPO}/actions/workflows/${job.workflow}/dispatches`,
+          {
+            method: "POST",
+            headers: {
+              Authorization: `Bearer ${env.GH_TOKEN}`,
+              Accept: "application/vnd.github+json",
+              "X-GitHub-Api-Version": "2022-11-28",
+              "User-Agent": "daytrade-dispatch", // GitHub rejects requests without one
+            },
+            body: JSON.stringify({
+              ref: "main",
+              // dry_run must be explicit: both workflows default it to true.
+              inputs: {
+                ...job.inputs,
+                dry_run: env.DISPATCH_DRY_RUN === "true" ? "true" : "false",
+              },
+            }),
+            // A hung request would otherwise eat the whole retry window.
+            signal: AbortSignal.timeout(30_000),
           },
-        }),
-      },
-    );
+        );
+        if (res.ok) {
+          const again = attempt > 1 ? ` on attempt ${attempt}` : "";
+          console.log(`dispatched ${job.workflow}${job.inputs?.session ? ` (${job.inputs.session})` : ""}${again}`);
+          return;
+        }
+        failure = `${res.status} ${await res.text()}`;
+      } catch (err) {
+        failure = String(err); // network error or the timeout
+      }
 
-    // Throwing marks the invocation failed in the Cloudflare dashboard.
-    if (!res.ok) throw new Error(`${job.workflow}: ${res.status} ${await res.text()}`);
-    console.log(`dispatched ${job.workflow}${job.inputs?.session ? ` (${job.inputs.session})` : ""}`);
+      // Throwing marks the invocation failed in the Cloudflare dashboard.
+      if ((res && res.status < 500) || Date.now() + RETRY_EVERY_MS > deadline) {
+        throw new Error(`${job.workflow}: ${failure} (attempt ${attempt}, giving up)`);
+      }
+      console.warn(`${job.workflow}: attempt ${attempt} failed, retrying in 60 s: ${failure}`);
+      await new Promise((resolve) => setTimeout(resolve, RETRY_EVERY_MS));
+    }
   },
 } satisfies ExportedHandler<Env>;
