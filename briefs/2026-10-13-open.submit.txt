@@ -1,0 +1,17 @@
+
+====================================================================
+  SESSION 2026-10-13   equity $100,516.45   day P&L +0.05%
+====================================================================
+
+  ----------------------------------------------------------------
+  PASSED IDEAS   logged to the shadow book and scored later, no orders
+      . UNH    short market 375.74  stop 388.00  target 358.00  P 34%
+      . JPM    short market 331.57  stop 340.50  target 318.00  P 33%
+
+  ----------------------------------------------------------------
+  No new positions today.
+  2 idea(s) for the shadow book.
+
+
+  Logged to journal.csv
+

@@ -1,6 +1,7 @@
-  AMD    long  stop         -1.00R  (passed 2026-09-29)
-  SMH    long  stop         -1.00R  (passed 2026-09-29)
-  NFLX   short never filled   (passed 2026-10-05)
-  AAPL   short stop         -0.93R  (passed 2026-10-09)
+  MSFT   long  target       +1.71R  (dropped 2026-10-01)
+  GS     short stop         -1.64R  (passed 2026-10-05)
+  GS     short stop         -1.22R  (passed 2026-10-06)
+  GS     long  stop         -0.91R  (passed 2026-10-13)
+  TLT    short stop         -1.08R  (passed 2026-10-07)
 
-  4 idea(s) resolved, 14 still pending.
+  5 idea(s) resolved, 11 still pending.
