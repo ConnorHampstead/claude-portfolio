@@ -1,5 +1,6 @@
 
-  1 resting exit order(s) left alone (protecting an open position):
+  2 resting exit order(s) left alone (protecting an open position):
+    XOM    sell  x121    bracket @179
     MSFT   sell  x36     bracket @548
 
   No unfilled entry orders older than 5d.

@@ -1,6 +1,4 @@
-  UAL    short target       +1.94R  (passed 2026-09-28)
-  XOM    long  target       +1.95R  (passed 2026-09-28)
-  AMD    long  stop         -1.03R  (passed 2026-10-06)
-  AVGO   long  stop         -1.00R  (passed 2026-10-06)
+  XLRE   short stop         -1.02R  (passed 2026-10-01)
+  DAL    long  never filled   (passed 2026-10-06)
 
-  4 idea(s) resolved, 15 still pending.
+  2 idea(s) resolved, 13 still pending.
