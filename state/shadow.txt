@@ -1,4 +1,5 @@
-  XLRE   short stop         -1.02R  (passed 2026-10-01)
-  DAL    long  never filled   (passed 2026-10-06)
+  KRE    short never filled   (passed 2026-10-07)
+  JNJ    short target       +1.07R  (passed 2026-10-13)
+  AMD    short stop         -1.17R  (passed 2026-10-13)
 
-  2 idea(s) resolved, 13 still pending.
+  3 idea(s) resolved, 10 still pending.

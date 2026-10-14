@@ -1,0 +1,45 @@
+
+====================================================================
+  SESSION 2026-10-14   equity $100,974.95   day P&L +0.45%
+====================================================================
+
+  POSITION MANAGEMENT
+
+  [OK] SMH UPDATE x31 (short, avg 587.00)
+      stop   603.00 -> 595.00
+      risk-at-stake $248.00 (0.25% of equity)
+      Thesis intact; lower stop to just above the 588-591 invalidation zone (~1.2 ATR above last) to cut risk.
+
+  [OK] XOM UPDATE x121 (long, avg 171.98)
+      stop   167.80 -> 170.80
+      risk-at-stake $142.78 (0.14% of equity)
+      New 20d high with oil bid; raise stop to ~1.4 ATR below last, near break-even.
+
+  ----------------------------------------------------------------
+
+  [REJECTED] XHB
+      x XHB is not shortable
+
+  [REJECTED] KRE
+      x KRE is not shortable
+
+  ----------------------------------------------------------------
+  PASSED IDEAS   logged to the shadow book and scored later, no orders
+      . BAC    short market 49.94  stop 52.30  target 47.00  P 33%
+      . CVX    long  market 219.55  stop 213.00  target 230.00  P 40%
+      . IWM    short market 273.64  stop 277.50  target 268.00  P 36%
+      . COST   long  stop 968.00  stop 945.00  target 1000.00  P 38%
+
+  ----------------------------------------------------------------
+  0 approved, 2 rejected.  Total new risk $0.00 (0.00% of equity)
+  2 position update(s) pending.
+  4 idea(s) for the shadow book.
+
+  ! Market is closed. Next open: 2026-10-14T09:30:00-04:00
+    Orders will queue. Market orders will fill at the next open.
+
+  ~ SMH stop -> 595.00 [held]
+  ~ XOM stop -> 170.80 [held]
+
+  Logged to journal.csv
+
