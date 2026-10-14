@@ -1,0 +1,27 @@
+
+====================================================================
+  SESSION 2026-10-14   equity $101,050.97   day P&L +0.53%
+====================================================================
+
+  [OK] IWM SHORT
+      entry 273.01 (market)  stop 277.50  target 267.00  [1.34R]
+      qty 112  notional $30,578  risk $502.32 (0.50% of equity, tier 0.5%)
+      P(target first) 42%   conviction 3
+
+  ----------------------------------------------------------------
+  BOOK-LEVEL ADMISSION   highest conviction first
+      book now: 2 positions/resting entries, gross 39%, net +3%, risk at stake 0.39%
+      + IWM    admitted  -> gross 69%, net -27%, risk 0.88%
+
+  ----------------------------------------------------------------
+  PASSED IDEAS   logged to the shadow book and scored later, no orders
+      . BAC    short market 49.34  stop 51.00  target 47.00  P 35%
+      . XHB    short limit 93.80  stop 96.10  target 89.50  P 37%
+      . KRE    short stop 67.60  stop 69.60  target 64.60  P 34%
+
+  ----------------------------------------------------------------
+  1 approved, 0 rejected.  Total new risk $502.32 (0.50% of equity)
+  3 idea(s) for the shadow book.
+
+  Validation only - `check` never sends. `submit --confirm` sends these.
+

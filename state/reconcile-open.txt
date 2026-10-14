@@ -1,6 +1,2 @@
-  closed MSFT   target  +1.18R  $+748.28
-  closed UNH    stop    -1.04R  $-406.40
 
-  2 trade(s) closed out.
-  Fill in `thesis_verdict` by hand: right/wrong thesis vs right/wrong outcome.
-
+  0 trade(s) closed out.
