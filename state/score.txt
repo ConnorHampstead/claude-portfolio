@@ -1,60 +1,60 @@
 
-  Entry fill rate  57%  (17 filled / 30 proposed, 13 never reached)
+  Entry fill rate  59%  (19 filled / 32 proposed, 13 never reached)
 
 ====================================================================
-  PERFORMANCE   17 closed trades
+  PERFORMANCE   19 closed trades
 ====================================================================
-  Net P&L         $+309.54
-  Win rate        29.4%  (5W / 12L)
-  Avg win         +1.36R
+  Net P&L         $+2,040.19
+  Win rate        36.8%  (7W / 12L)
+  Avg win         +1.47R
   Avg loss        -0.90R
-  Expectancy      -0.23R per trade
-  Total R         -3.93R
-  Best / worst    +1.76R / -1.18R
-  Max drawdown    -7.39R
+  Expectancy      -0.02R per trade
+  Total R         -0.46R
+  Best / worst    +2.63R / -1.18R
+  Max drawdown    -6.55R
 
-  6 closed trade(s) left out of calibration: their levels were moved
+  7 closed trade(s) left out of calibration: their levels were moved
   or they were closed by hand, so the fills do not show whether the
   initial target or the initial stop came first.
 
   ----------------------------------------------------------------
-  CALIBRATION   11 trades with a stated probability
+  CALIBRATION   12 trades with a stated probability
   ----------------------------------------------------------------
   stated           n   mean said    actual
-  0%-50%         10        40%       30%
+  0%-50%         11        39%       36%
   50%-60%          1        52%      100%
 
-  Brier score     0.230   (0 = perfect, 0.25 = coin flip, lower is better)
-  ! Only 11 samples - treat this as directional, not conclusive.
+  Brier score     0.243   (0 = perfect, 0.25 = coin flip, lower is better)
+  ! Only 12 samples - treat this as directional, not conclusive.
 
   Note: thesis_verdict column is empty. Fill it in to separate skill from luck.
 
 ====================================================================
-  SHADOW BOOK   52 ideas passed on or dropped, 34 resolved
+  SHADOW BOOK   54 ideas passed on or dropped, 37 resolved
 ====================================================================
   Never filled    5
-  Target first    7
-  Stop first      21
+  Target first    9
+  Stop first      22
   Expired         1   (neither level inside the window)
   Ambiguous       0   (both in one bar - not scored)
-  Avg R if taken  -0.36R over 29 filled ideas   (trades actually taken: -0.23R)
+  Avg R if taken  -0.30R over 32 filled ideas   (trades actually taken: -0.02R)
   A shadow book that out-earns the trades taken says the filter is rejecting
   the better ideas.
 
   ----------------------------------------------------------------
-  CALIBRATION   28 passed ideas with a stated probability
+  CALIBRATION   31 passed ideas with a stated probability
   ----------------------------------------------------------------
   stated           n   mean said    actual
-  0%-50%         28        37%       25%
+  0%-50%         31        37%       29%
 
-  Brier score     0.203   (0 = perfect, 0.25 = coin flip, lower is better)
+  Brier score     0.216   (0 = perfect, 0.25 = coin flip, lower is better)
 
   ----------------------------------------------------------------
-  CALIBRATION   39 trades and passed ideas together with a stated probability
+  CALIBRATION   43 trades and passed ideas together with a stated probability
   ----------------------------------------------------------------
   stated           n   mean said    actual
-  0%-50%         38        38%       26%
+  0%-50%         42        37%       31%
   50%-60%          1        52%      100%
 
-  Brier score     0.210   (0 = perfect, 0.25 = coin flip, lower is better)
+  Brier score     0.224   (0 = perfect, 0.25 = coin flip, lower is better)
 

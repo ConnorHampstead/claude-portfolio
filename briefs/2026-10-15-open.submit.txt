@@ -1,0 +1,28 @@
+
+====================================================================
+  SESSION 2026-10-15   equity $102,072.33   day P&L +0.28%
+====================================================================
+
+  [OK] HD LONG
+      entry 310.60 (stop)  stop 303.00  target 322.00  [1.50R]
+      qty 33  notional $10,250  risk $250.80 (0.25% of equity, tier 0.25%)
+      P(target first) 37%   conviction 2
+
+  ----------------------------------------------------------------
+  BOOK-LEVEL ADMISSION   highest conviction first
+      book now: 3 positions/resting entries, gross 62%, net -11%, risk at stake 1.03%
+      + HD     admitted  -> gross 72%, net -1%, risk 1.27%
+
+  ----------------------------------------------------------------
+  PASSED IDEAS   logged to the shadow book and scored later, no orders
+      . LLY    long  limit 1240.00  stop 1205.00  target 1310.00  P 40%
+      . AMD    short limit 555.00  stop 580.00  target 510.00  P 33%
+
+  ----------------------------------------------------------------
+  1 approved, 0 rejected.  Total new risk $250.80 (0.25% of equity)
+  2 idea(s) for the shadow book.
+
+  > HD long x33 submitted [pending_new]  id=d9cf7bb5
+
+  Logged to journal.csv
+
