@@ -1,5 +1,6 @@
 
-  2 resting exit order(s) left alone (protecting an open position):
+  3 resting exit order(s) left alone (protecting an open position):
+    IWM    buy   x112    bracket @267
     SMH    buy   x31     bracket @556
     XOM    sell  x121    bracket @179
 

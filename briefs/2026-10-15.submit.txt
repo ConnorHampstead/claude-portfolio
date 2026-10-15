@@ -1,0 +1,57 @@
+
+====================================================================
+  SESSION 2026-10-15   equity $102,308.06   day P&L +0.52%
+====================================================================
+
+  POSITION MANAGEMENT
+
+  [OK] IWM UPDATE x112 (short, avg 272.99)
+      stop   277.50 -> 275.60
+      risk-at-stake $292.71 (0.29% of equity)
+      Rates thesis weakening as yields fall 8-11bp and IWM outperforms QQQ; tighten to ~1 ATR above pre-market.
+
+  [OK] XOM UPDATE x121 (long, avg 171.98)
+      stop   170.80 -> 175.50
+      risk-at-stake $0.00 (0.00% of equity)
+      0.90 from target; lock in about +3R below the 177.43 breakout level.
+
+  ----------------------------------------------------------------
+
+  [OK] WMT LONG
+      entry 117.50 (limit)  stop 115.20  target 122.10  [2.00R]
+      qty 222  notional $26,085  risk $510.60 (0.50% of equity, tier 0.5%)
+      P(target first) 42%   conviction 3
+
+  [OK] CAT SHORT
+      entry 745.00 (limit)  stop 772.00  target 700.00  [1.67R]
+      qty 9  notional $6,705  risk $243.00 (0.24% of equity, tier 0.25%)
+      P(target first) 36%   conviction 2
+
+  ----------------------------------------------------------------
+  BOOK-LEVEL ADMISSION   highest conviction first
+      book now: 3 positions/resting entries, gross 67%, net -25%, risk at stake 0.88%
+      + WMT    admitted  -> gross 93%, net +0%, risk 1.38%
+      + CAT    admitted  -> gross 100%, net -6%, risk 1.61%
+
+  ----------------------------------------------------------------
+  PASSED IDEAS   logged to the shadow book and scored later, no orders
+      . AMD    short limit 565.00  stop 595.00  target 520.00  P 33%
+      . XLP    long  limit 86.80  stop 85.60  target 89.20  P 40%
+      . TLT    long  limit 79.80  stop 78.70  target 82.00  P 35%
+      . NVDA   short limit 222.00  stop 229.00  target 208.00  P 34%
+
+  ----------------------------------------------------------------
+  2 approved, 0 rejected.  Total new risk $753.60 (0.74% of equity)
+  2 position update(s) pending.
+  4 idea(s) for the shadow book.
+
+  ! Market is closed. Next open: 2026-10-15T09:30:00-04:00
+    Orders will queue. Market orders will fill at the next open.
+
+  ~ IWM stop -> 275.60 [held]
+  ~ XOM stop -> 175.50 [held]
+  > WMT long x222 submitted [pending_new]  id=ca6ee3ad
+  > CAT short x9 submitted [pending_new]  id=3dc1e8de
+
+  Logged to journal.csv
+

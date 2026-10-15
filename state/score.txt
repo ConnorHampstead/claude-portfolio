@@ -30,31 +30,31 @@
   Note: thesis_verdict column is empty. Fill it in to separate skill from luck.
 
 ====================================================================
-  SHADOW BOOK   48 ideas passed on or dropped, 32 resolved
+  SHADOW BOOK   52 ideas passed on or dropped, 34 resolved
 ====================================================================
   Never filled    5
-  Target first    6
-  Stop first      20
+  Target first    7
+  Stop first      21
   Expired         1   (neither level inside the window)
   Ambiguous       0   (both in one bar - not scored)
-  Avg R if taken  -0.40R over 27 filled ideas   (trades actually taken: -0.23R)
+  Avg R if taken  -0.36R over 29 filled ideas   (trades actually taken: -0.23R)
   A shadow book that out-earns the trades taken says the filter is rejecting
   the better ideas.
 
   ----------------------------------------------------------------
-  CALIBRATION   26 passed ideas with a stated probability
+  CALIBRATION   28 passed ideas with a stated probability
   ----------------------------------------------------------------
   stated           n   mean said    actual
-  0%-50%         26        37%       23%
+  0%-50%         28        37%       25%
 
-  Brier score     0.197   (0 = perfect, 0.25 = coin flip, lower is better)
+  Brier score     0.203   (0 = perfect, 0.25 = coin flip, lower is better)
 
   ----------------------------------------------------------------
-  CALIBRATION   37 trades and passed ideas together with a stated probability
+  CALIBRATION   39 trades and passed ideas together with a stated probability
   ----------------------------------------------------------------
   stated           n   mean said    actual
-  0%-50%         36        38%       25%
+  0%-50%         38        38%       26%
   50%-60%          1        52%      100%
 
-  Brier score     0.207   (0 = perfect, 0.25 = coin flip, lower is better)
+  Brier score     0.210   (0 = perfect, 0.25 = coin flip, lower is better)
 

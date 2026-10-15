@@ -1,5 +1,4 @@
-  KRE    short never filled   (passed 2026-10-07)
-  JNJ    short target       +1.07R  (passed 2026-10-13)
-  AMD    short stop         -1.17R  (passed 2026-10-13)
+  SMH    short target       +1.34R  (passed 2026-10-12)
+  BAC    short stop         -0.96R  (passed 2026-10-14)
 
-  3 idea(s) resolved, 10 still pending.
+  2 idea(s) resolved, 14 still pending.
