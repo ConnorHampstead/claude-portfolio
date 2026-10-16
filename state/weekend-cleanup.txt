@@ -1,35 +1,36 @@
-run 2026-10-09
+run 2026-10-16
 
-  1 resting exit order(s) left alone (protecting an open position):
-    MSFT   sell  x36     bracket @548
+  2 resting exit order(s) left alone (protecting an open position):
+    ORCL   buy   x33     bracket @116.5
+    HD     sell  x33     bracket @322
 
   3 unfilled entry order(s):
-    AAPL   sell  x45     stop   @325.4  submitted 2026-10-09  id=d404c1cb
-    TLT    sell  x312    stop   @76.35  submitted 2026-10-08  id=933f8a27
-    HD     sell  x47     stop   @276.9  submitted 2026-10-07  id=c437e430
-    cancelled AAPL
-    cancelled TLT
-    cancelled HD
+    XLV    buy   x137    stop   @179.1  submitted 2026-10-16  id=2681d521
+    CAT    sell  x9      limit  @745  submitted 2026-10-15  id=3dc1e8de
+    WMT    buy   x222    limit  @117.5  submitted 2026-10-15  id=ca6ee3ad
+    cancelled XLV
+    cancelled CAT
+    cancelled WMT
 
-  HD     never filled (canceled)
-  TLT    never filled (canceled)
-  AAPL   never filled (canceled)
-  NVDA   never filled (canceled)
+  WMT    never filled (canceled)
+  CAT    never filled (canceled)
+  XLV    never filled (canceled)
 
-  0 trade(s) closed out, 4 never filled.
+  0 trade(s) closed out, 3 never filled.
 
 ====================================================================
   BOOK STATE   market OPEN
 ====================================================================
-  Equity          $100,242.75
-  Cash            $80,967.27
-  Day P&L         $+461.52  (+0.46%)
-  Gross exposure  $19,275.48  (19.2% of equity)
-  Net exposure    $+19,275.48  (+19.2%)
-  Positions       1 / 8
-  Loss-limit room 3.46% before the 3.0% kill switch
+  Equity          $101,762.93
+  Cash            $95,786.30
+  Day P&L         $-35.67  (-0.04%)
+  Gross exposure  $14,452.85  (14.2% of equity)
+  Net exposure    $+5,975.47  (+5.9%)
+  Positions       2 / 8
+  Loss-limit room 2.96% before the 3.0% kill switch
 
   SYM    SIDE      QTY        AVG       LAST       P&L $    P&L %
   ---------------------------------------------------------------
-  MSFT   long       36     527.65     535.43     +279.92   +1.47%
+  HD     long       33     310.70     309.52      -39.01   -0.38%
+  ORCL   short      33     129.70     128.44      +41.39   +0.97%
 
