@@ -1,5 +1,5 @@
-  NKE    short stop         -2.14R  (not placed 2026-10-02)
-  COST   long  target       +1.67R  (passed 2026-10-08)
-  COST   long  target       +1.39R  (passed 2026-10-14)
+  XHB    short stop         -0.73R  (passed 2026-10-14)
+  JPM    short stop         -0.82R  (passed 2026-10-13)
+  BAC    short stop         -1.05R  (passed 2026-10-14)
 
-  3 idea(s) resolved, 15 still pending.
+  3 idea(s) resolved, 14 still pending.

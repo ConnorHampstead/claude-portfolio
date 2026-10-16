@@ -1,0 +1,15 @@
+
+====================================================================
+  SESSION 2026-10-16   equity $101,829.95   day P&L +0.03%
+====================================================================
+
+  ----------------------------------------------------------------
+  PASSED IDEAS   logged to the shadow book and scored later, no orders
+      . AMD    short market 544.59  stop 572.00  target 505.00  P 33%
+
+  ----------------------------------------------------------------
+  No new positions today.
+  1 idea(s) for the shadow book.
+
+  Validation only - `check` never sends. `submit --confirm` sends these.
+

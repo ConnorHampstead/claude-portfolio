@@ -1,6 +1,5 @@
-  closed XOM    stop    +0.84R  $+424.62  (levels were moved - not scored for calibration)
-  closed SMH    target  +2.63R  $+1,306.03
+  closed IWM    close   -0.54R  $-273.67  (levels were moved - not scored for calibration)
 
-  2 trade(s) closed out.
+  1 trade(s) closed out.
   Fill in `thesis_verdict` by hand: right/wrong thesis vs right/wrong outcome.
 
