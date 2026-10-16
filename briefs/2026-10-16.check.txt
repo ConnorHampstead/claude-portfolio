@@ -1,0 +1,40 @@
+
+====================================================================
+  SESSION 2026-10-16   equity $101,749.32   day P&L -0.05%
+====================================================================
+
+  POSITION MANAGEMENT
+
+  [OK] IWM CLOSE x112
+      Thesis invalidated: closed 275.08 above the 274.50 invalidation line; Warsh took October hike off the table and equal-weight/small caps are leading.
+
+  ----------------------------------------------------------------
+
+  [OK] XLV LONG
+      entry 179.10 (stop)  stop 175.40  target 184.60  [1.49R]
+      qty 137  notional $24,537  risk $506.90 (0.50% of equity, tier 0.5%)
+      P(target first) 40%   conviction 3
+
+  [OK] ORCL SHORT
+      entry 129.80 (stop)  stop 137.40  target 116.50  [1.75R]
+      qty 33  notional $4,283  risk $250.80 (0.25% of equity, tier 0.25%)
+      P(target first) 33%   conviction 2
+
+  ----------------------------------------------------------------
+  BOOK-LEVEL ADMISSION   highest conviction first
+      book now: 4 positions/resting entries, gross 73%, net -1%, risk at stake 1.27%
+      + XLV    admitted  -> gross 97%, net +23%, risk 1.77%
+      + ORCL   admitted  -> gross 101%, net +19%, risk 2.02%
+
+  ----------------------------------------------------------------
+  PASSED IDEAS   logged to the shadow book and scored later, no orders
+      . SMH    short limit 566.00  stop 584.00  target 535.00  P 35%
+      . XLE    long  stop 68.00  stop 66.00  target 71.50  P 35%
+
+  ----------------------------------------------------------------
+  2 approved, 0 rejected.  Total new risk $757.70 (0.74% of equity)
+  1 position update(s) pending.
+  2 idea(s) for the shadow book.
+
+  Validation only - `check` never sends. `submit --confirm` sends these.
+

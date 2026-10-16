@@ -1,4 +1,4 @@
-  SMH    short target       +1.34R  (passed 2026-10-12)
-  BAC    short stop         -0.96R  (passed 2026-10-14)
+  XLE    long  never filled   (passed 2026-10-09)
+  NVDA   long  never filled   (passed 2026-10-09)
 
-  2 idea(s) resolved, 14 still pending.
+  2 idea(s) resolved, 15 still pending.
