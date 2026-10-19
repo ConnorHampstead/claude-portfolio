@@ -1,0 +1,39 @@
+
+====================================================================
+  SESSION 2026-10-19   equity $101,582.06   day P&L -0.19%
+====================================================================
+
+  [OK] SMH SHORT
+      entry 566.00 (limit)  stop 584.00  target 540.00  [1.44R]
+      qty 28  notional $15,848  risk $504.00 (0.50% of equity, tier 0.5%)
+      P(target first) 40%   conviction 3
+
+  [OK] XOM LONG
+      entry 174.00 (limit)  stop 168.50  target 182.50  [1.55R]
+      qty 92  notional $16,008  risk $506.00 (0.50% of equity, tier 0.5%)
+      P(target first) 42%   conviction 2
+
+  ----------------------------------------------------------------
+  BOOK-LEVEL ADMISSION   highest conviction first
+      book now: 2 positions/resting entries, gross 14%, net +6%, risk at stake 0.50%
+      + SMH    admitted  -> gross 30%, net -10%, risk 1.00%
+      + XOM    admitted  -> gross 46%, net +6%, risk 1.49%
+
+  ----------------------------------------------------------------
+  PASSED IDEAS   logged to the shadow book and scored later, no orders
+      . AMZN   long  market 255.05  stop 247.50  target 266.00  P 38%
+      . AMD    short limit 565.00  stop 595.00  target 528.00  P 38%
+      . BAC    short stop 49.20  stop 51.40  target 46.50  P 30%
+
+  ----------------------------------------------------------------
+  2 approved, 0 rejected.  Total new risk $1,010.00 (0.99% of equity)
+  3 idea(s) for the shadow book.
+
+  ! Market is closed. Next open: 2026-10-19T09:30:00-04:00
+    Orders will queue. Market orders will fill at the next open.
+
+  > SMH short x28 submitted [pending_new]  id=3f920ba1
+  > XOM long x92 submitted [pending_new]  id=63fd9c47
+
+  Logged to journal.csv
+

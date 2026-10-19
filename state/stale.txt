@@ -1,6 +1,7 @@
 
-  1 resting exit order(s) left alone (protecting an open position):
-    IWM    buy   x112    bracket @267
+  2 resting exit order(s) left alone (protecting an open position):
+    ORCL   buy   x33     bracket @116.5
+    HD     sell  x33     bracket @322
 
   No unfilled entry orders older than 5d.
 
