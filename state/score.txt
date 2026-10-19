@@ -30,7 +30,7 @@
   Note: thesis_verdict column is empty. Fill it in to separate skill from luck.
 
 ====================================================================
-  SHADOW BOOK   60 ideas passed on or dropped, 43 resolved
+  SHADOW BOOK   62 ideas passed on or dropped, 43 resolved
 ====================================================================
   Never filled    7
   Target first    10

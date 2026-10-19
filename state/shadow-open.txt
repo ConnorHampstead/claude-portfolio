@@ -1,5 +1,2 @@
-  XHB    short stop         -0.73R  (passed 2026-10-14)
-  JPM    short stop         -0.82R  (passed 2026-10-13)
-  BAC    short stop         -1.05R  (passed 2026-10-14)
 
-  3 idea(s) resolved, 14 still pending.
+  0 idea(s) resolved, 17 still pending.

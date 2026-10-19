@@ -1,0 +1,38 @@
+
+====================================================================
+  SESSION 2026-10-19   equity $101,660.94   day P&L -0.11%
+====================================================================
+
+  POSITION MANAGEMENT
+
+  [OK] SMH CLOSE x28
+      Gap failed (low 547.77 under the 548 trigger); 566 retest now unlikely. Morning plan executed via AMD since SMH cannot be re-entered while this order rests.
+      ! SMH entry is still resting unfilled at 566.00 - cancelling it
+
+  ----------------------------------------------------------------
+
+  [OK] AMD SHORT
+      entry 542.22 (market)  stop 568.00  target 512.00  [1.17R]
+      qty 19  notional $10,302  risk $489.82 (0.48% of equity, tier 0.5%)
+      P(target first) 42%   conviction 3
+
+  ----------------------------------------------------------------
+  BOOK-LEVEL ADMISSION   highest conviction first
+      book now: 4 positions/resting entries, gross 46%, net +6%, risk at stake 1.49%
+      + AMD    admitted  -> gross 56%, net -4%, risk 1.98%
+
+  ----------------------------------------------------------------
+  PASSED IDEAS   logged to the shadow book and scored later, no orders
+      . SMH    short market 548.11  stop 564.00  target 530.00  P 44%
+      . NVDA   short market 215.38  stop 222.00  target 205.00  P 35%
+
+  ----------------------------------------------------------------
+  1 approved, 0 rejected.  Total new risk $489.82 (0.48% of equity)
+  1 position update(s) pending.
+  2 idea(s) for the shadow book.
+
+  ~ SMH resting entry cancelled x28
+  > AMD short x19 submitted [pending_new]  id=59cbd639
+
+  Logged to journal.csv
+
