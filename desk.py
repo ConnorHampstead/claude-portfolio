@@ -2486,28 +2486,36 @@ def cmd_prep(args):
     # before the 08:30 ET releases, and after the session moved to 09:05 ET it
     # kept discarding prints it had found because the prompt said they could
     # not exist yet.
+    #
+    # Stockholm is stated too, not left to the brief. It is ET + 6h except for
+    # a few weeks each March and a week around the start of November, when the
+    # EU and US have changed their clocks on different dates and it is ET + 5h.
+    # The brief assumed + 6h from memory.
     now = datetime.now(timezone.utc)
     et = ZoneInfo("America/New_York")
+    sthlm = ZoneInfo("Europe/Stockholm")
     now_et = now.astimezone(et)
+    both = lambda t: f"{t.astimezone(et):%H:%M} ET ({t.astimezone(sthlm):%H:%M} Stockholm)"
     try:
         hours = market_hours_utc()
     except (RuntimeError, ValueError, KeyError, TypeError):
         hours = None
-    clock = f"**{now_et:%H:%M} ET** ({now:%H:%M} UTC), {now_et:%A %Y-%m-%d}"
+    clock = (f"**{now_et:%H:%M} ET** ({now:%H:%M} UTC, {now.astimezone(sthlm):%H:%M} Stockholm), "
+             f"{now_et:%A %Y-%m-%d}")
     if hours is None:
         clock += ". The US market is closed today."
     else:
         _, open_utc, close_utc = hours
         mins = (open_utc - now).total_seconds() / 60
         if mins > 0:
-            clock += (f". The cash session opens at {open_utc.astimezone(et):%H:%M} ET, "
-                      f"in {mins:.0f} min, and closes at {close_utc.astimezone(et):%H:%M} ET. "
+            clock += (f". The cash session opens at {both(open_utc)}, "
+                      f"in {mins:.0f} min, and closes at {both(close_utc)}. "
                       f"Anything scheduled before {now_et:%H:%M} ET today has already "
                       "been released: look up the actual figure and the market's "
                       "reaction, not the consensus.")
         elif now < close_utc:
             clock += (f". The cash session opened {-mins:.0f} min ago and closes at "
-                      f"{close_utc.astimezone(et):%H:%M} ET.")
+                      f"{both(close_utc)}.")
         else:
             clock += ". Today's cash session has closed."
 
