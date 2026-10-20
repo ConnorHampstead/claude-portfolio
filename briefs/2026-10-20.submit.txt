@@ -1,0 +1,54 @@
+
+====================================================================
+  SESSION 2026-10-20   equity $102,002.93   day P&L +0.19%
+====================================================================
+
+  POSITION MANAGEMENT
+
+  [OK] AMD UPDATE x19 (short, avg 542.20)
+      stop   568.00 -> 558.00
+      risk-at-stake $300.20 (0.29% of equity)
+      Elice flop supports the thesis; stop tightened to just above Monday's 553.61 high, which is where the fade would fail.
+
+  [OK] XOM CLOSE x92
+      Limit 3.1% below market only fills on an oil reversal; energy view moved into the CVX breakout-retest entry instead.
+      ! XOM entry is still resting unfilled at 174.00 - cancelling it
+
+  ----------------------------------------------------------------
+
+  [OK] CVX LONG
+      entry 224.50 (limit)  stop 218.00  target 236.00  [1.77R]
+      qty 78  notional $17,511  risk $507.00 (0.50% of equity, tier 0.5%)
+      P(target first) 40%   conviction 3
+
+  [OK] NVDA SHORT
+      entry 212.40 (stop)  stop 222.00  target 198.00  [1.50R]
+      qty 26  notional $5,522  risk $249.60 (0.24% of equity, tier 0.25%)
+      P(target first) 35%   conviction 2
+
+  ----------------------------------------------------------------
+  BOOK-LEVEL ADMISSION   highest conviction first
+      book now: 4 positions/resting entries, gross 40%, net +12%, risk at stake 1.47%
+      + CVX    admitted  -> gross 57%, net +29%, risk 1.97%
+      + NVDA   admitted  -> gross 62%, net +23%, risk 2.22%
+
+  ----------------------------------------------------------------
+  PASSED IDEAS   logged to the shadow book and scored later, no orders
+      . AAPL   short market 339.15  stop 348.50  target 326.00  P 33%
+      . DAL    short market 74.48  stop 78.50  target 69.00  P 35%
+
+  ----------------------------------------------------------------
+  2 approved, 0 rejected.  Total new risk $756.60 (0.74% of equity)
+  2 position update(s) pending.
+  2 idea(s) for the shadow book.
+
+  ! Market is closed. Next open: 2026-10-20T09:30:00-04:00
+    Orders will queue. Market orders will fill at the next open.
+
+  ~ AMD stop -> 558.00 [held]
+  ~ XOM resting entry cancelled x92
+  > CVX long x78 submitted [pending_new]  id=f5a88981
+  > NVDA short x26 submitted [pending_new]  id=27b6adb2
+
+  Logged to journal.csv
+

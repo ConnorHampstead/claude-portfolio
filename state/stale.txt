@@ -1,5 +1,6 @@
 
-  2 resting exit order(s) left alone (protecting an open position):
+  3 resting exit order(s) left alone (protecting an open position):
+    AMD    buy   x19     bracket @512
     ORCL   buy   x33     bracket @116.5
     HD     sell  x33     bracket @322
 

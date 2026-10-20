@@ -1,3 +1,2 @@
-  UAL    short target       +1.21R  (passed 2026-10-08)
 
-  1 idea(s) resolved, 14 still pending.
+  0 idea(s) resolved, 19 still pending.
