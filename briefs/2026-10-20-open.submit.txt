@@ -1,0 +1,26 @@
+
+====================================================================
+  SESSION 2026-10-20   equity $101,952.38   day P&L +0.14%
+====================================================================
+
+  POSITION MANAGEMENT
+
+  [OK] HD UPDATE x33 (long, avg 310.70)
+      stop   303.00 -> 307.00
+      risk-at-stake $122.17 (0.12% of equity)
+      Pending home sales -7.3% vs -0.4% after the starts miss removes the housing-activity leg; position now rests on rates alone, so stop tightened below today's 310.64 low (~1.2 ATR).
+
+  ----------------------------------------------------------------
+
+  ----------------------------------------------------------------
+  PASSED IDEAS   logged to the shadow book and scored later, no orders
+      . XLV    long  market 179.06  stop 175.50  target 185.00  P 35%
+
+  ----------------------------------------------------------------
+  1 position update(s) pending.
+  1 idea(s) for the shadow book.
+
+  ~ HD stop -> 307.00 [held]
+
+  Logged to journal.csv
+
