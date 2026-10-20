@@ -105,9 +105,16 @@ class Prep(DeskCase):
 
     def test_clock_before_the_open(self):
         out = self.prep()
-        self.assertIn("Time now: **09:07 ET** (13:07 UTC), Thursday 2026-09-24", out)
-        self.assertIn("opens at 09:30 ET, in 23 min", out)
+        self.assertIn("Time now: **09:07 ET** (13:07 UTC, 15:07 Stockholm), Thursday 2026-09-24", out)
+        self.assertIn("opens at 09:30 ET (15:30 Stockholm), in 23 min", out)
         self.assertIn("Anything scheduled before 09:07 ET today has already been released", out)
+
+    def test_clock_in_the_autumn_dst_gap(self):
+        # Stockholm is on CET from Oct 25, New York on EDT until Nov 1: ET + 5h.
+        self.freeze(datetime(2026, 10, 27, 13, 7, tzinfo=timezone.utc))
+        out = self.prep()
+        self.assertIn("**09:07 ET** (13:07 UTC, 14:07 Stockholm)", out)
+        self.assertIn("opens at 09:30 ET (14:30 Stockholm)", out)
 
     def test_clock_after_the_open(self):
         self.freeze(POST_OPEN)
