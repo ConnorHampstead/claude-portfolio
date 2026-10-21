@@ -1,0 +1,34 @@
+
+====================================================================
+  SESSION 2026-10-21   equity $102,005.29   day P&L -0.09%
+====================================================================
+
+  POSITION MANAGEMENT
+
+  [OK] NFLX CLOSE x159
+      Morning condition met: sell-stop never triggered (low 64.10) and NFLX reclaimed 66+; the gap is failing.
+      ! NFLX entry is still resting unfilled at 63.40 - cancelling it
+
+  ----------------------------------------------------------------
+
+  [OK] GOOGL SHORT
+      entry 332.56 (market)  stop 341.50  target 320.00  [1.40R]
+      qty 28  notional $9,312  risk $250.32 (0.25% of equity, tier 0.25%)
+      P(target first) 35%   conviction 2
+
+  ----------------------------------------------------------------
+  BOOK-LEVEL ADMISSION   highest conviction first
+      book now: 7 positions/resting entries, gross 74%, net +15%, risk at stake 2.33%
+      + GOOGL  admitted  -> gross 83%, net +6%, risk 2.58%
+
+  ----------------------------------------------------------------
+  PASSED IDEAS   logged to the shadow book and scored later, no orders
+      . NFLX   short stop 63.40  stop 66.60  target 59.00  P 30%
+
+  ----------------------------------------------------------------
+  1 approved, 0 rejected.  Total new risk $250.32 (0.25% of equity)
+  1 position update(s) pending.
+  1 idea(s) for the shadow book.
+
+  Validation only - `check` never sends. `submit --confirm` sends these.
+
