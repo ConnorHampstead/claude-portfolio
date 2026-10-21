@@ -1,0 +1,41 @@
+
+====================================================================
+  SESSION 2026-10-21   equity $101,876.43   day P&L -0.21%
+====================================================================
+
+  POSITION MANAGEMENT
+
+  [OK] HD UPDATE x33 (long, avg 310.70)
+      stop   307.00 -> 309.00
+      risk-at-stake $56.17 (0.06% of equity)
+      Up 7% in 5 days near the 20d high; raise stop to ~1 ATR below last, near breakeven, ahead of the 20-year auction.
+
+  ----------------------------------------------------------------
+
+  [OK] NFLX SHORT
+      entry 63.40 (stop)  stop 66.60  target 59.00  [1.38R]
+      qty 159  notional $10,081  risk $508.80 (0.50% of equity, tier 0.5%)
+      P(target first) 42%   conviction 3
+
+  [OK] XOM LONG
+      entry 180.60 (stop)  stop 175.40  target 189.00  [1.62R]
+      qty 97  notional $17,518  risk $504.40 (0.50% of equity, tier 0.5%)
+      P(target first) 37%   conviction 2
+
+  ----------------------------------------------------------------
+  BOOK-LEVEL ADMISSION   highest conviction first
+      book now: 5 positions/resting entries, gross 47%, net +8%, risk at stake 1.41%
+      + NFLX   admitted  -> gross 57%, net -2%, risk 1.90%
+      + XOM    admitted  -> gross 74%, net +15%, risk 2.40%
+
+  ----------------------------------------------------------------
+  PASSED IDEAS   logged to the shadow book and scored later, no orders
+      . UNH    long  stop 423.00  stop 410.00  target 445.00  P 35%
+
+  ----------------------------------------------------------------
+  2 approved, 0 rejected.  Total new risk $1,013.20 (0.99% of equity)
+  1 position update(s) pending.
+  1 idea(s) for the shadow book.
+
+  Validation only - `check` never sends. `submit --confirm` sends these.
+
