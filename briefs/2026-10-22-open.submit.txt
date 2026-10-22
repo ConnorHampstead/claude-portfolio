@@ -1,0 +1,27 @@
+
+====================================================================
+  SESSION 2026-10-22   equity $102,902.84   day P&L +1.08%
+====================================================================
+
+  POSITION MANAGEMENT
+
+  [OK] HD UPDATE x33 (long, avg 310.70)
+      stop   309.00 -> 313.50
+      risk-at-stake $0.00 (0.00% of equity)
+      Broke above the 20d high (317.71) and is 0.9 from target; stop raised under today's low and open (313.56/313.86) to lock ~+0.9R, still more than 1 ATR below last.
+
+  ----------------------------------------------------------------
+
+  ----------------------------------------------------------------
+  PASSED IDEAS   logged to the shadow book and scored later, no orders
+      . META   short limit 668.00  stop 686.00  target 630.00  P 33%
+
+  ----------------------------------------------------------------
+  No new positions today.
+  1 position update(s) pending.
+  1 idea(s) for the shadow book.
+
+  ~ HD stop -> 313.50 [held]
+
+  Logged to journal.csv
+
