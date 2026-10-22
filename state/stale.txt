@@ -1,5 +1,6 @@
 
-  4 resting exit order(s) left alone (protecting an open position):
+  5 resting exit order(s) left alone (protecting an open position):
+    GOOGL  buy   x28     bracket @320
     CVX    sell  x78     bracket @236
     AMD    buy   x19     bracket @512
     ORCL   buy   x33     bracket @116.5

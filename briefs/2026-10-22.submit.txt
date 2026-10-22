@@ -1,0 +1,60 @@
+
+====================================================================
+  SESSION 2026-10-22   equity $102,768.54   day P&L +0.95%
+====================================================================
+
+  POSITION MANAGEMENT
+
+  [OK] AMD UPDATE x19 (short, avg 542.20)
+      stop   558.00 -> 545.00
+      risk-at-stake $53.20 (0.05% of equity)
+      Short working into the 20d low at 524.6; stop cut to just above entry, below yesterday's close; a gap-fill means the move failed.
+
+  [OK] ORCL UPDATE x33 (short, avg 129.70)
+      stop   137.40 -> 132.00
+      risk-at-stake $75.93 (0.07% of equity)
+      META negative FCF supports the AI-credit thesis; stop cut to above yesterday's 129.13 close to protect the trade.
+
+  [OK] GOOGL UPDATE x28 (short, avg 332.42)
+      stop   341.50 -> 337.00
+      risk-at-stake $128.24 (0.12% of equity)
+      Under the 20d low; stop cut to above the 334.76 close and the broken floor. Exit by Oct 27 before earnings.
+
+  [OK] CVX UPDATE x78 (long, avg 224.48)
+      stop   218.00 -> 223.00
+      risk-at-stake $115.44 (0.11% of equity)
+      Brent at a 5-month high, CVX above its 20d high; stop raised under Monday's 224 retest to cut risk.
+
+  ----------------------------------------------------------------
+
+  [OK] XLV LONG
+      entry 179.60 (limit)  stop 176.40  target 184.80  [1.63R]
+      qty 160  notional $28,736  risk $512.00 (0.50% of equity, tier 0.5%)
+      P(target first) 40%   conviction 3
+
+  ----------------------------------------------------------------
+  BOOK-LEVEL ADMISSION   highest conviction first
+      book now: 7 positions/resting entries, gross 73%, net +16%, risk at stake 2.07%
+      + XLV    admitted  -> gross 101%, net +44%, risk 2.57%
+
+  ----------------------------------------------------------------
+  PASSED IDEAS   logged to the shadow book and scored later, no orders
+      . META   short stop 674.00  stop 699.00  target 640.00  P 33%
+      . AVGO   short stop 324.00  stop 338.00  target 305.00  P 35%
+
+  ----------------------------------------------------------------
+  1 approved, 0 rejected.  Total new risk $512.00 (0.50% of equity)
+  4 position update(s) pending.
+  2 idea(s) for the shadow book.
+
+  ! Market is closed. Next open: 2026-10-22T09:30:00-04:00
+    Orders will queue. Market orders will fill at the next open.
+
+  ~ AMD stop -> 545.00 [held]
+  ~ ORCL stop -> 132.00 [held]
+  ~ GOOGL stop -> 337.00 [held]
+  ~ CVX stop -> 223.00 [held]
+  > XLV long x160 submitted [pending_new]  id=8cef029d
+
+  Logged to journal.csv
+

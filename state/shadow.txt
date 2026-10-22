@@ -1,6 +1,3 @@
-  XHB    short expired      -0.52R  (passed 2026-10-07)
-  DAL    short stop         -1.04R  (passed 2026-10-20)
-  KRE    short never filled   (passed 2026-10-14)
-  LLY    long  target       +2.00R  (passed 2026-10-15)
+  IWM    short stop         -1.08R  (passed 2026-10-14)
 
-  4 idea(s) resolved, 18 still pending.
+  1 idea(s) resolved, 18 still pending.
