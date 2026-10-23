@@ -1,0 +1,48 @@
+
+====================================================================
+  SESSION 2026-10-23   equity $103,201.93   day P&L -0.03%
+====================================================================
+
+  POSITION MANAGEMENT
+
+  [OK] GOOGL UPDATE x28 (short, avg 332.42)
+      stop   337.00 -> 330.00
+      risk-at-stake $0.00 (0.00% of equity)
+      1.6 from target with earnings Oct 28; stop cut to ~1 ATR above last, below the 334.76 close, to lock a small gain into the weekend.
+
+  [OK] ORCL UPDATE x33 (short, avg 129.70)
+      stop   132.00 -> 130.00
+      risk-at-stake $9.93 (0.01% of equity)
+      Stop moved to the broken 130 support (~breakeven); a reclaim means the breakdown failed. Protects +0.4R over the weekend.
+
+  ----------------------------------------------------------------
+
+  [OK] UAL SHORT
+      entry 101.00 (market)  stop 106.00  target 92.50  [1.70R]
+      qty 103  notional $10,403  risk $515.00 (0.50% of equity, tier 0.5%)
+      P(target first) 40%   conviction 3
+      ! market entry sized from the last price 101.00, not the stated 100.28
+
+  [OK] AVGO SHORT
+      entry 317.00 (stop)  stop 333.00  target 293.00  [1.50R]
+      qty 16  notional $5,072  risk $256.00 (0.25% of equity, tier 0.25%)
+      P(target first) 36%   conviction 2
+
+  ----------------------------------------------------------------
+  BOOK-LEVEL ADMISSION   highest conviction first
+      book now: 5 positions/resting entries, gross 63%, net +27%, risk at stake 1.42%
+      + UAL    admitted  -> gross 73%, net +17%, risk 1.92%
+      + AVGO   admitted  -> gross 78%, net +12%, risk 2.17%
+
+  ----------------------------------------------------------------
+  PASSED IDEAS   logged to the shadow book and scored later, no orders
+      . LLY    long  stop 1325.00  stop 1270.00  target 1410.00  P 35%
+      . META   short limit 660.00  stop 686.00  target 620.00  P 33%
+
+  ----------------------------------------------------------------
+  2 approved, 0 rejected.  Total new risk $771.00 (0.75% of equity)
+  2 position update(s) pending.
+  2 idea(s) for the shadow book.
+
+  Validation only - `check` never sends. `submit --confirm` sends these.
+

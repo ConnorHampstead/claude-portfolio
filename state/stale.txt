@@ -1,10 +1,9 @@
 
-  5 resting exit order(s) left alone (protecting an open position):
+  4 resting exit order(s) left alone (protecting an open position):
+    NVDA   buy   x26     bracket @198
+    XLV    sell  x160    bracket @184.8
     GOOGL  buy   x28     bracket @320
-    CVX    sell  x78     bracket @236
-    AMD    buy   x19     bracket @512
     ORCL   buy   x33     bracket @116.5
-    HD     sell  x33     bracket @322
 
   No unfilled entry orders older than 5d.
 
