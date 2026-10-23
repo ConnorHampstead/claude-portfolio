@@ -1,0 +1,35 @@
+
+====================================================================
+  SESSION 2026-10-23   equity $103,221.34   day P&L -0.02%
+====================================================================
+
+  POSITION MANAGEMENT
+
+  [OK] UAL UPDATE x103 (short, avg 99.14)
+      stop   106.00 -> 103.00
+      risk-at-stake $397.94 (0.39% of equity)
+      Filled below 102 and the open confirmed it (-4.4%); stop moved just above the 102 invalidation line (~1.1 ATR) to cut weekend gap risk.
+
+  ----------------------------------------------------------------
+
+  [OK] XLI SHORT
+      entry 163.32 (market)  stop 166.20  target 158.00  [1.85R]
+      qty 179  notional $29,234  risk $515.52 (0.50% of equity, tier 0.5%)
+      P(target first) 36%   conviction 3
+
+  ----------------------------------------------------------------
+  BOOK-LEVEL ADMISSION   highest conviction first
+      book now: 7 positions/resting entries, gross 78%, net +12%, risk at stake 2.18%
+      + XLI    admitted  -> gross 106%, net -16%, risk 2.68%
+
+  ----------------------------------------------------------------
+  PASSED IDEAS   logged to the shadow book and scored later, no orders
+      . CAT    short market 684.99  stop 712.00  target 640.00  P 38%
+
+  ----------------------------------------------------------------
+  1 approved, 0 rejected.  Total new risk $515.52 (0.50% of equity)
+  1 position update(s) pending.
+  1 idea(s) for the shadow book.
+
+  Validation only - `check` never sends. `submit --confirm` sends these.
+
