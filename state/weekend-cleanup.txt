@@ -1,36 +1,40 @@
-run 2026-10-16
+run 2026-10-23
 
-  2 resting exit order(s) left alone (protecting an open position):
+  7 resting exit order(s) left alone (protecting an open position):
+    XLI    buy   x179    bracket @158
+    UAL    buy   x103    bracket @92.5
+    XOM    sell  x97     bracket @189
+    NVDA   buy   x26     bracket @198
+    XLV    sell  x160    bracket @184.8
+    GOOGL  buy   x28     bracket @320
     ORCL   buy   x33     bracket @116.5
-    HD     sell  x33     bracket @322
 
-  3 unfilled entry order(s):
-    XLV    buy   x137    stop   @179.1  submitted 2026-10-16  id=2681d521
-    CAT    sell  x9      limit  @745  submitted 2026-10-15  id=3dc1e8de
-    WMT    buy   x222    limit  @117.5  submitted 2026-10-15  id=ca6ee3ad
-    cancelled XLV
-    cancelled CAT
-    cancelled WMT
+  1 unfilled entry order(s):
+    AVGO   sell  x16     stop   @317  submitted 2026-10-23  id=1070057c
+    cancelled AVGO
 
-  WMT    never filled (canceled)
-  CAT    never filled (canceled)
-  XLV    never filled (canceled)
+  AVGO   never filled (canceled)
 
-  0 trade(s) closed out, 3 never filled.
+  0 trade(s) closed out, 1 never filled.
 
 ====================================================================
   BOOK STATE   market OPEN
 ====================================================================
-  Equity          $101,762.93
-  Cash            $95,786.30
-  Day P&L         $-35.67  (-0.04%)
-  Gross exposure  $14,452.85  (14.2% of equity)
-  Net exposure    $+5,975.47  (+5.9%)
-  Positions       2 / 8
-  Loss-limit room 2.96% before the 3.0% kill switch
+  Equity          $103,046.63
+  Cash            $114,869.46
+  Day P&L         $-190.54  (-0.18%)
+  Gross exposure  $104,686.04  (101.6% of equity)
+  Net exposure    $-11,824.48  (-11.5%)
+  Positions       7 / 8
+  Loss-limit room 2.82% before the 3.0% kill switch
 
   SYM    SIDE      QTY        AVG       LAST       P&L $    P&L %
   ---------------------------------------------------------------
-  HD     long       33     310.70     309.52      -39.01   -0.38%
-  ORCL   short      33     129.70     128.44      +41.39   +0.97%
+  XLI    short     179     163.26     164.95     -302.51   -1.03%
+  XLV    long      160     179.57     179.23      -54.40   -0.19%
+  XOM    long       97     180.75     183.03     +221.23   +1.26%
+  UAL    short     103      99.14      98.01     +116.03   +1.14%
+  GOOGL  short      28     332.42     320.50     +333.62   +3.58%
+  NVDA   short      26     212.38     211.49      +23.04   +0.42%
+  ORCL   short      33     129.70     126.10     +118.77   +2.77%
 
