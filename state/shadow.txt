@@ -1,9 +1,4 @@
-  DAL    short expired      -0.43R  (passed 2026-10-09)
-  XLP    long  target       +2.00R  (passed 2026-10-15)
-  AMD    short target       +1.80R  (passed 2026-10-15)
-  AMD    short target       +1.41R  (passed 2026-10-16)
-  SMH    short never filled   (passed 2026-10-16)
-  SMH    short target       +1.25R  (passed 2026-10-19)
-  META   short target       +1.36R  (passed 2026-10-22)
+  AMD    short never filled   (passed 2026-10-19)
+  BAC    short never filled   (passed 2026-10-19)
 
-  7 idea(s) resolved, 13 still pending.
+  2 idea(s) resolved, 11 still pending.

@@ -1,7 +1,2 @@
-  closed HD     target  +1.47R  $+372.83
-  closed AMD    target  +1.17R  $+575.13
-  closed CVX    stop    -0.23R  $-116.90  (levels were moved - not scored for calibration)
 
-  3 trade(s) closed out.
-  Fill in `thesis_verdict` by hand: right/wrong thesis vs right/wrong outcome.
-
+  0 trade(s) closed out.

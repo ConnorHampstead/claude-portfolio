@@ -1,5 +1,8 @@
 
-  4 resting exit order(s) left alone (protecting an open position):
+  7 resting exit order(s) left alone (protecting an open position):
+    XLI    buy   x179    bracket @158
+    UAL    buy   x103    bracket @92.5
+    XOM    sell  x97     bracket @189
     NVDA   buy   x26     bracket @198
     XLV    sell  x160    bracket @184.8
     GOOGL  buy   x28     bracket @320

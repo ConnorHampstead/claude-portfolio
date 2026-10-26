@@ -1,5 +1,5 @@
 
-  Entry fill rate  55%  (23 filled / 42 proposed, 19 never reached)
+  Entry fill rate  53%  (23 filled / 43 proposed, 20 never reached)
 
 ====================================================================
   PERFORMANCE   23 closed trades
@@ -30,9 +30,9 @@
   Note: thesis_verdict column is empty. Fill it in to separate skill from luck.
 
 ====================================================================
-  SHADOW BOOK   73 ideas passed on or dropped, 60 resolved
+  SHADOW BOOK   76 ideas passed on or dropped, 62 resolved
 ====================================================================
-  Never filled    9
+  Never filled    11
   Target first    18
   Stop first      30
   Expired         3   (neither level inside the window)

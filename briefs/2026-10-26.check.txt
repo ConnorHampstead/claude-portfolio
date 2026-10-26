@@ -1,0 +1,27 @@
+
+====================================================================
+  SESSION 2026-10-26   equity $102,573.91   day P&L -0.57%
+====================================================================
+
+  [OK] KRE LONG
+      entry 73.05 (stop)  stop 71.25  target 76.20  [1.75R]
+      qty 142  notional $10,373  risk $255.60 (0.25% of equity, tier 0.25%)
+      P(target first) 37%   conviction 2
+
+  ----------------------------------------------------------------
+  BOOK-LEVEL ADMISSION   highest conviction first
+      book now: 7 positions/resting entries, gross 102%, net -12%, risk at stake 2.16%
+      + KRE    admitted  -> gross 112%, net -2%, risk 2.40%
+
+  ----------------------------------------------------------------
+  PASSED IDEAS   logged to the shadow book and scored later, no orders
+      . AAPL   short market 343.40  stop 352.00  target 326.00  P 33%
+      . AVGO   short stop 319.00  stop 334.00  target 296.00  P 33%
+      . TLT    long  stop 82.05  stop 80.70  target 84.20  P 35%
+
+  ----------------------------------------------------------------
+  1 approved, 0 rejected.  Total new risk $255.60 (0.25% of equity)
+  3 idea(s) for the shadow book.
+
+  Validation only - `check` never sends. `submit --confirm` sends these.
+
