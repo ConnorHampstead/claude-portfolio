@@ -1,0 +1,28 @@
+
+====================================================================
+  SESSION 2026-10-26   equity $102,742.19   day P&L -0.40%
+====================================================================
+
+  POSITION MANAGEMENT
+
+  [OK] UAL UPDATE x103 (short, avg 99.14)
+      stop   103.00 -> 102.05
+      risk-at-stake $300.09 (0.29% of equity)
+      Morning plan was to close above 102; nothing looks again today, so it goes in as the stop. Oil -2.5% on de-escalation hopes weakens the thesis.
+
+  [OK] XOM UPDATE x97 (long, avg 180.75)
+      stop   175.40 -> 178.90
+      risk-at-stake $179.45 (0.17% of equity)
+      Breakout retest held at 181.52; raising stop under it to cut risk from 5.35 to 1.85/share given oil de-escalation headline risk.
+
+  ----------------------------------------------------------------
+
+  ----------------------------------------------------------------
+  No new positions today.
+  2 position update(s) pending.
+
+  ~ UAL stop -> 102.05 [held]
+  ~ XOM stop -> 178.90 [held]
+
+  Logged to journal.csv
+

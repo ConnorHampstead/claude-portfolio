@@ -1,5 +1,2 @@
-  CVX    long  target       +1.70R  (passed 2026-10-14)
-  AMZN   long  stop         -1.06R  (passed 2026-10-19)
-  AAPL   short stop         -0.99R  (passed 2026-10-20)
 
-  3 idea(s) resolved, 12 still pending.
+  0 idea(s) resolved, 14 still pending.
