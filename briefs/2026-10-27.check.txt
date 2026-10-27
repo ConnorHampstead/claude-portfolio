@@ -1,0 +1,44 @@
+
+====================================================================
+  SESSION 2026-10-27   equity $102,132.75   day P&L -0.27%
+====================================================================
+
+  POSITION MANAGEMENT
+
+  [OK] XOM UPDATE x97 (long, avg 180.75)
+      stop   178.90 -> 180.40
+      risk-at-stake $33.95 (0.03% of equity)
+      Earnings Fri 10/30 force an exit by Thursday; Saudi-Iran talks add de-escalation risk. Stop raised to just under entry and above the 180.26 breakout.
+
+  ----------------------------------------------------------------
+
+  [OK] BA SHORT
+      entry 182.20 (stop)  stop 188.60  target 172.50  [1.52R]
+      qty 39  notional $7,106  risk $249.60 (0.24% of equity, tier 0.25%)
+      P(target first) 34%   conviction 2
+
+  [OK] TSLA LONG
+      entry 399.00 (stop)  stop 384.00  target 421.00  [1.47R]
+      qty 17  notional $6,783  risk $255.00 (0.25% of equity, tier 0.25%)
+      P(target first) 35%   conviction 2
+
+  ----------------------------------------------------------------
+  BOOK-LEVEL ADMISSION   highest conviction first
+      book now: 5 positions/resting entries, gross 65%, net +46%, risk at stake 1.18%
+      + BA     admitted  -> gross 72%, net +39%, risk 1.42%
+      + TSLA   admitted  -> gross 79%, net +46%, risk 1.67%
+
+  ----------------------------------------------------------------
+  PASSED IDEAS   logged to the shadow book and scored later, no orders
+      . META   short stop 624.00  stop 652.00  target 585.00  P 33%
+      . CVX    long  stop 234.40  stop 228.50  target 244.00  P 36%
+      . XLU    long  stop 42.95  stop 42.00  target 44.40  P 35%
+      . TLT    long  stop 82.05  stop 80.70  target 84.20  P 33%
+
+  ----------------------------------------------------------------
+  2 approved, 0 rejected.  Total new risk $504.60 (0.49% of equity)
+  1 position update(s) pending.
+  4 idea(s) for the shadow book.
+
+  Validation only - `check` never sends. `submit --confirm` sends these.
+

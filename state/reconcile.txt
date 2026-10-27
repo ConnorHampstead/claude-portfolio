@@ -1,2 +1,5 @@
+  closed UAL    stop    -0.45R  $-315.44  (levels were moved - not scored for calibration)
 
-  0 trade(s) closed out.
+  1 trade(s) closed out.
+  Fill in `thesis_verdict` by hand: right/wrong thesis vs right/wrong outcome.
+
