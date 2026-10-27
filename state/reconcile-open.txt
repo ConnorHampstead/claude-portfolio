@@ -1,6 +1,5 @@
-  closed GOOGL  target  +1.42R  $+361.76
-  closed XLI    stop    -1.00R  $-525.75
+  closed ORCL   stop    -0.06R  $-15.72  (levels were moved - not scored for calibration)
 
-  2 trade(s) closed out.
+  1 trade(s) closed out.
   Fill in `thesis_verdict` by hand: right/wrong thesis vs right/wrong outcome.
 
