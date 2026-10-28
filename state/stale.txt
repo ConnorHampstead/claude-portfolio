@@ -1,10 +1,9 @@
 
-  5 resting exit order(s) left alone (protecting an open position):
+  4 resting exit order(s) left alone (protecting an open position):
+    TSLA   sell  x17     bracket @421
     KRE    sell  x142    bracket @76.2
-    XOM    sell  x97     bracket @189
     NVDA   buy   x26     bracket @198
     XLV    sell  x160    bracket @184.8
-    ORCL   buy   x33     bracket @116.5
 
   No unfilled entry orders older than 5d.
 

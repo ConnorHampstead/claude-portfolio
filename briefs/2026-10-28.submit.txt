@@ -1,0 +1,54 @@
+
+====================================================================
+  SESSION 2026-10-28   equity $102,088.22   day P&L -0.22%
+====================================================================
+
+  POSITION MANAGEMENT
+
+  [OK] NVDA CLOSE x26
+      Breakdown thesis invalidated by a three-day semis rally and SK Hynix blowout; do not carry the short into MSFT/GOOGL capex guidance tonight.
+
+  [OK] TSLA UPDATE x17 (long, avg 398.69)
+      stop   384.00 -> 395.00
+      risk-at-stake $62.68 (0.06% of equity)
+      Above the 408.45 20d high; trail the stop just under the 397-399 breakout zone ahead of FOMC and MSFT/GOOGL.
+
+  ----------------------------------------------------------------
+
+  [OK] XLE LONG
+      entry 70.00 (stop)  stop 67.90  target 73.20  [1.52R]
+      qty 243  notional $17,010  risk $510.30 (0.50% of equity, tier 0.5%)
+      P(target first) 38%   conviction 3
+
+  [OK] META SHORT
+      entry 616.50 (stop)  stop 643.00  target 580.00  [1.38R]
+      qty 9  notional $5,548  risk $238.50 (0.23% of equity, tier 0.25%)
+      P(target first) 35%   conviction 2
+
+  ----------------------------------------------------------------
+  BOOK-LEVEL ADMISSION   highest conviction first
+      book now: 4 positions/resting entries, gross 50%, net +39%, risk at stake 1.24%
+      + XLE    admitted  -> gross 67%, net +56%, risk 1.74%
+      + META   admitted  -> gross 73%, net +50%, risk 1.97%
+
+  ----------------------------------------------------------------
+  PASSED IDEAS   logged to the shadow book and scored later, no orders
+      . UAL    short stop 101.50  stop 106.50  target 95.00  P 33%
+      . XLC    short stop 102.90  stop 106.00  target 98.00  P 33%
+      . TLT    long  stop 82.05  stop 80.70  target 84.20  P 30%
+
+  ----------------------------------------------------------------
+  2 approved, 0 rejected.  Total new risk $748.80 (0.73% of equity)
+  2 position update(s) pending.
+  3 idea(s) for the shadow book.
+
+  ! Market is closed. Next open: 2026-10-28T09:30:00-04:00
+    Orders will queue. Market orders will fill at the next open.
+
+  ~ NVDA close order sent x26 [pending_new]
+  ~ TSLA stop -> 395.00 [held]
+  > XLE long x243 submitted [pending_new]  id=39b3c5d0
+  > META short x9 submitted [pending_new]  id=1bddcd6a
+
+  Logged to journal.csv
+

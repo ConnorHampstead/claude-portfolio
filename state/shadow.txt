@@ -1,3 +1,3 @@
-  UNH    long  stop         -1.00R  (passed 2026-10-21)
+  CAT    short stop         -1.04R  (passed 2026-10-23)
 
-  1 idea(s) resolved, 13 still pending.
+  1 idea(s) resolved, 15 still pending.
