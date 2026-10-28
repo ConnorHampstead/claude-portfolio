@@ -1,3 +1,2 @@
-  AVGO   short stop         -1.10R  (passed 2026-10-22)
 
-  1 idea(s) resolved, 16 still pending.
+  0 idea(s) resolved, 18 still pending.

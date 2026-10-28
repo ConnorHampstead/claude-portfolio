@@ -1,0 +1,15 @@
+
+====================================================================
+  SESSION 2026-10-28   equity $102,220.62   day P&L -0.09%
+====================================================================
+
+  ----------------------------------------------------------------
+  PASSED IDEAS   logged to the shadow book and scored later, no orders
+      . ENPH   short stop 23.70  stop 26.20  target 20.50  P 33%
+
+  ----------------------------------------------------------------
+  No new positions today.
+  1 idea(s) for the shadow book.
+
+  Validation only - `check` never sends. `submit --confirm` sends these.
+

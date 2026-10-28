@@ -1,4 +1,4 @@
-  closed ORCL   stop    -0.06R  $-15.72  (levels were moved - not scored for calibration)
+  closed NVDA   close   -0.76R  $-190.47  (levels were moved - not scored for calibration)
 
   1 trade(s) closed out.
   Fill in `thesis_verdict` by hand: right/wrong thesis vs right/wrong outcome.
