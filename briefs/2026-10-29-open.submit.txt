@@ -1,0 +1,42 @@
+
+====================================================================
+  SESSION 2026-10-29   equity $102,800.06   day P&L +0.53%
+====================================================================
+
+  POSITION MANAGEMENT
+
+  [OK] MSFT CLOSE x34
+      Morning invalidation hit: red on the day (526.9 vs 531.0 prior close) after a 540 open while QQQ is off its lows; beat-and-pop being sold, stop sits under half an ATR away.
+
+  [OK] CRM CLOSE x27
+      Morning invalidation hit: CRM reclaimed 230 (233.28) before the 219.80 trigger; the setup is stale.
+      ! CRM entry is still resting unfilled at 219.80 - cancelling it
+
+  ----------------------------------------------------------------
+
+  [OK] GOOGL SHORT
+      entry 279.80 (stop)  stop 290.50  target 258.40  [2.00R]
+      qty 48  notional $13,430  risk $513.60 (0.50% of equity, tier 0.5%)
+      P(target first) 30%   conviction 2
+
+  ----------------------------------------------------------------
+  BOOK-LEVEL ADMISSION   highest conviction first
+      book now: 6 positions/resting entries, gross 62%, net +39%, risk at stake 1.68%
+      + GOOGL  admitted  -> gross 75%, net +26%, risk 2.18%
+
+  ----------------------------------------------------------------
+  PASSED IDEAS   logged to the shadow book and scored later, no orders
+      . LLY    long  limit 1350.00  stop 1300.00  target 1450.00  P 35%
+      . CAT    short limit 665.00  stop 685.00  target 625.00  P 33%
+
+  ----------------------------------------------------------------
+  1 approved, 0 rejected.  Total new risk $513.60 (0.50% of equity)
+  2 position update(s) pending.
+  2 idea(s) for the shadow book.
+
+  ~ MSFT close order sent x34 [pending_new]
+  ~ CRM resting entry cancelled x27
+  > GOOGL short x48 submitted [pending_new]  id=65dce17e
+
+  Logged to journal.csv
+
