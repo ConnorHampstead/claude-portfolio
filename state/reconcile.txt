@@ -1,6 +1,2 @@
-  closed XOM    stop    -0.07R  $-36.86  (levels were moved - not scored for calibration)
-  closed BA     target  +1.52R  $+378.84
 
-  2 trade(s) closed out.
-  Fill in `thesis_verdict` by hand: right/wrong thesis vs right/wrong outcome.
-
+  0 trade(s) closed out.

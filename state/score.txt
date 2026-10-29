@@ -30,14 +30,14 @@
   Note: thesis_verdict column is empty. Fill it in to separate skill from luck.
 
 ====================================================================
-  SHADOW BOOK   84 ideas passed on or dropped, 65 resolved
+  SHADOW BOOK   87 ideas passed on or dropped, 68 resolved
 ====================================================================
-  Never filled    11
+  Never filled    12
   Target first    18
   Stop first      33
-  Expired         3   (neither level inside the window)
+  Expired         5   (neither level inside the window)
   Ambiguous       0   (both in one bar - not scored)
-  Avg R if taken  -0.13R over 54 filled ideas   (trades actually taken: +0.07R)
+  Avg R if taken  -0.09R over 56 filled ideas   (trades actually taken: +0.07R)
   A shadow book that out-earns the trades taken says the filter is rejecting
   the better ideas.
 
