@@ -1,4 +1,4 @@
-  closed XLV    target  +1.65R  $+836.80
+  closed TSLA   stop    -0.52R  $-129.15  (levels were moved - not scored for calibration)
 
   1 trade(s) closed out.
   Fill in `thesis_verdict` by hand: right/wrong thesis vs right/wrong outcome.

@@ -1,0 +1,26 @@
+
+====================================================================
+  SESSION 2026-10-30   equity $102,294.25   day P&L -0.43%
+====================================================================
+
+  [OK] LLY LONG
+      entry 1431.19 (market)  stop 1385.00  target 1520.00  [1.92R]
+      qty 5  notional $7,156  risk $230.95 (0.23% of equity, tier 0.25%)
+      P(target first) 40%   conviction 2
+
+  ----------------------------------------------------------------
+  BOOK-LEVEL ADMISSION   highest conviction first
+      book now: 6 positions/resting entries, gross 81%, net +20%, risk at stake 2.50%
+      + LLY    admitted  -> gross 88%, net +27%, risk 2.72%
+
+  ----------------------------------------------------------------
+  PASSED IDEAS   logged to the shadow book and scored later, no orders
+      . AMZN   long  market 238.12  stop 228.50  target 252.00  P 33%
+      . NVDA   short stop 205.00  stop 215.00  target 188.00  P 30%
+
+  ----------------------------------------------------------------
+  1 approved, 0 rejected.  Total new risk $230.95 (0.23% of equity)
+  2 idea(s) for the shadow book.
+
+  Validation only - `check` never sends. `submit --confirm` sends these.
+

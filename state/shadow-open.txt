@@ -1,2 +1,6 @@
+  XLV    long  target       +2.26R  (passed 2026-10-20)
+  LLY    long  target       +1.70R  (passed 2026-10-23)
+  LLY    long  target       +1.85R  (passed 2026-10-29)
+  AMZN   short stop         -0.34R  (passed 2026-10-30)
 
-  0 idea(s) resolved, 19 still pending.
+  4 idea(s) resolved, 18 still pending.
