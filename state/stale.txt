@@ -1,9 +1,8 @@
 
-  4 resting exit order(s) left alone (protecting an open position):
+  3 resting exit order(s) left alone (protecting an open position):
     META   buy   x9      bracket @580
     TSLA   sell  x17     bracket @421
     KRE    sell  x142    bracket @76.2
-    XLV    sell  x160    bracket @184.8
 
   No unfilled entry orders older than 5d.
 
