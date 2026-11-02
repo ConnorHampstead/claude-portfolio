@@ -1,7 +1,11 @@
 
-  3 resting exit order(s) left alone (protecting an open position):
+  7 resting exit order(s) left alone (protecting an open position):
+    SMH    buy   x23     bracket @486
+    LLY    sell  x5      bracket @1520
+    XLE    sell  x243    bracket @73.2
+    XLP    sell  x270    bracket @93.5
+    GOOGL  buy   x48     bracket @258.4
     META   buy   x9      bracket @580
-    TSLA   sell  x17     bracket @421
     KRE    sell  x142    bracket @76.2
 
   No unfilled entry orders older than 5d.

@@ -1,0 +1,47 @@
+
+====================================================================
+  SESSION 2026-11-02   equity $101,620.40   day P&L -0.56%
+====================================================================
+
+  POSITION MANAGEMENT
+
+  [OK] XLE CLOSE x243
+      Thesis was energy repricing $100+ oil; WTI is back under $100 on Iran diplomacy and the 69.86 breakout has failed, with the stop only 0.5 ATR away.
+
+  ----------------------------------------------------------------
+
+  [OK] ORCL SHORT
+      entry 122.40 (stop)  stop 130.40  target 110.40  [1.50R]
+      qty 63  notional $7,711  risk $504.00 (0.50% of equity, tier 0.5%)
+      P(target first) 36%   conviction 3
+      ! entry 122.4 is 3.2% from last price 126.41
+
+  [OK] XHB LONG
+      entry 103.10 (stop)  stop 100.40  target 107.20  [1.52R]
+      qty 188  notional $19,383  risk $507.60 (0.50% of equity, tier 0.5%)
+      P(target first) 37%   conviction 2
+
+  ----------------------------------------------------------------
+  BOOK-LEVEL ADMISSION   highest conviction first
+      book now: 7 positions/resting entries, gross 88%, net +26%, risk at stake 2.75%
+      + ORCL   admitted  -> gross 96%, net +19%, risk 3.24%
+      x XHB    dropped: would be 9 positions and resting entries, cap is 8
+
+  ----------------------------------------------------------------
+  PASSED IDEAS   logged to the shadow book and scored later, no orders
+      . UAL    long  limit 107.00  stop 103.50  target 114.00  P 40%
+      . TLT    long  stop 82.10  stop 80.90  target 83.90  P 38%
+
+  ----------------------------------------------------------------
+  1 approved, 0 rejected, 1 dropped by book-level caps.  Total new risk $504.00 (0.50% of equity)
+  1 position update(s) pending.
+  3 idea(s) for the shadow book.
+
+  ! Market is closed. Next open: 2026-11-02T09:30:00-05:00
+    Orders will queue. Market orders will fill at the next open.
+
+  ~ XLE close order sent x243 [pending_new]
+  > ORCL short x63 submitted [pending_new]  id=60eb2fa2
+
+  Logged to journal.csv
+
