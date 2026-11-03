@@ -1,8 +1,7 @@
 
-  7 resting exit order(s) left alone (protecting an open position):
+  6 resting exit order(s) left alone (protecting an open position):
+    ORCL   buy   x63     bracket @110.4
     SMH    buy   x23     bracket @486
-    LLY    sell  x5      bracket @1520
-    XLE    sell  x243    bracket @73.2
     XLP    sell  x270    bracket @93.5
     GOOGL  buy   x48     bracket @258.4
     META   buy   x9      bracket @580

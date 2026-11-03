@@ -1,0 +1,25 @@
+
+====================================================================
+  SESSION 2026-11-03   equity $102,473.13   day P&L -0.67%
+====================================================================
+
+  [OK] AAPL SHORT
+      entry 330.00 (limit)  stop 338.80  target 312.00  [2.05R]
+      qty 29  notional $9,570  risk $255.20 (0.25% of equity, tier 0.25%)
+      P(target first) 33%   conviction 2
+
+  ----------------------------------------------------------------
+  BOOK-LEVEL ADMISSION   highest conviction first
+      book now: 7 positions/resting entries, gross 96%, net +21%, risk at stake 2.97%
+      + AAPL   admitted  -> gross 105%, net +11%, risk 3.22%
+
+  ----------------------------------------------------------------
+  PASSED IDEAS   logged to the shadow book and scored later, no orders
+      . XLI    long  limit 171.00  stop 167.50  target 177.00  P 35%
+
+  ----------------------------------------------------------------
+  1 approved, 0 rejected.  Total new risk $255.20 (0.25% of equity)
+  1 idea(s) for the shadow book.
+
+  Validation only - `check` never sends. `submit --confirm` sends these.
+
