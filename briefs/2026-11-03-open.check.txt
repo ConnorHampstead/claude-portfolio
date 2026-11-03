@@ -1,0 +1,15 @@
+
+====================================================================
+  SESSION 2026-11-03   equity $102,101.59   day P&L -1.03%
+====================================================================
+
+  ----------------------------------------------------------------
+  PASSED IDEAS   logged to the shadow book and scored later, no orders
+      . CRM    short limit 220.00  stop 227.00  target 206.00  P 35%
+
+  ----------------------------------------------------------------
+  No new positions today.
+  1 idea(s) for the shadow book.
+
+  Validation only - `check` never sends. `submit --confirm` sends these.
+
