@@ -1,0 +1,49 @@
+
+====================================================================
+  SESSION 2026-11-04   equity $102,683.81   day P&L +1.26%
+====================================================================
+
+  POSITION MANAGEMENT
+
+  [OK] AAPL CLOSE x29
+      Pre-market 339.33 is above the 338.80 stop and the 334 invalidation; mega-cap bid. Exit rather than leave it to a gap fill.
+
+  [OK] ORCL UPDATE x63 (short, avg 122.52)
+      stop   130.40 -> 129.00
+      risk-at-stake $408.02 (0.40% of equity)
+      Data-center moratorium fears confirm the thesis; tighten stop to 129, still >0.8 ATR above the 126.19 prior close.
+
+  [OK] SMH UPDATE x23 (short, avg 518.88)
+      stop   541.00 -> 532.00
+      risk-at-stake $301.76 (0.29% of equity)
+      Falling despite AMD beat; tighten stop to above the 520.53 broken 20d low plus 0.5 ATR, cutting risk.
+
+  [OK] KRE UPDATE x142 (long, avg 73.06)
+      stop   71.25 -> 72.00
+      risk-at-stake $150.52 (0.15% of equity)
+      New 20d high; raise stop under the 72.88 prior close.
+
+  [OK] XHB UPDATE x242 (long, avg 102.93)
+      stop   100.90 -> 101.80
+      risk-at-stake $273.46 (0.27% of equity)
+      Trail stop under the 102.86 breakout, about 1 ATR below last.
+
+  [OK] XLP UPDATE x270 (long, avg 89.90)
+      stop   88.00 -> 88.80
+      risk-at-stake $297.00 (0.29% of equity)
+      At 20d high; raise stop under the 88.95 prior close, 1.4 ATR below last.
+
+  ----------------------------------------------------------------
+
+  ----------------------------------------------------------------
+  PASSED IDEAS   logged to the shadow book and scored later, no orders
+      . NVDA   short stop 200.40  stop 208.50  target 184.00  P 36%
+      . HD     long  limit 342.00  stop 334.00  target 358.00  P 40%
+
+  ----------------------------------------------------------------
+  No new positions today.
+  6 position update(s) pending.
+  2 idea(s) for the shadow book.
+
+  Validation only - `check` never sends. `submit --confirm` sends these.
+

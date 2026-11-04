@@ -1,5 +1,4 @@
-  CVX    long  stop         -1.00R  (passed 2026-10-27)
-  CAT    short target       +1.80R  (passed 2026-10-29)
-  AMZN   long  target       +1.49R  (passed 2026-10-30)
+  NFLX   short expired      +0.01R  (passed 2026-10-21)
+  ENPH   short never filled   (passed 2026-10-28)
 
-  3 idea(s) resolved, 18 still pending.
+  2 idea(s) resolved, 17 still pending.

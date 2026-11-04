@@ -1,5 +1,7 @@
 
-  6 resting exit order(s) left alone (protecting an open position):
+  8 resting exit order(s) left alone (protecting an open position):
+    XHB    sell  x242    bracket @107.2
+    AAPL   buy   x29     bracket @312
     ORCL   buy   x63     bracket @110.4
     SMH    buy   x23     bracket @486
     XLP    sell  x270    bracket @93.5
