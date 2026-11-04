@@ -53,109 +53,77 @@ what you actually believe rather than clustering everything near 60%.
 
 ## This morning's pre-market brief
 
-Research is done. AAPL is gapping down after earnings, PLTR is lower, AMD reports tonight, voting in the midterms is under way, and oil is up again after a US strike on Iran. Next I'll write the brief.
+Quick update: slots are full (8 of 8), so today's brief is mainly about managing the existing positions. I've checked the overnight news (the Democratic midterm sweep, AMD's earnings beat, the ADP print), and the AAPL short is already through its stop pre-market. Writing the brief now.
 
-# Pre-market brief: Tuesday 2026-11-03, 09:05 ET / 15:05 Stockholm
+# Pre-market brief: Wednesday 2026-11-04 (09:05 ET / 15:05 Stockholm, ET+6)
 
 ### 1. Tape
-The open is mixed and splits by sector. Dow futures are about −0.7/−0.8%, S&P futures about −0.1%, and Nasdaq-100 futures +0.2/+0.4% (verified: StockTitan, TradingKey). Semis are bouncing ahead of AMD's report tonight (SMH 522.45, +2.8%; NVDA +2.3%; AMD +4.6%). Mega-cap software and platforms are not: AAPL is −4.2% at 324.23 after a weak gross-margin guide (45–46% against a 46.3% estimate, with memory costs rising), PLTR is about −8% after earnings, and SHOP is about −16%. Brent is back above $105 after a US strike on Iran's Qeshm Island, but it has given back little of Monday's ~7% fall (sources disagree on the exact figure; USO in the table is −1.5%, which may reflect Monday's settle). The 10-year is around 4.91%. The midterms are being voted on today and results arrive tonight, after the review, so they are overnight gap risk on everything we hold. The regime is still rotation out of AI-capex and mega-cap tech into financials, staples and cyclicals, with a short-covering bounce in semis inside it. **Edge: short, in mega-cap tech that has failed on earnings.** Today's semis strength is a bounce into a binary event.
+Democrats won both chambers of Congress overnight, and Trump said he would accept the result. That removed a source of uncertainty, and buyers came into the broad index dip. In the Alpaca table, SPY is +1.2%, DIA +2.1% and IWM +1.8%, but QQQ is only +0.2% and SMH −1.6%. The market is splitting, not rising evenly. AI data-center names are being sold on fears that Democratic governors in Texas, Ohio and Georgia will restrict new builds: ORCL is −3.1%, NVDA −1.2%, TSLA −5.3%, and sources report CRWV/IREN down 3–4% (sourced, not checked against my table). Renewables are rallying (FSLR about +8%, reported, not checked). AMD beat (EPS $2.09 vs $1.95, revenue $13.4B vs $13.1B) and is up about 5–6%, yet SMH is lower. That means the AMD beat is not pulling the AI-infrastructure group up with it. Gold is +3.1% and USO −2.9%. **The regime is rotation out of AI-capex into cyclicals, defensives and small caps, which is the book's existing thesis.** I see the edge long in breadth (banks, homebuilders, staples) and short in AI infrastructure. Mega-cap platforms (AAPL, MSFT, AMZN, META, GOOGL) are being bought, and that hurts three of my shorts.
 
 ### 2. Calendar
-| Time ET | Stockholm | Event | Status / consensus | Touches |
+| Time ET | Stockholm | Event | Actual / consensus | Touches |
 |---|---|---|---|---|
-| Overnight | — | AAPL FQ4 (Mon after close) | Revenue $114.48B beat $113.39B; Dec-qtr GM guide 45–46% against 46.3% est.; stock −4.2% pre-market | AAPL (new) |
-| Overnight | — | PLTR Q3 (Mon after close) | Beat and raised, but TCV only +6%; stock about −8% pre-market | SMH/AI sentiment |
-| 07:00 approx | 13:00 | PFE, YUM, ZBRA, IT earnings | PFE beat and is flat; ZBRA and IT −6% | none |
-| 10:00 | 16:00 | JOLTS (Sep), factory orders | Could not verify consensus | KRE, XHB through rates |
-| All day | — | US midterm elections | Results after the close and overnight | everything; gap risk |
-| After close | after 22:00 | AMD Q3 | Consensus about $13.09B revenue, $1.95 EPS (single source) | SMH short |
-| Fri 11-06 | — | October payrolls | — | XHB, KRE |
+| 08:15 | 14:15 | ADP Oct payrolls | **86k actual vs 67k est** (Sep revised to 86k); job-changer pay growth fastest since Mar 2024. A mild hawkish lean, but TLT is still +0.3%, so the reaction is muted. | KRE, XHB, XLP |
+| 09:45 | 15:45 | S&P Global services PMI (final) | est 57.9, prev 58.8 | all |
+| 10:00 | 16:00 | ISM services Oct | prev 54.9 headline, prices 74.0. A hot prices index is a risk to XHB. | XHB, KRE |
+| 10:30 | 16:30 | EIA crude inventories | — | none directly |
+| Prior evening | — | AMD Q3 | beat; stock about +5–6% pre-market | SMH |
 
-### 3. Open positions and resting entries
-- **GOOGL short** (279.61 → 279.82, stop 290.50, target 258.40). **Intact.** It is pinned near the 276.92 20-day low and lagging the Nasdaq bounce. Hold.
-- **META short** (616.20 → 608.67, stop 643, target 580). **Intact.** It sits right at the 606.41 20-day low; a break of that level is the continuation. Hold.
-- **ORCL short** (122.52 → 120.70, stop 130.40, target 110.40). **Intact.** The $20B debt-plus-equity financing is still overhanging the stock and the offering has not priced. The +1.2% pre-market move is sympathy with semis. Hold.
-- **SMH short** (518.88 → 522.45, stop 541, target 486). **Weakening in the short run, intact structurally.** It is bouncing 2.8% into AMD tonight. AMD's earnings are not a binary event under rule 8 for an ETF position, but they are real gap risk. The stop sits 18.5 above the market, below 1 ATR, and at full size that is a 1R loss. Last week's thesis, a breakdown of the AI-capex leader group, is not invalidated by a pre-event squeeze. Hold, with the rule for the review in section 7.
-- **KRE long** (73.06 → 73.86, stop 71.25, target 76.20). **Intact.** It is near the 74.19 20-day high, and a steep curve with the 10-year at about 4.9% helps. Hold.
-- **XLP long** (89.90 → 90.06, stop 88.00, target 93.50). **Intact, but being tested.** It is −0.8% pre-market as money rotates back into semis for the day. It is still above the 89.99 retest level, and the 88 stop sits below the breakout zone. Hold.
-- **XHB resting long limit 103.00** (last 104.38, stop 100.90, target 107.20). **Keep.** It is a retest buy of yesterday's breakout above 102.86. A rates spike overnight after the midterms could fill it on a gap. That is the known risk of a limit order, and the 100.90 stop sits under Friday's close.
+I did not verify which other companies report today. None of my holdings report inside the horizon as far as I know.
 
-No manage changes.
+### 3. Open positions
+- **AAPL short (0.25 tier).** Pre-market is 339.33, above the 338.80 stop. **Invalidated.** My stated invalidation was "closes back above 334", and it has rallied 2.2% with the mega-caps. The stop will trigger at the open anyway. I am closing it explicitly so it is not left to a gap fill. Loss is about −1.05R. **Close.**
+- **GOOGL short.** 283.97 vs entry 279.61, stop 290.50. **Weakening.** It is back above the 280.36 break level I traded. The stop stays outside ordinary noise (290.5 is 0.6 ATR above). Hold. The review should close it if it trades above 288 at 10:05 with QQQ green.
+- **META short.** 630 vs entry 616.20, stop 643. **Weakening.** The mega-cap bid is working against it. The stop is 0.57 ATR away; hold, no change.
+- **ORCL short.** 122.25 (−3.1%) vs entry 122.52. **Intact and strengthening.** The data-center-moratorium story is exactly the debt-funded-capex risk in my thesis. I am tightening the stop from 130.40 to **129.00**: still more than 0.8 ATR above the 126.19 prior close, which a failed gap-down rally would have to reclaim first. Target 110.40 unchanged.
+- **SMH short.** 510.48 vs entry 518.88. **Intact.** It is falling even with a strong AMD print, which is the tell. I am tightening the stop from 541 to **532.00**: above the 520.53 broken 20d low plus half an ATR, and above yesterday's 518.52 close. This cuts risk by about $207. Target 486.
+- **KRE long.** 74.23 at a new 20d high (74.19). **Intact.** I am raising the stop from 71.25 to **72.00**, under the 72.88 prior close by more than half an ATR and 1.06 below entry. Target 76.20.
+- **XHB long.** 104.40 vs entry 102.93. **Intact.** I am raising the stop from 100.90 to **101.80**, under the 102.86 breakout and 2.6 below last (about 1 ATR). Target 107.20.
+- **XLP long.** 90.93 at its 20d high. **Intact.** I am raising the stop from 88.00 to **88.80**, under the prior close of 88.95 and 2.1 below last (1.4 ATR). Target 93.50.
+
+No resting entries.
 
 ### 4. New plays
-
-**AAPL short: post-earnings failed retest**
-| Field | Value |
-|---|---|
-| Ticker | AAPL |
-| Direction | Short |
-| Catalyst | 2026-11-02 FQ4 report: Dec-qtr GM guide 45–46% against 46.3% est., memory-cost pressure, iPad miss; stock −4.2% pre-market at 324.23, below the 330.62 20-day low |
-| Thesis | Margin compression from memory costs is a multi-quarter story, not a one-day reset, and the tape is punishing mega-cap tech that disappoints (GOOGL, META, MSFT this cycle). A bounce back to the broken 20-day low at about 330 is the place to sell. |
-| Entry | 330.00 limit (sell), back at the broken 20-day low of 330.62 |
-| Stop | 338.80. Above the 338.32 prior close, so a full gap fill proves the market shrugged the guide off. Risk 8.80, about 1.3 ATR. |
-| Target | 312.00 (2.05R) |
-| Risk tier | 0.25. Probe size: it would be the fifth tech/AI-adjacent short, with tech-sector net exposure near the 40% cap, and mega-cap earnings gaps often get bought. |
-| Time horizon | 2–5 days |
-| Conviction | 2 |
-| P(target before stop) | 0.33 |
-| Invalidation | AAPL reclaims and closes above 334 within two sessions, or a rally back above 330 from a broad tech squeeze holds through the close |
-| What I'd be wrong about | Apple's gap-downs are bought more reliably than other mega-caps': revenue beat, buybacks, and the guide misses by only about 0.3–1.3pt. It may never bounce to 330, leaving no fill and no exposure, or bounce straight through to fill the gap. |
+None. All 8 slots are taken and the harness allows 0 new plays. Closing AAPL frees a slot only after the open, so the review can use it (see §7).
 
 ### 5. Both sides
-- **Best short: AAPL**, taken above as a 0.25 probe.
-- **Best long: XLI** at a 171.00 limit, stop 167.50, target 177.00, P = 0.35. Industrials are leading the rotation (+0.7% pre-market, near the 172.34 20-day high). Passed: no slot is left after AAPL, and it overlaps the cyclical long already in XHB and KRE.
+- **Best short: NVDA breakdown.** Sell stop at 200.40, under the 200.92 20d low; stop 208.50, which is above the 206.69 prior close; target 184.00 (about 2R); P = 0.36. It fits the data-center-policy story, but there is no slot, and it would stack a fifth AI-tech short on top of SMH, which overlaps it. **Passed.**
+- **Best long: HD.** Breakout to 346 (+3.7%) above the 341.54 20d high. Limit 342.00 on a retest; stop 334.00, under the breakout by about 1 ATR; target 358.00 (2R); P = 0.40. No slot, and it duplicates XHB's housing exposure. HD reports mid-November; I did not verify the date, so I would check it before taking the trade. **Passed.**
 
 ### 6. Passing on
-- **XLI long**: see above; no slot.
-- **PLTR short**: −8% to about 163.80 (seen in one pre-market source and not in my market table). I could not confirm the level well enough to trade it, and it would stack more AI shorts.
-- **SHOP short**: −16% gap. The move already happened; a pass with no levels.
-- **SMH / AMD into earnings, either side**: it is a coin flip on a binary event, and I am already short SMH.
+- **NVDA short** and **HD long**: as above, no slot.
+- **TSLA short** (−5.3% to 377 on the Democratic sweep): the move has already happened, and the 3.8% ATR means a sensible stop gives poor R. No levels.
+- **FSLR/RUN long** (renewables gap up): I could not verify the prices in my table. Excluded.
+- **AMD long** after earnings: it gapped about 6% while the group is falling. I would be chasing a gap against the sector.
 
 ### 7. For the post-open review
-- **AAPL:** if it opens weak and breaks its opening-range low with no bounce toward 330 by 10:05, leave the limit in place; do not chase below 320. If it is already back above 334 by 10:05 (the gap is being bought), cancel the limit.
-- **SMH:** if SMH is above 535 at 10:05 with NVDA above 212, close it before AMD (take about −0.7R rather than risk a full −1R overnight gap). Otherwise hold.
-- **JOLTS at 10:00:** a sharply strong print that pushes the 10-year toward 5% argues for cancelling the XHB limit. Otherwise keep it.
+- **The AAPL slot frees up.** If ORCL's opening range holds below 124 and NVDA is below 202 at 10:05, consider the NVDA short with the §5 levels at a 0.25–0.5 tier. Otherwise use the slot for nothing.
+- **GOOGL:** above 288 at 10:05 with QQQ positive → close it (about −0.75R) instead of carrying it to the 290.50 stop.
+- **ISM services at 10:00:** if the prices index is ≥76 and TLT turns red, close half the case for XHB by keeping its new 101.80 stop. If the 10-year breaks to a new high, close XHB outright.
+- **META:** above 640 at 10:05 → close it.
 
 ### 8. Book state
-If AAPL fills: 8 of 8 slots. Risk at stake is about 2.97% + 0.25% ≈ **3.22%** (cap 4%). Gross exposure is about 96% + 9% ≈ **105%** (cap 150%), and net about **+12%** (cap ±100%).
+Once AAPL closes and the stops are tightened: 7 of 8 slots. Risk at stake falls from 3.20% to roughly **2.0%** of equity (cap 4%). Gross is about **96%** (cap 150%) and net about **+21%** (cap ±100%).
 
-Sources: [StockTitan](https://www.stocktitan.net/articles/stock-market-today-live-november-3-2026), [TradingKey](https://www.tradingkey.com/analysis/stocks/us-stocks/262267546-us-premarket-futures-mixed-aapl-down-4-pltr-down-8-amd-earnings-ahead-tradingkey), [CNBC premarket movers](https://www.cnbc.com/2026/11/03/stocks-making-the-biggest-moves-premarket-pfe-pltr-aapl-zbra.html), [CNBC Apple/Palantir](https://www.cnbc.com/2026/11/03/apple-palantir-stock-earnings.html), [Tradingpedia](https://www.tradingpedia.com/2026/11/03/apple-shares-fall-as-margin-outlook-china-eclipse-beat/), [Yahoo Finance](https://finance.yahoo.com/markets/live/stock-market-today-tuesday-november-3-dow-sp-500-nasdaq-midterms-amd-090846378.html), [TT News oil](https://www.ttnews.com/articles/oil-prices-us-attacks-iran), [Trading Economics Brent](https://tradingeconomics.com/commodity/brent-crude-oil), [KuCoin PLTR](https://www.kucoin.com/news/flash/palantir-stock-drops-8-15-in-premarket-despite-strong-q3-earnings), [TradingKey AMD](https://www.tradingkey.com/analysis/stocks/us-stocks/262267536-ahead-amd-earnings-shares-up-premarket-helios-volume-pc-demand-tradingkey)
+Sources: [TipRanks](https://www.tipranks.com/news/stock-market-today-nov-4-futures-rise-after-democrats-sweep-midterm-elections), [Yahoo Finance live](https://finance.yahoo.com/markets/live/stock-market-today-dow-sp-500-nasdaq-midterm-elections-091834396.html), [Benzinga](https://www.benzinga.com/markets/equities/26/11/62854452/stock-market-today-dow-jones-sp-500-futures-rise-as-democrats-take-control-of-congress-amd-amgn-nvo-in-focus), [Investing.com premarket movers](https://www.investing.com/news/stock-market-news/premarket-movers-trump-media-ai-infrastructure-stocks-fall-amd-jumps-4998777), [Yahoo AI data center/renewables](https://finance.yahoo.com/energy/articles/ai-data-center-stocks-dip-113427491.html), [CNBC](https://www.cnbc.com/2026/11/04/ai-stocks-texas-governor-data-centers.html), [Benzinga Gerstner](https://www.benzinga.com/markets/equities/26/11/62856685/crwv-apld-iren-stocks-slip-as-brad-gerstner-warns-democratic-midterm-gains-could-put-10–15-gw-of-ai-dat), [Investing.com ADP](https://www.investing.com/news/economic-indicators/us-private-payrolls-rise-by-86000-in-october-adp-says-4999417), [Investing.com calendar](https://ph.investing.com/news/stock-market-news/adp-jobs-report-services-pmi-and-oil-inventories-among-data-due-wednesday-93CH-2671538), [Chartmill premarket](https://www.chartmill.com/news/FTK/Chartmill-57770-Premarket-Movers-Nov-4-2026-Gainers-and-Losers)
 
 ```json
 {
-  "date": "2026-11-03",
-  "no_trade": false,
-  "session_note": "Mixed open on midterm day: AAPL/PLTR punished on earnings while semis squeeze into AMD tonight; rotation regime intact. Holding all positions, adding an AAPL post-earnings short probe on a bounce to the broken 20d low.",
-  "plays": [
-    {
-      "ticker": "AAPL",
-      "direction": "short",
-      "entry_type": "limit",
-      "entry": 330.00,
-      "stop": 338.80,
-      "targets": [312.00],
-      "time_horizon": "2-5 days",
-      "conviction": 2,
-      "risk_pct": 0.25,
-      "p_target_first": 0.33,
-      "catalyst": "2026-11-02 FQ4 report: Dec-qtr gross-margin guide 45-46% vs 46.3% est on memory costs, iPad miss; stock -4.2% pre-market below the 330.62 20d low.",
-      "thesis": "Memory-cost margin compression is multi-quarter and the tape is punishing mega-cap tech that disappoints. A bounce to the broken 20d low near 330 is the place to sell, with the stop above the full gap fill.",
-      "invalidation": "AAPL closes back above 334 within two sessions, or a broad tech squeeze carries it above 330 into the close.",
-      "bear_case": "Apple gap-downs get bought reliably; revenue beat and buybacks, and the guide miss is small. It may never bounce to 330 or may fill the gap outright."
-    }
+  "date": "2026-11-04",
+  "no_trade": true,
+  "session_note": "Democratic midterm sweep: breadth rally plus AI data-center selloff, i.e. the book's rotation thesis. No slots free; closing the invalidated AAPL short and tightening stops. The review may use the freed slot for an NVDA breakdown short if ORCL/NVDA stay weak at 10:05.",
+  "plays": [],
+  "manage": [
+    {"ticker": "AAPL", "action": "close", "reason": "Pre-market 339.33 is above the 338.80 stop and the 334 invalidation; mega-cap bid. Exit rather than leave it to a gap fill."},
+    {"ticker": "ORCL", "action": "update", "stop": 129.00, "reason": "Data-center moratorium fears confirm the thesis; tighten stop to 129, still >0.8 ATR above the 126.19 prior close."},
+    {"ticker": "SMH", "action": "update", "stop": 532.00, "reason": "Falling despite AMD beat; tighten stop to above the 520.53 broken 20d low plus 0.5 ATR, cutting risk."},
+    {"ticker": "KRE", "action": "update", "stop": 72.00, "reason": "New 20d high; raise stop under the 72.88 prior close."},
+    {"ticker": "XHB", "action": "update", "stop": 101.80, "reason": "Trail stop under the 102.86 breakout, about 1 ATR below last."},
+    {"ticker": "XLP", "action": "update", "stop": 88.80, "reason": "At 20d high; raise stop under the 88.95 prior close, 1.4 ATR below last."}
   ],
-  "manage": [],
   "passed": [
-    {
-      "ticker": "XLI",
-      "direction": "long",
-      "entry_type": "limit",
-      "entry": 171.00,
-      "stop": 167.50,
-      "targets": [177.00],
-      "p_target_first": 0.35,
-      "reason": "Best long: industrials leading the rotation near the 172.34 20d high, but no slot left and overlaps XHB/KRE cyclical exposure."
-    }
+    {"ticker": "NVDA", "direction": "short", "entry_type": "stop", "entry": 200.40, "stop": 208.50, "targets": [184.00], "p_target_first": 0.36, "reason": "Best short: breakdown below the 200.92 20d low on data-center policy risk, but no slot and overlaps SMH."},
+    {"ticker": "HD", "direction": "long", "entry_type": "limit", "entry": 342.00, "stop": 334.00, "targets": [358.00], "p_target_first": 0.40, "reason": "Best long: breakout above the 341.54 20d high; no slot, duplicates XHB, earnings date unverified."}
   ]
 }
 ```
@@ -163,17 +131,17 @@ Sources: [StockTitan](https://www.stocktitan.net/articles/stock-market-today-liv
 ## Current book state
 *Auto-generated. These are live figures - use them, do not estimate.*
 
-- Time now: **10:05 ET** (15:05 UTC, 16:05 Stockholm), Tuesday 2026-11-03. The cash session opened 35 min ago and closes at 16:00 ET (22:00 Stockholm).
-- Equity: **$102,115.17**
-- Cash: $90,890.96
-- Session P&L so far: -1.02% (new entries are blocked at -3.0%)
-- Gross exposure: $107,845 (106% of equity, cap 150%)
-- Net exposure: $+11,224 (+11%, cap +/-100%)
-- Risk at stake (entry to stop): $3,284 (3.22% of equity, cap 4.0%) — 0.78% left for new plays
-- Slots: 8 open + 0 resting entries of 8 — you may add at most 0 more
+- Time now: **10:05 ET** (15:05 UTC, 16:05 Stockholm), Wednesday 2026-11-04. The cash session opened 35 min ago and closes at 16:00 ET (22:00 Stockholm).
+- Equity: **$102,348.66**
+- Cash: $79,087.95
+- Session P&L so far: +0.93% (new entries are blocked at -3.0%)
+- Gross exposure: $46,999 (46% of equity, cap 150%)
+- Net exposure: $+23,261 (+23%, cap +/-100%)
+- Risk at stake (entry to stop): $749 (0.73% of equity, cap 4.0%) — 3.27% left for new plays
+- Slots: 3 open + 0 resting entries of 8 — you may add at most 5 more
 - *Gross, net, risk and slots count resting entries as if filled.*
-- A new long can be up to 44% of equity in notional: at 1% risk its stop must be at least 2.3% from entry (half that at 0.5%, a quarter at 0.25%).
-- A new short can be up to 44% of equity in notional: at 1% risk its stop must be at least 2.3% from entry (half that at 0.5%, a quarter at 0.25%).
+- A new long can be up to 50% of equity in notional: at 1% risk its stop must be at least 2.0% from entry (half that at 0.5%, a quarter at 0.25%).
+- A new short can be up to 50% of equity in notional: at 1% risk its stop must be at least 2.0% from entry (half that at 0.5%, a quarter at 0.25%).
 
 ### Open positions
 
@@ -181,40 +149,35 @@ Sources: [StockTitan](https://www.stocktitan.net/articles/stock-market-today-liv
 
 | Symbol | Side | Qty | Avg entry | Last | Unreal. P&L | Stop | Target | Original thesis |
 |---|---|---|---|---|---|---|---|---|
-| AAPL | short | 29 | 330.06 | 333.00 | -85 (-0.9%) | 338.80 | 312.00 | Memory-cost margin compression is multi-quarter and the tape is punishing mega-cap tech that disappoints. A bounce to th |
-| GOOGL | short | 48 | 279.61 | 277.84 | +85 (+0.6%) | 290.50 | 258.40 | A break of the 280.36 opening-range low on the gap day confirms the bounce failed and selling continues; post-earnings d |
-| KRE | long | 142 | 73.06 | 73.43 | +53 (+0.5%) | 71.25 | 76.20 | Regional banks are among the few groups making new highs while AI capex unwinds; NIM widening and a steep curve support  |
-| META | short | 9 | 616.20 | 615.11 | +10 (+0.2%) | 643.00 | 580.00 | Market is punishing META capex without a cloud business to monetize it; a break of the 20d low extends the drift toward  |
-| ORCL | short | 63 | 122.52 | 124.75 | -140 (-1.8%) | 130.40 | 110.40 | Oracle is the clearest case of AI capex financed with debt and now equity; a $10B raise into a market punishing capex co |
-| SMH | short | 23 | 518.88 | 518.35 | +12 (+0.1%) | 541.00 | 486.00 | Semis are the most crowded AI-capex expression; a break of the 520.53 20d low converts the gap into a range breakdown be |
-| XHB | long | 242 | 102.93 | 103.15 | +53 (+0.2%) | 100.90 | 107.20 | Homebuilders benefit when yields and energy costs fall together; the breakout above 102.86 is confirmed. Buying the firs |
-| XLP | long | 270 | 89.90 | 89.42 | -128 (-0.5%) | 88.00 | 93.50 | Money leaving AI-capex names is going to staples; a pullback to the 89.99 breakout level is a retest that buys the rotat |
+| KRE | long | 142 | 73.06 | 74.08 | +145 (+1.4%) | 72.00 | 76.20 | Regional banks are among the few groups making new highs while AI capex unwinds; NIM widening and a steep curve support  |
+| SMH | short | 23 | 518.88 | 516.05 | +65 (+0.5%) | 532.00 | 486.00 | Semis are the most crowded AI-capex expression; a break of the 520.53 20d low converts the gap into a range breakdown be |
+| XLP | long | 270 | 89.90 | 91.15 | +338 (+1.4%) | 88.80 | 93.50 | Money leaving AI-capex names is going to staples; a pullback to the 89.99 breakout level is a retest that buys the rotat |
 
 ### Record
 
-35 closed trades: 12W / 23L, total +1.31R, net $+2,268 realized. Shorts taken: 33.
+40 closed trades: 13W / 27L, total -0.69R, net $+1,814 realized. Shorts taken: 33.
 
 ### Last 5 closed trades
 
 | Symbol | Direction | Exit | R | P&L | You said |
 |---|---|---|---|---|---|
-| LLY | long | stop | -0.57R | $-134 | 40% |
-| XLE | long | close | -0.46R | $-236 | 38% |
-| TSLA | long | stop | -0.52R | $-129 | 35% |
-| MSFT | long | close | -0.80R | $-324 | 38% |
-| XLV | long | target | +1.65R | $+837 | 40% |
+| GOOGL | short | stop | -1.00R | $-522 | 30% |
+| ORCL | short | stop | -0.84R | $-418 | 36% |
+| XHB | long | target | +2.18R | $+1,071 | 38% |
+| META | short | stop | -0.59R | $-142 | 35% |
+| AAPL | short | close | -1.75R | $-443 | 33% |
 
 ### Ideas you passed on, replayed against the tape
 
-81 resolved: 24 reached target first, 36 stop first, 15 never reached the entry, 6 expired, 0 ambiguous. Average +0.06R across the 66 that would have filled.
+85 resolved: 25 reached target first, 37 stop first, 16 never reached the entry, 7 expired, 0 ambiguous. Average +0.06R across the 69 that would have filled.
 
 | Session | Symbol | Direction | Why passed | Outcome | R | You said |
 |---|---|---|---|---|---|---|
+| 2026-11-02 pre-market | XHB | long | dropped by the caps: would be 9 positions and resting entries, cap is 8 | target | +1.52R | 37% |
+| 2026-11-03 open | CRM | short | Fresh break of the 220.29 20d low on -4% day; sell a retest. No slot left and it | stop | -1.29R | 35% |
+| 2026-10-28 open | ENPH | short | Post-earnings -15%, already far below its 20d low; 5.8% ATR, and a break of toda | never filled | - | 33% |
+| 2026-10-21 open | NFLX | short | Gap-down failed at the open; price back at the old 20d low 66.54, so the breakdo | expired | +0.01R | 30% |
 | 2026-10-26 pre-market | AAPL | short | Best short (iPhone 18 Pro order cuts), but its own earnings are inside the horiz | target | +2.13R | 33% |
-| 2026-10-29 pre-market | CAT | short | -11% gap already the move; only a bounce or an opening-range breakdown offers lo | target | +1.80R | 34% |
-| 2026-10-27 pre-market | CVX | long | Duplicates XOM energy exposure, and its own Oct 30 earnings fall inside the hori | stop | -1.00R | 36% |
-| 2026-10-30 open | AMZN | long | Gap reversal from -7.4% to -2.3% is real demand, but price is still under the 24 | target | +1.49R | 33% |
-| 2026-10-28 pre-market | UAL | short | Oil headwind real but 4.8% ATR and +7% in 5d; last UAL short stopped out. | stop | -1.49R | 33% |
 
 ### Market data
 
@@ -224,84 +187,80 @@ Sources: [StockTitan](https://www.stocktitan.net/articles/stock-market-today-liv
 
 | Symbol | Last (ET) | vs prev | Prev close | Today open / low-high | ATR14 | 20d low-high | Prev vs 20d / 50d avg | 5d | Avg vol 20d |
 |---|---|---|---|---|---|---|---|---|---|
-| AAPL | 332.91 (10:05 iex) | -1.6% | 338.32 | 325.58 / 325.33-334.48 | 6.80 (2.0%) | 330.62-351.73 | -1.2% / +1.4% | -1.6% | 42.1M |
-| GOOGL | 277.76 (10:05 iex) | -0.4% | 278.99 | 280.23 / 277.80-281.36 | 10.93 (3.9%) | 276.92-359.40 | -15.6% / -17.4% | -11.9% | 34.3M |
-| KRE | 73.42 (10:05 iex) | -0.4% | 73.73 | 73.68 / 73.02-73.76 | 1.38 (1.9%) | 67.79-74.19 | +4.2% / +2.7% | +1.4% | 15.1M |
-| META | 614.87 (10:05 iex) | +1.3% | 606.73 | 610.53 / 610.10-616.74 | 23.54 (3.9%) | 606.41-771.27 | -11.3% / -9.6% | -3.8% | 23.4M |
-| ORCL | 124.65 (10:05 iex) | +4.6% | 119.22 | 122.00 / 121.35-125.23 | 8.30 (7.0%) | 118.43-148.48 | -10.7% / -15.4% | -5.4% | 33.7M |
-| SMH | 518.21 (10:05 iex) | +1.9% | 508.31 | 520.68 / 517.26-524.44 | 21.73 (4.3%) | 506.44-639.47 | -9.8% / -11.1% | -6.2% | 9.6M |
-| XHB | 103.17 (10:05 iex) | -1.3% | 104.58 | 104.02 / 102.57-104.61 | 2.70 (2.6%) | 91.87-104.90 | +7.8% / +6.3% | +6.8% | 2.3M |
-| XLP | 89.44 (10:05 iex) | -1.5% | 90.83 | 89.90 / 89.21-90.24 | 1.51 (1.7%) | 81.03-90.99 | +5.0% / +7.5% | +3.3% | 15.8M |
+| KRE | 74.07 (10:05 iex) | +1.6% | 72.88 | 74.62 / 74.03-75.67 | 1.36 (1.9%) | 67.79-74.19 | +2.8% / +1.6% | +0.4% | 15.2M |
+| SMH | 516.03 (10:05 iex) | -0.5% | 518.52 | 511.17 / 505.77-522.20 | 21.11 (4.1%) | 506.44-625.89 | -7.1% / -9.2% | -7.1% | 9.8M |
+| XLP | 91.16 (10:05 iex) | +2.5% | 88.95 | 90.62 / 90.27-91.28 | 1.51 (1.7%) | 81.69-90.99 | +2.4% / +5.2% | +2.1% | 16.3M |
 
 #### Indices, rates, commodities and sectors
 
 | Symbol | Last (ET) | vs prev | Prev close | Today open / low-high | ATR14 | 20d low-high | Prev vs 20d / 50d avg | 5d | Avg vol 20d |
 |---|---|---|---|---|---|---|---|---|---|
-| SPY | 753.16 (10:05 iex) | +0.1% | 752.10 | 752.72 / 752.39-754.68 | 8.97 (1.2%) | 750.36-781.62 | -2.2% / -1.9% | -1.7% | 39.6M |
-| QQQ | 684.80 (10:04 iex) | +0.5% | 681.09 | 684.41 / 683.18-687.28 | 15.23 (2.2%) | 680.33-762.86 | -6.0% / -5.9% | -4.4% | 40.9M |
-| IWM | 280.02 (10:05 iex) | +0.3% | 279.14 | 279.84 / 279.34-280.71 | 4.10 (1.5%) | 269.88-285.26 | +0.7% / -1.6% | +0.8% | 24.1M |
-| DIA | 515.87 (10:05 iex) | -0.7% | 519.34 | 517.06 / 515.19-517.57 | 5.29 (1.0%) | 508.35-528.45 | -0.1% / -0.3% | -0.7% | 3.3M |
-| TLT | 81.08 (10:05 iex) | -0.8% | 81.73 | 81.44 / 81.08-81.45 | 0.86 (1.1%) | 76.11-82.17 | +2.7% / +2.2% | +0.5% | 37.7M |
-| GLD | 360.96 (10:04 iex) | -0.2% | 361.65 | 361.25 / 360.94-361.86 | 6.17 (1.7%) | 354.67-385.17 | -3.5% / -7.1% | -1.7% | 8.6M |
-| USO | 156.88 (10:04 iex) | +0.0% | 156.87 | 157.44 / 156.83-157.96 | 5.45 (3.5%) | 141.76-171.82 | -0.9% / +4.2% | -5.6% | 4.8M |
-| SMH | 518.21 (10:05 iex) | +1.9% | 508.31 | 520.68 / 517.26-524.44 | 21.73 (4.3%) | 506.44-639.47 | -9.8% / -11.1% | -6.2% | 9.6M |
-| XLK | 176.16 (10:04 iex) | +1.1% | 174.22 | 175.41 / 174.80-177.28 | 5.19 (3.0%) | 173.91-203.25 | -8.1% / -8.0% | -6.5% | 9.6M |
-| XLF | 57.14 (10:05 iex) | -0.7% | 57.56 | 57.36 / 56.96-57.47 | 0.76 (1.3%) | 53.41-57.70 | +3.7% / +3.0% | +2.7% | 33.2M |
-| XLE | 66.71 (10:05 iex) | -0.8% | 67.25 | 66.62 / 66.46-67.48 | 1.54 (2.3%) | 62.93-70.15 | -0.1% / +3.7% | -3.4% | 32.5M |
-| XLV | 184.88 (10:05 iex) | +0.2% | 184.60 | 183.68 / 183.62-185.72 | 3.27 (1.8%) | 165.19-187.99 | +4.6% / +7.2% | +3.0% | 9.7M |
-| XLI | 170.77 (10:05 iex) | +0.6% | 169.71 | 170.82 / 170.34-171.34 | 2.82 (1.7%) | 162.97-172.34 | +1.0% / -0.3% | +1.6% | 7.8M |
-| XLY | 117.16 (10:05 iex) | -0.9% | 118.16 | 118.32 / 116.83-118.39 | 1.96 (1.7%) | 110.58-119.20 | +3.7% / +4.4% | +3.4% | 7.4M |
-| XLP | 89.44 (10:05 iex) | -1.5% | 90.83 | 89.90 / 89.21-90.24 | 1.51 (1.7%) | 81.03-90.99 | +5.0% / +7.5% | +3.3% | 15.8M |
-| XLU | 43.40 (10:05 iex) | -0.6% | 43.67 | 43.56 / 43.29-43.64 | 0.61 (1.4%) | 40.41-43.80 | +3.6% / +4.8% | +2.6% | 27.8M |
-| XLB | 52.80 (10:05 iex) | -1.6% | 53.67 | 53.50 / 52.78-53.53 | 0.72 (1.3%) | 48.70-54.03 | +5.4% / +5.4% | +4.5% | 10.7M |
-| XLRE | 43.47 (10:04 iex) | -0.4% | 43.64 | 43.50 / 43.30-43.57 | 0.64 (1.5%) | 40.28-43.72 | +3.7% / +2.7% | +2.0% | 8.1M |
-| XLC | 100.67 (10:05 iex) | +0.4% | 100.26 | 100.50 / 100.17-100.89 | 1.89 (1.9%) | 99.33-113.17 | -7.0% / -9.1% | -3.5% | 6.9M |
-| KRE | 73.42 (10:05 iex) | -0.4% | 73.73 | 73.68 / 73.02-73.76 | 1.38 (1.9%) | 67.79-74.19 | +4.2% / +2.7% | +1.4% | 15.1M |
-| XHB | 103.17 (10:05 iex) | -1.3% | 104.58 | 104.02 / 102.57-104.61 | 2.70 (2.6%) | 91.87-104.90 | +7.8% / +6.3% | +6.8% | 2.3M |
+| SPY | 767.98 (10:05 iex) | +1.8% | 754.35 | 763.03 / 762.64-768.22 | 8.52 (1.1%) | 750.36-779.42 | -1.8% / -1.6% | -2.0% | 39.4M |
+| QQQ | 698.97 (10:05 iex) | +2.0% | 685.28 | 688.43 / 687.87-699.41 | 14.54 (2.1%) | 680.33-758.30 | -4.9% / -5.3% | -5.0% | 41.5M |
+| IWM | 283.49 (10:05 iex) | +1.3% | 279.79 | 284.17 / 283.08-286.17 | 3.85 (1.4%) | 269.88-285.26 | +1.0% / -1.2% | -0.1% | 23.9M |
+| DIA | 528.65 (10:05 iex) | +2.2% | 517.06 | 527.73 / 527.02-529.78 | 5.21 (1.0%) | 508.35-528.45 | -0.5% / -0.7% | -1.2% | 3.4M |
+| TLT | 81.25 (10:05 iex) | +0.2% | 81.11 | 81.37 / 81.12-81.52 | 0.82 (1.0%) | 76.11-82.17 | +1.7% / +1.5% | -0.2% | 37.7M |
+| GLD | 369.86 (10:05 iex) | +3.0% | 359.26 | 369.58 / 369.46-371.28 | 5.78 (1.6%) | 354.67-385.17 | -3.9% / -7.4% | -3.5% | 8.5M |
+| USO | 153.78 (10:04 iex) | -2.8% | 158.17 | 153.22 / 152.38-153.78 | 5.46 (3.5%) | 142.47-171.82 | -0.5% / +4.7% | -3.5% | 4.9M |
+| SMH | 516.03 (10:05 iex) | -0.5% | 518.52 | 511.17 / 505.77-522.20 | 21.11 (4.1%) | 506.44-625.89 | -7.1% / -9.2% | -7.1% | 9.8M |
+| XLK | 179.49 (10:05 iex) | +1.7% | 176.51 | 176.34 / 176.12-179.98 | 4.96 (2.8%) | 173.91-201.56 | -6.2% / -6.8% | -6.8% | 9.9M |
+| XLF | 58.16 (10:05 iex) | +1.7% | 57.19 | 58.46 / 57.98-58.52 | 0.75 (1.3%) | 53.41-57.70 | +2.7% / +2.4% | +2.3% | 33.7M |
+| XLE | 64.40 (10:05 iex) | -3.4% | 66.68 | 65.92 / 64.13-65.95 | 1.57 (2.4%) | 63.04-70.15 | -1.1% / +2.7% | -2.2% | 32.7M |
+| XLV | 186.49 (10:05 iex) | +1.3% | 184.02 | 187.71 / 186.37-188.06 | 3.11 (1.7%) | 165.19-187.99 | +3.7% / +6.8% | +2.7% | 9.9M |
+| XLI | 168.62 (10:05 iex) | -1.6% | 171.32 | 170.83 / 168.11-170.98 | 2.80 (1.6%) | 162.97-172.40 | +1.9% / +0.7% | +2.0% | 8.0M |
+| XLY | 121.72 (10:05 iex) | +3.7% | 117.33 | 119.78 / 119.61-121.79 | 1.95 (1.7%) | 110.58-119.20 | +2.8% / +3.7% | +1.6% | 7.6M |
+| XLP | 91.16 (10:05 iex) | +2.5% | 88.95 | 90.62 / 90.27-91.28 | 1.51 (1.7%) | 81.69-90.99 | +2.4% / +5.2% | +2.1% | 16.3M |
+| XLU | 42.91 (10:05 iex) | -1.2% | 43.42 | 43.36 / 42.83-43.38 | 0.59 (1.4%) | 40.63-43.80 | +2.8% / +4.2% | +1.3% | 26.5M |
+| XLB | 53.30 (10:05 iex) | +1.4% | 52.59 | 53.37 / 53.24-53.69 | 0.77 (1.5%) | 48.70-54.03 | +3.0% / +3.3% | +1.6% | 10.8M |
+| XLRE | 44.40 (10:05 iex) | +1.7% | 43.67 | 44.32 / 44.10-44.55 | 0.63 (1.4%) | 40.28-43.72 | +3.4% / +2.9% | +2.9% | 8.1M |
+| XLC | 105.05 (10:05 iex) | +3.6% | 101.44 | 103.53 / 103.39-105.11 | 1.84 (1.8%) | 99.33-113.17 | -5.5% / -7.9% | -2.1% | 7.3M |
+| KRE | 74.07 (10:05 iex) | +1.6% | 72.88 | 74.62 / 74.03-75.67 | 1.36 (1.9%) | 67.79-74.19 | +2.8% / +1.6% | +0.4% | 15.2M |
+| XHB | 106.40 (10:04 iex) | +4.3% | 101.98 | 104.98 / 104.00-107.97 | 2.70 (2.6%) | 91.87-104.90 | +4.9% / +3.8% | +2.8% | 2.3M |
 
 #### Large caps
 
 | Symbol | Last (ET) | vs prev | Prev close | Today open / low-high | ATR14 | 20d low-high | Prev vs 20d / 50d avg | 5d | Avg vol 20d |
 |---|---|---|---|---|---|---|---|---|---|
-| AAPL | 332.91 (10:05 iex) | -1.6% | 338.32 | 325.58 / 325.33-334.48 | 6.80 (2.0%) | 330.62-351.73 | -1.2% / +1.4% | -1.6% | 42.1M |
-| MSFT | 511.35 (10:05 iex) | +0.8% | 507.12 | 509.49 / 507.82-512.60 | 12.79 (2.5%) | 504.96-551.15 | -4.3% / -1.2% | -4.8% | 22.6M |
-| NVDA | 207.70 (10:05 iex) | +2.8% | 202.06 | 207.88 / 205.93-209.14 | 6.74 (3.3%) | 200.92-243.37 | -8.0% / -8.8% | -6.5% | 101.4M |
-| AMZN | 246.48 (10:05 iex) | +0.3% | 245.63 | 248.68 / 245.95-249.82 | 8.36 (3.4%) | 229.36-265.34 | -3.3% / -3.3% | -1.4% | 42.7M |
-| GOOGL | 277.76 (10:05 iex) | -0.4% | 278.99 | 280.23 / 277.80-281.36 | 10.93 (3.9%) | 276.92-359.40 | -15.6% / -17.4% | -11.9% | 34.3M |
-| META | 614.87 (10:05 iex) | +1.3% | 606.73 | 610.53 / 610.10-616.74 | 23.54 (3.9%) | 606.41-771.27 | -11.3% / -9.6% | -3.8% | 23.4M |
-| TSLA | 402.25 (10:05 iex) | -0.4% | 403.82 | 406.49 / 400.91-406.50 | 15.09 (3.7%) | 349.33-414.23 | +5.7% / +9.0% | +3.1% | 36.6M |
-| AVGO | 332.72 (10:05 iex) | +3.3% | 322.23 | 328.97 / 326.60-335.74 | 13.02 (4.0%) | 319.30-380.84 | -6.2% / -8.4% | -2.1% | 22.2M |
-| AMD | 486.58 (10:05 iex) | +4.2% | 466.84 | 479.99 / 473.54-497.40 | 32.99 (7.1%) | 466.07-658.52 | -17.0% / -14.8% | -12.1% | 21.5M |
-| ORCL | 124.65 (10:05 iex) | +4.6% | 119.22 | 122.00 / 121.35-125.23 | 8.30 (7.0%) | 118.43-148.48 | -10.7% / -15.4% | -5.4% | 33.7M |
-| NFLX | 62.33 (10:05 iex) | -0.0% | 62.34 | 62.57 / 61.90-63.02 | 2.12 (3.4%) | 61.39-73.07 | -7.4% / -13.8% | -2.4% | 45.0M |
-| CRM | 217.23 (10:04 iex) | -4.0% | 226.18 | 222.40 / 214.67-222.59 | 9.08 (4.0%) | 220.29-252.42 | -4.6% / -5.4% | -8.7% | 7.1M |
-| JPM | 339.45 (10:04 iex) | -0.3% | 340.58 | 340.00 / 338.63-340.75 | 6.42 (1.9%) | 325.07-345.75 | +1.6% / -0.4% | +2.0% | 7.0M |
-| GS | 896.18 (10:05 iex) | -0.3% | 898.72 | 903.00 / 894.54-903.53 | 26.12 (2.9%) | 859.03-939.38 | +0.5% / -4.8% | +0.6% | 2.3M |
-| BAC | 49.66 (10:05 iex) | +0.2% | 49.57 | 49.37 / 49.17-49.70 | 1.30 (2.6%) | 49.26-54.93 | -4.2% / -11.7% | -1.9% | 41.9M |
-| XOM | 178.09 (10:04 iex) | -0.9% | 179.67 | 178.00 / 177.87-180.30 | 4.48 (2.5%) | 162.94-188.50 | +1.6% / +6.9% | -2.6% | 12.2M |
-| CVX | 225.40 (10:05 iex) | -1.0% | 227.77 | 224.71 / 224.46-227.56 | 5.04 (2.2%) | 204.86-236.48 | +2.2% / +6.6% | -1.8% | 7.6M |
-| LLY | 1,420.22 (10:05 iex) | +0.7% | 1,410.99 | 1,398.63 / 1,393.47-1,436.32 | 48.60 (3.4%) | 1,131.21-1,449.68 | +12.0% / +17.6% | +10.3% | 2.6M |
-| UNH | 398.08 (10:05 iex) | -0.6% | 400.44 | 398.52 / 397.00-402.08 | 12.04 (3.0%) | 368.50-426.55 | +0.2% / +2.7% | -2.5% | 6.1M |
-| JNJ | 269.75 (10:04 iex) | -0.3% | 270.56 | 268.51 / 267.74-270.56 | 6.82 (2.5%) | 245.17-282.01 | +3.4% / +1.9% | +1.6% | 7.6M |
-| WMT | 125.51 (10:05 iex) | -1.7% | 127.69 | 126.56 / 125.12-126.85 | 2.77 (2.2%) | 104.50-127.94 | +9.1% / +15.3% | +6.2% | 20.4M |
-| COST | 1,026.35 (10:04 iex) | -1.4% | 1,040.55 | 1,031.57 / 1,021.00-1,034.77 | 18.87 (1.8%) | 917.64-1,042.57 | +5.9% / +10.2% | +3.7% | 2.2M |
-| HD | 334.17 (10:05 iex) | -2.0% | 341.15 | 337.25 / 332.11-338.78 | 8.12 (2.4%) | 282.13-341.54 | +10.1% / +10.7% | +6.8% | 4.7M |
-| CAT | 618.21 (10:05 iex) | +0.7% | 613.62 | 618.94 / 617.01-623.22 | 30.36 (4.9%) | 609.89-874.87 | -16.1% / -21.1% | -11.3% | 3.3M |
-| BA | 175.03 (10:05 iex) | -0.2% | 175.40 | 175.26 / 173.84-176.40 | 5.95 (3.4%) | 165.01-193.28 | -4.9% / -10.2% | -6.9% | 10.0M |
-| DAL | 83.12 (10:05 iex) | -0.4% | 83.42 | 83.91 / 82.92-84.70 | 3.25 (3.9%) | 74.14-85.51 | +4.9% / +3.9% | +5.4% | 7.1M |
-| UAL | 108.80 (10:04 iex) | -0.4% | 109.24 | 110.30 / 108.28-111.25 | 5.27 (4.8%) | 94.54-115.20 | +5.9% / +1.6% | +8.5% | 5.3M |
+| AAPL | 353.29 (10:05 iex) | +6.4% | 331.90 | 341.85 / 340.99-353.56 | 7.31 (2.2%) | 325.33-351.73 | -3.0% / -0.6% | -4.4% | 43.7M |
+| MSFT | 554.27 (10:05 iex) | +6.4% | 520.99 | 543.70 / 542.30-557.18 | 13.01 (2.5%) | 504.96-551.15 | -1.6% / +1.3% | -1.9% | 22.6M |
+| NVDA | 205.53 (10:05 iex) | -0.6% | 206.69 | 203.55 / 200.94-206.79 | 6.61 (3.2%) | 200.92-239.08 | -5.2% / -6.6% | -5.2% | 100.9M |
+| AMZN | 271.01 (10:05 iex) | +8.1% | 250.69 | 264.97 / 263.85-271.44 | 8.35 (3.3%) | 229.36-265.34 | -1.2% / -1.2% | -1.0% | 42.9M |
+| GOOGL | 294.06 (10:05 iex) | +5.0% | 280.03 | 283.53 / 283.40-294.50 | 10.31 (3.7%) | 276.92-359.40 | -14.4% / -16.7% | -12.6% | 35.2M |
+| META | 632.66 (10:05 iex) | +1.9% | 621.03 | 641.00 / 629.00-643.09 | 22.82 (3.7%) | 606.41-771.27 | -8.5% / -7.6% | +0.1% | 23.5M |
+| TSLA | 386.57 (10:05 iex) | -3.0% | 398.50 | 379.80 / 375.50-386.62 | 14.99 (3.8%) | 349.33-414.23 | +4.1% / +7.3% | -2.2% | 36.6M |
+| AVGO | 331.84 (10:05 iex) | -0.1% | 332.13 | 326.86 / 326.03-334.12 | 12.95 (3.9%) | 319.30-376.97 | -2.7% / -5.4% | -3.0% | 21.5M |
+| AMD | 497.30 (10:05 iex) | +2.8% | 483.90 | 485.25 / 476.50-514.61 | 32.42 (6.7%) | 466.07-648.48 | -12.6% / -11.8% | -13.6% | 22.0M |
+| ORCL | 126.92 (10:05 iex) | +0.6% | 126.19 | 121.78 / 121.78-129.85 | 7.94 (6.3%) | 118.43-148.48 | -4.8% / -10.2% | -3.3% | 37.0M |
+| NFLX | 66.11 (10:05 iex) | +4.2% | 63.42 | 64.55 / 64.02-66.34 | 2.09 (3.3%) | 61.39-73.07 | -5.4% / -11.9% | +1.4% | 45.1M |
+| CRM | 231.81 (10:05 iex) | +4.3% | 222.20 | 229.00 / 228.00-231.96 | 9.44 (4.2%) | 214.67-252.42 | -6.3% / -7.2% | -7.8% | 7.1M |
+| JPM | 345.12 (10:05 iex) | +2.1% | 337.98 | 346.00 / 342.21-348.17 | 6.07 (1.8%) | 325.07-345.75 | +0.7% / -1.1% | +0.7% | 7.0M |
+| GS | 911.09 (10:05 iex) | +1.7% | 896.09 | 920.31 / 899.60-930.66 | 24.60 (2.7%) | 859.03-939.38 | +0.2% / -4.8% | -1.7% | 2.3M |
+| BAC | 51.03 (10:05 iex) | +2.8% | 49.66 | 51.26 / 50.73-51.38 | 1.03 (2.1%) | 49.17-54.93 | -3.6% / -11.1% | -2.0% | 43.2M |
+| XOM | 171.49 (10:05 iex) | -3.4% | 177.46 | 174.26 / 170.69-174.61 | 4.46 (2.5%) | 163.46-188.50 | +0.0% / +5.4% | -1.4% | 12.3M |
+| CVX | 219.15 (10:05 iex) | -2.7% | 225.27 | 222.56 / 217.33-223.01 | 4.93 (2.2%) | 204.86-236.48 | +0.7% / +5.2% | -1.3% | 7.7M |
+| LLY | 1,420.62 (10:05 iex) | +0.8% | 1,409.38 | 1,441.00 / 1,418.06-1,445.96 | 48.13 (3.4%) | 1,131.21-1,449.68 | +10.8% / +17.1% | +9.9% | 2.7M |
+| UNH | 402.24 (10:05 iex) | -0.5% | 404.44 | 396.60 / 392.50-404.44 | 11.31 (2.8%) | 368.50-426.55 | +0.8% / +3.7% | -1.4% | 6.0M |
+| JNJ | 269.64 (10:05 iex) | +1.3% | 266.17 | 272.41 / 269.32-273.12 | 6.85 (2.6%) | 245.17-282.01 | +1.5% / +0.3% | -1.0% | 7.6M |
+| WMT | 128.48 (10:05 iex) | +2.9% | 124.86 | 127.02 / 125.84-128.83 | 2.71 (2.2%) | 107.40-127.94 | +5.8% / +12.4% | +4.6% | 20.3M |
+| COST | 1,038.42 (10:05 iex) | +1.9% | 1,019.26 | 1,036.83 / 1,028.50-1,043.02 | 18.41 (1.8%) | 936.22-1,042.57 | +3.3% / +7.9% | +2.9% | 2.2M |
+| HD | 345.33 (10:05 iex) | +3.5% | 333.66 | 346.01 / 343.79-351.55 | 8.43 (2.5%) | 282.84-341.54 | +6.9% / +8.3% | +4.8% | 4.7M |
+| CAT | 593.75 (10:05 iex) | -4.8% | 623.94 | 609.45 / 590.81-609.45 | 29.22 (4.7%) | 609.89-843.99 | -13.2% / -19.4% | -12.5% | 3.4M |
+| BA | 177.19 (10:04 iex) | +2.2% | 173.31 | 177.00 / 176.03-179.10 | 5.90 (3.4%) | 165.01-193.28 | -5.6% / -10.9% | +3.1% | 10.0M |
+| DAL | 85.89 (10:04 iex) | +3.1% | 83.28 | 85.89 / 85.55-87.17 | 3.14 (3.8%) | 74.14-84.70 | +4.7% / +3.6% | +2.2% | 6.8M |
+| UAL | 111.53 (10:05 iex) | +4.0% | 107.21 | 112.17 / 111.05-113.97 | 5.17 (4.8%) | 94.54-112.01 | +4.1% / -0.2% | +2.4% | 5.3M |
 
-#### Movers (at least $5 and 1M average volume, screener as of 2026-11-03 10:05 ET)
+#### Movers (at least $5 and 1M average volume, screener as of 2026-11-04 10:05 ET)
 
 | Symbol | Last (ET) | vs prev | Prev close | Today open / low-high | ATR14 | 20d low-high | Prev vs 20d / 50d avg | 5d | Avg vol 20d |
 |---|---|---|---|---|---|---|---|---|---|
-| AEHR | 62.41 (10:05 iex) | +21.3% | 51.47 | 57.20 / 54.01-63.44 | 6.49 (12.6%) | 50.52-107.93 | -24.5% / -37.7% | -9.1% | 2.8M |
-| BEX | 19.95 (10:05 iex) | +20.5% | 16.56 | 18.88 / 18.62-20.47 | 4.01 (24.2%) | 15.66-42.45 | -36.1% / -44.5% | -9.6% | 3.4M |
-| AXTX | 13.39 (10:05 iex) | +18.4% | 11.31 | 11.51 / 11.18-13.61 | 4.09 (36.1%) | 10.87-44.60 | -45.0% / -56.3% | -30.9% | 4.8M |
-| SUPN | 29.34 (10:04 iex) | -30.0% | 41.92 | 28.35 / 28.35-31.20 | 2.04 (4.9%) | 37.54-44.31 | +1.4% / -1.2% | +2.8% | 1.1M |
-| AIOK | 10.07 (09:53 iex) | -20.2% | 12.63 | 11.01 / 9.32-11.21 | 5.88 (46.6%) | 3.90-31.09 | - / - | +37.9% | 7.1M |
-| BEZ | 6.45 (10:04 iex) | -20.5% | 8.11 | 6.95 / 6.23-7.13 | 1.23 (15.1%) | 4.18-9.16 | +25.9% / +19.3% | +2.5% | 5.0M |
-| ADTN | 5.03 (10:03 iex) | -19.9% | 6.28 | 6.18 / 5.03-6.20 | 0.29 (4.6%) | 6.28-7.91 | -8.0% / -11.6% | -4.1% | 1.5M |
-| IREZ | 22.09 (09:49 sip) | -16.8% | 26.56 | 25.47 / 22.09-26.08 | 3.75 (14.1%) | 9.12-26.82 | +50.7% / +105.7% | +22.1% | 1.6M |
-| ADEA | 17.37 (10:03 iex) | -16.0% | 20.67 | 17.21 / 16.95-17.94 | 1.17 (5.7%) | 19.89-26.34 | -7.3% / -14.9% | -3.5% | 1.2M |
-| DT | 47.33 (10:05 iex) | -14.2% | 55.13 | 46.00 / 45.52-49.20 | 2.49 (4.5%) | 54.88-66.30 | -11.5% / -4.5% | -14.1% | 7.8M |
+| YOU | 61.40 (10:05 iex) | +28.6% | 47.76 | 51.40 / 50.80-61.41 | 1.46 (3.1%) | 41.45-48.65 | +6.1% / +10.9% | +4.9% | 1.3M |
+| KD | 16.09 (10:05 iex) | +24.3% | 12.94 | 14.91 / 14.62-16.59 | 0.70 (5.4%) | 11.22-15.23 | -2.7% / +1.0% | -8.6% | 4.0M |
+| ARRY | 5.72 (10:05 iex) | +23.3% | 4.64 | 5.13 / 5.12-5.96 | 0.28 (6.1%) | 3.09-4.69 | +31.1% / +16.5% | +36.9% | 7.9M |
+| GDXU | 77.73 (10:02 iex) | +19.6% | 65.00 | 75.95 / 74.88-79.40 | 9.24 (14.2%) | 60.78-110.15 | -25.8% / -45.8% | -21.2% | 1.9M |
+| AIOK | 11.74 (10:05 iex) | +17.5% | 9.99 | 11.99 / 11.22-12.95 | 6.03 (60.4%) | 3.90-31.09 | - / - | -25.6% | 6.8M |
+| IREZ | 24.40 (10:04 iex) | +18.7% | 20.55 | 23.02 / 21.98-24.40 | 3.97 (19.3%) | 9.91-26.82 | +13.1% / +57.1% | +11.3% | 1.6M |
+| NRIX | 15.42 (10:05 iex) | -40.3% | 25.82 | 17.22 / 15.38-17.28 | 1.20 (4.6%) | 21.23-27.99 | +3.8% / +3.5% | -3.3% | 2.9M |
+| FIS | 30.25 (10:05 iex) | -22.4% | 38.99 | 30.60 / 29.92-32.40 | 1.40 (3.6%) | 33.38-40.79 | +7.1% / +6.0% | +9.5% | 6.1M |
+| MOD | 99.21 (10:05 iex) | -20.9% | 125.45 | 115.50 / 96.88-116.47 | 9.28 (7.4%) | 121.25-189.67 | -16.4% / -23.4% | -8.1% | 1.6M |
+| GDXD | 24.65 (10:03 iex) | -19.2% | 30.52 | 25.31 / 23.78-25.81 | 2.82 (9.3%) | 20.76-32.41 | +21.7% / +44.1% | +20.9% | 1.5M |
+| UVIX | 33.69 (10:05 iex) | -18.0% | 41.09 | 36.20 / 33.83-36.31 | 4.52 (11.0%) | 32.32-47.25 | +11.1% / +8.8% | +8.6% | 3.0M |

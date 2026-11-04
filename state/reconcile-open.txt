@@ -1,2 +1,9 @@
+  closed META   stop    -0.59R  $-142.04
+  closed GOOGL  stop    -1.00R  $-522.19
+  closed ORCL   stop    -0.84R  $-417.94  (levels were moved - not scored for calibration)
+  closed XHB    target  +2.18R  $+1,071.02
+  closed AAPL   close   -1.75R  $-442.83  (levels were moved - not scored for calibration)
 
-  0 trade(s) closed out.
+  5 trade(s) closed out.
+  Fill in `thesis_verdict` by hand: right/wrong thesis vs right/wrong outcome.
+

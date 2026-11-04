@@ -1,3 +1,4 @@
-  AAPL   short target       +2.13R  (passed 2026-10-26)
+  XHB    long  target       +1.52R  (dropped 2026-11-02)
+  CRM    short stop         -1.29R  (passed 2026-11-03)
 
-  1 idea(s) resolved, 18 still pending.
+  2 idea(s) resolved, 17 still pending.
