@@ -1,4 +1,3 @@
-  XHB    long  target       +1.52R  (dropped 2026-11-02)
-  CRM    short stop         -1.29R  (passed 2026-11-03)
+  XLC    short stop         -1.40R  (passed 2026-10-28)
 
-  2 idea(s) resolved, 17 still pending.
+  1 idea(s) resolved, 13 still pending.
