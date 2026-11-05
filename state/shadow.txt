@@ -1,4 +1,8 @@
-  NFLX   short expired      +0.01R  (passed 2026-10-21)
-  ENPH   short never filled   (passed 2026-10-28)
+  TLT    long  stop         -1.00R  (passed 2026-11-02)
+  GOOGL  short never filled   (passed 2026-10-29)
+  LLY    long  never filled   (passed 2026-10-29)
+  CAT    short never filled   (passed 2026-10-29)
+  UAL    long  target       +1.62R  (passed 2026-11-02)
+  XLI    long  stop         -0.95R  (passed 2026-11-03)
 
-  2 idea(s) resolved, 17 still pending.
+  6 idea(s) resolved, 12 still pending.

@@ -1,0 +1,66 @@
+
+====================================================================
+  SESSION 2026-11-05   equity $103,659.45   day P&L +0.80%
+====================================================================
+
+  POSITION MANAGEMENT
+
+  [OK] SMH UPDATE x23 (short, avg 518.88)
+      stop   532.00 -> 508.00
+      risk-at-stake $0.00 (0.00% of equity)
+      At the 486 target; tighten stop above the 504.27 prior close to lock in a gain if the open bounces.
+
+  [OK] XLP UPDATE x270 (long, avg 89.90)
+      stop   88.80 -> 91.20
+      risk-at-stake $0.00 (0.00% of equity)
+      Near target; raise stop under the 91.94 prior close to lock in a gain.
+
+  [OK] KRE UPDATE x142 (long, avg 73.06)
+      stop   72.00 -> 73.00
+      risk-at-stake $8.52 (0.01% of equity)
+      Financials at highs; raise stop to about breakeven, 1.3 ATR below last.
+
+  [OK] HD CLOSE x63
+      HD ran to 359.57; a fill at 342 would mean a failed breakout, not a better entry. Cancel.
+      ! HD entry is still resting unfilled at 342.00 - cancelling it
+
+  ----------------------------------------------------------------
+
+  [OK] NVDA SHORT
+      entry 195.00 (stop)  stop 204.50  target 178.00  [1.79R]
+      qty 54  notional $10,530  risk $513.00 (0.49% of equity, tier 0.5%)
+      P(target first) 37%   conviction 3
+
+  [OK] XLV LONG
+      entry 190.00 (limit)  stop 186.20  target 197.60  [2.00R]
+      qty 136  notional $25,840  risk $516.80 (0.50% of equity, tier 0.5%)
+      P(target first) 40%   conviction 3
+
+  ----------------------------------------------------------------
+  BOOK-LEVEL ADMISSION   highest conviction first
+      book now: 5 positions/resting entries, gross 73%, net +37%, risk at stake 1.45%
+      + NVDA   admitted  -> gross 83%, net +27%, risk 1.95%
+      + XLV    admitted  -> gross 108%, net +52%, risk 2.45%
+
+  ----------------------------------------------------------------
+  PASSED IDEAS   logged to the shadow book and scored later, no orders
+      . AMD    short stop 455.00  stop 485.00  target 410.00  P 33%
+      . COST   long  limit 1050.00  stop 1025.00  target 1100.00  P 30%
+
+  ----------------------------------------------------------------
+  2 approved, 0 rejected.  Total new risk $1,029.80 (0.99% of equity)
+  4 position update(s) pending.
+  2 idea(s) for the shadow book.
+
+  ! Market is closed. Next open: 2026-11-05T09:30:00-05:00
+    Orders will queue. Market orders will fill at the next open.
+
+  ~ SMH stop -> 508.00 [held]
+  ~ XLP stop -> 91.20 [held]
+  ~ KRE stop -> 73.00 [held]
+  ~ HD resting entry cancelled x63
+  > NVDA short x54 submitted [pending_new]  id=bc731d7f
+  > XLV long x136 submitted [pending_new]  id=30eaec8f
+
+  Logged to journal.csv
+
