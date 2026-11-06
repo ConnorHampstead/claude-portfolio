@@ -1,37 +1,32 @@
-run 2026-10-30
+run 2026-11-06
 
-  7 resting exit order(s) left alone (protecting an open position):
-    SMH    buy   x23     bracket @486
-    LLY    sell  x5      bracket @1520
-    XLE    sell  x243    bracket @73.2
-    XLP    sell  x270    bracket @93.5
-    GOOGL  buy   x48     bracket @258.4
-    META   buy   x9      bracket @580
-    KRE    sell  x142    bracket @76.2
+  2 resting exit order(s) left alone (protecting an open position):
+    AVGO   buy   x18     bracket @281
+    NVDA   buy   x54     bracket @178
 
-  No unfilled entry orders.
+  2 unfilled entry order(s):
+    SMH    sell  x24     limit  @488  submitted 2026-11-06  id=3535b40d
+    CAT    sell  x12     limit  @605  submitted 2026-11-04  id=6cf4f79c
+    cancelled SMH
+    cancelled CAT
 
+  SMH    never filled (canceled)
 
-  0 trade(s) closed out.
+  0 trade(s) closed out, 1 never filled.
 
 ====================================================================
   BOOK STATE   market OPEN
 ====================================================================
-  Equity          $102,173.85
-  Cash            $74,707.81
-  Day P&L         $-557.28  (-0.54%)
-  Gross exposure  $89,321.91  (87.4% of equity)
-  Net exposure    $+27,466.69  (+26.9%)
-  Positions       7 / 8
-  Loss-limit room 2.46% before the 3.0% kill switch
+  Equity          $102,574.40
+  Cash            $117,954.16
+  Day P&L         $-752.38  (-0.73%)
+  Gross exposure  $15,379.76  (15.0% of equity)
+  Net exposure    $-15,379.76  (-15.0%)
+  Positions       2 / 8
+  Loss-limit room 2.27% before the 3.0% kill switch
 
   SYM    SIDE      QTY        AVG       LAST       P&L $    P&L %
   ---------------------------------------------------------------
-  XLP    long      270      89.90      89.31     -160.65   -0.66%
-  XLE    long      243      70.01      69.88      -32.80   -0.19%
-  GOOGL  short      48     279.61     279.60       +0.53   +0.00%
-  SMH    short      23     518.88     520.67      -41.17   -0.34%
-  KRE    long      142      73.06      71.92     -162.59   -1.57%
-  LLY    long        5    1432.09    1418.08      -70.05   -0.98%
-  META   short       9     616.20     614.60      +14.43   +0.26%
+  NVDA   short      54     194.96     187.20     +419.18   +3.98%
+  AVGO   short      18     302.03     292.83     +165.64   +3.05%
 
