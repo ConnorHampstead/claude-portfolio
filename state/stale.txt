@@ -1,8 +1,7 @@
 
-  3 resting exit order(s) left alone (protecting an open position):
-    SMH    buy   x23     bracket @486
+  2 resting exit order(s) left alone (protecting an open position):
+    NVDA   buy   x54     bracket @178
     XLP    sell  x270    bracket @93.5
-    KRE    sell  x142    bracket @76.2
 
   No unfilled entry orders older than 5d.
 

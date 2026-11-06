@@ -1,8 +1,7 @@
-  TLT    long  stop         -1.00R  (passed 2026-11-02)
-  GOOGL  short never filled   (passed 2026-10-29)
-  LLY    long  never filled   (passed 2026-10-29)
-  CAT    short never filled   (passed 2026-10-29)
-  UAL    long  target       +1.62R  (passed 2026-11-02)
-  XLI    long  stop         -0.95R  (passed 2026-11-03)
+  META   short target       +1.39R  (passed 2026-10-27)
+  NVDA   short target       +1.70R  (passed 2026-10-30)
+  NVDA   short target       +1.70R  (passed 2026-10-30)
+  NVDA   short target       +2.02R  (passed 2026-11-04)
+  AMD    short target       +1.40R  (passed 2026-11-05)
 
-  6 idea(s) resolved, 12 still pending.
+  5 idea(s) resolved, 8 still pending.
