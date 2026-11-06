@@ -1,6 +1,5 @@
-  closed SMH    target  +1.71R  $+872.51
-  HD     never filled (canceled)
+  closed XLP    close   -0.49R  $-251.10  (levels were moved - not scored for calibration)
 
-  1 trade(s) closed out, 1 never filled.
+  1 trade(s) closed out.
   Fill in `thesis_verdict` by hand: right/wrong thesis vs right/wrong outcome.
 

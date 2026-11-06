@@ -1,0 +1,26 @@
+
+====================================================================
+  SESSION 2026-11-06   equity $102,111.78   day P&L -1.18%
+====================================================================
+
+  [OK] AVGO SHORT
+      entry 302.03 (market)  stop 316.00  target 281.00  [1.51R]
+      qty 18  notional $5,437  risk $251.46 (0.25% of equity, tier 0.25%)
+      P(target first) 37%   conviction 2
+
+  ----------------------------------------------------------------
+  BOOK-LEVEL ADMISSION   highest conviction first
+      book now: 3 positions/resting entries, gross 29%, net -29%, risk at stake 1.09%
+      + AVGO   admitted  -> gross 34%, net -34%, risk 1.33%
+
+  ----------------------------------------------------------------
+  PASSED IDEAS   logged to the shadow book and scored later, no orders
+      . XHB    short market 102.43  stop 106.50  target 96.00  P 30%
+      . AMD    short limit 465.00  stop 505.00  target 410.00  P 33%
+
+  ----------------------------------------------------------------
+  1 approved, 0 rejected.  Total new risk $251.46 (0.25% of equity)
+  2 idea(s) for the shadow book.
+
+  Validation only - `check` never sends. `submit --confirm` sends these.
+

@@ -1,3 +1,4 @@
-  XLC    short stop         -1.40R  (passed 2026-10-28)
+  LLY    long  stop         -1.21R  (passed 2026-10-30)
+  XLF    long  stop         -1.19R  (passed 2026-11-04)
 
-  1 idea(s) resolved, 13 still pending.
+  2 idea(s) resolved, 9 still pending.
