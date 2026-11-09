@@ -1,6 +1,3 @@
-  closed KRE    stop    -0.04R  $-9.94  (levels were moved - not scored for calibration)
-  closed XLV    stop    -0.82R  $-421.60
+  CAT    never filled (canceled)
 
-  2 trade(s) closed out.
-  Fill in `thesis_verdict` by hand: right/wrong thesis vs right/wrong outcome.
-
+  0 trade(s) closed out, 1 never filled.

@@ -1,7 +1,7 @@
 
   2 resting exit order(s) left alone (protecting an open position):
+    AVGO   buy   x18     bracket @281
     NVDA   buy   x54     bracket @178
-    XLP    sell  x270    bracket @93.5
 
   No unfilled entry orders older than 5d.
 

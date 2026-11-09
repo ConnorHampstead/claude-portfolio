@@ -1,0 +1,39 @@
+
+====================================================================
+  SESSION 2026-11-09   equity $103,038.02   day P&L +0.44%
+====================================================================
+
+  [OK] QQQ SHORT
+      entry 646.50 (stop)  stop 664.00  target 615.00  [1.80R]
+      qty 29  notional $18,748  risk $507.50 (0.49% of equity, tier 0.5%)
+      P(target first) 38%   conviction 3
+
+  [OK] AMZN LONG
+      entry 274.00 (stop)  stop 263.50  target 293.00  [1.81R]
+      qty 24  notional $6,576  risk $252.00 (0.24% of equity, tier 0.25%)
+      P(target first) 36%   conviction 2
+
+  [OK] DAL LONG
+      entry 89.50 (limit)  stop 85.80  target 96.50  [1.89R]
+      qty 69  notional $6,176  risk $255.30 (0.25% of equity, tier 0.25%)
+      P(target first) 37%   conviction 2
+
+  ----------------------------------------------------------------
+  BOOK-LEVEL ADMISSION   highest conviction first
+      book now: 2 positions/resting entries, gross 14%, net -14%, risk at stake 0.59%
+      + QQQ    admitted  -> gross 33%, net -33%, risk 1.08%
+      + AMZN   admitted  -> gross 39%, net -26%, risk 1.32%
+      + DAL    admitted  -> gross 45%, net -20%, risk 1.57%
+
+  ----------------------------------------------------------------
+  PASSED IDEAS   logged to the shadow book and scored later, no orders
+      . XLE    short stop 60.90  stop 62.90  target 57.50  P 33%
+      . UAL    long  limit 115.50  stop 110.00  target 126.00  P 35%
+      . SMH    short stop 444.00  stop 470.00  target 400.00  P 35%
+
+  ----------------------------------------------------------------
+  3 approved, 0 rejected.  Total new risk $1,014.80 (0.98% of equity)
+  3 idea(s) for the shadow book.
+
+  Validation only - `check` never sends. `submit --confirm` sends these.
+
