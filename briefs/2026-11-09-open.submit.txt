@@ -1,0 +1,24 @@
+
+====================================================================
+  SESSION 2026-11-09   equity $102,825.63   day P&L +0.23%
+====================================================================
+
+  POSITION MANAGEMENT
+
+  [OK] AVGO CLOSE x18
+      Thesis invalidated: new single-name catalyst (Anthropic S-1 supports AVGO compute deal) plus rotation out of NVDA into AVGO; price 315.44 vs 316 stop, so exit at about -0.96R instead of risking slippage on the stop.
+
+  ----------------------------------------------------------------
+
+  ----------------------------------------------------------------
+  PASSED IDEAS   logged to the shadow book and scored later, no orders
+      . NVDA   short stop 169.90  stop 180.50  target 155.00  P 33%
+
+  ----------------------------------------------------------------
+  1 position update(s) pending.
+  1 idea(s) for the shadow book.
+
+  ~ AVGO close order sent x18 [pending_new]
+
+  Logged to journal.csv
+

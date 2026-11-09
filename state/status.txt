@@ -1,17 +1,17 @@
 
 ====================================================================
-  BOOK STATE   market closed
+  BOOK STATE   market OPEN
 ====================================================================
-  Equity          $103,035.86
-  Cash            $117,953.54
-  Day P&L         $+447.30  (+0.44%)
-  Gross exposure  $14,917.68  (14.5% of equity)
-  Net exposure    $-14,917.68  (-14.5%)
+  Equity          $102,822.33
+  Cash            $101,954.85
+  Day P&L         $+233.77  (+0.23%)
+  Gross exposure  $12,205.32  (11.9% of equity)
+  Net exposure    $+867.48  (+0.8%)
   Positions       2 / 8
-  Loss-limit room 3.44% before the 3.0% kill switch
+  Loss-limit room 3.23% before the 3.0% kill switch
 
   SYM    SIDE      QTY        AVG       LAST       P&L $    P&L %
   ---------------------------------------------------------------
-  NVDA   short      54     194.96     175.50    +1051.00   +9.98%
-  AVGO   short      18     302.03     302.26       -4.10   -0.07%
+  AMZN   long       24     274.10     272.35      -41.99   -0.64%
+  AVGO   short      18     302.03     314.94     -232.34   -4.27%
 

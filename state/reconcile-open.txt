@@ -1,4 +1,4 @@
-  closed XLP    close   -0.49R  $-251.10  (levels were moved - not scored for calibration)
+  closed NVDA   target  +2.15R  $+1,107.70
 
   1 trade(s) closed out.
   Fill in `thesis_verdict` by hand: right/wrong thesis vs right/wrong outcome.
