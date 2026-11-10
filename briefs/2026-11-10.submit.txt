@@ -1,0 +1,45 @@
+
+====================================================================
+  SESSION 2026-11-10   equity $102,661.72   day P&L -0.03%
+====================================================================
+
+  [OK] IWM SHORT
+      entry 281.00 (limit)  stop 287.00  target 271.00  [1.67R]
+      qty 85  notional $23,885  risk $510.00 (0.50% of equity, tier 0.5%)
+      P(target first) 36%   conviction 3
+
+  [OK] XLE SHORT
+      entry 60.70 (stop)  stop 63.10  target 57.30  [1.42R]
+      qty 213  notional $12,929  risk $511.20 (0.50% of equity, tier 0.5%)
+      P(target first) 37%   conviction 3
+
+  [OK] GLD SHORT
+      entry 374.00 (limit)  stop 382.00  target 358.00  [2.00R]
+      qty 32  notional $11,968  risk $256.00 (0.25% of equity, tier 0.25%)
+      P(target first) 33%   conviction 2
+
+  ----------------------------------------------------------------
+  BOOK-LEVEL ADMISSION   highest conviction first
+      book now: 3 positions/resting entries, gross 30%, net -6%, risk at stake 0.99%
+      + IWM    admitted  -> gross 54%, net -29%, risk 1.49%
+      + XLE    admitted  -> gross 66%, net -42%, risk 1.99%
+      + GLD    admitted  -> gross 78%, net -54%, risk 2.23%
+
+  ----------------------------------------------------------------
+  PASSED IDEAS   logged to the shadow book and scored later, no orders
+      . JNJ    long  limit 283.00  stop 275.50  target 298.00  P 38%
+      . SMH    short market 476.50  stop 500.00  target 446.00  P 35%
+
+  ----------------------------------------------------------------
+  3 approved, 0 rejected.  Total new risk $1,277.20 (1.24% of equity)
+  2 idea(s) for the shadow book.
+
+  ! Market is closed. Next open: 2026-11-10T09:30:00-05:00
+    Orders will queue. Market orders will fill at the next open.
+
+  > IWM short x85 submitted [pending_new]  id=94a1ff9d
+  > XLE short x213 submitted [pending_new]  id=2ba1e68c
+  > GLD short x32 submitted [pending_new]  id=d5e75435
+
+  Logged to journal.csv
+

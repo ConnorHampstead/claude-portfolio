@@ -1,3 +1,5 @@
-  CAT    never filled (canceled)
+  closed AVGO   close   -0.92R  $-232.34  (levels were moved - not scored for calibration)
 
-  0 trade(s) closed out, 1 never filled.
+  1 trade(s) closed out.
+  Fill in `thesis_verdict` by hand: right/wrong thesis vs right/wrong outcome.
+

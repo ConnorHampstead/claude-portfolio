@@ -1,7 +1,6 @@
 
-  2 resting exit order(s) left alone (protecting an open position):
-    AVGO   buy   x18     bracket @281
-    NVDA   buy   x54     bracket @178
+  1 resting exit order(s) left alone (protecting an open position):
+    AMZN   sell  x24     bracket @293
 
   No unfilled entry orders older than 5d.
 

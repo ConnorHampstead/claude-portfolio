@@ -1,3 +1,8 @@
-  UAL    long  never filled   (passed 2026-11-02)
+  XLU    long  expired      +0.91R  (passed 2026-10-27)
+  TLT    long  expired      -0.07R  (passed 2026-10-27)
+  AMD    short stop         -0.79R  (passed 2026-11-06)
+  AMD    short stop         -0.79R  (passed 2026-11-06)
+  XHB    short stop         -0.87R  (passed 2026-11-06)
+  XHB    short stop         -0.84R  (passed 2026-11-06)
 
-  1 idea(s) resolved, 10 still pending.
+  6 idea(s) resolved, 8 still pending.
