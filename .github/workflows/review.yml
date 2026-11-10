@@ -1,0 +1,107 @@
+name: weekly review
+run-name: "weekly review${{ (inputs.dry_run == true || inputs.dry_run == 'true') && ' (dry run)' || '' }}"
+
+# Every Saturday: a thesis verdict for each trade that closed, and a check of
+# the week's sessions against the desk's own rules. See scripts/review.sh.
+#
+# It reads the record, writes reviews/weekly/<date>.md and fills in
+# journal.csv's thesis_verdict column. It places no orders and edits no prompt.
+#
+# The monthly review is a separate cloud routine that reads these files; its
+# instructions are prompts/review-monthly.md.
+
+on:
+  # GitHub's own cron is good enough here. It fires hours late on this repo,
+  # which is why the trading sessions are dispatched from Cloudflare, but
+  # nothing about a Saturday review depends on the hour.
+  schedule:
+    - cron: "17 14 * * 6"
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Dry run: write the review to state/dryrun, record no verdicts, commit nothing'
+        type: boolean
+        default: true
+
+concurrency:
+  group: trading-desk        # never overlap a session: both write journal.csv
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+
+    # Secrets are scoped per step, not set here, so the install steps and
+    # third-party actions never see them.
+    env:
+      # A scheduled run has no inputs, so this is empty and the run is real.
+      # Both forms compared on purpose - see desk.yml.
+      DRY_RUN: ${{ (inputs.dry_run == true || inputs.dry_run == 'true') && '1' || '' }}
+      # The same pins as desk.yml: change them together. A test holds them equal.
+      DESK_MODEL: claude-opus-5-5
+      DESK_EFFORT: xhigh
+
+    steps:
+      # Branch tip, not the frozen triggering SHA - see desk.yml for why.
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          persist-credentials: false
+          ref: ${{ github.ref_name }}
+
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
+        with:
+          python-version: '3.12'
+
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: '20'
+
+      # No chart, so requests alone is enough.
+      - name: Install dependencies
+        run: |
+          pip install --require-hashes -r requirements-min.txt
+          npm install -g @anthropic-ai/claude-code@2.1.321
+          claude --version
+
+      - name: Run review
+        env:
+          ALPACA_API_KEY_ID: ${{ secrets.ALPACA_API_KEY_ID }}
+          ALPACA_API_SECRET_KEY: ${{ secrets.ALPACA_API_SECRET_KEY }}
+          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: bash scripts/review.sh
+
+      # Runs even when the review step failed: a review that was written but
+      # whose verdicts did not parse is still worth keeping.
+      - name: Commit results
+        if: ${{ !cancelled() && env.DRY_RUN == '' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git config user.name  "trading-desk[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A reviews state journal.csv shadow.csv 2>/dev/null || true
+          if git diff --staged --quiet; then
+            echo "Nothing to commit."
+          else
+            git commit -m "weekly review $(date -u +%Y-%m-%d)"
+            # checkout runs with persist-credentials: false, so the token is
+            # passed here only, never left in .git/config for earlier steps.
+            AUTH="AUTHORIZATION: basic $(printf 'x-access-token:%s' "$GH_TOKEN" | base64 -w0)"
+            git -c http.https://github.com/.extraheader="$AUTH" pull --rebase --autostash origin "${GITHUB_REF_NAME}"
+            git -c http.https://github.com/.extraheader="$AUTH" push
+          fi
+
+      - name: Summary
+        if: always()
+        run: |
+          D=$(date -u +%Y-%m-%d)
+          F="reviews/weekly/${D}.md"; [ -n "${DRY_RUN}" ] && F="state/dryrun/review-${D}.md"
+          {
+            echo "## Weekly review ${D}${DRY_RUN:+ (dry run)}"
+            cat "$F" 2>/dev/null || echo "(no review was written)"
+          } >> "$GITHUB_STEP_SUMMARY"

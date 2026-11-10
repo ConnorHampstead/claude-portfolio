@@ -33,8 +33,10 @@ const JOBS: Record<string, Job> = {
   "55 13,14 * * MON-FRI": {
     workflow: "desk.yml", etHour: 9, etDays: WEEKDAYS, inputs: { session: "open" },
   },
-  // 15:40 ET Fridays, 10 min ahead of weekend.yml's target (10 min before the close, 15:50 ET).
-  "40 19,20 * * FRI": { workflow: "weekend.yml", etHour: 15, etDays: ["Fri"] },
+  // 15:40 ET every weekday, 10 min ahead of weekend.yml's target (10 min before the close,
+  // 15:50 ET). The workflow acts only on the last session before a weekend or a holiday and
+  // exits in seconds otherwise; Fridays alone skipped the cleanup whenever Friday was a holiday.
+  "40 19,20 * * MON-FRI": { workflow: "weekend.yml", etHour: 15, etDays: WEEKDAYS },
 };
 
 // event.cron is the expression as configured; compare it the way Cloudflare

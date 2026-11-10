@@ -1,13 +1,19 @@
 name: weekend cleanup
 run-name: "weekend cleanup${{ (inputs.dry_run == true || inputs.dry_run == 'true') && ' (dry run)' || '' }}"
 
-# Cancels every unfilled entry order before the weekend.
+# Cancels every unfilled entry order before the weekend - and before any other
+# day the market is shut.
 #
 # This is a different policy from the daily session, which only cancels entries
 # older than the 5-day holding horizon. The reasoning here is specific to the
-# weekend gap: a limit order left resting from Friday can fill on Monday's open
-# into a thesis written before two days of news it never saw. The entry price
-# would be honoured; the reasoning behind it would not be.
+# gap: a limit order left resting from Friday can fill on Monday's open into a
+# thesis written before two days of news it never saw. The entry price would
+# be honoured; the reasoning behind it would not be.
+#
+# It is dispatched every weekday and acts only on the last session before a
+# break (`calendar --before-break`). Fridays alone missed the Fridays that are
+# themselves holidays - 2026-12-25 and 2027-01-01 - when the last session is
+# the Thursday, and every midweek holiday.
 #
 # If you would rather let entries survive the weekend, delete this file — the
 # daily age-based cleanup in session.sh is independent of it.
@@ -15,7 +21,7 @@ run-name: "weekend cleanup${{ (inputs.dry_run == true || inputs.dry_run == 'true
 on:
   # No `schedule` trigger - GitHub's cron fired hours late, after the close.
   # dispatch/ calls workflow_dispatch with dry_run=false instead: a Cloudflare
-  # Worker cron at 15:40 ET Friday. A duplicate dispatch exits on the
+  # Worker cron at 15:40 ET every weekday. A duplicate dispatch exits on the
   # already-ran check below.
   workflow_dispatch:
     inputs:
@@ -73,16 +79,17 @@ jobs:
         if: steps.ran.outputs.already == 'false'
         run: pip install --require-hashes -r requirements-min.txt
 
-      # Killswitch before the wait, so a non-trading day exits in seconds
-      # instead of holding a runner open for nothing.
-      - name: Is today a trading day?
+      # Killswitch before the wait, so every day that is not the last session
+      # before a break - most of them - exits in seconds instead of holding a
+      # runner open for nothing.
+      - name: Is today the last session before a break?
         id: guard
         if: steps.ran.outputs.already == 'false'
         env:
           ALPACA_API_KEY_ID: ${{ secrets.ALPACA_API_KEY_ID }}
           ALPACA_API_SECRET_KEY: ${{ secrets.ALPACA_API_SECRET_KEY }}
         run: |
-          if python3 desk.py calendar; then
+          if python3 desk.py calendar --before-break; then
             echo "trading=true" >> "$GITHUB_OUTPUT"
           else
             echo "trading=false" >> "$GITHUB_OUTPUT"
@@ -153,7 +160,7 @@ jobs:
             if [ "${{ steps.ran.outputs.already }}" = "true" ]; then
               echo "Already ran today — duplicate trigger exited without acting."
             elif [ "${{ steps.guard.outputs.trading }}" != "true" ]; then
-              echo "US market closed today — nothing to do."
+              echo "Not the last session before a break — nothing to do."
             else
               echo '```'
               cat state/weekend-cleanup.txt 2>/dev/null || echo "(none)"

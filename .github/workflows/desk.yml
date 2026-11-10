@@ -54,6 +54,11 @@ jobs:
       # experiment. Preflight uses it too, so a model the CLI cannot serve
       # fails there, before any session work.
       DESK_MODEL: claude-opus-5-5
+      # Pinned for the same reason. Until 2026-11-10 no effort was set, each
+      # session ran at whatever the CLI defaulted to, and the whole brief -
+      # research included - took about a minute of a twenty-minute window.
+      # review.yml pins the same pair; change them together.
+      DESK_EFFORT: xhigh
 
     steps:
       # ref is set explicitly on purpose. With no ref, checkout takes the SHA
@@ -124,7 +129,9 @@ jobs:
         if: steps.tradingday.outputs.trading == 'true'
         run: |
           pip install --require-hashes -r requirements.txt
-          npm install -g @anthropic-ai/claude-code@2.1.280
+          # 2.1.321: the version --tools, --system-prompt and --effort were
+          # checked against. review.yml installs the same one.
+          npm install -g @anthropic-ai/claude-code@2.1.321
           claude --version
 
       # Lands the session at a consistent point relative to the market rather
@@ -213,9 +220,19 @@ jobs:
             echo "ANTHROPIC_API_KEY: not set"
           fi
 
+          # With the session's own model, effort and tool flags, so a pin the
+          # CLI or the account cannot serve fails here and not mid-session.
+          # A failure is raised as an annotation with claude's own words: a
+          # spent usage limit, an expired token and a bad pin all exit 1, and
+          # annotations can be read without a token for the logs.
           echo "--- live auth test (1 turn, negligible cost) ---"
-          claude -p "Reply with exactly: PREFLIGHT_OK" \
-            --model "$DESK_MODEL" --max-turns 1 --output-format text
+          OUT=$(claude -p "Reply with exactly: PREFLIGHT_OK" \
+            --model "$DESK_MODEL" --effort "$DESK_EFFORT" --tools "" \
+            --max-turns 1 --output-format text 2>&1) || {
+            echo "::error::Preflight failed: $(printf '%s' "$OUT" | tr '\n' ' ' | cut -c1-300)"
+            exit 1
+          }
+          echo "$OUT"
 
       - name: Run session
         id: session

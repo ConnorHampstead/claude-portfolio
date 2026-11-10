@@ -1,9 +1,12 @@
 """check / submit: validation, sizing, admission, submission, the shadow book."""
 
+import json
 import unittest
 from datetime import timedelta
+from types import SimpleNamespace
+from unittest import mock
 
-from tests.support import DeskCase, desk
+from tests.support import CONFIG, DeskCase, desk
 
 
 def play(ticker, direction="long", entry=100.0, stop=98.0, target=104.0, **kw):
@@ -103,6 +106,39 @@ class Check(DeskCase):
         self.assertIn("DAILY LOSS LIMIT HIT", out)
         self.assertIn("0 approved", out)
 
+    def test_states_what_the_plays_own_numbers_are_worth(self):
+        out, _ = self.check({"plays": [play("AAA")]})   # 45% of +2R against 55% of -1R
+        self.assertIn("stated EV +0.35R   (breakeven P at 2.00R is 33%)", out)
+
+    def test_rule_8_from_the_briefs_own_earnings_date(self):
+        """Today is 2026-09-24. The rule was in the prompt and nowhere else."""
+        out, _ = self.check({"plays": [
+            play("AAA", earnings_date="2026-09-28"),
+            play("BBB", entry=50, stop=49, target=53, earnings_date="2026-09-28",
+                 event_trade=True),
+            play("CCC", entry=200, stop=196, target=212, earnings_date="2026-09-28",
+                 event_trade=True, risk_pct=0.5),
+            play("DDD", earnings_date="2026-11-05"), play("EEE", earnings_date=None),
+            play("XHB", entry=95.5, stop=93.5, target=99.5)]})
+        blocks = {b.split()[1]: b for b in out.split("\n  [")[1:]}
+        self.assertIn("REJECTED] AAA", out)
+        self.assertIn("AAA reports on 2026-09-28, 4 day(s) away - rule 8", blocks["AAA"])
+        self.assertIn("event trade into BBB's earnings must be risk_pct 0.5 or less", blocks["BBB"])
+        self.assertIn("! event trade: CCC reports on 2026-09-28", blocks["CCC"])
+        for sym in ("DDD", "EEE"):
+            self.assertTrue(blocks[sym].startswith("OK]"), blocks[sym])
+            self.assertNotIn("rule 8", blocks[sym])
+        self.assertIn("no earnings_date given - rule 8 was not checked", blocks["XHB"])
+
+    def test_the_universe_floor(self):
+        self.fake.prices["PENNY"] = 3.0
+        self.fake.daily_history("THIN", [100.0], vol=50_000)
+        self.fake.prices["THIN"] = 100.0
+        out, _ = self.check({"plays": [play("PENNY", entry=3.0, stop=2.9, target=3.3),
+                                       play("THIN")]})
+        self.assertIn("PENNY trades at 3.00, under the $5 floor", out)
+        self.assertIn("THIN averages 0.05M shares a day, under the 1M floor", out)
+
 
 class Submit(DeskCase):
     def setUp(self):
@@ -162,6 +198,98 @@ class Submit(DeskCase):
         self.assertEqual(self.post_bodies(), [])
         self.assertIn("Validation only - `check` never sends.", out)
         self.assertNotIn("Dry run", out)
+        self.assertEqual(self.shadow(), [])
+
+    def test_under_the_conviction_floor_is_scored_not_placed(self):
+        (self.tmp / "config.json").write_text(json.dumps({**CONFIG, "min_conviction": 3}))
+        out, code = self.submit({"plays": [play("AAA", conviction=2), play("EEE")]})
+        self.assertEqual(code, 0, out)
+        self.assertIn("x AAA    dropped: conviction 2 is under the 3 needed to trade", out)
+        self.assertEqual([b["symbol"] for b in self.post_bodies()], ["EEE"])
+        (row,) = self.shadow()
+        self.assertEqual((row["ticker"], row["source"], row["p_target_first"]),
+                         ("AAA", "dropped", "0.45"))
+
+    def test_one_shadow_row_per_idea_per_day(self):
+        """The review re-lists what the morning passed on; 25 of the first 114
+        shadow rows were the same idea counted twice."""
+        xle = {"ticker": "CCC", "direction": "short", "entry": 201, "stop": 205,
+               "targets": [193], "p_target_first": 0.4, "reason": "location"}
+        self.submit({"plays": [play("AAA")], "passed": [xle]})
+        out, _ = self.submit({"plays": [], "passed": [
+            xle, {**xle, "direction": "long", "entry": 199, "stop": 195, "targets": [207]},
+            {"ticker": "AAA", "direction": "long", "entry": 99, "stop": 97, "targets": [103]}]},
+            session="open")
+        self.assertIn(". CCC    short already logged or traded today - not counted twice", out)
+        self.assertIn(". AAA    long  already logged or traded today", out)
+        self.assertEqual([(r["ticker"], r["direction"], r["session"]) for r in self.shadow()],
+                         [("CCC", "short", "pre-market"), ("CCC", "long", "open")])
+
+    def test_a_pass_that_is_placed_later_the_same_day_is_a_trade(self):
+        self.submit({"plays": [], "passed": [
+            {"ticker": "AAA", "direction": "long", "entry": 99, "stop": 97, "targets": [103]},
+            {"ticker": "CCC", "direction": "long", "entry": 199, "stop": 195, "targets": [207]}]})
+        out, code = self.submit({"plays": [play("AAA")]}, session="open")
+        self.assertEqual(code, 0, out)
+        rows = {r["ticker"]: r for r in self.shadow()}
+        self.assertEqual((rows["AAA"]["status"], rows["AAA"]["outcome"]), ("resolved", "taken"))
+        self.assertEqual(rows["CCC"]["status"], "pending")
+        self.assertEqual([r["ticker"] for r in desk.passes(self.shadow())], ["CCC"])
+
+    def test_a_dry_run_scores_what_it_would_have_placed(self):
+        """How a prompt or model change is tried before it trades."""
+        doc = {"plays": [play("AAA")], "passed": [
+            {"ticker": "CCC", "direction": "long", "entry": 199, "stop": 195, "targets": [207]}]}
+        out, code = self.check(doc, log_shadow=True, session="open", model="new-model/high")
+        self.assertEqual(code, 0, out)
+        self.assertIn("Dry run: 2 idea(s) logged to the shadow book", out)
+        self.assertEqual(self.post_bodies(), [])
+        self.assertEqual([(r["ticker"], r["source"], r["model"]) for r in self.shadow()],
+                         [("CCC", "dry run", "new-model/high"), ("AAA", "dry run", "new-model/high")])
+        # The real session the same day is not deduplicated against the dry run.
+        self.submit(doc)
+        self.assertEqual([(r["ticker"], r["source"]) for r in self.shadow()][2:],
+                         [("CCC", "passed")])
+        self.assertEqual([r["ticker"] for r in desk.passes(self.shadow())], ["CCC"])
+        self.check(doc, log_shadow=True)   # and a second dry run adds nothing
+        self.assertEqual(len(self.shadow()), 3)
+
+
+class ApiRetry(unittest.TestCase):
+    """One timeout or 5xx on a read used to cost the whole session. A write
+    is never repeated: a second POST could place the order twice."""
+
+    def call(self, method, *replies):
+        def reply(r):
+            return r if isinstance(r, Exception) else SimpleNamespace(
+                status_code=r, text="{}", json=lambda: {"status": r})
+        with mock.patch.object(desk.requests, "request",
+                               side_effect=[reply(r) for r in replies]) as request, \
+                mock.patch.object(desk.time, "sleep"), \
+                mock.patch.object(desk, "creds", return_value={}):
+            try:
+                return desk.api(method, "/v2/orders"), request.call_count
+            except RuntimeError as e:
+                return e, request.call_count
+
+    def test_reads_are_retried(self):
+        self.assertEqual(self.call("GET", 503, 200), ({"status": 200}, 2))
+        self.assertEqual(self.call("GET", desk.requests.ConnectionError("reset"), 429, 200),
+                         ({"status": 200}, 3))
+        err, n = self.call("GET", 503, 503, 503)
+        self.assertIsInstance(err, RuntimeError)
+        self.assertEqual(n, 3)
+
+    def test_a_refusal_is_not_a_retry(self):
+        err, n = self.call("GET", 404, 200)
+        self.assertIsInstance(err, RuntimeError)
+        self.assertEqual(n, 1)
+
+    def test_writes_are_sent_once(self):
+        for method in ("POST", "PATCH", "DELETE"):
+            err, n = self.call(method, 503, 200)
+            self.assertIsInstance(err, RuntimeError, method)
+            self.assertEqual(n, 1, method)
 
 
 if __name__ == "__main__":

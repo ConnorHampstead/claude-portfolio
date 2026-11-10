@@ -14,6 +14,8 @@
       "conviction": 4,
       "risk_pct": 1.0,
       "p_target_first": 0.62,
+      "earnings_date": "2026-10-29",
+      "event_trade": false,
       "catalyst": "Illustrative only.",
       "thesis": "Illustrative only.",
       "invalidation": "Illustrative only.",

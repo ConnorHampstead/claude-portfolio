@@ -43,10 +43,12 @@ class JournalMigration(DeskCase):
         super().setUp()
         shutil.copy(FIXTURES / "journal-legacy.csv", desk.JOURNAL)
 
-    def test_header_rewritten_and_initial_levels_backfilled(self):
+    def test_a_read_backfills_initial_levels_and_leaves_the_file_alone(self):
+        """2026-11-10: a local `prep --out`, a read-only command, rewrote the
+        header of the journal CI owns because the code had gained columns."""
+        before = desk.JOURNAL.read_bytes()
         rows = self.journal()
-        with open(desk.JOURNAL) as f:
-            self.assertEqual(f.readline().strip().split(","), desk.JOURNAL_FIELDS)
+        self.assertEqual(desk.JOURNAL.read_bytes(), before)
         # From the brief, even though the live levels were moved since.
         self.assertEqual((rows["LLY"]["stop_initial"], rows["LLY"]["target_initial"]),
                          ("1126.0", "1228.0"))
@@ -59,9 +61,12 @@ class JournalMigration(DeskCase):
         self.journal_row(ticker="AAPL", direction="long", entry_planned=346, stop=338.5,
                          target=358, qty=67, risk_usd=502.5, order_id="aapl-entry",
                          session="pre-market", model="claude-opus-5-5")
-        aapl = self.journal()["AAPL"]
-        self.assertEqual((aapl["stop_initial"], aapl["session"], aapl["model"]),
-                         ("338.5", "pre-market", "claude-opus-5-5"))
+        with open(desk.JOURNAL) as f:
+            self.assertEqual(f.readline().strip().split(","), desk.JOURNAL_FIELDS)
+        rows = self.journal()
+        self.assertEqual((rows["AAPL"]["stop_initial"], rows["AAPL"]["session"],
+                          rows["AAPL"]["model"]), ("338.5", "pre-market", "claude-opus-5-5"))
+        self.assertEqual(rows["LLY"]["stop_initial"], "1126.0", "the backfill was written too")
 
 
 class Reconcile(DeskCase):
@@ -103,21 +108,24 @@ class Reconcile(DeskCase):
 
     def test_exit_through_a_replaced_oco_leg(self):
         """LLY's exit was never a leg of its bracket, and its live stop had
-        been trailed above entry. It must close, at +1.76R, scored as having
-        reached its initial target."""
+        been trailed above entry. It must close, at +1.70R of its $975 budget,
+        scored as having reached its initial target."""
         self.reconcile()
         lly = self.journal()["LLY"]
         self.assertEqual(lly["exit_reason"], "stop")
         self.assertAlmostEqual(float(lly["exit_fill"]), 1229.76)
-        self.assertAlmostEqual(float(lly["r_multiple"]), 1.757, places=3)
+        self.assertAlmostEqual(float(lly["r_multiple"]), 1.695, places=3)
         self.assertAlmostEqual(float(lly["pnl_usd"]), 1653.0, places=2)
         self.assertEqual(lly["hit_target_first"], "1")
 
-    def test_open_trade_and_closed_trade_untouched(self):
+    def test_open_trade_untouched_and_closed_trade_rescored_on_its_budget(self):
+        """ANET was closed at -1.01R of its fill-to-stop distance. It lost $758
+        of a $994 budget, and R is now profit over the budget."""
         self.reconcile()
         rows = self.journal()
         self.assertEqual(rows["DAL"]["r_multiple"], "", "DAL's OCO has not filled")
-        self.assertEqual(rows["ANET"]["r_multiple"], "-1.01")
+        self.assertEqual(rows["ANET"]["r_multiple"], "-0.763")
+        self.assertEqual(rows["ANET"]["pnl_usd"], "-758.4")
 
     def test_trailed_stop_exit_is_not_scored_for_calibration(self):
         self.dal_oco["status"] = "canceled"
@@ -126,16 +134,16 @@ class Reconcile(DeskCase):
                    filled_at="2026-09-23T13:30:04.918273645Z")
         out, _ = self.reconcile()
         dal = self.journal()["DAL"]
-        self.assertAlmostEqual(float(dal["r_multiple"]), 0.923, places=3)  # vs the 78.20 stop
+        self.assertAlmostEqual(float(dal["r_multiple"]), 0.916, places=3)  # of the $1,005 budget
         self.assertEqual(dal["hit_target_first"], "")
-        self.assertIn("not scored for calibration", out)
+        self.assertIn("the bracket replay scores it", out)
 
     def test_target_exit_after_moving_levels_is_scored(self):
         self.dal_oco.update(status="filled", filled_qty="457", filled_avg_price="84.90",
                             filled_at="2026-09-23T15:00:00.1Z")
         self.reconcile()
         dal = self.journal()["DAL"]
-        self.assertAlmostEqual(float(dal["r_multiple"]), 2.067, places=3)
+        self.assertAlmostEqual(float(dal["r_multiple"]), 2.052, places=3)
         self.assertEqual(dal["hit_target_first"], "1")
 
     def test_untouched_short_bracket_stopped(self):
@@ -147,10 +155,49 @@ class Reconcile(DeskCase):
                             filled_at="2026-09-11T14:00:00.5Z")
         self.journal_row(ticker="XLE", direction="short", entry_planned=64, stop=66, target=60,
                          qty=300, risk_usd=600, order_id=o["id"])
-        self.reconcile()
+        out, _ = self.reconcile()
         xle = self.journal()["XLE"]
         self.assertEqual((xle["exit_reason"], xle["hit_target_first"]), ("stop", "0"))
-        self.assertAlmostEqual(float(xle["r_multiple"]), -1.026, places=3)
+        self.assertAlmostEqual(float(xle["r_multiple"]), -0.975, places=3)
+        self.assertTrue(xle["filled_at"].startswith("2026-09-10T13:31:00"))
+        self.assertNotIn("look at that order", out)
+
+    def test_a_stop_that_fills_far_from_its_price_is_flagged(self):
+        """META 2026-11-04: a short's 643 stop filled at 631.99, untouched."""
+        t = lambda s: datetime.fromisoformat(s).replace(tzinfo=timezone.utc)
+        o = self.fake.bracket("META", "short", "limit", 40, 618, 643, 580, fill=618,
+                              filled_at=t("2026-09-10T13:31:00"), submitted=t("2026-09-10T13:05:00"))
+        o["legs"][0]["status"] = "canceled"
+        o["legs"][1].update(status="filled", filled_qty="40", filled_avg_price="631.99",
+                            filled_at="2026-09-11T14:00:00.5Z")
+        self.journal_row(ticker="META", direction="short", entry_planned=618, stop=643,
+                         target=580, qty=40, risk_usd=1000, order_id=o["id"])
+        # A second, closed before the check existed and scored as stopped; the
+        # replay has since found its target came first.
+        self.journal_row(ticker="XLV", direction="long", entry_planned=190, entry_fill=190,
+                         stop=186, target=198, qty=100, risk_usd=400, exit_fill=187,
+                         exit_reason="stop", pnl_usd=-300, r_multiple=-0.75,
+                         hit_target_first=0, bracket_outcome="target", bracket_r=2.0,
+                         closed_at="2026-09-12T15:00:00Z")
+        out, _ = self.reconcile()
+        self.assertIn("! META: the stop at 643 filled at 631.99, 0.44 of its risk short", out)
+        rows = self.journal()
+        self.assertEqual(rows["META"]["hit_target_first"], "", "left for the replay")
+        self.assertEqual(rows["XLV"]["hit_target_first"], "1")
+        self.assertEqual(rows["ANET"]["hit_target_first"], "0", "an ordinary stop stays")
+
+    def test_a_replayed_bracket_outcome_survives_a_managed_close(self):
+        """`shadow` can resolve the initial bracket before the trade closes;
+        reconcile must not blank that when the fills cannot say."""
+        self.dal_oco["status"] = "canceled"
+        self.dal_oco["legs"][0].update(status="filled", filled_qty="457",
+                                       filled_avg_price="82.40",
+                                       filled_at="2026-09-23T13:30:04.918273645Z")
+        rows = desk.read_journal()
+        next(r for r in rows if r["ticker"] == "DAL")["hit_target_first"] = "1"
+        desk.write_journal(rows)
+        self.reconcile()
+        self.assertEqual(self.journal()["DAL"]["hit_target_first"], "1")
 
     def test_market_close_and_a_later_trade_in_the_same_name(self):
         t = lambda s: datetime.fromisoformat(s).replace(tzinfo=timezone.utc)

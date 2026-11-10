@@ -17,11 +17,13 @@ Commands:
     status    Account state: equity, exposure, positions, loss-limit headroom.
     reconcile Pull fills from Alpaca and update the journal with outcomes.
     score     Performance and calibration report from the journal.
-    shadow    Replay passed ideas against the tape and score them.
+    shadow    Replay passed ideas, and every trade's bracket, against the tape.
     stale     List (and optionally cancel) unfilled entry orders.
     flatten   Close all open positions and cancel all orders. Requires --confirm.
+    transcript, review-prep, verdicts
+              Plumbing for the session and the weekly review scripts.
 
-Every command is read-only unless you pass --confirm.
+Nothing reaches the broker unless you pass --confirm.
 """
 
 from __future__ import annotations
@@ -32,6 +34,7 @@ import json
 import math
 import os
 import sys
+import time
 import uuid
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
@@ -61,19 +64,21 @@ DEFAULT_CONFIG = {
     "max_net_exposure_pct": 100,    # |longs - shorts|, % of equity
     "max_position_pct": 50,         # max notional in any single name, % of equity
     "daily_loss_limit_pct": 3.0,    # flatten + stand down past this
-    "min_conviction": 1,            # reject plays below this
+    "min_conviction": 3,            # plays below this are scored in the shadow book, not placed
     "time_in_force": "gtc",         # gtc or day
     "data_feed": "iex",             # iex (free) or sip (paid)
     "allow_shorts": True,
-    # Market data table in `prep`: watchlist groups, then the day's movers
-    # filtered to the tradable universe.
+    # Market data table in `prep`: watchlist groups, then today's biggest
+    # movers among the `scan` names, filtered to the tradable universe.
     "watchlist": {},
+    "scan": [],
     "movers_show": 8,               # per side, after filtering
     "min_price": 5.0,
     "min_avg_volume": 1_000_000,
     # Shadow book replay windows, in trading sessions from the session date.
     "shadow_entry_sessions": 5,     # an entry not reached by then never filled
     "shadow_exit_sessions": 10,     # neither level by then: expired
+    "earnings_window_days": 7,      # rule 8: own earnings this close need event_trade
 }
 
 # stop / target are the live levels and move with `manage`. The *_initial
@@ -89,6 +94,9 @@ JOURNAL_FIELDS = [
     "order_id", "status", "entry_fill", "exit_fill", "exit_reason",
     "pnl_usd", "r_multiple", "hit_target_first", "closed_at",
     "thesis_verdict", "notes", "session", "model",
+    # The bracket as submitted, replayed against the tape by `shadow`: what the
+    # trade would have returned left alone, whatever `manage` did to it since.
+    "filled_at", "bracket_outcome", "bracket_r",
 ]
 
 # Ideas the brief looked at with real levels and did not take, plus plays the
@@ -137,10 +145,19 @@ def creds() -> dict:
 
 def api(method: str, path: str, base: str = PAPER_BASE, **kwargs):
     url = f"{base}{path}"
-    try:
-        r = requests.request(method, url, headers=creds(), timeout=30, **kwargs)
-    except requests.RequestException as e:
-        sys.exit(f"Network error calling {path}: {e}")
+    # Reads are retried: one timeout or 5xx would otherwise cost the whole
+    # session. Writes are not - a repeated POST could place an order twice.
+    tries = 3 if method == "GET" else 1
+    for attempt in range(1, tries + 1):
+        try:
+            r = requests.request(method, url, headers=creds(), timeout=30, **kwargs)
+        except requests.RequestException as e:
+            if attempt == tries:
+                sys.exit(f"Network error calling {path}: {e}")
+        else:
+            if attempt == tries or r.status_code not in (429, 500, 502, 503, 504):
+                break
+        time.sleep(2 * attempt)
     if r.status_code >= 400:
         detail = r.text[:400]
         if r.status_code in (401, 403):
@@ -166,15 +183,12 @@ def get_asset(symbol: str) -> dict:
 
 
 def get_snapshots(symbols: list[str], feed: str) -> dict:
-    if not symbols:
-        return {}
-    params = {"symbols": ",".join(s.upper() for s in symbols), "feed": feed}
-    try:
-        data = api("GET", "/v2beta1/stocks/snapshots", base=DATA_BASE, params=params)
-    except RuntimeError:
-        # Older/alternate endpoint shape
+    out = {}
+    for i in range(0, len(symbols), 100):
+        params = {"symbols": ",".join(s.upper() for s in symbols[i:i + 100]), "feed": feed}
         data = api("GET", "/v2/stocks/snapshots", base=DATA_BASE, params=params)
-    return data.get("snapshots", data)
+        out.update(data.get("snapshots", data))
+    return out
 
 
 def get_open_orders(symbol: str | None = None) -> list:
@@ -400,6 +414,14 @@ def et_today() -> str:
     return datetime.now(ZoneInfo(ET)).strftime("%Y-%m-%d")
 
 
+def et_midnight_utc(today: str) -> str:
+    """Start of an ET calendar day as a UTC timestamp: history up to here is
+    completed sessions only."""
+    from zoneinfo import ZoneInfo
+    midnight = datetime.strptime(today, "%Y-%m-%d").replace(tzinfo=ZoneInfo(ET))
+    return midnight.astimezone(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+
+
 def fetch_bars(symbols: list[str], timeframe: str, start: str, end: str | None,
                feed: str, adjustment: str = "all") -> dict[str, list[dict]]:
     """Historical bars per symbol, oldest first, following pagination."""
@@ -437,9 +459,9 @@ def history_bars(symbols: list[str], feed: str, end: str,
     for f in dict.fromkeys(("sip", feed)):
         try:
             return fetch_bars(symbols, timeframe, start, end, f, adjustment), f
-        except RuntimeError:
-            continue
-    raise RuntimeError(f"no bars for {len(symbols)} symbols on sip or {feed}")
+        except RuntimeError as e:
+            why = e   # kept: it names the symbol when one is refused
+    raise RuntimeError(f"no bars for {len(symbols)} symbols on sip or {feed}: {why}")
 
 
 def sip_today(symbols: list[str], today: str,
@@ -481,12 +503,6 @@ def sip_today(symbols: list[str], today: str,
     return out
 
 
-def fetch_movers(top: int = 50) -> dict:
-    """Alpaca's movers screener: {"gainers": [...], "losers": [...], "last_updated"}."""
-    return api("GET", "/v1beta1/screener/stocks/movers", base=DATA_BASE,
-               params={"top": top})
-
-
 def market_stats(bars: list[dict], snap: dict, today: str) -> dict | None:
     """Levels a brief needs, from completed daily bars plus today's snapshot."""
     hist = [b for b in bars if b["t"][:10] < today]
@@ -520,6 +536,37 @@ def market_stats(bars: list[dict], snap: dict, today: str) -> dict | None:
     return s
 
 
+def table_stats(symbols: list[str], cfg: dict, today: str,
+                open_utc: datetime | None) -> tuple[dict, str, bool]:
+    """market_stats per symbol, with the delayed consolidated tape merged in.
+
+    Returns (stats, the feed the history came from, whether the delayed tape
+    was used). Raises RuntimeError when history or snapshots cannot be read.
+    """
+    bars, used = history_bars(symbols, cfg["data_feed"], et_midnight_utc(today))
+    snaps = get_snapshots(symbols, cfg["data_feed"]) or {}
+    stats = {s: market_stats(bars.get(s, []), snaps.get(s) or {}, today) for s in symbols}
+    for s in stats.values():
+        if s and s["last"]:
+            s["src"] = cfg["data_feed"]
+    # Whichever is more recent: the live single-venue print, or the whole tape
+    # as of 15 minutes ago. Today's range takes the consolidated open and the
+    # widest high and low either source has seen.
+    delayed = sip_today(symbols, today, open_utc) if used == "sip" else {}
+    for sym, d in delayed.items():
+        s = stats.get(sym)
+        if not s:
+            continue
+        if s["last"] is None or d["last_t"] > s["last_t"]:
+            s["last"], s["last_t"], s["src"] = d["last"], d["last_t"], "sip"
+        if d.get("today"):
+            t = s["today"]
+            s["today"] = d["today"] if not t else {
+                "o": d["today"]["o"], "h": max(t["h"], d["today"]["h"]),
+                "l": min(t["l"], d["today"]["l"])}
+    return stats, used, bool(delayed)
+
+
 def market_data_section(cfg: dict, held: list[str], resting: list[str],
                         hours: tuple | None) -> list[str]:
     """Markdown tables of prices and levels for the brief, grouped.
@@ -539,58 +586,24 @@ def market_data_section(cfg: dict, held: list[str], resting: list[str],
     for name, syms in (cfg.get("watchlist") or {}).items():
         groups.append((name, [s.upper() for s in syms]))
 
-    movers, movers_note = {"gainers": [], "losers": []}, ""
-    try:
-        m = fetch_movers()
-        for side in ("gainers", "losers"):
-            movers[side] = [x for x in m.get(side) or []
-                            if float(x.get("price") or 0) >= cfg["min_price"]
-                            and str(x.get("symbol", "")).isalpha()]
-        ts = parse_ts(m.get("last_updated"))
-        if ts:
-            from zoneinfo import ZoneInfo
-            ts_et = ts.astimezone(ZoneInfo(ET))
-            movers_note = f", screener as of {ts_et:%Y-%m-%d %H:%M} ET"
-            if ts_et.strftime("%Y-%m-%d") < today:
-                # It does not refresh before the open: these are yesterday's.
-                movers_note += (" - the PREVIOUS session's movers; the screener "
-                                "does not update before the open")
-    except RuntimeError as e:
-        movers_note = f" - screener unavailable ({str(e)[:80]})"
-    mover_syms = [x["symbol"].upper() for side in ("gainers", "losers")
-                  for x in movers[side]]
-
-    everything = list(dict.fromkeys([s for _, g in groups for s in g] + mover_syms))
+    core = list(dict.fromkeys(s for _, g in groups for s in g))
     out = ["\n### Market data\n"]
     try:
-        from zoneinfo import ZoneInfo
-        midnight = datetime.strptime(today, "%Y-%m-%d").replace(tzinfo=ZoneInfo(ET))
-        bars, used = history_bars(everything, cfg["data_feed"],
-                                  midnight.astimezone(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"))
-        snaps = get_snapshots(everything, cfg["data_feed"]) or {}
+        stats, used, delayed = table_stats(core, cfg, today, open_utc)
     except RuntimeError as e:
         return out + [f"*Unavailable this session: {str(e)[:200]}. Search for levels.*"]
-    stats = {s: market_stats(bars.get(s, []), snaps.get(s) or {}, today) for s in everything}
-    feed = cfg["data_feed"]
-    for s in stats.values():
-        if s and s["last"]:
-            s["src"] = feed
-    # Whichever is more recent: the live single-venue print, or the whole tape
-    # as of 15 minutes ago. Today's range takes the consolidated open and the
-    # widest high and low either source has seen.
-    delayed = sip_today(everything, today, open_utc) if used == "sip" else {}
-    for sym, d in delayed.items():
-        s = stats.get(sym)
-        if not s:
-            continue
-        if s["last"] is None or d["last_t"] > s["last_t"]:
-            s["last"], s["last_t"], s["src"] = d["last"], d["last_t"], "sip"
-        if d.get("today"):
-            t = s["today"]
-            s["today"] = d["today"] if not t else {
-                "o": d["today"]["o"], "h": max(t["h"], d["today"]["h"]),
-                "l": min(t["l"], d["today"]["l"])}
+    # The scan list is read on its own, so a symbol in it that the data API
+    # refuses costs the movers table and not the levels above.
+    scan = [s for s in dict.fromkeys(x.upper() for x in cfg.get("scan") or [])
+            if s not in core]
+    scan_used, scan_note = used, ""
+    try:
+        scan_stats, scan_used, _ = table_stats(scan, cfg, today, open_utc)
+        stats.update(scan_stats)
+    except RuntimeError as e:
+        scan_note = f" - unavailable this session ({str(e)[:200]})"
 
+    feed = cfg["data_feed"]
     vol_note = ("consolidated volume" if used == "sip"
                 else f"{used.upper()} volume only, a small slice of the tape")
     last_note = (f"last is the more recent of today's latest {feed.upper()} trade and "
@@ -643,18 +656,35 @@ def market_data_section(cfg: dict, held: list[str], resting: list[str],
     for name, syms in groups:
         out += [f"\n#### {name}\n"] + header + [row(s) for s in syms]
 
-    liquid = lambda sym: ((stats.get(sym) or {}).get("adv") or 0) >= cfg["min_avg_volume"] \
-        if used == "sip" else True
-    shown = {side: [x for x in movers[side] if liquid(x["symbol"].upper())][:cfg["movers_show"]]
-             for side in ("gainers", "losers")}
-    out.append(f"\n#### Movers (at least ${cfg['min_price']:g}"
-               + (f" and {cfg['min_avg_volume'] / 1e6:g}M average volume" if used == "sip" else "")
-               + f"{movers_note})\n")
-    if shown["gainers"] or shown["losers"]:
-        out += header + [row(x["symbol"].upper()) for side in ("gainers", "losers")
-                         for x in shown[side]]
-    else:
-        out.append("*None passed the filter.*")
+    if not scan:
+        return out
+
+    # Today's movers, from prices this table can vouch for. The screener this
+    # replaces does not update before the open, so every pre-market brief was
+    # shown the previous session's small caps.
+    def move(sym):
+        s = stats.get(sym)
+        return s["last"] / s["prev"] - 1 if s and s["last"] and s["prev"] else None
+
+    def tradable(sym):
+        s = stats[sym]
+        return s["last"] >= cfg["min_price"] and (
+            scan_used != "sip" or (s["adv"] or 0) >= cfg["min_avg_volume"])
+
+    moved = sorted((s for s in scan if move(s) and tradable(s)), key=move)
+    n = cfg["movers_show"]
+    shown = ([s for s in reversed(moved[-n:]) if move(s) > 0]
+             + [s for s in moved[:n] if move(s) < 0])
+    out.append(f"\n#### Today's biggest movers among {len(scan)} other liquid names "
+               f"(at least ${cfg['min_price']:g}"
+               + (f" and {cfg['min_avg_volume'] / 1e6:g}M average volume"
+                  if scan_used == "sip" else "") + f"){scan_note}\n")
+    if shown:
+        out.append("*Last price against the prior close, largest moves each way. A stock "
+                   "that has moved this far today usually has a dated reason: find it.*\n")
+        out += header + [row(s) for s in shown]
+    elif not scan_note:
+        out.append("*None has traded yet today.*")
     return out
 
 
@@ -770,10 +800,12 @@ def validate_play(play: dict, ctx: dict) -> tuple[list[str], list[str], dict]:
             errors.append("p_target_first must be a number")
             p = None
 
+    # Only that it is a number. The floor is applied at admission, so a play
+    # under it is scored in the shadow book instead of being thrown away.
     conviction = play.get("conviction")
     try:
-        if conviction is not None and float(conviction) < cfg["min_conviction"]:
-            errors.append(f"conviction {conviction} below floor {cfg['min_conviction']}")
+        if conviction is not None:
+            float(conviction)
     except (TypeError, ValueError):
         errors.append(f"conviction must be a number 1-5, got '{conviction}'")
 
@@ -840,6 +872,39 @@ def validate_play(play: dict, ctx: dict) -> tuple[list[str], list[str], dict]:
             warnings.append(f"entry {entry} is {drift:.1%} from last price {ref:.2f}")
     else:
         warnings.append(f"no reference price for {symbol} - could not sanity-check entry")
+
+    # The tradable universe: nothing under the price floor or thinner than the
+    # volume floor. Volume is only known when consolidated history was served.
+    if ref and ref < cfg["min_price"]:
+        errors.append(f"{symbol} trades at {ref:.2f}, under the ${cfg['min_price']:g} floor")
+    adv = (ctx.get("adv") or {}).get(symbol)
+    if adv is not None and adv < cfg["min_avg_volume"]:
+        errors.append(f"{symbol} averages {adv / 1e6:.2f}M shares a day, under the "
+                      f"{cfg['min_avg_volume'] / 1e6:g}M floor")
+
+    # Rule 8: not into the company's own earnings unless that is the trade.
+    # The date is the brief's own; stating it is what makes the rule checkable.
+    earnings = play.get("earnings_date")
+    if "earnings_date" not in play:
+        warnings.append("no earnings_date given - rule 8 was not checked")
+    elif earnings:
+        try:
+            days = (datetime.fromisoformat(str(earnings)[:10])
+                    - datetime.fromisoformat(et_today())).days
+        except ValueError:
+            warnings.append(f"earnings_date '{earnings}' is not a date - rule 8 was not checked")
+        else:
+            if 0 <= days <= cfg["earnings_window_days"]:
+                if not play.get("event_trade"):
+                    errors.append(
+                        f"{symbol} reports on {str(earnings)[:10]}, {days} day(s) away - "
+                        "rule 8 allows that only as an event trade (event_trade true, "
+                        "risk_pct 0.5 or less)")
+                elif risk_pct > 0.5:
+                    errors.append(f"an event trade into {symbol}'s earnings must be "
+                                  f"risk_pct 0.5 or less, got {risk_pct:g}")
+                else:
+                    warnings.append(f"event trade: {symbol} reports on {str(earnings)[:10]}")
 
     # An entry on the wrong side of the market is not the order it looks like:
     # the broker refuses a stop trigger the price has already crossed (BAC,
@@ -1201,7 +1266,10 @@ def admit_plays(planned: list[dict], ctx: dict) -> tuple[list[dict], list[tuple]
         sym = p["symbol"]
         signed = p["notional"] if p["direction"] == "long" else -p["notional"]
         why = None
-        if sym in book["held"]:
+        if conviction_of(p) < cfg["min_conviction"]:
+            why = (f"conviction {conviction_of(p):g} is under the {cfg['min_conviction']} "
+                   "needed to trade - scored in the shadow book instead")
+        elif sym in book["held"]:
             why = "already held - one position per name; use manage to change it"
         elif sym in book["resting_symbols"]:
             why = ("already has a resting entry - use manage to amend or cancel "
@@ -1313,25 +1381,13 @@ def build_order(p: dict, tif: str) -> dict:
 # --------------------------------------------------------------------------
 
 def ensure_journal():
-    if not JOURNAL.exists():
-        with JOURNAL.open("w", newline="") as f:
-            csv.DictWriter(f, fieldnames=JOURNAL_FIELDS).writeheader()
-        return
-    with JOURNAL.open(newline="") as f:
-        reader = csv.DictReader(f)
-        if reader.fieldnames == JOURNAL_FIELDS:
-            return
-        rows = list(reader)
-    # Older header. Rewrite it before anything appends, or new rows land under
-    # the wrong columns. Rows from before the *_initial columns existed get them
-    # filled in from what they were submitted with.
-    for row in rows:
-        stop0, target0 = submitted_levels(row)
-        if row.get("stop_initial") in ("", None) and stop0 is not None:
-            row["stop_initial"] = stop0
-        if row.get("target_initial") in ("", None) and target0 is not None:
-            row["target_initial"] = target0
-    write_journal(rows)
+    """Before an append: a missing file gets its header, and an older header is
+    rewritten, or the new row lands under the wrong columns."""
+    if JOURNAL.exists():
+        with JOURNAL.open(newline="") as f:
+            if csv.DictReader(f).fieldnames == JOURNAL_FIELDS:
+                return
+    write_journal(read_journal())
 
 
 def submitted_levels(row: dict) -> tuple[float | None, float | None]:
@@ -1380,9 +1436,24 @@ def initial_levels(row: dict) -> tuple[float | None, float | None]:
 
 
 def read_journal() -> list[dict]:
-    ensure_journal()
+    """Reading never rewrites the file, so `status`, `check` and `prep --out`
+    stay read-only when the header is older than the code. Columns the file
+    lacks read as blank; the next write or append brings the header up to date."""
+    if not JOURNAL.exists():
+        return []
     with JOURNAL.open(newline="") as f:
-        return list(csv.DictReader(f))
+        reader = csv.DictReader(f)
+        rows = [{**dict.fromkeys(JOURNAL_FIELDS, ""), **r} for r in reader]
+    if reader.fieldnames != JOURNAL_FIELDS:
+        # Rows from before the *_initial columns existed get them filled in from
+        # what they were submitted with.
+        for row in rows:
+            stop0, target0 = submitted_levels(row)
+            if row["stop_initial"] == "" and stop0 is not None:
+                row["stop_initial"] = str(stop0)   # as the file would hold it
+            if row["target_initial"] == "" and target0 is not None:
+                row["target_initial"] = str(target0)   # as the file would hold it
+    return rows
 
 
 def write_journal(rows: list[dict]):
@@ -1478,6 +1549,18 @@ def build_context(symbols: list[str]) -> dict:
         if t is None or d["last_t"] > t:
             prices[sym] = d["last"]
 
+    # Average daily volume, for the universe floor. Consolidated history only:
+    # IEX alone is a few percent of the tape and would fail every name.
+    adv = {}
+    try:
+        daily, used = history_bars([s.upper() for s in symbols if s], cfg["data_feed"],
+                                   et_midnight_utc(et_today()))
+        if used == "sip":
+            adv = {s: sum(b["v"] for b in bs[-20:]) / len(bs[-20:])
+                   for s, bs in daily.items() if bs}
+    except RuntimeError:
+        pass
+
     positions = get_positions()
     # Not caught: without the open orders the caps cannot see resting entries,
     # and admitting new risk blind is worse than failing the run.
@@ -1488,6 +1571,7 @@ def build_context(symbols: list[str]) -> dict:
         "cfg": cfg, "account": acct, "equity": equity,
         "daily_pnl": daily_pnl, "daily_pnl_pct": daily_pnl_pct,
         "positions": positions, "prices": prices, "orders": orders, "book": book,
+        "adv": adv,
     }
 
 
@@ -1604,6 +1688,10 @@ def cmd_check(args, submit: bool = False):
         if e["p"] is not None:
             print(f"      P(target first) {e['p']:.0%}   "
                   f"conviction {play.get('conviction', '-')}")
+            if e["rr"]:
+                # What the brief's own numbers say the play is worth.
+                print(f"      stated EV {e['p'] * e['rr'] - (1 - e['p']):+.2f}R   "
+                      f"(breakeven P at {e['rr']:.2f}R is {1 / (1 + e['rr']):.0%})")
         for w in warnings:
             print(f"      ! {w}")
 
@@ -1643,8 +1731,26 @@ def cmd_check(args, submit: bool = False):
             "reason": reason, "status": "pending",
         }
 
+    # One scored row per name and direction per day. The review re-lists what
+    # the morning passed on and names entries already resting as passes; 25 of
+    # the first 114 rows were the same idea counted twice. A dry run keeps its
+    # own rows, apart from the real book's.
+    dry = bool(getattr(args, "log_shadow", False)) and not submit
+    seen = {(r["ticker"].upper(), r["direction"])
+            for r in read_shadow() + read_journal()
+            if r.get("session_date") == session_date
+            and (r.get("source") == "dry run") == dry}
+
+    def fresh(e):
+        key = (e["symbol"], e["direction"])
+        if key in seen:
+            return False
+        seen.add(key)
+        return True
+
     for p, why in dropped:
-        shadow_rows.append(shadow_row(p, "dropped", p["p"], f"dropped by the caps: {why}"))
+        if fresh(p):
+            shadow_rows.append(shadow_row(p, "dropped", p["p"], f"dropped by the caps: {why}"))
     if passed:
         print(f"\n  {'-' * 64}")
         print(f"  PASSED IDEAS   logged to the shadow book and scored later, no orders")
@@ -1652,6 +1758,10 @@ def cmd_check(args, submit: bool = False):
             errors, e = validate_passed(item, ctx)
             if errors:
                 print(f"      x {item.get('ticker', '?'):<6} not logged: {'; '.join(errors)}")
+                continue
+            if not fresh(e):
+                print(f"      . {e['symbol']:<6} {e['direction']:<5} already logged or "
+                      "traded today - not counted twice")
                 continue
             shadow_rows.append(shadow_row(e, "passed", e["p"], e["reason"]))
             print(f"      . {e['symbol']:<6} {e['direction']:<5} {e['entry_type']} "
@@ -1676,6 +1786,15 @@ def cmd_check(args, submit: bool = False):
     if not approved and not managed and not shadow_rows:
         return
     if not submit:
+        if dry:
+            # Nothing is placed, so the plays are scored the way a pass is. This
+            # is how a prompt or model change is tried, on a branch, before it
+            # trades: its dry runs build a scored record of their own.
+            rows = [{**r, "source": "dry run"} for r in shadow_rows] + [
+                shadow_row(p, "dry run", p["p"], "dry run: would have been placed")
+                for p in approved if fresh(p)]
+            append_shadow(rows)
+            print(f"\n  Dry run: {len(rows)} idea(s) logged to the shadow book to be scored.")
         print("\n  Validation only - `check` never sends. `submit --confirm` sends these.\n")
         return
     if not args.confirm:
@@ -1733,6 +1852,7 @@ def cmd_check(args, submit: bool = False):
                 print(f"  ! {m['symbol']} has no open journal row - "
                       "orders updated, journal not")
 
+    placed = set()
     for p in approved:
         order_body = build_order(p, cfg["time_in_force"])
         play_id = uuid.uuid4().hex[:8]
@@ -1780,9 +1900,21 @@ def cmd_check(args, submit: bool = False):
             "status": resp.get("status", "submitted"),
             "session": session, "model": model,
         })
+        placed.add((p["symbol"], p["direction"]))
         print(f"  > {p['symbol']} {p['direction']} x{p['qty']} "
               f"submitted [{resp.get('status')}]  id={resp.get('id', '')[:8]}")
     print(f"\n  Logged to {JOURNAL.name}\n")
+
+    # Passed on this morning, placed now: it is a trade, and scoring it as a
+    # pass as well would count the idea on both sides of the comparison.
+    rows = read_shadow()
+    taken = [r for r in rows if r.get("session_date") == session_date
+             and r.get("status") != "resolved" and r.get("source") != "dry run"
+             and (r["ticker"].upper(), r["direction"]) in placed]
+    for r in taken:
+        r.update(status="resolved", outcome="taken", evaluated_through=logged_at)
+    if taken:
+        write_shadow(rows)
 
     if failures:
         # Non-zero so the workflow goes red. Everything above has already run,
@@ -1887,6 +2019,42 @@ def exit_fills(entry: dict, symbol: str, exit_side: str) -> list[dict]:
     return out
 
 
+# ponytail: one threshold for "short of its stop", in units of the trade's own
+# risk. Ordinary slippage on these names is a few hundredths.
+EARLY_STOP = 0.15
+
+
+def budget_r(pnl: float, row: dict) -> float | None:
+    """Profit over the risk budgeted at entry, or None if the row records none."""
+    try:
+        risk = float(row["risk_usd"])
+    except (KeyError, TypeError, ValueError):
+        return None
+    return pnl / risk if risk > 0 else None
+
+
+def early_stop(row: dict) -> float:
+    """How far short of its price an untouched stop filled, as a share of the
+    fill-to-stop distance. 0 when the row is not an untouched stop exit.
+
+    A stop fills at or through its price. On the paper account some do not:
+    META (closed 2026-11-04, stop 643, filled 631.99), LLY (2026-11-02) and XLV
+    (2026-11-05) were stopped out 0.2 to 0.4 of their risk short of the stop,
+    with no instruction having moved it. Such a fill does not show that price
+    reached the initial stop before the initial target.
+    """
+    stop0, _ = initial_levels(row)
+    try:
+        fill, exit_fill, stop_now = (float(row[k]) for k in ("entry_fill", "exit_fill", "stop"))
+    except (KeyError, TypeError, ValueError):
+        return 0.0
+    if row.get("exit_reason") != "stop" or stop0 is None or abs(stop_now - stop0) >= 0.005:
+        return 0.0
+    long = row["direction"] == "long"
+    denom = (fill - stop0) if long else (stop0 - fill)
+    return ((exit_fill - stop0) if long else (stop0 - exit_fill)) / denom if denom > 0 else 0.0
+
+
 def cmd_reconcile(args):
     rows = read_journal()
     if not rows:
@@ -1926,6 +2094,7 @@ def cmd_reconcile(args):
             continue
         entry_fill = float(entry_fill)
         row["entry_fill"] = round(entry_fill, 4)
+        row["filled_at"] = order.get("filled_at") or row.get("filled_at", "")
 
         long = row["direction"] == "long"
         symbol = row["ticker"].upper()
@@ -1957,13 +2126,14 @@ def cmd_reconcile(args):
                        else "stop" if otype in ("stop", "stop_limit", "trailing_stop")
                        else "close")
 
-        # Measured against the levels the play was submitted with. The live
-        # stop may have been trailed past entry, and dividing by that turns a
-        # winner into a loss.
+        # Against the risk the play was sized for, never the live stop: that
+        # may have been trailed past entry, which turns a winner into a loss.
         stop0, target0 = initial_levels(row)
         pnl = ((exit_fill - entry_fill) if long else (entry_fill - exit_fill)) * qty
         denom = ((entry_fill - stop0) if long else (stop0 - entry_fill)) if stop0 else 0
-        r = (pnl / qty / denom) if denom > 0 else 0.0
+        r = budget_r(pnl, row)
+        if r is None:
+            r = (pnl / qty / denom) if denom > 0 else 0.0
 
         # p_target_first was about the initial target and stop. On an untouched
         # bracket the exit answers that directly. Once `manage` has moved the
@@ -1987,13 +2157,35 @@ def cmd_reconcile(args):
             "exit_reason": exit_reason,
             "pnl_usd": round(pnl, 2),
             "r_multiple": round(r, 3),
-            "hit_target_first": hit,
+            # Blank here leaves whatever the bracket replay has already found.
+            "hit_target_first": hit or row.get("hit_target_first", ""),
             "closed_at": last.get("filled_at", "") or "",
         })
         updated += 1
         print(f"  closed {row['ticker']:<6} {exit_reason:<7} "
               f"{r:+.2f}R  ${pnl:+,.2f}"
-              + ("" if hit else "  (levels were moved - not scored for calibration)"))
+              + ("" if hit else "  (levels were moved - the bracket replay scores it)"))
+        if early_stop(row) > EARLY_STOP:
+            print(f"  ! {row['ticker']}: the stop at {stop0:g} filled at {exit_fill:.2f}, "
+                  f"{early_stop(row):.2f} of its risk short of the stop price - the "
+                  "bracket replay scores it; look at that order")
+
+    # Every closed row, old and new. R is profit over the risk budgeted at
+    # entry, the same measure the shadow book uses. Until 2026-11-10 it was
+    # profit over the fill-to-stop distance, which called ROST's gap fill
+    # (2026-08-21) -1.18R when it lost a third of its budget. R is derived, so
+    # rows closed under the old definition are brought into line here. And a
+    # stop that filled short of its price is not evidence the stop came first:
+    # the replay's answer stands in for it, or a blank until there is one.
+    for row in rows:
+        if row.get("r_multiple") in ("", None) or row.get("pnl_usd") in ("", None):
+            continue
+        r = budget_r(float(row["pnl_usd"]), row)
+        if r is not None:
+            row["r_multiple"] = round(r, 3)
+        if row.get("hit_target_first") == "0" and early_stop(row) > EARLY_STOP:
+            row["hit_target_first"] = {"target": "1", "stop": "0"}.get(
+                row.get("bracket_outcome"), "")
 
     write_journal(rows)
     print(f"\n  {updated} trade(s) closed out"
@@ -2123,18 +2315,33 @@ def replay_idea(row: dict, bars: list[dict], sessions: list[tuple], cfg: dict,
     return {**pending, "entry_fill": round(fill, 4), "filled_at": filled_at.isoformat()}
 
 
+def passes(rows: list[dict]) -> list[dict]:
+    """The shadow book proper: no dry-run rows, and no idea that was taken after all."""
+    return [r for r in rows if r.get("source") != "dry run" and r.get("outcome") != "taken"]
+
+
 def cmd_shadow(args):
-    """Replay pending shadow ideas against the tape and record what happened."""
-    rows = read_shadow()
-    pending = [r for r in rows if r.get("status") != "resolved"]
-    if not pending:
-        print("  No pending ideas in the shadow book.")
-        return
+    """Replay pending shadow ideas, and every trade's bracket as it was submitted."""
+    from zoneinfo import ZoneInfo
     cfg = load_config()
     # Consolidated history is free once it is 15 minutes old.
     now_limit = datetime.now(timezone.utc) - timedelta(minutes=16)
+    stamp = lambda t: t.strftime("%Y-%m-%dT%H:%M:%SZ")
 
-    first = min(r["session_date"] for r in pending)
+    rows = read_shadow()
+    pending = [r for r in rows if r.get("status") != "resolved"]
+    journal = read_journal()
+    # ponytail: 50 trades a run, two requests each, so a backlog stays inside
+    # Alpaca's 200-a-minute allowance at the start of a session. The first run
+    # clears the 45 trades closed before this existed; after that it is one or
+    # two a session.
+    trades = [r for r in journal if r.get("entry_fill") not in ("", None)
+              and not r.get("bracket_outcome")][:50]
+    if not pending and not trades:
+        print("  Nothing to replay.")
+        return
+
+    first = min(r["session_date"] for r in pending + trades)
     last = (now_limit + timedelta(days=1)).strftime("%Y-%m-%d")
     end_cal = (datetime.strptime(last, "%Y-%m-%d") + timedelta(days=30)).strftime("%Y-%m-%d")
     cal = api("GET", "/v2/calendar", params={"start": first, "end": end_cal})
@@ -2150,10 +2357,8 @@ def cmd_shadow(args):
         if start >= now_limit:
             continue
         try:
-            bars, _ = history_bars([sym], cfg["data_feed"],
-                                   now_limit.strftime("%Y-%m-%dT%H:%M:%SZ"),
-                                   timeframe="5Min", adjustment="raw",
-                                   start=start.strftime("%Y-%m-%dT%H:%M:%SZ"))
+            bars, _ = history_bars([sym], cfg["data_feed"], stamp(now_limit),
+                                   timeframe="5Min", adjustment="raw", start=stamp(start))
         except RuntimeError as e:
             print(f"  ! {sym}: {e}")
             continue
@@ -2165,9 +2370,61 @@ def cmd_shadow(args):
                 print(f"  {r['ticker']:<6} {r['direction']:<5} {r['outcome']:<12} "
                       + (f"{float(r['r_multiple']):+.2f}R" if r["r_multiple"] != "" else "")
                       + f"  ({r['source']} {r['session_date']})")
-    write_shadow(rows)
-    print(f"\n  {resolved} idea(s) resolved, "
-          f"{sum(1 for r in rows if r.get('status') != 'resolved')} still pending.")
+    if pending:
+        write_shadow(rows)
+        print(f"\n  {resolved} idea(s) resolved, "
+              f"{sum(1 for r in rows if r.get('status') != 'resolved')} still pending.")
+
+    # The trades themselves, as the brackets they were submitted with. `manage`
+    # moved a stop or closed by hand on 20 of the first 45, and the fills of
+    # those cannot say which initial level price reached first, or what the
+    # trade would have made left alone. The tape can.
+    done = 0
+    for r in trades:
+        sym = r["ticker"].upper()
+        stop0, target0 = initial_levels(r)
+        if stop0 is None or target0 is None:
+            continue
+        try:
+            filled = parse_ts(r.get("filled_at")) or parse_ts(
+                api("GET", f"/v2/orders/{r['order_id']}").get("filled_at"))
+            if filled is None:
+                continue
+            r["filled_at"] = filled.isoformat()
+            # A bar the fill opened counts; one the fill landed inside does not.
+            start = filled - timedelta(seconds=60)
+            if start >= now_limit:
+                continue
+            bars, _ = history_bars([sym], cfg["data_feed"],
+                                   stamp(min(now_limit, start + timedelta(days=21))),
+                                   timeframe="5Min", adjustment="raw", start=stamp(start))
+        except RuntimeError as e:
+            print(f"  ! {sym}: {e}")
+            continue
+        fill = float(r["entry_fill"])
+        day = filled.astimezone(ZoneInfo(ET)).strftime("%Y-%m-%d")
+        res = replay_idea(
+            {"direction": r["direction"], "entry_type": "market", "entry": fill,
+             "stop": stop0, "target": target0, "logged_at": start.isoformat()},
+            bars.get(sym, []), [s for s in all_sessions if s[0] >= day], cfg, now_limit)
+        if res["status"] != "resolved":
+            continue
+        r["bracket_outcome"] = res["outcome"]
+        px = res.get("exit_price")
+        if px not in ("", None):
+            pnl = ((px - fill) if r["direction"] == "long" else (fill - px)) * float(r["qty"])
+            br = budget_r(pnl, r)
+            r["bracket_r"] = "" if br is None else round(br, 3)
+        if r.get("hit_target_first") in ("", None):
+            r["hit_target_first"] = res["hit_target_first"]
+        done += 1
+        print(f"  {sym:<6} bracket as submitted: {res['outcome']:<10} "
+              + (f"{float(r['bracket_r']):+.2f}R" if r.get("bracket_r") not in ("", None) else "")
+              + (f"   (as managed: {float(r['r_multiple']):+.2f}R)"
+                 if r.get("r_multiple") not in ("", None) else ""))
+    if trades:
+        write_journal(journal)
+        print(f"\n  {done} trade bracket(s) replayed.")
 
 
 def calibration_rows(rows: list[dict]) -> list[dict]:
@@ -2175,28 +2432,45 @@ def calibration_rows(rows: list[dict]) -> list[dict]:
             and r.get("hit_target_first") not in ("", None)]
 
 
+# Nearly every probability the desk has stated sits between 0.30 and 0.47, so
+# the bands are narrow there. One 0-50% bucket held 97 of the first 98 samples.
+BANDS = [(0, .3), (.3, .35), (.35, .4), (.4, .45), (.45, .5), (.5, .6), (.6, .7), (.7, 1.01)]
+
+
+def calibration(scored: list[dict]) -> tuple[list[tuple], float, float, float]:
+    """(bands, base rate, Brier score, Brier score of always stating the base rate).
+
+    Each band is (low, high, n, mean stated, share that hit target first). The
+    base rate is the reference, not 0.25: with brackets that reach target 42%
+    of the time, saying 42% every time already scores 0.244.
+    """
+    pairs = [(float(r["p_target_first"]), int(r["hit_target_first"])) for r in scored]
+    base = sum(h for _, h in pairs) / len(pairs)
+    bands = []
+    for lo, hi in BANDS:
+        g = [(p, h) for p, h in pairs if lo <= p < hi]
+        if g:
+            bands.append((lo, min(hi, 1), len(g), sum(p for p, _ in g) / len(g),
+                          sum(h for _, h in g) / len(g)))
+    brier = sum((p - h) ** 2 for p, h in pairs) / len(pairs)
+    return bands, base, brier, base * (1 - base)
+
+
 def print_calibration(scored: list[dict], what: str):
-    """Stated probability against outcome, bucketed, with a Brier score."""
+    """Stated probability against outcome, in bands, with a Brier score."""
     print(f"\n  {'-' * 64}")
     print(f"  CALIBRATION   {len(scored)} {what} with a stated probability")
     print(f"  {'-' * 64}")
-    buckets = [(0, .5), (.5, .6), (.6, .7), (.7, .8), (.8, .9), (.9, 1.01)]
+    bands, base, brier, ref = calibration(scored)
     print(f"  {'stated':<14}{'n':>4}{'mean said':>12}{'actual':>10}")
-    brier = 0.0
-    for lo, hi in buckets:
-        in_b = [r for r in scored if lo <= float(r["p_target_first"]) < hi]
-        if not in_b:
-            continue
-        said = sum(float(r["p_target_first"]) for r in in_b) / len(in_b)
-        hit = sum(int(r["hit_target_first"]) for r in in_b) / len(in_b)
+    for lo, hi, n, said, hit in bands:
         flag = "  <-- overconfident" if said - hit > 0.15 else ""
-        print(f"  {lo:.0%}-{hi if hi <= 1 else 1:.0%}{'':<7}{len(in_b):>4}"
-              f"{said:>11.0%}{hit:>10.0%}{flag}")
-    for r in scored:
-        brier += (float(r["p_target_first"]) - int(r["hit_target_first"])) ** 2
-    brier /= len(scored)
-    print(f"\n  Brier score     {brier:.3f}   "
-          f"(0 = perfect, 0.25 = coin flip, lower is better)")
+        print(f"  {f'{lo:.0%}-{hi:.0%}':<14}{n:>4}{said:>11.0%}{hit:>10.0%}{flag}")
+    print(f"\n  Brier score     {brier:.3f}   (lower is better; always saying the "
+          f"{base:.0%} base rate scores {ref:.3f})")
+    if brier >= ref:
+        print("  The stated probabilities do not beat the base rate: they are not "
+              "telling\n  the better ideas from the worse ones.")
     if len(scored) < 20:
         print(f"  ! Only {len(scored)} samples - treat this as directional, not conclusive.")
 
@@ -2216,7 +2490,15 @@ def shadow_summary(rows: list[dict]) -> dict:
 
 
 def print_shadow_report(trades: list[dict]):
-    shadow = read_shadow()
+    everything = read_shadow()
+    dry = [r for r in everything if r.get("source") == "dry run"]
+    if dry:
+        # Kept apart: these are what a dry run would have placed, not passes.
+        d = shadow_summary(dry)
+        print(f"\n  DRY RUNS   {d['logged']} idea(s) logged, {d['resolved']} resolved"
+              + (f", {d['avg_r']:+.2f}R average over {d['n_r']} filled"
+                 if d["avg_r"] is not None else ""))
+    shadow = passes(everything)
     if not shadow:
         return
     s = shadow_summary(shadow)
@@ -2289,13 +2571,25 @@ def cmd_score(args):
         dd = min(dd, cum - peak)
     print(f"  Max drawdown    {dd:.2f}R")
 
+    # What `manage` was worth: the same trades with every bracket left as it
+    # was submitted, from the replay `shadow` runs.
+    both = [(float(r["r_multiple"]), float(r["bracket_r"])) for r in rows
+            if r.get("bracket_r") not in ("", None)]
+    if both:
+        managed, alone = sum(a for a, _ in both), sum(b for _, b in both)
+        print(f"\n  Brackets left alone  {alone:+.2f}R over {len(both)} of these trades "
+              f"(as managed: {managed:+.2f}R)")
+        print(f"  What was done after entry - stops moved, closes by hand, stops "
+              f"that\n  filled early - has {'cost' if alone > managed else 'added'} "
+              f"{abs(alone - managed):.2f}R.")
+
     # Calibration
     scored = calibration_rows(rows)
     unscorable = sum(1 for r in rows if r.get("hit_target_first") in ("", None))
     if unscorable:
-        print(f"\n  {unscorable} closed trade(s) left out of calibration: their levels "
-              "were moved\n  or they were closed by hand, so the fills do not show "
-              "whether the\n  initial target or the initial stop came first.")
+        print(f"\n  {unscorable} closed trade(s) not in calibration yet: `manage` moved "
+              "their levels\n  and the bracket replay has not resolved them (or neither "
+              "level came\n  within its window).")
     if scored:
         print_calibration(scored, "trades")
 
@@ -2425,6 +2719,17 @@ def cmd_calendar(args):
     d, open_utc, close_utc = hours
     print(f"{today} is a trading day (open {d.get('open')} close {d.get('close')} ET)")
 
+    if getattr(args, "before_break", False):
+        # The last session before any day the market is shut. The cleanup this
+        # guards ran on Fridays only, which skips it whenever the Friday is
+        # itself a holiday (2026-12-25, 2027-01-01) and before midweek ones.
+        tomorrow = (datetime.now(timezone.utc) + timedelta(days=1)).strftime("%Y-%m-%d")
+        if api("GET", "/v2/calendar", params={"start": tomorrow, "end": tomorrow}):
+            print("  Tomorrow is a session too - nothing to clear tonight.")
+            sys.exit(1)
+        print("  No session tomorrow - this is the last one before a break.")
+        sys.exit(0)
+
     if args.open_window is not None:
         # The post-open review is written from the first stretch of the
         # session. Too early and the open has not settled; too late and it is
@@ -2456,6 +2761,57 @@ def cmd_calendar(args):
 
     print(f"  {mins:.0f} min before the open - inside the pre-market window.")
     sys.exit(0)
+
+
+def record_section(closed: list[dict], shadow: list[dict], cfg: dict) -> list[str]:
+    """The whole record for the brief, every bracket scored as it was submitted.
+
+    The brief used to be shown its last five trades and its last five passes,
+    which is recency, not a record: it never saw how its stated probabilities
+    had held up, or what its passes and its management had been worth.
+    """
+    s = shadow_summary(shadow)
+    if not closed and not s["resolved"]:
+        return []
+    mean = lambda xs: f"{sum(xs) / len(xs):+.2f}R" if xs else "-"
+    out = ["\n### Your record\n"]
+    if closed:
+        rs = [float(r["r_multiple"]) for r in closed]
+        wins = sum(1 for x in rs if x > 0)
+        out.append(f"{len(closed)} closed trades: {wins}W / {len(closed) - wins}L, "
+                   f"total {sum(rs):+.2f}R, net ${sum(float(r['pnl_usd']) for r in closed):+,.0f} "
+                   "realized.\n")
+    out.append("*Every idea is scored on the bracket as you submitted it: which of the "
+               "initial target and the initial stop came first, within "
+               f"{cfg['shadow_exit_sessions']} sessions. R is profit over the risk "
+               "budgeted.*\n")
+    out.append("| | Ideas | Target first | Stop first | Average R |")
+    out.append("|---|---|---|---|---|")
+    if closed:
+        hit = [r.get("hit_target_first") for r in closed]
+        out.append(f"| Trades taken, as managed | {len(closed)} | {hit.count('1')} "
+                   f"| {hit.count('0')} | {mean(rs)} |")
+        alone = [float(r["bracket_r"]) for r in closed if r.get("bracket_r") not in ("", None)]
+        if alone:
+            out.append(f"| The same trades, bracket left alone | {len(alone)} | | "
+                       f"| {mean(alone)} |")
+    if s["n_r"]:
+        out.append(f"| Ideas you passed on, or the caps dropped | {s['n_r']} | {s['target']} "
+                   f"| {s['stop']} | {s['avg_r']:+.2f}R |")
+    scored = calibration_rows(closed) + calibration_rows(shadow)
+    if scored:
+        bands, base, brier, ref = calibration(scored)
+        out.append("\nWhat you said against what happened, trades and passes together:\n")
+        out.append("| You said | Ideas | Reached target first |")
+        out.append("|---|---|---|")
+        out += [f"| {lo:.0%}-{hi:.0%} | {n} | {hit:.0%} |" for lo, hi, n, _, hit in bands]
+        out.append(
+            f"\nBase rate: {base:.0%} of {len(scored)} brackets reached target first. Your "
+            f"Brier score is {brier:.3f}; saying {base:.0%} every time scores {ref:.3f}."
+            + (" Your probabilities are not yet telling the better ideas from the worse "
+               "ones: start from the base rate and move off it only for a reason you "
+               "can name." if brier >= ref else ""))
+    return out
 
 
 def cmd_prep(args):
@@ -2553,18 +2909,32 @@ def cmd_prep(args):
         else:
             out.append(f"- A new {side} can be up to {room:.0f}% of equity in notional: "
                        f"at 1% risk its stop must be at least {100 / room:.1f}% from "
-                       f"entry (half that at 0.5%, a quarter at 0.25%).")
+                       f"entry (half that at 0.5%).")
 
     if positions:
+        # Sessions each position has been open, from the calendar: counted
+        # from the fill, which for a resting entry can be days after the brief.
+        opened = lambda j: (j.get("filled_at") or j.get("session_date") or "")[:10]
+        cal_days = []
+        try:
+            first = min(filter(None, (opened(by_symbol.get(p["symbol"], {}))
+                                      for p in positions)), default="")
+            if first:
+                cal_days = [d["date"] for d in api("GET", "/v2/calendar", params={
+                    "start": first, "end": et_today()})]
+        except RuntimeError:
+            pass
         out.append(f"\n### Open positions\n")
         out.append("*Stop and target are the live resting orders. To change them, put the "
                    "position in the `manage` array of your JSON block — prose alone does "
-                   "not move an order.*\n")
-        out.append("| Symbol | Side | Qty | Avg entry | Last | Unreal. P&L | Stop | Target | Original thesis |")
+                   "not move an order. Share of equity is signed notional, for the sector "
+                   "cap.*\n")
+        out.append("| Symbol | Side | Qty | Avg entry | Last | Unreal. P&L | Share of equity | Stop | Target |")
         out.append("|---|---|---|---|---|---|---|---|---|")
+        clean = lambda x: " ".join((x or "not recorded.").replace("|", "/").split())
+        notes = []
         for p in positions:
             j = by_symbol.get(p["symbol"], {})
-            thesis = (j.get("thesis") or "-").replace("|", "/")[:120]
             legs = exit_legs(p["symbol"], p["side"], live_orders,
                              open_entry_id(p["symbol"], journal))
             stop = leg_price(legs["stop_loss"])
@@ -2575,8 +2945,25 @@ def cmd_prep(args):
                 f"| {p['symbol']} | {p['side']} | {abs(int(float(p['qty'])))} "
                 f"| {float(p['avg_entry_price']):.2f} | {float(p['current_price']):.2f} "
                 f"| {float(p['unrealized_pl']):+,.0f} ({float(p['unrealized_plpc']) * 100:+.1f}%) "
-                f"| {stop_s} | {target_s} | {thesis} |"
+                f"| {pct(float(p['market_value'])):+.0f}% | {stop_s} | {target_s} |"
             )
+            # The brief used to see 120 characters of its thesis and nothing of
+            # the invalidation it wrote, the one test it has for closing early.
+            since = opened(j)
+            n = sum(1 for d in cal_days if d >= since) if since else 0
+            stop0, target0 = initial_levels(j)
+            said = j.get("p_target_first")
+            notes.append(
+                f"- **{p['symbol']}**" + (f", opened {since}" if since else "")
+                + (f" (session {n} of at most {cfg['shadow_exit_sessions']})" if n else "")
+                + (f", submitted with stop {stop0:g} and target {target0:g}"
+                   if stop0 and target0 else "")
+                + (f", P {float(said):.0%}" if said else "")
+                + f". Thesis: {clean(j.get('thesis'))} "
+                  f"Invalidation: {clean(j.get('invalidation'))}")
+        out.append("\n*What you wrote when you opened each one. The invalidation is the "
+                   "test for closing it early.*\n")
+        out += notes
     else:
         out.append(f"\n*No open positions.*")
 
@@ -2585,7 +2972,8 @@ def cmd_prep(args):
         out.append("*These are live GTC orders and fill without you. Re-proposing the name "
                    "in `plays` is rejected; to change the levels use `manage` with "
                    "`update`, to withdraw the idea use `manage` with `close`. Unfilled "
-                   "entries are cancelled after 5 days and before every weekend.*\n")
+                   "entries are cancelled after 5 days and before every weekend or "
+                   "market holiday.*\n")
         out.append("| Symbol | Side | Qty | Entry | Type | Stop | Target | Submitted |")
         out.append("|---|---|---|---|---|---|---|---|")
         fmt = lambda x: f"{x:.2f}" if x else "-"
@@ -2609,14 +2997,7 @@ def cmd_prep(args):
                        f"| {r['stop']} | {r['target']} | {r['reason']} |")
 
     closed = [r for r in journal if r.get("r_multiple") not in ("", None)]
-    if closed:
-        rs = [float(r["r_multiple"]) for r in closed]
-        wins = sum(1 for x in rs if x > 0)
-        out.append(f"\n### Record\n")
-        out.append(f"{len(closed)} closed trades: {wins}W / {len(closed) - wins}L, "
-                   f"total {sum(rs):+.2f}R, net ${sum(float(r['pnl_usd']) for r in closed):+,.0f} "
-                   f"realized. Shorts taken: "
-                   f"{sum(1 for r in journal if r.get('direction') == 'short')}.")
+    out += record_section(closed, passes(read_shadow()), cfg)
     recent = sorted(closed, key=lambda r: r.get("closed_at", ""), reverse=True)[:5]
     if recent:
         out.append(f"\n### Last {len(recent)} closed trades\n")
@@ -2630,31 +3011,6 @@ def cmd_prep(args):
                 f"| {float(r['r_multiple']):+.2f}R | ${float(r['pnl_usd']):+,.0f} | {p_str} |"
             )
 
-    # What the ideas it passed on went on to do. Without this a pass can never
-    # be wrong on the record, and standing aside is free.
-    shadow = read_shadow()
-    done = [r for r in shadow if r.get("status") == "resolved"]
-    if done:
-        s = shadow_summary(shadow)
-        out.append(f"\n### Ideas you passed on, replayed against the tape\n")
-        out.append(f"{s['resolved']} resolved: {s['target']} reached target first, "
-                   f"{s['stop']} stop first, {s['never']} never reached the entry, "
-                   f"{s['expired']} expired, {s['ambiguous']} ambiguous."
-                   + (f" Average {s['avg_r']:+.2f}R across the {s['n_r']} that would "
-                      "have filled." if s["avg_r"] is not None else ""))
-        recent = sorted(done, key=lambda r: r.get("exit_at") or r.get("evaluated_through", ""),
-                        reverse=True)[:5]
-        out.append("\n| Session | Symbol | Direction | Why passed | Outcome | R | You said |")
-        out.append("|---|---|---|---|---|---|---|")
-        for r in recent:
-            p, rm = r.get("p_target_first"), r.get("r_multiple")
-            why = (r.get("reason") or "-").replace("|", "/")[:80]
-            out.append(
-                f"| {r['session_date']} {r.get('session', '')} | {r['ticker']} "
-                f"| {r['direction']} | {why} | {r['outcome']} "
-                f"| {f'{float(rm):+.2f}R' if rm not in ('', None) else '-'} "
-                f"| {f'{float(p):.0%}' if p not in ('', None) else '-'} |")
-
     out += market_data_section(cfg, [p["symbol"].upper() for p in positions],
                                [e["symbol"] for e in book["resting"]], hours)
 
@@ -2664,6 +3020,130 @@ def cmd_prep(args):
         print(f"Wrote book state to {args.out}")
     else:
         print(text)
+
+
+def cmd_transcript(args):
+    """Split a `claude -p --output-format stream-json` transcript into the
+    brief and a log of the research behind it.
+
+    Only the brief used to be kept, so nothing recorded whether a session had
+    searched at all - and a brief written from memory reads exactly like one
+    that was researched. The README's signal for that (every play rejected as
+    far from the last price) stopped firing once `prep` supplied the prices.
+    Exits non-zero, after writing both files, if the run did not finish or did
+    fewer lookups than --min-research.
+    """
+    lookups, result = [], None
+    for line in Path(args.file).read_text().splitlines():
+        try:
+            ev = json.loads(line)
+        except json.JSONDecodeError:
+            continue
+        if not isinstance(ev, dict):
+            continue
+        if ev.get("type") == "result":
+            result = ev
+        elif ev.get("type") == "assistant":
+            for block in (ev.get("message") or {}).get("content") or []:
+                if isinstance(block, dict) and block.get("type") == "tool_use":
+                    arg = block.get("input") or {}
+                    lookups.append(f"{block.get('name', '?')}: "
+                                   f"{arg.get('query') or arg.get('url') or ''}")
+    result = result or {}
+    text = (result.get("result") or "").strip()
+    Path(args.brief).write_text(text + "\n" if text else "")
+    summary = (f"{len(lookups)} lookups in {result.get('num_turns', '?')} turns, "
+               f"{(result.get('duration_ms') or 0) / 1000:.0f} s")
+    if args.log:
+        Path(args.log).write_text("\n".join([summary] + lookups) + "\n")
+    print(f"  Research: {summary}")
+    if not text or result.get("is_error"):
+        # A failed run's text is its reason (a usage limit, a refused token). As
+        # an annotation it can be read from the run's public metadata.
+        sys.exit("::error::The model run did not finish cleanly "
+                 f"({result.get('subtype') or 'no result'}): "
+                 f"{' '.join(text.split())[:200] or 'no output'}. Nothing to act on.")
+    if len(lookups) < args.min_research:
+        sys.exit(f"Only {len(lookups)} lookup(s), fewer than the {args.min_research} "
+                 "required: this was written from memory. Not acting on it.")
+
+
+VERDICTS = ("right thesis right outcome", "right thesis wrong outcome",
+            "wrong thesis right outcome", "wrong thesis wrong outcome")
+
+
+def cmd_review_prep(args):
+    """Material for the weekly review: closed trades that still have no thesis
+    verdict, then the past week's submit and research logs."""
+    todo = sorted((r for r in read_journal() if r.get("r_multiple") not in ("", None)
+                   and not (r.get("thesis_verdict") or "").strip()),
+                  key=lambda r: r.get("closed_at", ""))
+    out = [f"## Closed trades without a thesis verdict\n",
+           f"{len(todo)} in all, oldest first; the {min(len(todo), args.limit)} below "
+           "are this review's.\n"]
+    for r in todo[:args.limit]:
+        stop0, target0 = initial_levels(r)
+        out.append(f"### {r['play_id']}: {r['ticker']} {r['direction']}, proposed "
+                   f"{r['session_date']} ({r.get('session') or 'pre-market'})\n")
+        out.append(f"- {r['entry_type']} entry planned at {r['entry_planned']}, filled "
+                   f"{r['entry_fill']}; stop {stop0}, target {target0}; conviction "
+                   f"{r['conviction']}, P(target first) {r['p_target_first']}")
+        out.append(f"- Closed {(r.get('closed_at') or '')[:10]} by {r['exit_reason']} at "
+                   f"{r['exit_fill']}: {float(r['r_multiple']):+.2f}R, "
+                   f"${float(r['pnl_usd']):+,.0f}"
+                   + (f". Left alone the bracket ended in {r['bracket_outcome']}"
+                      + (f" at {float(r['bracket_r']):+.2f}R" if r.get("bracket_r") else "")
+                      if r.get("bracket_outcome") else ""))
+        out += [f"- {k.replace('_', ' ').capitalize()}: {r[k]}"
+                for k in ("catalyst", "thesis", "invalidation", "bear_case", "notes")
+                if r.get(k)]
+        out.append("")
+
+    # What reached the account, and what each session looked up. submit.txt
+    # repeats the validation, so check.txt is only read where nothing was sent.
+    out.append("## The past week's session logs\n")
+    now = datetime.now(timezone.utc)
+    for i in range(7, -1, -1):
+        day = (now - timedelta(days=i)).strftime("%Y-%m-%d")
+        for sfx in ("", "-open"):
+            stem = HERE / "briefs" / f"{day}{sfx}"
+            for f in (stem.with_name(stem.name + ".submit.txt"),
+                      stem.with_name(stem.name + ".check.txt"),
+                      stem.with_name(stem.name + ".research.txt")):
+                if f.name.endswith(".check.txt") and \
+                        stem.with_name(stem.name + ".submit.txt").exists():
+                    continue
+                if f.exists() and f.read_text().strip():
+                    out += [f"### {f.name}\n", "```", f.read_text().strip()[:1500], "```", ""]
+    text = "\n".join(out) + "\n"
+    if args.out:
+        Path(args.out).write_text(text)
+        print(f"Wrote review material to {args.out}")
+    else:
+        print(text)
+
+
+def cmd_verdicts(args):
+    """Record the weekly review's thesis verdicts in the journal.
+
+    Only on closed rows that have none: a verdict written by hand is never
+    replaced, and the review's reasoning stays in its own file.
+    """
+    rows = read_journal()
+    by_id = {r["play_id"]: r for r in rows}
+    done = 0
+    for v in load_plays(args.file).get("verdicts") or []:
+        row = by_id.get(str(v.get("play_id", "")))
+        verdict = " ".join(str(v.get("verdict", "")).lower().replace("/", " ").split())
+        if row is None or verdict not in VERDICTS:
+            print(f"  x {v.get('play_id', '?')}: not recorded ('{v.get('verdict')}')")
+        elif row.get("r_multiple") not in ("", None) \
+                and not (row.get("thesis_verdict") or "").strip():
+            row["thesis_verdict"] = verdict
+            done += 1
+    if done:
+        write_journal(rows)
+    print(f"  {done} thesis verdict(s) recorded.")
 
 
 EQUITY_CSV = HERE / "state" / "equity.csv"
@@ -2958,6 +3438,10 @@ def main():
 
     p = sub.add_parser("check", help="validate and size a plays file, send nothing")
     p.add_argument("file")
+    p.add_argument("--session", choices=["pre-market", "open"], default="pre-market")
+    p.add_argument("--model", default=os.environ.get("DESK_MODEL", ""))
+    p.add_argument("--log-shadow", action="store_true",
+                   help="dry run: log what would have been placed to the shadow book")
     p.set_defaults(func=lambda a: cmd_check(a, submit=False))
 
     p = sub.add_parser("submit", help="validate, size, and submit a plays file")
@@ -2978,7 +3462,7 @@ def main():
     p = sub.add_parser("score", help="performance and calibration report")
     p.set_defaults(func=cmd_score)
 
-    p = sub.add_parser("shadow", help="replay passed ideas against the tape and score them")
+    p = sub.add_parser("shadow", help="replay passed ideas and trade brackets against the tape")
     p.set_defaults(func=cmd_shadow)
 
     p = sub.add_parser("wait", help="hold open until a target time, no-op if already past")
@@ -3000,7 +3484,26 @@ def main():
                    help="also require at least MIN minutes remain before the open")
     p.add_argument("--open-window", type=int, nargs=2, metavar=("FROM", "TO"),
                    help="also require it to be FROM-TO minutes after today's open")
+    p.add_argument("--before-break", action="store_true",
+                   help="also require that tomorrow is not a trading day")
     p.set_defaults(func=cmd_calendar)
+
+    p = sub.add_parser("transcript", help="split a model transcript into brief and research log")
+    p.add_argument("file")
+    p.add_argument("--brief", required=True, help="write the final text here")
+    p.add_argument("--log", help="write the list of searches and fetches here")
+    p.add_argument("--min-research", type=int, default=0, metavar="N",
+                   help="fail if the run made fewer than N searches and fetches")
+    p.set_defaults(func=cmd_transcript)
+
+    p = sub.add_parser("review-prep", help="material for the weekly review")
+    p.add_argument("--out", help="write to this file instead of stdout")
+    p.add_argument("--limit", type=int, default=15, help="trades to judge per review")
+    p.set_defaults(func=cmd_review_prep)
+
+    p = sub.add_parser("verdicts", help="record a review's thesis verdicts in the journal")
+    p.add_argument("file")
+    p.set_defaults(func=cmd_verdicts)
 
     p = sub.add_parser("prep", help="markdown book state for the brief request")
     p.add_argument("--out", help="write to this file instead of stdout")

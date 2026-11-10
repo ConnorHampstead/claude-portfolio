@@ -30,6 +30,21 @@ class Calendar(DeskCase):
             _, code = self.calendar(open_window=[30, 120])
             self.assertEqual(code, 1, why)
 
+    def test_before_break_is_the_last_session_before_any_closed_day(self):
+        """The cleanup ran on Fridays only, which misses the Thursday before a
+        Friday holiday and every midweek one."""
+        out, code = self.calendar(before_break=True)        # Thursday: Friday trades
+        self.assertEqual(code, 1, out)
+        self.freeze(datetime(2026, 9, 25, 19, 40, tzinfo=timezone.utc))
+        out, code = self.calendar(before_break=True)        # Friday: Saturday does not
+        self.assertEqual(code, 0, out)
+        self.assertIn("last one before a break", out)
+        self.fake.calendar = lambda start, end: (           # a Wednesday before a holiday
+            [] if start == "2026-09-24" else [{"date": start, "open": "09:30", "close": "16:00"}])
+        self.freeze(datetime(2026, 9, 23, 19, 40, tzinfo=timezone.utc))
+        _, code = self.calendar(before_break=True)
+        self.assertEqual(code, 0)
+
     def test_weekend(self):
         self.freeze(datetime(2026, 9, 26, 13, 7, tzinfo=timezone.utc))
         out, code = self.calendar()
@@ -80,7 +95,8 @@ class DispatchSchedule(unittest.TestCase):
     def test_the_friday_jobs(self):
         self.assertIn("55 12,13 * * MON-FRI", self.crons)
         self.assertIn("55 13,14 * * MON-FRI", self.crons)
-        self.assertIn("40 19,20 * * FRI", self.crons)
+        # Every weekday: weekend.yml acts only on the last session before a break.
+        self.assertIn("40 19,20 * * MON-FRI", self.crons)
 
 
 if __name__ == "__main__":

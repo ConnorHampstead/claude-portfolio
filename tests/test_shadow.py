@@ -1,4 +1,5 @@
-"""The shadow book: replaying passed ideas against the tape, and reporting them."""
+"""The shadow book: replaying passed ideas and trade brackets against the tape,
+and reporting them."""
 
 import unittest
 from datetime import datetime, timezone
@@ -102,7 +103,43 @@ class ShadowCommand(DeskCase):
         self.assertIn("Target first    1", out)
 
         prep, _ = self.run_cmd(desk.cmd_prep, out=None)
-        self.assertIn("| 2026-09-22 open | XLE | short | wrong location | target | +2.06R | 40% |", prep)
+        self.assertIn("| Ideas you passed on, or the caps dropped | 1 | 1 | 0 | +2.06R |", prep)
+
+    def test_replays_each_trade_as_the_bracket_it_was_submitted_with(self):
+        """DAL's stop was trailed to 79.50 and took it out for a loss. The
+        fills cannot say what the 78 / 84 bracket would have done; the tape
+        can: the dip held above 78 and 84 traded five minutes later."""
+        filled = datetime(2026, 9, 22, 13, 30, 2, tzinfo=timezone.utc)
+        entry = self.fake.bracket("DAL", "long", "limit", 100, 80, 78, 84, fill=80,
+                                  filled_at=filled, submitted=filled)
+        self.journal_row(ticker="DAL", direction="long", entry_planned=80, stop=79.5, target=84,
+                         stop_initial=78, target_initial=84, qty=100, risk_usd=200,
+                         session_date="2026-09-22", order_id=entry["id"], entry_fill=80,
+                         exit_fill=79.5, exit_reason="stop", pnl_usd=-50, r_multiple=-0.25,
+                         closed_at="2026-09-22T13:33:00Z")
+        # Still open, and its bracket not yet resolved: left for a later run.
+        self.journal_row(ticker="UAL", direction="long", entry_planned=90, stop=88, target=95,
+                         qty=100, risk_usd=200, session_date="2026-09-24", entry_fill=90,
+                         filled_at="2026-09-24T13:30:01+00:00", order_id="none")
+        self.fake.bars[("5Min", "DAL")] = [bar(et("2026-09-22", "09:30"), 80, 80.5, 79.2, 80.2),
+                                           bar(et("2026-09-22", "09:35"), 80.2, 84.2, 80.1, 84)]
+        self.fake.bars[("5Min", "UAL")] = [bar(et("2026-09-24", "09:30"), 90, 91, 89.5, 90.5)]
+        out, code = self.run_cmd(desk.cmd_shadow)
+        self.assertEqual(code, 0, out)
+        self.assertIn("1 trade bracket(s) replayed", out)
+        rows = self.journal()
+        dal = rows["DAL"]
+        self.assertEqual((dal["bracket_outcome"], dal["bracket_r"], dal["hit_target_first"]),
+                         ("target", "2.0", "1"))
+        self.assertTrue(dal["filled_at"].startswith("2026-09-22T13:30:02"))
+        self.assertEqual(rows["UAL"]["bracket_outcome"], "")
+
+        out, _ = self.run_cmd(desk.cmd_score)
+        self.assertIn("Brackets left alone  +2.00R over 1 of these trades (as managed: -0.25R)", out)
+        self.assertIn("filled early - has cost 2.25R.", out)
+
+        out, _ = self.run_cmd(desk.cmd_shadow)
+        self.assertNotIn("DAL", out, "a resolved bracket is not replayed again")
 
 
 if __name__ == "__main__":

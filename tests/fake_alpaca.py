@@ -13,7 +13,6 @@ that broke the desk in September 2026:
   2026-09-23).
 - Replacing an order with unchanged parameters is a 422 (DAL 2026-09-22).
 - SIP data is refused when it is less than 15 minutes old.
-- /v2beta1/stocks/snapshots does not exist; desk.py falls back to /v2.
 """
 
 from __future__ import annotations
@@ -66,7 +65,6 @@ class FakeAlpaca:
         self.trade_time: dict[str, datetime] = {}  # symbol -> latest trade time
         self.daily: dict[str, dict] = {}        # symbol -> today's o/h/l
         self.bars: dict[tuple[str, str], list[dict]] = {}
-        self.movers = {"gainers": [], "losers": [], "last_updated": None}
         self.not_shortable: set[str] = set()
         self.refuse: dict[str, str] = {}   # symbol -> message for POST /v2/orders
         self.no_sip = False
@@ -171,14 +169,10 @@ class FakeAlpaca:
             sym = path.rsplit("/", 1)[1]
             return {"symbol": sym, "tradable": True,
                     "shortable": sym not in self.not_shortable, "easy_to_borrow": True}
-        if path == "/v2beta1/stocks/snapshots":
-            raise http_error(method, path, 404, {"message": "Not Found"})
         if path == "/v2/stocks/snapshots":
             return self.snapshots(params["symbols"].split(","))
         if path == "/v2/stocks/bars":
             return self.get_bars(method, path, params)
-        if path == "/v1beta1/screener/stocks/movers":
-            return copy.deepcopy(self.movers)
         if path == "/v2/orders" and method == "GET":
             return self.list_orders(params)
         if path == "/v2/orders" and method == "POST":

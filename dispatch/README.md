@@ -8,14 +8,16 @@ starts in seconds. So the clock lives here and GitHub only supplies the runner.
 |---|---|---|
 | Pre-market brief | `desk.yml` | 08:55 ET, Mon-Fri |
 | Post-open review | `desk.yml`, `session=open` | 09:55 ET, Mon-Fri |
-| Weekend cleanup | `weekend.yml` | 15:40 ET, Fri |
+| Weekend cleanup | `weekend.yml` | 15:40 ET, Mon-Fri |
 
 Each job has a target (pre-market: 25 min before the open, 09:05 ET; post-open:
 35 min after it, 10:05 ET; weekend: 10 min before the close) and holds its
 runner until then. Each dispatch sits 10 min ahead of its target, short enough
-that a runner is never tied up for long. On the half-day after Thanksgiving the
-close is 13:00 ET, so the weekend cleanup arrives after it and cancels straight
-away; that is still well before Monday's open.
+that a runner is never tied up for long. The weekend cleanup is dispatched every
+weekday and acts only on the last session before a weekend or a market holiday
+(`desk.py calendar --before-break`); on any other day it exits in seconds. On
+the half-day after Thanksgiving the close is 13:00 ET, so it arrives after the
+close and cancels straight away; that is still well before Monday's open.
 
 Each call passes `dry_run=false`, and `session` for the two desk jobs (the
 workflow defaults it to `pre-market`). A duplicate dispatch - a manual one on
@@ -62,7 +64,7 @@ Cron Triggers work on the Workers free plan (5 per account; this uses 3).
 Cloudflare cron is UTC-only, so each cron lists both the EDT and EST hour and
 `src/index.ts` dispatches only on the one matching New York time.
 
-Weekdays are written as names (`MON-FRI`, `FRI`), never numbers. Cloudflare
+Weekdays are written as names (`MON-FRI`), never numbers. Cloudflare
 counts 1 = Sunday .. 7 = Saturday, not standard cron's 0 = Sunday, so the
 original `1-5` ran Sunday-Thursday: the Friday session never dispatched and the
 Friday cleanup ran on Thursday (2026-09-24/25). The Worker also checks the

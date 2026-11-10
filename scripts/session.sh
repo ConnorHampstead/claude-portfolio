@@ -8,19 +8,15 @@
 #
 set -euo pipefail
 
-# An unset GitHub secret expands to an empty string, and an empty auth variable
-# is worse than an absent one — Claude Code resolves credentials in precedence
-# order and an empty high-precedence var can shadow the one you meant to use.
-for v in ANTHROPIC_API_KEY ANTHROPIC_AUTH_TOKEN CLAUDE_CODE_OAUTH_TOKEN; do
-  if [ -z "${!v:-}" ]; then unset "$v" || true; fi
-done
-
 DATE="$(date -u +%Y-%m-%d)"
 DRY_RUN="${DRY_RUN:-}"
 SESSION="${SESSION:-pre-market}"
-# Pinned, not an alias: a model change is a change to the experiment, and the
-# journal records which model wrote each play.
+# Pinned, not an alias or a default: the model and how hard it is asked to
+# think are both part of the experiment, and the journal records them
+# together on every play.
 export DESK_MODEL="${DESK_MODEL:-claude-opus-5-5}"
+export DESK_EFFORT="${DESK_EFFORT:-xhigh}"
+LABEL="${DESK_MODEL}/${DESK_EFFORT}"
 SUBMIT_RC=0
 mkdir -p briefs state
 
@@ -41,7 +37,7 @@ else
   BRIEF="briefs/${DATE}${SFX}.md"
   CHECK="briefs/${DATE}${SFX}.check.txt"
 fi
-echo "Session: ${SESSION}   model: ${DESK_MODEL}"
+echo "Session: ${SESSION}   model: ${DESK_MODEL}   effort: ${DESK_EFFORT}"
 
 echo "::group::Settle previous session"
 python3 desk.py reconcile | tee "state/reconcile${SFX}.txt"
@@ -65,45 +61,50 @@ echo "::group::Generate brief"
 {
   cat "$REQUEST_TEMPLATE"
   echo
+  # What the reviews have established, merged by hand. Until this file the
+  # reviews wrote to reviews/ and nothing the desk learned reached the brief.
+  if [ -s prompts/lessons.md ]; then
+    cat prompts/lessons.md
+    echo
+  fi
   if [ "$SESSION" = "open" ]; then
     echo "## This morning's pre-market brief"
     echo
     cat "briefs/${DATE}.md" 2>/dev/null \
       || echo "*No pre-market brief ran today. Work from the book state alone.*"
     echo
+  else
+    # The brief is asked to name the level it would act at tomorrow, and
+    # tomorrow's brief never saw it. The last review is short by design.
+    PREV="$(ls briefs/*-open.md 2>/dev/null | grep -v "/${DATE}-open.md" | tail -n1 || true)"
+    if [ -n "$PREV" ]; then
+      echo "## Your last post-open review ($(basename "$PREV" -open.md))"
+      echo
+      echo "*For continuity: what you were watching and why. The book state below is"
+      echo "current and overrides anything here.*"
+      echo
+      cat "$PREV"
+      echo
+    fi
   fi
   cat "state/book${SFX}.md"
 } > "state/request${SFX}.md"
 
-# Linux caps a single argument at 128 KiB. The open session's request carries
-# the morning brief and the market tables, around 30 KiB - fail loudly rather
-# than have exec refuse it if that ever grows.
-if [ "$(wc -c < "state/request${SFX}.md")" -gt 120000 ]; then
-  echo "::error::state/request${SFX}.md is over 120 KB - too long for one argument."
-  exit 1
-fi
-
-# WebSearch and WebFetch only. No Bash, no Write - the model produces text and
-# nothing else. Everything that touches the account goes through desk.py, which
-# validates independently.
-claude -p "$(cat "state/request${SFX}.md")" \
-  --append-system-prompt "$(cat prompts/system.md)" \
-  --allowedTools "WebSearch,WebFetch" \
-  --permission-mode acceptEdits \
-  --model "$DESK_MODEL" \
-  --max-turns 40 \
-  --output-format text \
-  | tee "${BRIEF}"
+# ask.sh runs the model with web search and nothing else, and refuses a brief
+# that was written without looking anything up.
+bash scripts/ask.sh "state/request${SFX}.md" prompts/system.md "${BRIEF}" 1
 echo "::endgroup::"
-
-if [ ! -s "${BRIEF}" ]; then
-  echo "Brief is empty - Claude produced no output. Aborting before submission."
-  exit 1
-fi
 
 echo "::group::Validate"
 # check never blocks: bad plays are rejected individually and the good ones proceed.
-python3 desk.py check "${BRIEF}" | tee "${CHECK}"
+if [ -n "$DRY_RUN" ]; then
+  # A dry run's plays are logged to the shadow book and scored, which is how
+  # a prompt or model change is tried on a branch before it trades.
+  python3 desk.py check "${BRIEF}" --log-shadow --session "$SESSION" --model "$LABEL" \
+    | tee "${CHECK}"
+else
+  python3 desk.py check "${BRIEF}" | tee "${CHECK}"
+fi
 echo "::endgroup::"
 
 if [ -n "$DRY_RUN" ]; then
@@ -119,7 +120,7 @@ else
   # book actually looks like afterwards - so they still run, and the exit code
   # is carried to the end of the script.
   SUBMIT_RC=0
-  python3 desk.py submit "${BRIEF}" --confirm --session "$SESSION" --model "$DESK_MODEL" \
+  python3 desk.py submit "${BRIEF}" --confirm --session "$SESSION" --model "$LABEL" \
     | tee "briefs/${DATE}${SFX}.submit.txt" || SUBMIT_RC=$?
   echo "::endgroup::"
 fi

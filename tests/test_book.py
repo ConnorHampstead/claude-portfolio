@@ -1,9 +1,10 @@
 """Exit legs and manage, and the book state prep writes for the brief."""
 
+import json
 import unittest
 from datetime import datetime, timedelta, timezone
 
-from tests.support import POST_OPEN, DeskCase, desk
+from tests.support import CONFIG, POST_OPEN, DeskCase, desk
 from tests.fake_alpaca import et
 
 
@@ -132,6 +133,56 @@ class Prep(DeskCase):
         self.assertIn("2 closed trades: 1W / 1L, total +0.75R, net $+895 realized", out)
         self.assertLess(out.index("| LLY |"), out.index("| ANET |"))
 
+    def test_the_record_scores_every_bracket_as_submitted(self):
+        """The brief saw its last five trades and nothing of how its stated
+        probabilities had held up, or what managing its positions had cost."""
+        self.journal_row(ticker="LLY", direction="long", entry_planned=1165, stop=1230,
+                         target=1300, stop_initial=1126, target_initial=1228, qty=25,
+                         risk_usd=975, r_multiple=0.5, pnl_usd=487.5, exit_reason="stop",
+                         p_target_first=0.52, hit_target_first=1, bracket_r=1.6,
+                         bracket_outcome="target", closed_at="2026-08-25T19:59:11Z")
+        self.journal_row(ticker="ANET", direction="long", entry_planned=207, stop=193.2,
+                         target=228, qty=72, risk_usd=993.6, r_multiple=-0.763, pnl_usd=-758.4,
+                         exit_reason="stop", hit_target_first=0,
+                         closed_at="2026-08-05T14:01:04Z")
+        desk.append_shadow([
+            {"shadow_id": "a", "session_date": "2026-09-01", "source": "passed", "ticker": "XLE",
+             "direction": "short", "p_target_first": 0.4, "status": "resolved",
+             "outcome": "target", "r_multiple": 2.0, "hit_target_first": 1},
+            # Neither a pass: one was placed after all, one is a dry run's.
+            {"shadow_id": "b", "session_date": "2026-09-01", "source": "passed", "ticker": "AAPL",
+             "direction": "long", "p_target_first": 0.4, "status": "resolved", "outcome": "taken"},
+            {"shadow_id": "c", "session_date": "2026-09-01", "source": "dry run", "ticker": "MSFT",
+             "direction": "long", "p_target_first": 0.9, "status": "resolved",
+             "outcome": "stop", "r_multiple": -1.0, "hit_target_first": 0}])
+        record = self.prep().split("### Your record")[1].split("### Last")[0]
+        self.assertIn("| Trades taken, as managed | 2 | 1 | 1 | -0.13R |", record)
+        self.assertIn("| The same trades, bracket left alone | 1 | | | +1.60R |", record)
+        self.assertIn("| Ideas you passed on, or the caps dropped | 1 | 1 | 0 | +2.00R |", record)
+        self.assertIn("| 40%-45% | 1 | 100% |", record)
+        self.assertIn("| 50%-60% | 1 | 100% |", record)
+        self.assertNotIn("70%", record, "the dry run's 0.9 is not part of the record")
+        self.assertIn("Base rate: 67% of 3 brackets reached target first.", record)
+
+    def test_open_positions_show_what_was_written_at_entry(self):
+        """A later brief closes on the recorded invalidation; it used to be
+        shown 120 characters of the thesis and none of it."""
+        f = self.fake
+        entry = f.bracket("BAC", "short", "stop", 267, 55.80, 57.70, 52.90, fill=55.80,
+                          filled_at=self.NOW - timedelta(days=2))
+        f.position("BAC", -267, 55.80, 56.20)
+        self.journal_row(ticker="BAC", direction="short", entry_type="stop", entry_planned=55.8,
+                         stop=57.7, target=52.9, qty=267, risk_usd=507.3, order_id=entry["id"],
+                         session_date="2026-09-18", filled_at="2026-09-22T13:30:02+00:00",
+                         thesis="Banks lag | the curve.",
+                         invalidation="A close back above 56.90.")
+        out = self.prep()
+        row = next(l for l in out.splitlines() if l.startswith("| BAC | short"))
+        self.assertIn("| -15% | 57.70 | 52.90 |", row)   # signed share of equity
+        self.assertIn("- **BAC**, opened 2026-09-22 (session 3 of at most 10), submitted with "
+                      "stop 57.7 and target 52.9, P 45%. Thesis: Banks lag / the curve. "
+                      "Invalidation: A close back above 56.90.", out)
+
     def test_resting_entries_and_room(self):
         self.fake.bracket("AAPL", "long", "stop", 67, 346, 338.5, 358)
         out = self.prep()
@@ -170,20 +221,43 @@ class Prep(DeskCase):
         self.assertIn("(IEX, IEX volume only", out)
         self.assertIn("thin single-venue print", out)
 
-    def test_movers_filtered_and_labelled_when_stale(self):
+    def scan(self, *symbols):
+        (self.tmp / "config.json").write_text(json.dumps({**CONFIG, "scan": list(symbols)}))
+
+    def test_movers_come_from_the_scan_list_at_todays_prices(self):
+        """Alpaca's screener does not update before the open, so every
+        pre-market brief was shown the previous session's small caps."""
         f = self.fake
-        for sym, px, vol in (("MOVR", 30.0, 5e6), ("THIN", 40.0, 5e4), ("PENNY", 3.0, 5e6)):
-            f.daily_history(sym, [px], vol=vol)
-            f.prices[sym] = px
-        f.movers = {"gainers": [{"symbol": s, "price": p} for s, p in
-                                (("MOVR", 36), ("THIN", 44), ("PENNY", 3.2), ("ABCDW", 9))],
-                    "losers": [], "last_updated": "2026-09-23T23:59:00.123456789Z"}
+        for sym, prev, last, vol in (("MOVR", 30.0, 36.0, 5e6), ("DOWN", 50.0, 45.0, 5e6),
+                                     ("FLAT", 20.0, 20.0, 5e6), ("THIN", 40.0, 44.0, 5e4),
+                                     ("PENNY", 3.0, 3.6, 5e6)):
+            f.daily_history(sym, [prev], vol=vol)
+            f.prices[sym] = last
+        self.scan("MOVR", "DOWN", "FLAT", "THIN", "PENNY", "GONE", "SPY")
         out = self.prep()
-        movers = out[out.index("#### Movers"):]
-        self.assertIn("PREVIOUS session's movers", movers)
-        self.assertIn("| MOVR |", movers)
-        for sym in ("THIN", "PENNY", "ABCDW"):
+        movers = out[out.index("#### Today's biggest movers among 6 other liquid names "
+                               "(at least $5 and 1M average volume)"):]
+        self.assertLess(movers.index("| MOVR | 36.00 (09:07 iex) | +20.0% |"),
+                        movers.index("| DOWN | 45.00 (09:07 iex) | -10.0% |"))
+        for sym in ("FLAT", "THIN", "PENNY", "GONE", "SPY"):
             self.assertNotIn(f"| {sym} |", movers)
+
+    def test_no_scan_list_no_movers_table(self):
+        self.assertNotIn("biggest movers", self.prep())
+
+    def test_a_scan_symbol_the_api_refuses_costs_only_the_movers(self):
+        def broken(method, path, base=None, **kw):
+            if "NOPE" in (kw.get("params") or {}).get("symbols", ""):
+                raise RuntimeError(f"GET {path} -> 400: invalid symbol")
+            return fake(method, path, base, **kw)
+        fake = self.fake
+        desk.api = broken
+        self.scan("NOPE")
+        out = self.prep()
+        self.assertIn("| SPY | 720.00 (09:07 iex) |", out)
+        movers = out[out.index("#### Today's biggest movers"):]
+        self.assertIn("unavailable this session", movers)
+        self.assertIn("invalid symbol", movers, "the reason names what to take off the list")
 
     def test_market_data_failure_does_not_stop_the_brief(self):
         def broken(method, path, base=None, **kw):
