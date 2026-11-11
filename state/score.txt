@@ -6,54 +6,73 @@
 ====================================================================
   Net P&L         $+2,878.86
   Win rate        32.6%  (15W / 31L)
-  Avg win         +1.57R
-  Avg loss        -0.73R
-  Expectancy      +0.02R per trade
-  Total R         +0.91R
-  Best / worst    +2.63R / -1.75R
-  Max drawdown    -6.55R
+  Avg win         +1.59R
+  Avg loss        -0.70R
+  Expectancy      +0.05R per trade
+  Total R         +2.19R
+  Best / worst    +2.63R / -1.74R
+  Max drawdown    -6.29R
 
-  21 closed trade(s) left out of calibration: their levels were moved
-  or they were closed by hand, so the fills do not show whether the
-  initial target or the initial stop came first.
+  Brackets left alone  +3.08R over 45 of these trades (as managed: +2.68R)
+  What was done after entry - stops moved, closes by hand, stops that
+  filled early - has cost 0.40R.
+
+  3 closed trade(s) not in calibration yet: `manage` moved their levels
+  and the bracket replay has not resolved them (or neither level came
+  within its window).
 
   ----------------------------------------------------------------
-  CALIBRATION   25 trades with a stated probability
+  CALIBRATION   43 trades with a stated probability
   ----------------------------------------------------------------
   stated           n   mean said    actual
-  0%-50%         24        38%       50%
+  30%-35%          6        33%       33%
+  35%-40%         19        37%       42%
+  40%-45%         14        41%       36%
+  45%-50%          3        46%       33%
   50%-60%          1        52%      100%
 
-  Brier score     0.270   (0 = perfect, 0.25 = coin flip, lower is better)
+  Brier score     0.236   (lower is better; always saying the 40% base rate scores 0.239)
 
   Note: thesis_verdict column is empty. Fill it in to separate skill from luck.
 
 ====================================================================
-  SHADOW BOOK   116 ideas passed on or dropped, 106 resolved
+  SHADOW BOOK   119 ideas passed on or dropped, 107 resolved
 ====================================================================
   Never filled    20
   Target first    31
-  Stop first      46
+  Stop first      47
   Expired         9   (neither level inside the window)
   Ambiguous       0   (both in one bar - not scored)
-  Avg R if taken  +0.07R over 86 filled ideas   (trades actually taken: +0.02R)
+  Avg R if taken  +0.05R over 87 filled ideas   (trades actually taken: +0.05R)
   A shadow book that out-earns the trades taken says the filter is rejecting
   the better ideas.
 
   ----------------------------------------------------------------
-  CALIBRATION   77 passed ideas with a stated probability
+  CALIBRATION   78 passed ideas with a stated probability
   ----------------------------------------------------------------
   stated           n   mean said    actual
-  0%-50%         77        36%       40%
+  0%-30%           1        28%      100%
+  30%-35%         26        32%       50%
+  35%-40%         38        36%       26%
+  40%-45%         12        40%       58%
+  45%-50%          1        45%        0%  <-- overconfident
 
-  Brier score     0.246   (0 = perfect, 0.25 = coin flip, lower is better)
+  Brier score     0.244   (lower is better; always saying the 40% base rate scores 0.239)
+  The stated probabilities do not beat the base rate: they are not telling
+  the better ideas from the worse ones.
 
   ----------------------------------------------------------------
-  CALIBRATION   102 trades and passed ideas together with a stated probability
+  CALIBRATION   121 trades and passed ideas together with a stated probability
   ----------------------------------------------------------------
   stated           n   mean said    actual
-  0%-50%        101        36%       43%
+  0%-30%           1        28%      100%
+  30%-35%         32        33%       47%
+  35%-40%         57        36%       32%
+  40%-45%         26        41%       46%
+  45%-50%          4        46%       25%  <-- overconfident
   50%-60%          1        52%      100%
 
-  Brier score     0.252   (0 = perfect, 0.25 = coin flip, lower is better)
+  Brier score     0.241   (lower is better; always saying the 40% base rate scores 0.239)
+  The stated probabilities do not beat the base rate: they are not telling
+  the better ideas from the worse ones.
 

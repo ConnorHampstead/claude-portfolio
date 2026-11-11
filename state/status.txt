@@ -2,15 +2,17 @@
 ====================================================================
   BOOK STATE   market closed
 ====================================================================
-  Equity          $102,661.72
-  Cash            $96,285.92
-  Day P&L         $-30.52  (-0.03%)
-  Gross exposure  $6,375.80  (6.2% of equity)
-  Net exposure    $+6,375.80  (+6.2%)
-  Positions       1 / 8
-  Loss-limit room 2.97% before the 3.0% kill switch
+  Equity          $102,169.46
+  Cash            $133,070.63
+  Day P&L         $-302.02  (-0.29%)
+  Gross exposure  $43,991.29  (43.1% of equity)
+  Net exposure    $-30,901.17  (-30.2%)
+  Positions       3 / 8
+  Loss-limit room 2.71% before the 3.0% kill switch
 
   SYM    SIDE      QTY        AVG       LAST       P&L $    P&L %
   ---------------------------------------------------------------
-  AMZN   long       24     274.10     265.66     -202.59   -3.08%
+  IWM    short      85     281.03     282.96     -164.71   -0.69%
+  XLE    short     213      60.56      62.88     -496.04   -3.85%
+  AMZN   long       24     274.10     272.71      -33.33   -0.51%
 

@@ -1,0 +1,31 @@
+30 lookups in 31 turns, 413 s
+WebSearch: stock futures November 11 2026
+WebSearch: premarket movers today chip stocks Seagate Marvell surge
+WebSearch: stock market today November 11 2026 futures Nasdaq chips rally
+WebSearch: CPI October 2026 report released November 10 inflation
+WebFetch: https://www.stocktitan.net/articles/stock-market-today-live-november-11-2026
+WebFetch: https://www.aol.com/articles/stock-market-today-dow-p-123445000.html
+WebFetch: https://www.bls.gov/news.release/cpi.nr0.htm
+WebSearch: October CPI hotter than expected core 2026 Fed hike December yields 5%
+WebSearch: oil prices Brent November 11 2026 Iran
+WebFetch: https://investrade.com/morning-preview-november-11-2026/
+WebFetch: https://fvbb.com/ns/oil-price-today-november-11-brent-crude/329965
+WebSearch: Costco special dividend $30 November 2026 record date ex-dividend
+WebSearch: Costco declares special cash dividend $30 per share buyback $4 billion
+WebSearch: Iran tanker attack Strait of Hormuz November 11 2026
+WebSearch: economic calendar week November 9-13 2026 PPI jobless claims retail sales Fed speakers
+WebSearch: Nvidia third quarter fiscal 2027 earnings date November 2026
+WebFetch: https://investrade.com/weekly-event-calendar-11-09-2026-11-13-2026/
+WebSearch: CoreWeave third quarter 2026 results revenue guidance shares
+WebSearch: Oracle stock CoreWeave earnings AI debt November 11 2026 premarket
+WebSearch: REITs utilities real estate stocks Treasury yields 5% CPI November 10 2026 sector performance
+WebFetch: https://www.home.saxo/en-sg/content/articles/macro/market-quick-take---us-treasury-yields-rip-higher---11-november-2026-11112026
+WebFetch: https://www.benzinga.com/markets/equities/26/11/63117496/stock-market-today-hot-cpi-treasury-yields-5-percent-nvidia-slides
+WebSearch: Oracle fiscal Q2 2027 earnings date December 2026
+WebSearch: Oracle shares rise CoreWeave results November 11 2026
+WebFetch: https://stockanalysis.com/etf/xlre/history/
+WebFetch: https://stockanalysis.com/etf/iwm/history/
+WebSearch: Eli Lilly Johnson & Johnson shares fall premarket November 11 2026 healthcare stocks
+WebSearch: Broadcom stock premarket November 11 2026
+WebFetch: https://stockanalysis.com/etf/xhb/history/
+WebSearch: MBA mortgage applications November 11 2026 30-year mortgage rate

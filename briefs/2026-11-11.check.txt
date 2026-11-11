@@ -1,0 +1,17 @@
+
+====================================================================
+  SESSION 2026-11-11   equity $102,169.46   day P&L -0.29%
+====================================================================
+
+  ----------------------------------------------------------------
+  PASSED IDEAS   logged to the shadow book and scored later, no orders
+      . AVGO   long  stop 355.50  stop 337.00  target 392.00  P 34%
+      . XLRE   short limit 44.90  stop 45.80  target 43.10  P 35%
+      . ORCL   long  market 123.71  stop 113.50  target 141.00  P 35%
+
+  ----------------------------------------------------------------
+  No new positions today.
+  3 idea(s) for the shadow book.
+
+  Validation only - `check` never sends. `submit --confirm` sends these.
+
