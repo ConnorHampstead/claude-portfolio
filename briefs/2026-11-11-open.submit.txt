@@ -1,0 +1,25 @@
+
+====================================================================
+  SESSION 2026-11-11   equity $102,138.43   day P&L -0.33%
+====================================================================
+
+  POSITION MANAGEMENT
+
+  [OK] XLE CLOSE x213
+      Condition 1, recorded invalidation met: Brent back above $93 ($93.08 at 13:06 GMT per Invezz, $93.22 near 07:30 ET, $93.14 +1.8% on Investing.com at ~10:05 ET) on Hormuz mine incidents; the Iran risk-premium unwind thesis is reversing.
+
+  ----------------------------------------------------------------
+
+  ----------------------------------------------------------------
+  PASSED IDEAS   logged to the shadow book and scored later, no orders
+      . XLP    short market 90.36  stop 92.45  target 87.00  P 34%
+
+  ----------------------------------------------------------------
+  No new positions today.
+  1 position update(s) pending.
+  1 idea(s) for the shadow book.
+
+  ~ XLE close order sent x213 [pending_new]
+
+  Logged to journal.csv
+

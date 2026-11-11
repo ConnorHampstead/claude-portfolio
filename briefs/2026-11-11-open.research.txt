@@ -1,0 +1,20 @@
+19 lookups in 20 turns, 174 s
+WebSearch: Brent crude oil price November 11 2026
+WebSearch: stock market today November 11 2026 Nasdaq open chips CoreWeave
+WebSearch: Amazon stock falls November 11 2026
+WebFetch: https://www.stocktitan.net/articles/stock-market-today-live-november-11-2026
+WebSearch: oil prices Wednesday tanker Hormuz Brent rises OPEC report
+WebFetch: https://invezz.com/news/2026/11/11/oil-prices-today-brent-opec-output-surge-iran/
+WebFetch: https://financefeeds.com/brent-crude-oil-price-92-53-wednesday-after-lowest-settle-since-august-iran-talks-bull-98-bear-89/
+WebSearch: oil prices November 11 2026 US session WTI Brent afternoon
+WebSearch: Wall Street opens higher November 11 2026 Nvidia AMD chip stocks rally CoreWeave
+WebFetch: https://www.investing.com/news/stock-market-news/wall-st-opens-higher-as-coreweave-lifts-ai-trade-5019274
+WebFetch: https://invezz.com/news/2026/11/11/nasdaq-opens-1-4-higher-as-coreweave-earnings-boost-ai-stocks-nvidia-rebounds/
+WebSearch: Nvidia Jensen Huang affair Chinese intelligence report November 2026
+WebSearch: "Brent" "$93" oil November 11 2026 Hormuz tanker mine
+WebSearch: Kimberly-Clark Clorox Molson Coors shares fall November 11 2026
+WebSearch: Accenture stock down November 11 2026
+WebSearch: Cigna UnitedHealth shares fall November 11 2026 health insurers
+WebSearch: Apple stock record high November 11 2026
+WebSearch: consumer staples stocks slide rotation into tech November 11 2026 Clorox Campbell Conagra
+WebSearch: Microsoft Amazon shares lower Wednesday hyperscalers AI spending CoreWeave November 11
