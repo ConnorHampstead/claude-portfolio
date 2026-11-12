@@ -1,6 +1,7 @@
-  XLE    short stop         -1.00R  (passed 2026-11-09)
-  SMH    short stop         -1.14R  (passed 2026-11-10)
+  COST   long  target       +2.18R  (passed 2026-11-05)
+  NVDA   short target       +1.78R  (passed 2026-11-09)
+  CTVA   short target       +0.76R  (passed 2026-11-12)
 
-  2 idea(s) resolved, 10 still pending.
+  3 idea(s) resolved, 15 still pending.
 
   0 trade bracket(s) replayed.

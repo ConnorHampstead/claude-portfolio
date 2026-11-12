@@ -1,0 +1,26 @@
+
+====================================================================
+  SESSION 2026-11-12   equity $102,390.43   day P&L +0.41%
+====================================================================
+
+  POSITION MANAGEMENT
+
+  [OK] GLD CLOSE x32
+      Resting entry stale: GLD broke its 354.67 20d low at the open (354.51); a 374 spike-fade fill would need +5.5% before the pre-weekend clear, and the order blocks the breakdown-retest short planned for tomorrow.
+      ! GLD entry is still resting unfilled at 374.00 - cancelling it
+
+  ----------------------------------------------------------------
+
+  ----------------------------------------------------------------
+  PASSED IDEAS   logged to the shadow book and scored later, no orders
+      . KDP    long  limit 35.50  stop 33.50  target 38.20  P 41%
+      . MSTR   short market 113.70  stop 124.00  target 95.00  P 33%
+      . MOS    short market 21.57  stop 23.00  target 19.50  P 35%
+
+  ----------------------------------------------------------------
+  No new positions today.
+  1 position update(s) pending.
+  3 idea(s) for the shadow book.
+
+  Validation only - `check` never sends. `submit --confirm` sends these.
+

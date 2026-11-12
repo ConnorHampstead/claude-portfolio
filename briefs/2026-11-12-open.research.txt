@@ -1,0 +1,18 @@
+17 lookups in 18 turns, 185 s
+WebSearch: existing home sales October 2026
+WebSearch: stock market today November 12 2026 Nvidia open
+WebSearch: Hammack Fed November 12 2026
+WebSearch: VIX Treasury yields 10-year November 12 2026 morning
+WebFetch: https://www.stocktitan.net/articles/stock-market-today-live-november-12-2026
+WebSearch: Keurig Dr Pepper stock falls November 12
+WebSearch: Alibaba shares fall November 12 2026
+WebSearch: Palo Alto Networks stock down November 12 2026
+WebSearch: Brent crude price Thursday November 12 2026 EIA
+WebSearch: Mosaic stock falls November 12 2026
+WebSearch: Keurig Dr Pepper prices offering $2 billion share price per share
+WebSearch: oil prices today Trump Iran "Strait" Brent futures midday
+WebSearch: Broadcom stock record high November 12 2026 Nvidia Huang
+WebFetch: https://www.cnbc.com/2026/11/12/nvidia-jensen-huang-ceo-live-updates.html
+WebSearch: 2-year Treasury yield existing home sales Thursday stocks 10am
+WebSearch: Allstate shares rise November 12 2026 catastrophe losses October
+WebSearch: Strategy MSTR MSCI USA index deletion November 30 2026 shares fall
