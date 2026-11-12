@@ -1,0 +1,31 @@
+30 lookups in 31 turns, 417 s
+WebSearch: Nvidia stock falls premarket November 12 2026
+WebSearch: stock futures today November 12 2026 jobless claims
+WebFetch: https://www.cnbc.com/2026/11/11/stock-market-today-live-updates.html
+WebFetch: https://www.zerohedge.com/markets/nasdaq-futures-slide-nvidia-board-hunts-huangs-replacement-rivals-feast
+WebSearch: Nvidia Jensen Huang resigns Colette Kress interim CEO press release
+WebSearch: Trump Iran "don't need a deal" oil prices Brent November 12
+WebSearch: Corteva cuts EBITDA guidance Brazil shares fall
+WebSearch: HubSpot stock jumps premarket November 12 2026
+WebFetch: https://www.cnbc.com/2026/11/12/nvidia-nvda-jensen-huang-second-affair.html
+WebFetch: https://finance.yahoo.com/markets/live/stock-market-today-thursday-november-12-sp-500-nasdaq-dow-nvidia-invest-110027430.html
+WebSearch: Corteva shares November 12 2026 guidance
+WebSearch: 2-year Treasury yield October CPI report November 10 2026 Fed hike December
+WebSearch: Eli Lilly shares rise premarket November 12 2026
+WebSearch: HubSpot shares surge November 12 2026
+WebSearch: Broadcom AVGO next earnings date December 2026
+WebSearch: Nebius guidance 2027 capex shares fall CoreWeave Micron Sandisk premarket November 12
+WebSearch: Brent crude price Thursday November 12 2026
+WebFetch: https://seekingalpha.com/news/4671376-hubspot-rises-as-co-founder-halligan-returns-as-ceo
+WebFetch: https://www.investing.com/commodities/brent-oil
+WebSearch: Trump Truth Social Iran deal oil jumps Thursday
+WebSearch: Oracle stock falls premarket November 12 2026
+WebSearch: AMD Broadcom shares rise Nvidia Huang resignation rivals analysts
+WebFetch: https://in.investing.com/news/stock-market-news/hubspot-cofounder-returns-as-ceo-cfo-to-retire-93CH-5699497
+WebSearch: Corteva CTVA stock premarket November 12 2026 Q3 results guidance cut shares
+WebSearch: Micron Sandisk Seagate shares fall premarket Thursday memory stocks SK Hynix Nvidia
+WebSearch: Anthropic IPO pricing November 18 oversubscribed valuation Amazon Alphabet stake
+WebSearch: Nvidia third quarter fiscal 2027 results date November 18 2026 conference call
+WebSearch: Delta Air Lines news November 2026 shares
+WebSearch: VIX volatility index November 12 2026 Nvidia premarket
+WebSearch: Hammack remarks November 12 2026 inflation rate hike

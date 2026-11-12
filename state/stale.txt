@@ -1,7 +1,6 @@
 
-  3 resting exit order(s) left alone (protecting an open position):
+  2 resting exit order(s) left alone (protecting an open position):
     IWM    buy   x85     bracket @271
-    XLE    buy   x213    bracket @57.3
     AMZN   sell  x24     bracket @293
 
   No unfilled entry orders older than 5d.

@@ -74,80 +74,126 @@ and "Your record" in the book state has the current figures.*
   trades and took slots, while the ideas you passed on averaged +0.10R over 80.
   Low-conviction ideas are now scored in the shadow book instead of traded.
 
-## Your last post-open review (2026-11-09)
+## Your last post-open review (2026-11-11)
 
 *For continuity: what you were watching and why. The book state below is
 current and overrides anything here.*
 
-## Post-open review: Monday 2026-11-09, 10:05 ET (16:05 Stockholm)
+# Post-open review: Wednesday 2026-11-11
 
-### 1. Since the open
-There was no 08:30 or 10:00 ET data today. The gap-up held and kept going: QQQ is +2.5% at 672.65 (high 673.64), SPY +1.8%, SMH +2.9%. NVDA is the laggard at −4.6% (177.97), and money is moving out of it into other chip names: AMD +8.0%, AVGO +7.4%. There is one new headline specific to AVGO since the morning brief. Anthropic's S-1 filing shows a large cash pile and fast-growing revenue, which supports its multi-year compute commitment to Broadcom. AVGO also set its Q4 earnings date for Dec 9. Both come from the Investing.com write-up below, which is a single source, though the price action matches it. The bounce is not failing, so the morning's main short idea is not in play today.
+*10:05 ET / 16:05 Stockholm (ET+6). The bond market is closed for Veterans Day.*
 
-### 2. Fills, positions and resting entries
-- **NVDA short: closed at the 178 target, +2.15R.** Done.
-- **AVGO short (302.03, stop 316.00): close now at market.** AVGO is 315.44, 0.56 below its stop, and has made a new high for the day on every push. The morning said hold because nothing specific to AVGO was out. There is now: the Anthropic S-1 gives buyers a reason specific to Broadcom, and NVDA's trouble is pushing chip money toward AVGO. Closing here loses about −0.96R instead of −1.0R at the stop. More importantly, it avoids slippage on a stop-market order in a squeeze. The thesis is invalidated. This is a loss that should be recorded as one, not rescued. One correction to the morning brief: its "tighten to 312 above 310" plan made no sense for a short. A 312 stop would sit below the current price and trigger immediately.
-- **AMZN long (filled 274.10, stop 263.50, target 293): keep.** It filled on the breakout and is now back at 271.85, just under the 273.23 20-day high. That is soft, but the invalidation needs QQQ breaking down too, and QQQ is ripping instead. The stop is about 1 ATR away, which is right for a probe.
-- **DAL limit 89.50: keep.** DAL is 91.25, today's low is 90.08, and it is holding above the 89.92 breakout level. A retest is still a reasonable fill. Brent is still falling (USO −3.2%).
-- **QQQ sell stop 646.50: keep.** QQQ is above 670. The morning brief said to keep the trigger in that case, because it only goes live on a real breakdown, 26 points below here.
+## 1. Since the open
 
-### 3. The morning's plans
-- NVDA cover: **done**, +2.15R.
-- AVGO: the "above 310" case triggered, but tightening wasn't possible. **Closed** instead because of the new headline (see above).
-- QQQ: above 670, so the trigger **stays** as planned.
-- DAL: didn't fill. The "close below 87.50" rule was **not triggered**.
+No US data came out this morning. Reuters had the open at S&P +0.97%, Nasdaq +1.54% and the Dow flat. The AI gap held: SMH is +3.8% (opened 504.99, now 501.92), AVGO +6.2%, CRWV about +20%. Defensives are lower: XLV −1.0%, XLP −0.7%, UNH −1.6%. Even inside tech, the big AI spenders are red: MSFT −1.1%, AMZN −0.7%, META −0.4%. The VIX is 18.29.
 
-### 4. New plays
-None. Tech is ripping, CPI is out tomorrow at 08:30 ET (14:30 Stockholm), and the book already has a QQQ short trigger and a tech long. Nothing new clears the bar at 10:05. After closing AVGO, risk at stake falls to about 1.0% if every order fills.
+The one fact that changed versus the morning is oil. The brief used a Brent quote of $92.53 taken at 06:36 GMT. Since then Brent has traded above $93:
+- $93.22 around 07:30 ET;
+- $93.08 at 13:06 GMT (Invezz);
+- $93.14 (+1.80%) on Investing.com's live ticker at about 10:05 ET.
 
-### 5. Passing on
-- **NVDA short re-entry** (sell stop 169.90, under today's 170.24 low / stop 180.50 / target 155.00, P 33%): the CEO-probe news is already in the price, and a cool CPI could set up a relief squeeze. Logged so it gets scored.
-- **AMD/SMH fade**: the move is +8% with an 8.5% ATR, so there is no clean place for a stop. No levels.
+Those prices follow the Hormuz mine reports, and they came even though the OPEC report showed OPEC+ output up more than 2m bpd.
+
+## 2. Fills, positions and resting entries
+
+Nothing filled at the open.
+
+- **XLE short: close. Condition 1, the recorded invalidation has happened.** The invalidation was "Brent back above $93." Three independent quotes since 07:30 ET put Brent at $93.08–93.22. The morning's plan was to hold only while Brent stayed under $93, and it no longer is. XLE is 62.92, 0.18 under the stop, so closing now realizes about −0.93R against −1.0R at the stop. The saving is not the reason; the thesis was an unwinding Iran risk premium, and it is reversing.
+- **AMZN long: hold.** The invalidation needs QQQ below its 647.05 20-day low *and* AMZN back inside its range. QQQ is 686.28. Not met. Session 3 of 10.
+- **IWM short: hold.** The invalidation is the 2-year reversing its CPI move or a *close* above 284. Cash Treasuries are shut and IWM is 281.84 (high 283.09). Not met. I'll check the close tomorrow.
+- **GLD short limit 374: keep.** GLD is 367.80 and gold is about $4,022 (−0.2%) with the dollar +0.7%. The level still describes the trade.
+- **DAL long limit 89.50: keep.** The cancel condition was Brent above $95, and it is about $93.1. DAL is 91.62.
+- **QQQ sell stop 646.50: keep.** It is 40 points below the market and only goes live on a breakdown.
+
+## 3. The morning's plans
+
+- **XLE:** the stop did not fill on the open, but Brent is above $93, so it is **acted on: close.** No re-entry today, as the morning said.
+- **DAL, cancel if Brent is above $95:** **not triggered** at about $93.1. The limit stays.
+- **IWM:** **no action**, as planned. The close above 284 gets checked tomorrow.
+- **AVGO:** **no action.** It printed 354.50, just over the 354.25 20-day high, and is now 352.66. It has not failed below 345, so the idea is still alive. The 355.50 buy-stop idea is already being scored in `passed`. No chase.
+- **QQQ:** did not give back the gap (686 against a 674.76 prior close), so there is **nothing to note.**
+
+## 4. New plays
+
+**None.**
+- The open added no new catalyst to the AI longs. They held a gap that the morning had already priced at about 0 EV.
+- The weak defensives (KMB −2.9%, CI −2.7%, GIS −2.7%, ACN −2.6%) have no dated reason I could find. KMB's only coverage is background (the Kenvue deal, a soft Q3). These moves look like rotation, and a mover I cannot explain is not a trade.
+- I won't re-short energy: the invalidation I just acted on says the oil thesis is broken.
+
+## 5. Passing on
+
+- **XLP short:** the short side of today's rotation. Market 90.36, stop 92.45 (about 1.15 ATR), target 87.00 (1.6R). P = 0.34: the 39% base rate, moved down because there is no dated catalyst and my last XLP trade was wrong. EV is about −0.11R, conviction 1. Levels are in `passed`.
+- **AVGO, XLRE, ORCL:** unchanged from the morning and already scored in `passed`.
+
+## 6. For tomorrow
+
+- **IWM:** close the position if today's close is above 284, the recorded invalidation.
+- **Thursday:** claims at 08:30 ET / 14:30 Stockholm; the 30-year auction at 13:00 ET / 19:00 Stockholm, when cash Treasuries reopen after Tuesday's weak 10-year; AMAT and CSCO after the close.
+- **AVGO:** a close above 354.25 followed by a retest of 345 that holds is the long I'd act on.
+- **XLRE:** a rejection between 44.90 and 45.34 with the 10-year above 5% when it reopens.
+- **DAL:** the limit is cancelled if Brent goes above $95.
+
+**Book after the XLE close** (resting entries counted as filled): gross about 66% / 150%, net about −41% / ±100%, risk at stake about 1.74% / 4.0%, 5 of 8 slots.
 
 ```json
 {
-  "date": "2026-11-09",
-  "no_trade": false,
-  "session_note": "Gap-up extended into a broad tech squeeze with chip money rotating from NVDA to AVGO/AMD; closing the AVGO short on a new Anthropic-S-1 headline at 0.56 from its stop, keeping AMZN, DAL limit and QQQ breakdown trigger.",
+  "date": "2026-11-11",
+  "no_trade": true,
+  "session_note": "AI relief gap held through the open with defensives and hyperscalers lagging; Brent back above $93 (93.08-93.22 on three quotes) meets the XLE invalidation, so XLE is closed. Nothing new clears positive EV. Would act on an AVGO close above 354.25 then a 345 retest that holds, or XLRE rejecting 44.90-45.34 with the 10y above 5% when bonds reopen Thursday.",
   "plays": [],
   "manage": [
     {
-      "ticker": "AVGO",
+      "ticker": "XLE",
       "action": "close",
-      "reason": "Thesis invalidated: new single-name catalyst (Anthropic S-1 supports AVGO compute deal) plus rotation out of NVDA into AVGO; price 315.44 vs 316 stop, so exit at about -0.96R instead of risking slippage on the stop."
+      "reason": "Condition 1, recorded invalidation met: Brent back above $93 ($93.08 at 13:06 GMT per Invezz, $93.22 near 07:30 ET, $93.14 +1.8% on Investing.com at ~10:05 ET) on Hormuz mine incidents; the Iran risk-premium unwind thesis is reversing."
     }
   ],
   "passed": [
     {
-      "ticker": "NVDA",
+      "ticker": "XLP",
       "direction": "short",
-      "entry_type": "stop",
-      "entry": 169.90,
-      "stop": 180.50,
-      "targets": [155.00],
-      "p_target_first": 0.33,
-      "reason": "CEO-probe news already in the price after the cover; a cool CPI tomorrow could set up a relief squeeze."
+      "entry_type": "market",
+      "entry": 90.36,
+      "stop": 92.45,
+      "targets": [87.00],
+      "p_target_first": 0.34,
+      "reason": "Short side of today's defensive rotation (XLP -0.7%, KMB/GIS/CPB/CAG -3%), but no dated catalyst at source; EV about -0.11R at 1.6R; conviction 1."
     }
   ]
 }
 ```
 
-Sources: [Investing.com: why Broadcom is surging](https://uk.investing.com/news/stock-market-news/why-is-broadcom-stock-surging-today-93CH-4968988), [Stocktwits: chip stocks](https://stocktwits.com/news-articles/markets/equity/amd-avgo-intc-mu-chip-stocks-inch-higher-as-investors-look-past-midterms-led-selloff-nvidia-controversy/cNGAD0CR9eR)
+Sources:
+- [Investing.com / Reuters: Wall St opens higher as CoreWeave lifts AI trade](https://www.investing.com/news/stock-market-news/wall-st-opens-higher-as-coreweave-lifts-ai-trade-5019274)
+- [Invezz: Brent rebounds to $93 despite OPEC+ output surge](https://invezz.com/news/2026/11/11/oil-prices-today-brent-opec-output-surge-iran/)
+- [Invezz (SG): Brent rebounds to $93](https://invezz.com/sg/news/2026/11/11/oil-price-today-brent-rebounds-to-dollar93-despite-a-massive-opec-output-surge/)
+- [FinanceFeeds: Brent $92.53 Wednesday](https://financefeeds.com/brent-crude-oil-price-92-53-wednesday-after-lowest-settle-since-august-iran-talks-bull-98-bear-89/)
+- [Business Standard: oil rises as Hormuz attacks offset truce hopes](https://www.business-standard.com/amp/markets/commodities/oil-rises-from-2-month-low-as-hormuz-shipping-attacks-offset-truce-hopes-126111100088_1.html)
+- [Conservative Daily News: oil rebounds as Iran says another tanker hit a mine](https://conservativedailynews.com/2026/11/oil-rebounds-to-92-from-a-two-month-low-as-iran-says-another-tanker-hit-a-mine-in-hormuz/)
+- [ZeroHedge: futures rise, oil jumps on Hormuz mines](http://www.zerohedge.com/markets/futures-rise-coreweave-calms-debt-jitters-sparking-ai-rebound-oil-jumps-hormuz-mines)
+- [CNBC: Brent briefly dips below $90 (Nov 10)](https://www.cnbc.com/2026/11/10/oil-prices-trump-iran.html)
+- [StockTitan: stock market today, Nov 11](https://www.stocktitan.net/articles/stock-market-today-live-november-11-2026)
+- [Invezz: Nasdaq opens 1.4% higher](https://invezz.com/news/2026/11/11/nasdaq-opens-1-4-higher-as-coreweave-earnings-boost-ai-stocks-nvidia-rebounds/)
+- [MLQ: chip stocks jump 4% at the open](https://mlq.ai/news/chip-stocks-jump-4-at-the-open-as-coreweave-rallies-11-and-the-nasdaq-gains-15/)
+- [CNBC: Nvidia board investigates Huang (Nov 8)](https://www.cnbc.com/2026/11/08/nvidia-jensen-huang-investigation-china-spy.html)
+- [Al Jazeera: Nvidia investigates CEO](https://www.aljazeera.com/news/2026/11/8/us-chipmaker-nvidia-investigates-ceo-jensen-huang-over-affair)
+- [Motley Fool: What's wrong with Kimberly-Clark stock (Nov 10)](https://www.fool.com/investing/2026/11/10/whats-wrong-with-kimberly-clark-stock/)
+- [Yahoo Finance: KMB quote](https://finance.yahoo.com/quote/KMB/)
 
 ## Current book state
 *Auto-generated. These are live figures - use them, do not estimate.*
 
-- Time now: **09:05 ET** (14:05 UTC, 15:05 Stockholm), Wednesday 2026-11-11. The cash session opens at 09:30 ET (15:30 Stockholm), in 25 min, and closes at 16:00 ET (22:00 Stockholm). Anything scheduled before 09:05 ET today has already been released: look up the actual figure and the market's reaction, not the consensus.
-- Equity: **$102,165.95**
-- Cash: $133,070.63
-- Session P&L so far: -0.30% (new entries are blocked at -3.0%)
-- Gross exposure: $80,905 (79% of equity, cap 150%)
-- Net exposure: $-55,446 (-54%, cap +/-100%)
-- Risk at stake (entry to stop): $2,323 (2.27% of equity, cap 4.0%) — 1.73% left for new plays
-- Slots: 3 open + 3 resting entries of 8 — you may add at most 2 more
+- Time now: **09:05 ET** (14:05 UTC, 15:05 Stockholm), Thursday 2026-11-12. The cash session opens at 09:30 ET (15:30 Stockholm), in 25 min, and closes at 16:00 ET (22:00 Stockholm). Anything scheduled before 09:05 ET today has already been released: look up the actual figure and the market's reaction, not the consensus.
+- Equity: **$102,158.33**
+- Cash: $119,651.62
+- Session P&L so far: +0.18% (new entries are blocked at -3.0%)
+- Gross exposure: $67,306 (66% of equity, cap 150%)
+- Net exposure: $-42,034 (-41%, cap +/-100%)
+- Risk at stake (entry to stop): $1,781 (1.74% of equity, cap 4.0%) — 2.26% left for new plays
+- Slots: 2 open + 3 resting entries of 8 — you may add at most 3 more
 - *Gross, net, risk and slots count resting entries as if filled.*
 - A new long can be up to 50% of equity in notional: at 1% risk its stop must be at least 2.0% from entry (half that at 0.5%).
-- A new short can be up to 46% of equity in notional: at 1% risk its stop must be at least 2.2% from entry (half that at 0.5%).
+- A new short can be up to 50% of equity in notional: at 1% risk its stop must be at least 2.0% from entry (half that at 0.5%).
 
 ### Open positions
 
@@ -155,15 +201,13 @@ Sources: [Investing.com: why Broadcom is surging](https://uk.investing.com/news/
 
 | Symbol | Side | Qty | Avg entry | Last | Unreal. P&L | Share of equity | Stop | Target |
 |---|---|---|---|---|---|---|---|---|
-| AMZN | long | 24 | 274.10 | 273.10 | -24 (-0.4%) | +6% | 263.50 | 293.00 |
-| IWM | short | 85 | 281.03 | 283.05 | -172 (-0.7%) | -24% | 287.00 | 271.00 |
-| XLE | short | 213 | 60.56 | 62.91 | -502 (-3.9%) | -13% | 63.10 | 57.30 |
+| AMZN | long | 24 | 274.10 | 269.19 | -118 (-1.8%) | +6% | 263.50 | 293.00 |
+| IWM | short | 85 | 281.03 | 281.81 | -67 (-0.3%) | -23% | 287.00 | 271.00 |
 
 *What you wrote when you opened each one. The invalidation is the test for closing it early.*
 
-- **AMZN**, opened 2026-11-09 (session 3 of at most 10), submitted with stop 263.5 and target 293, P 36%. Thesis: Money is rotating within tech toward AMZN and away from chip capex. A 20-day-high breakout in this tape is a strong relative signal. Invalidation: QQQ breaking its 20-day low while AMZN falls back inside the range.
-- **IWM**, opened 2026-11-10 (session 2 of at most 10), submitted with stop 287 and target 271, P 36%. Thesis: Small caps are the most rate-sensitive equity cohort; a front-end repricing should pull IWM from +2% above its 20d average back toward the 270 range low. Invalidation: 2-year yields fully reverse the CPI move, or IWM closes above 284.
-- **XLE**, opened 2026-11-10 (session 2 of at most 10), submitted with stop 63.1 and target 57.3, P 37%. Thesis: Energy is breaking down as the Iran risk premium unwinds; a break of the 60.85 20d low continues the trend toward 57. Invalidation: Brent back above $93 or a renewed Iran escalation headline.
+- **AMZN**, opened 2026-11-09 (session 4 of at most 10), submitted with stop 263.5 and target 293, P 36%. Thesis: Money is rotating within tech toward AMZN and away from chip capex. A 20-day-high breakout in this tape is a strong relative signal. Invalidation: QQQ breaking its 20-day low while AMZN falls back inside the range.
+- **IWM**, opened 2026-11-10 (session 3 of at most 10), submitted with stop 287 and target 271, P 36%. Thesis: Small caps are the most rate-sensitive equity cohort; a front-end repricing should pull IWM from +2% above its 20d average back toward the 270 range low. Invalidation: 2-year yields fully reverse the CPI move, or IWM closes above 284.
 
 ### Resting entries (unfilled, carried from earlier sessions)
 
@@ -177,38 +221,38 @@ Sources: [Investing.com: why Broadcom is surging](https://uk.investing.com/news/
 
 ### Your record
 
-46 closed trades: 15W / 31L, total +2.19R, net $+2,879 realized.
+47 closed trades: 15W / 32L, total +1.17R, net $+2,358 realized.
 
 *Every idea is scored on the bracket as you submitted it: which of the initial target and the initial stop came first, within 10 sessions. R is profit over the risk budgeted.*
 
 | | Ideas | Target first | Stop first | Average R |
 |---|---|---|---|---|
-| Trades taken, as managed | 46 | 17 | 26 | +0.05R |
-| The same trades, bracket left alone | 45 | | | +0.07R |
-| Ideas you passed on, or the caps dropped | 87 | 31 | 47 | +0.05R |
+| Trades taken, as managed | 47 | 17 | 27 | +0.02R |
+| The same trades, bracket left alone | 46 | | | +0.04R |
+| Ideas you passed on, or the caps dropped | 89 | 31 | 49 | +0.03R |
 
 What you said against what happened, trades and passes together:
 
 | You said | Ideas | Reached target first |
 |---|---|---|
 | 0%-30% | 1 | 100% |
-| 30%-35% | 32 | 47% |
-| 35%-40% | 57 | 32% |
+| 30%-35% | 33 | 45% |
+| 35%-40% | 59 | 31% |
 | 40%-45% | 26 | 46% |
 | 45%-50% | 4 | 25% |
 | 50%-60% | 1 | 100% |
 
-Base rate: 40% of 121 brackets reached target first. Your Brier score is 0.241; saying 40% every time scores 0.239. Your probabilities are not yet telling the better ideas from the worse ones: start from the base rate and move off it only for a reason you can name.
+Base rate: 39% of 124 brackets reached target first. Your Brier score is 0.238; saying 39% every time scores 0.237. Your probabilities are not yet telling the better ideas from the worse ones: start from the base rate and move off it only for a reason you can name.
 
 ### Last 5 closed trades
 
 | Symbol | Direction | Exit | R | P&L | You said |
 |---|---|---|---|---|---|
+| XLE | short | close | -1.02R | $-521 | 37% |
 | AVGO | short | close | -0.92R | $-232 | 37% |
 | NVDA | short | target | +2.16R | $+1,108 | 37% |
 | XLP | long | close | -0.49R | $-251 | 38% |
 | XLV | long | stop | -0.82R | $-422 | 40% |
-| KRE | long | stop | -0.04R | $-10 | 37% |
 
 ### Market data
 
@@ -218,70 +262,69 @@ Base rate: 40% of 121 brackets reached target first. Your Brier score is 0.241; 
 
 | Symbol | Last (ET) | vs prev | Prev close | ATR14 | 20d low-high | Prev vs 20d / 50d avg | 5d | Avg vol 20d |
 |---|---|---|---|---|---|---|---|---|
-| AMZN | 272.90 (08:49 sip) | +0.7% | 270.87 | 10.68 (3.9%) | 229.36-275.34 | +6.1% / +6.6% | +8.0% | 50.4M |
-| IWM | 283.10 (08:54 iex) | +0.9% | 280.58 | 5.21 (1.9%) | 269.88-286.17 | +1.2% / -0.3% | +0.3% | 25.7M |
-| XLE | 62.97 (08:49 sip) | +1.2% | 62.21 | 1.88 (3.0%) | 60.43-70.15 | -6.7% / -4.2% | -6.7% | 37.6M |
-| GLD | 369.80 (08:49 sip) | +0.1% | 369.36 | 7.57 (2.0%) | 354.67-384.88 | -0.7% / -3.7% | +2.8% | 9.2M |
-| DAL | 91.38 (08:49 sip) | -0.9% | 92.20 | 3.48 (3.8%) | 74.14-92.52 | +13.1% / +13.6% | +10.7% | 6.6M |
-| QQQ | 687.85 (09:02 iex) | +1.9% | 674.76 | 17.87 (2.6%) | 647.05-740.53 | -3.7% / -6.2% | -1.5% | 51.9M |
+| AMZN | 269.05 (09:04 iex) | +1.1% | 266.17 | 10.31 (3.9%) | 229.36-275.34 | +4.0% / +4.6% | +0.1% | 50.6M |
+| IWM | 281.51 (08:49 sip) | -0.6% | 283.09 | 5.23 (1.8%) | 269.88-286.17 | +1.9% / +0.6% | -0.3% | 24.7M |
+| GLD | 356.39 (08:56 iex) | -2.4% | 365.17 | 7.13 (2.0%) | 354.67-384.88 | -1.7% / -4.6% | -2.0% | 8.9M |
+| DAL | 90.14 (08:45 sip) | -1.3% | 91.32 | 3.27 (3.6%) | 74.14-92.52 | +11.0% / +12.1% | +2.3% | 6.6M |
+| QQQ | 681.75 (08:53 iex) | -1.3% | 690.38 | 17.69 (2.6%) | 647.05-729.43 | -1.2% / -4.0% | -0.2% | 51.5M |
 
 #### Indices, rates, commodities and sectors
 
 | Symbol | Last (ET) | vs prev | Prev close | ATR14 | 20d low-high | Prev vs 20d / 50d avg | 5d | Avg vol 20d |
 |---|---|---|---|---|---|---|---|---|
-| SPY | 757.04 (08:49 sip) | +0.9% | 749.92 | 12.11 (1.6%) | 732.71-776.35 | -1.4% / -1.9% | -0.6% | 49.4M |
-| QQQ | 687.85 (09:02 iex) | +1.9% | 674.76 | 17.87 (2.6%) | 647.05-740.53 | -3.7% / -6.2% | -1.5% | 51.9M |
-| IWM | 283.10 (08:54 iex) | +0.9% | 280.58 | 5.21 (1.9%) | 269.88-286.17 | +1.2% / -0.3% | +0.3% | 25.7M |
-| DIA | 523.27 (08:49 sip) | +0.3% | 521.73 | 7.74 (1.5%) | 508.66-536.60 | +0.1% / +0.4% | +0.9% | 3.9M |
-| TLT | 80.82 (09:01 iex) | -0.1% | 80.88 | 0.80 (1.0%) | 77.41-82.42 | +0.1% / +1.2% | -0.3% | 39.6M |
-| GLD | 369.80 (08:49 sip) | +0.1% | 369.36 | 7.57 (2.0%) | 354.67-384.88 | -0.7% / -3.7% | +2.8% | 9.2M |
-| USO | 142.70 (08:49 sip) | +0.9% | 141.45 | 6.05 (4.3%) | 138.47-171.82 | -10.5% / -7.3% | -10.6% | 5.5M |
-| SMH | 505.35 (08:49 sip) | +4.5% | 483.63 | 25.77 (5.3%) | 445.59-580.08 | -8.1% / -14.1% | -6.7% | 12.1M |
-| XLK | 173.71 (08:49 sip) | +2.8% | 168.91 | 5.82 (3.4%) | 162.14-194.66 | -6.6% / -10.0% | -4.3% | 12.8M |
-| XLF | 58.19 (08:45 sip) | -0.2% | 58.29 | 1.02 (1.7%) | 54.02-60.04 | +3.1% / +4.3% | +1.9% | 35.7M |
-| XLE | 62.97 (08:49 sip) | +1.2% | 62.21 | 1.88 (3.0%) | 60.43-70.15 | -6.7% / -4.2% | -6.7% | 37.6M |
-| XLV | 187.48 (08:40 sip) | -0.7% | 188.88 | 3.79 (2.0%) | 170.65-192.32 | +3.9% / +8.6% | +2.6% | 11.6M |
-| XLI | 170.59 (08:15 sip) | +1.1% | 168.73 | 3.50 (2.1%) | 161.74-172.40 | +0.7% / -0.2% | -1.5% | 9.1M |
-| XLY | 121.02 (07:35 sip) | -0.0% | 121.05 | 2.63 (2.2%) | 110.67-122.92 | +4.2% / +6.7% | +3.2% | 9.4M |
-| XLP | 90.48 (08:49 sip) | -0.6% | 91.03 | 1.81 (2.0%) | 84.61-93.40 | +2.6% / +6.9% | +2.3% | 19.6M |
-| XLU | 43.70 (08:45 sip) | -0.1% | 43.73 | 0.65 (1.5%) | 41.24-44.09 | +2.2% / +4.8% | +0.7% | 27.8M |
-| XLB | 53.00 (08:35 sip) | +0.3% | 52.85 | 1.03 (2.0%) | 49.23-54.63 | +1.8% / +3.9% | +0.5% | 12.5M |
-| XLRE | 44.44 (05:10 sip) | -0.3% | 44.58 | 0.75 (1.7%) | 41.31-45.34 | +3.6% / +5.0% | +2.1% | 8.5M |
-| XLC | 108.06 (08:15 sip) | +0.3% | 107.76 | 2.28 (2.1%) | 99.33-112.90 | +1.7% / -1.6% | +6.2% | 8.1M |
-| KRE | 73.27 (08:35 sip) | +0.2% | 73.09 | 1.67 (2.3%) | 67.79-75.80 | +1.7% / +2.0% | +0.3% | 15.3M |
-| XHB | 103.70 (08:15 sip) | +0.5% | 103.17 | 3.42 (3.3%) | 91.87-108.78 | +3.5% / +4.9% | +1.2% | 2.5M |
+| SPY | 755.12 (08:57 iex) | -0.6% | 759.81 | 12.15 (1.6%) | 732.71-775.64 | -0.1% / -0.6% | -0.9% | 48.6M |
+| QQQ | 681.75 (08:53 iex) | -1.3% | 690.38 | 17.69 (2.6%) | 647.05-729.43 | -1.2% / -4.0% | -0.2% | 51.5M |
+| IWM | 281.51 (08:49 sip) | -0.6% | 283.09 | 5.23 (1.8%) | 269.88-286.17 | +1.9% / +0.6% | -0.3% | 24.7M |
+| DIA | 523.25 (08:55 iex) | -0.2% | 524.44 | 7.77 (1.5%) | 508.66-536.60 | +0.5% / +1.0% | -1.6% | 3.9M |
+| TLT | 80.66 (09:00 iex) | -0.3% | 80.92 | 0.71 (0.9%) | 79.01-82.42 | -0.0% / +1.3% | -1.0% | 38.3M |
+| GLD | 356.39 (08:56 iex) | -2.4% | 365.17 | 7.13 (2.0%) | 354.67-384.88 | -1.7% / -4.6% | -2.0% | 8.9M |
+| USO | 142.52 (08:49 sip) | +0.7% | 141.47 | 6.06 (4.3%) | 138.47-171.82 | -10.1% / -7.3% | -2.7% | 5.5M |
+| SMH | 488.04 (08:58 iex) | -3.7% | 506.96 | 25.55 (5.0%) | 445.59-571.00 | -3.2% / -9.8% | +0.5% | 12.3M |
+| XLK | 170.52 (08:49 sip) | -2.2% | 174.36 | 5.86 (3.4%) | 162.14-191.55 | -3.2% / -7.0% | -1.2% | 13.0M |
+| XLF | 58.78 (08:49 sip) | +0.3% | 58.63 | 1.00 (1.7%) | 54.59-60.04 | +3.3% / +4.9% | -1.0% | 34.7M |
+| XLE | 64.17 (08:49 sip) | +1.3% | 63.37 | 1.79 (2.8%) | 60.43-70.15 | -4.6% / -2.4% | -0.2% | 37.6M |
+| XLV | 190.15 (08:49 sip) | +0.6% | 188.95 | 3.73 (2.0%) | 175.27-192.32 | +3.5% / +8.4% | -0.4% | 11.4M |
+| XLI | 170.52 (08:49 sip) | -0.3% | 170.97 | 3.44 (2.0%) | 161.74-172.40 | +2.0% / +1.1% | +0.9% | 8.9M |
+| XLY | 120.59 (08:35 sip) | -0.3% | 120.99 | 2.60 (2.1%) | 111.70-122.92 | +3.8% / +6.5% | -1.1% | 9.4M |
+| XLP | 92.00 (08:49 sip) | +0.6% | 91.45 | 1.69 (1.9%) | 86.36-93.40 | +2.7% / +7.3% | -0.5% | 19.7M |
+| XLU | 43.91 (08:49 sip) | +0.2% | 43.82 | 0.61 (1.4%) | 41.28-44.09 | +2.2% / +4.9% | +0.5% | 26.8M |
+| XLB | 52.93 (08:15 sip) | -0.2% | 53.02 | 1.00 (1.9%) | 49.90-54.63 | +1.8% / +4.2% | -1.6% | 12.4M |
+| XLRE | 44.60 (08:35 sip) | +0.0% | 44.59 | 0.73 (1.6%) | 41.60-45.34 | +3.3% / +4.9% | -1.2% | 8.3M |
+| XLC | 108.02 (08:15 sip) | -0.5% | 108.60 | 2.21 (2.0%) | 99.33-112.90 | +2.6% / -0.8% | +3.5% | 8.0M |
+| KRE | 72.96 (08:49 sip) | +0.0% | 72.95 | 1.55 (2.1%) | 68.72-75.80 | +1.2% / +1.7% | -1.6% | 14.8M |
+| XHB | 102.85 (08:15 sip) | -0.2% | 103.10 | 3.20 (3.1%) | 94.05-108.78 | +2.9% / +4.8% | -4.1% | 2.6M |
 
 #### Large caps
 
 | Symbol | Last (ET) | vs prev | Prev close | ATR14 | 20d low-high | Prev vs 20d / 50d avg | 5d | Avg vol 20d |
 |---|---|---|---|---|---|---|---|---|
-| AAPL | 347.34 (08:49 sip) | -0.3% | 348.51 | 9.49 (2.7%) | 325.33-355.38 | +1.2% / +3.3% | +5.0% | 49.5M |
-| MSFT | 536.50 (08:49 sip) | +0.6% | 533.16 | 17.29 (3.2%) | 504.96-559.15 | +0.4% / +3.0% | +2.3% | 26.3M |
-| NVDA | 174.85 (08:59 iex) | +3.5% | 168.89 | 9.29 (5.5%) | 165.89-226.00 | -18.1% / -22.5% | -18.3% | 155.3M |
-| AMZN | 272.90 (08:49 sip) | +0.7% | 270.87 | 10.68 (3.9%) | 229.36-275.34 | +6.1% / +6.6% | +8.0% | 50.4M |
-| GOOGL | 290.70 (08:49 sip) | +1.2% | 287.38 | 11.41 (4.0%) | 276.92-359.40 | -7.6% / -13.1% | +2.6% | 40.3M |
-| META | 650.32 (08:49 iex) | +1.4% | 641.39 | 23.90 (3.7%) | 583.80-761.50 | -1.6% / -5.3% | +3.3% | 24.4M |
-| TSLA | 385.15 (08:49 sip) | +1.4% | 379.78 | 18.31 (4.8%) | 338.15-414.23 | -0.2% / +1.8% | -4.7% | 41.2M |
-| AVGO | 346.33 (08:58 iex) | +4.3% | 331.98 | 17.29 (5.2%) | 289.77-354.25 | +0.9% / -4.0% | -0.0% | 25.5M |
-| AMD | 543.79 (09:04 iex) | +5.5% | 515.21 | 42.65 (8.3%) | 402.10-591.88 | -0.6% / -6.1% | +6.5% | 30.9M |
-| ORCL | 123.71 (08:49 sip) | +4.9% | 117.98 | 8.71 (7.4%) | 109.21-148.48 | -7.3% / -14.2% | -6.5% | 43.8M |
-| NFLX | 63.07 (08:49 sip) | -0.3% | 63.26 | 1.88 (3.0%) | 61.39-73.07 | -3.5% / -10.0% | -0.3% | 47.1M |
-| CRM | 215.52 (08:49 sip) | +1.0% | 213.48 | 9.09 (4.3%) | 208.88-252.42 | -8.8% / -10.2% | -3.9% | 7.2M |
-| JPM | 343.15 (08:49 sip) | +0.3% | 342.07 | 7.95 (2.3%) | 326.40-359.80 | +1.2% / +0.5% | +1.2% | 7.2M |
-| GS | 926.00 (08:45 sip) | +1.7% | 910.19 | 29.62 (3.3%) | 854.45-939.38 | +1.6% / -1.9% | +1.6% | 2.2M |
-| BAC | 50.88 (08:49 sip) | +0.4% | 50.68 | 1.24 (2.5%) | 49.17-53.02 | +0.1% / -7.5% | +2.1% | 43.7M |
-| XOM | 165.90 (08:49 sip) | +0.9% | 164.47 | 5.16 (3.1%) | 160.11-188.50 | -6.8% / -2.7% | -7.3% | 14.2M |
-| CVX | 212.85 (08:49 sip) | +0.8% | 211.22 | 5.72 (2.7%) | 206.01-236.48 | -5.6% / -1.8% | -6.2% | 8.4M |
-| LLY | 1,415.94 (08:49 sip) | -1.1% | 1,432.29 | 53.57 (3.7%) | 1,174.24-1,453.00 | +8.0% / +17.0% | +1.6% | 3.2M |
-| UNH | 402.52 (08:45 sip) | -0.6% | 405.12 | 11.42 (2.8%) | 382.29-426.55 | -0.5% / +3.7% | +0.2% | 5.7M |
-| JNJ | 277.71 (08:49 sip) | -1.1% | 280.78 | 7.77 (2.8%) | 248.50-283.25 | +5.1% / +5.4% | +5.5% | 7.7M |
-| WMT | 124.42 (08:49 sip) | -0.9% | 125.55 | 3.19 (2.5%) | 113.38-131.82 | +3.0% / +10.8% | +0.6% | 23.0M |
-| COST | 1,084.00 (08:49 sip) | +1.7% | 1,066.14 | 21.46 (2.0%) | 958.58-1,081.55 | +5.1% / +11.5% | +4.6% | 2.5M |
-| HD | 347.75 (08:45 sip) | -0.9% | 351.00 | 10.50 (3.0%) | 289.57-362.44 | +7.3% / +13.1% | +5.2% | 4.8M |
-| CAT | 602.85 (08:49 sip) | +3.1% | 584.57 | 32.66 (5.6%) | 550.81-768.52 | -12.1% / -22.1% | -6.3% | 4.0M |
-| BA | 173.66 (08:49 sip) | +0.2% | 173.38 | 6.67 (3.8%) | 165.01-193.28 | -3.6% / -9.2% | +0.0% | 10.6M |
-| DAL | 91.38 (08:49 sip) | -0.9% | 92.20 | 3.48 (3.8%) | 74.14-92.52 | +13.1% / +13.6% | +10.7% | 6.6M |
-| UAL | 119.61 (08:40 sip) | -0.8% | 120.56 | 5.59 (4.6%) | 94.54-122.08 | +14.5% / +11.9% | +12.5% | 5.6M |
+| AAPL | 357.84 (09:05 iex) | +0.7% | 355.36 | 9.57 (2.7%) | 325.08-355.64 | +3.1% / +5.3% | +1.8% | 48.8M |
+| MSFT | 522.20 (09:05 iex) | +0.2% | 521.12 | 17.51 (3.4%) | 504.96-559.15 | -1.8% / +0.6% | -6.2% | 26.7M |
+| NVDA | 155.38 (09:04 iex) | -10.6% | 173.73 | 9.14 (5.3%) | 165.89-222.19 | -14.8% / -20.0% | -13.2% | 166.3M |
+| AMZN | 269.05 (09:04 iex) | +1.1% | 266.17 | 10.31 (3.9%) | 229.36-275.34 | +4.0% / +4.6% | +0.1% | 50.6M |
+| GOOGL | 295.56 (08:57 iex) | +0.7% | 293.45 | 11.09 (3.8%) | 276.92-352.15 | -4.8% / -11.0% | +1.6% | 40.2M |
+| META | 626.54 (08:58 iex) | -0.4% | 628.77 | 21.23 (3.4%) | 583.80-743.97 | -2.7% / -7.3% | -0.2% | 24.4M |
+| TSLA | 386.05 (08:49 sip) | -1.2% | 390.84 | 18.34 (4.7%) | 338.15-414.23 | +2.4% / +4.6% | +1.5% | 41.1M |
+| AVGO | 351.89 (09:04 iex) | +1.9% | 345.22 | 17.86 (5.2%) | 289.77-356.85 | +4.9% / -0.1% | +6.1% | 26.0M |
+| AMD | 563.69 (09:01 iex) | +2.0% | 552.90 | 42.82 (7.7%) | 402.10-579.18 | +6.8% / +0.4% | +13.1% | 32.1M |
+| ORCL | 123.14 (08:56 iex) | -4.1% | 128.38 | 9.16 (7.1%) | 109.21-148.48 | +1.0% / -6.5% | +3.8% | 43.1M |
+| NFLX | 64.28 (08:49 sip) | -0.4% | 64.54 | 1.84 (2.8%) | 61.39-73.07 | -1.1% / -7.8% | -2.8% | 46.6M |
+| CRM | 217.50 (08:49 sip) | -0.2% | 218.01 | 8.67 (4.0%) | 208.88-252.42 | -6.5% / -8.0% | -4.0% | 7.2M |
+| JPM | 343.80 (08:49 sip) | +0.1% | 343.39 | 7.94 (2.3%) | 330.40-359.80 | +1.5% / +0.9% | -2.5% | 6.9M |
+| GS | 915.44 (08:49 sip) | -1.2% | 926.81 | 29.41 (3.2%) | 854.45-939.38 | +3.2% / +0.1% | -0.1% | 2.2M |
+| BAC | 50.62 (08:49 sip) | -0.1% | 50.67 | 1.21 (2.4%) | 49.17-53.02 | +0.2% / -7.1% | -1.9% | 38.7M |
+| XOM | 169.00 (08:49 sip) | +1.4% | 166.71 | 4.92 (2.9%) | 160.11-188.50 | -5.3% / -1.4% | -1.5% | 14.2M |
+| CVX | 216.28 (08:49 sip) | +1.4% | 213.28 | 5.46 (2.6%) | 206.01-236.48 | -4.5% / -0.9% | -1.7% | 8.3M |
+| LLY | 1,455.44 (08:54 iex) | +1.3% | 1,437.29 | 51.83 (3.6%) | 1,230.66-1,453.00 | +7.4% / +16.8% | +1.4% | 3.1M |
+| UNH | 403.30 (08:45 sip) | +0.1% | 402.94 | 11.32 (2.8%) | 388.00-426.55 | -1.1% / +3.1% | -1.6% | 5.5M |
+| JNJ | 281.50 (08:35 sip) | +0.4% | 280.41 | 7.25 (2.6%) | 251.50-283.25 | +4.4% / +5.2% | +1.5% | 7.5M |
+| WMT | 126.43 (08:49 sip) | +0.6% | 125.67 | 3.11 (2.5%) | 116.63-131.82 | +2.7% / +10.5% | -2.7% | 22.8M |
+| COST | 1,095.00 (08:49 sip) | +0.7% | 1,087.61 | 21.84 (2.0%) | 975.80-1,091.92 | +6.7% / +13.4% | +3.9% | 2.4M |
+| HD | 351.66 (08:49 sip) | +0.1% | 351.31 | 9.99 (2.8%) | 301.42-362.44 | +6.5% / +13.0% | -1.2% | 4.7M |
+| CAT | 592.46 (08:49 sip) | -1.5% | 601.61 | 31.32 (5.2%) | 550.81-743.23 | -8.5% / -19.5% | +1.7% | 4.0M |
+| BA | 173.24 (08:49 sip) | -0.7% | 174.54 | 6.40 (3.7%) | 165.01-193.28 | -2.7% / -8.3% | -1.4% | 10.6M |
+| DAL | 90.14 (08:45 sip) | -1.3% | 91.32 | 3.27 (3.6%) | 74.14-92.52 | +11.0% / +12.1% | +2.3% | 6.6M |
+| UAL | 116.00 (08:45 sip) | -2.0% | 118.37 | 5.34 (4.5%) | 94.54-122.08 | +11.4% / +9.6% | +2.3% | 5.6M |
 
 #### Today's biggest movers among 270 other liquid names (at least $5 and 1M average volume)
 
@@ -289,19 +332,19 @@ Base rate: 40% of 121 brackets reached target first. Your Brier score is 0.241; 
 
 | Symbol | Last (ET) | vs prev | Prev close | ATR14 | 20d low-high | Prev vs 20d / 50d avg | 5d | Avg vol 20d |
 |---|---|---|---|---|---|---|---|---|
-| STX | 547.25 (08:49 sip) | +9.1% | 501.62 | 54.27 (10.8%) | 449.28-751.81 | -19.1% / -33.7% | -17.3% | 6.1M |
-| MRVL | 167.70 (08:49 sip) | +8.6% | 154.39 | 18.53 (12.0%) | 132.54-264.30 | -25.0% / -33.4% | -10.2% | 29.8M |
-| WDC | 312.88 (08:49 sip) | +8.2% | 289.20 | 28.27 (9.8%) | 258.61-402.23 | -15.7% / -27.7% | -16.7% | 9.3M |
-| SNDK | 929.54 (08:49 sip) | +8.1% | 859.99 | 107.74 (12.5%) | 803.97-1,461.80 | -27.7% / -41.8% | -23.7% | 11.4M |
-| DELL | 360.30 (08:50 iex) | +7.8% | 334.38 | 33.23 (9.9%) | 315.00-547.63 | -22.3% / -33.1% | -18.1% | 7.7M |
-| TER | 263.26 (08:49 sip) | +7.3% | 245.40 | 23.80 (9.7%) | 211.63-371.71 | -16.6% / -29.3% | -8.9% | 4.6M |
-| GLW | 119.97 (08:49 sip) | +7.0% | 112.13 | 8.15 (7.3%) | 101.83-147.17 | -10.4% / -21.6% | -11.1% | 10.9M |
-| MU | 774.59 (09:04 iex) | +6.8% | 725.11 | 60.62 (8.4%) | 650.00-990.00 | -15.2% / -23.9% | -15.2% | 31.0M |
-| NUE | 251.60 (08:15 sip) | -1.9% | 256.47 | 11.73 (4.6%) | 244.64-287.70 | -2.0% / +0.6% | -6.2% | 1.6M |
-| AMT | 187.00 (07:25 sip) | -1.8% | 190.37 | 6.28 (3.3%) | 175.78-202.50 | +2.3% / +7.5% | +1.6% | 3.4M |
-| DG | 135.00 (08:49 sip) | -1.7% | 137.31 | 5.69 (4.1%) | 123.86-144.61 | +3.0% / +7.5% | +5.2% | 2.3M |
-| CHTR | 132.00 (08:49 sip) | -1.5% | 134.06 | 6.97 (5.2%) | 101.11-134.92 | +19.0% / +11.8% | +17.8% | 3.0M |
-| EW | 102.53 (07:05 sip) | -1.4% | 104.01 | 3.35 (3.2%) | 84.83-105.37 | +11.6% / +16.2% | +9.3% | 4.8M |
-| ACN | 255.00 (08:10 sip) | -1.4% | 258.51 | 11.95 (4.6%) | 212.71-271.76 | +4.6% / +21.7% | +1.6% | 6.3M |
-| SYK | 319.99 (07:25 sip) | -1.3% | 324.29 | 12.60 (3.9%) | 278.57-349.48 | +5.2% / +11.1% | +4.4% | 3.2M |
-| ABNB | 184.43 (08:49 sip) | -1.3% | 186.90 | 7.09 (3.8%) | 163.82-197.87 | +7.5% / +10.5% | +11.9% | 4.6M |
+| HUBS | 219.94 (08:45 sip) | +8.4% | 202.88 | 13.84 (6.8%) | 188.25-271.60 | -13.1% / -11.3% | -6.4% | 1.3M |
+| EW | 108.04 (04:05 sip) | +2.1% | 105.81 | 3.45 (3.3%) | 85.54-106.05 | +12.4% / +17.9% | +6.5% | 4.9M |
+| EOG | 156.40 (08:49 sip) | +1.7% | 153.77 | 4.88 (3.2%) | 144.14-165.93 | -1.5% / +3.2% | +4.6% | 3.3M |
+| OXY | 58.19 (08:49 sip) | +1.7% | 57.24 | 1.92 (3.4%) | 53.86-64.95 | -5.8% / -4.3% | -0.2% | 10.2M |
+| ICE | 183.37 (07:45 sip) | +1.5% | 180.59 | 4.61 (2.6%) | 153.90-180.71 | +8.8% / +13.2% | +3.2% | 3.6M |
+| VLO | 369.00 (08:49 sip) | +1.5% | 363.71 | 19.35 (5.3%) | 341.51-456.50 | -8.2% / -9.0% | -0.4% | 3.2M |
+| SYK | 323.00 (08:25 sip) | +1.3% | 318.79 | 12.37 (3.9%) | 282.18-349.48 | +2.8% / +9.2% | -6.1% | 3.3M |
+| DG | 139.22 (08:45 sip) | +1.3% | 137.44 | 5.41 (3.9%) | 124.62-144.61 | +2.8% / +7.5% | -3.0% | 2.3M |
+| SMCI | 27.37 (09:03 iex) | -10.1% | 30.43 | 2.41 (7.9%) | 25.81-37.45 | -4.7% / -17.7% | +2.8% | 44.2M |
+| SNDK | 893.76 (09:04 iex) | -8.6% | 977.69 | 108.99 (11.1%) | 803.97-1,424.48 | -16.3% / -33.4% | -5.8% | 11.8M |
+| MSTR | 114.70 (08:49 sip) | -6.3% | 122.35 | 8.50 (7.0%) | 118.43-155.69 | -10.9% / -15.1% | -14.2% | 18.1M |
+| MU | 761.81 (09:01 iex) | -6.1% | 811.30 | 63.34 (7.8%) | 650.00-990.00 | -4.5% / -14.6% | +2.0% | 31.4M |
+| DELL | 351.66 (08:49 sip) | -5.9% | 373.68 | 34.04 (9.1%) | 315.00-507.38 | -11.8% / -25.1% | +0.4% | 7.6M |
+| STX | 526.00 (08:49 sip) | -4.7% | 551.72 | 54.23 (9.8%) | 449.28-718.65 | -9.8% / -26.5% | -1.0% | 6.3M |
+| BABA | 96.80 (08:49 sip) | -4.6% | 101.52 | 3.19 (3.1%) | 97.48-112.17 | -2.2% / -5.6% | -3.6% | 9.5M |
+| MRVL | 161.30 (08:49 sip) | -4.4% | 168.80 | 18.22 (10.8%) | 132.54-253.66 | -16.5% / -26.9% | +5.6% | 30.2M |

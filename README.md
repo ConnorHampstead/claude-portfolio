@@ -6,11 +6,11 @@
 
 | | Desk | SPY buy & hold |
 |---|---|---|
-| Return | +2.47% | -1.67% |
+| Return | +1.98% | -1.22% |
 | Max drawdown | -2.83% | -5.86% |
 | Avg. gross exposure | 34% | 100% |
 
-*71 sessions, 46 closed trades, updated 2026-11-11.*
+*72 sessions, 47 closed trades, updated 2026-11-12.*
 
 The desk holds cash most of the time and SPY does not, so this is not a like-for-like comparison — read it alongside the exposure row rather than as a scoreboard. SPY is dividend- and split-adjusted.
 

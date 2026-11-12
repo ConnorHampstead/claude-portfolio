@@ -1,0 +1,22 @@
+
+====================================================================
+  SESSION 2026-11-12   equity $102,181.02   day P&L +0.20%
+====================================================================
+
+  ----------------------------------------------------------------
+  PASSED IDEAS   logged to the shadow book and scored later, no orders
+      . AVGO   long  stop 358.00  stop 339.00  target 392.00  P 35%
+      . GLD    short stop 353.90  stop 363.00  target 336.00  P 36%
+      . NVDA   long  market 155.40  stop 141.00  target 178.00  P 37%
+      . SMH    short limit 501.00  stop 527.00  target 455.00  P 33%
+      . HUBS   long  limit 212.00  stop 197.50  target 240.00  P 33%
+      . XLE    long  market 64.17  stop 61.90  target 67.50  P 37%
+      . CTVA   short market 11.20  stop 12.40  target 9.60  P 33%
+
+  ----------------------------------------------------------------
+  No new positions today.
+  7 idea(s) for the shadow book.
+
+
+  Logged to journal.csv
+
