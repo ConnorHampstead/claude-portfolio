@@ -1,32 +1,34 @@
-run 2026-11-06
+run 2026-11-13
 
-  2 resting exit order(s) left alone (protecting an open position):
-    AVGO   buy   x18     bracket @281
-    NVDA   buy   x54     bracket @178
+  3 resting exit order(s) left alone (protecting an open position):
+    DAL    sell  x69     bracket @96.5
+    IWM    buy   x85     bracket @271
+    AMZN   sell  x24     bracket @293
 
   2 unfilled entry order(s):
-    SMH    sell  x24     limit  @488  submitted 2026-11-06  id=3535b40d
-    CAT    sell  x12     limit  @605  submitted 2026-11-04  id=6cf4f79c
-    cancelled SMH
-    cancelled CAT
+    GLD    sell  x56     stop   @352.4  submitted 2026-11-13  id=67acb814
+    QQQ    sell  x29     stop   @646.5  submitted 2026-11-09  id=bf0f42bb
+    cancelled GLD
+    cancelled QQQ
 
-  SMH    never filled (canceled)
+  GLD    never filled (canceled)
 
   0 trade(s) closed out, 1 never filled.
 
 ====================================================================
   BOOK STATE   market OPEN
 ====================================================================
-  Equity          $102,574.40
-  Cash            $117,954.16
-  Day P&L         $-752.38  (-0.73%)
-  Gross exposure  $15,379.76  (15.0% of equity)
-  Net exposure    $-15,379.76  (-15.0%)
-  Positions       2 / 8
-  Loss-limit room 2.27% before the 3.0% kill switch
+  Equity          $102,283.90
+  Cash            $113,476.11
+  Day P&L         $+84.68  (+0.08%)
+  Gross exposure  $35,986.19  (35.2% of equity)
+  Net exposure    $-11,192.21  (-10.9%)
+  Positions       3 / 8
+  Loss-limit room 3.08% before the 3.0% kill switch
 
   SYM    SIDE      QTY        AVG       LAST       P&L $    P&L %
   ---------------------------------------------------------------
-  NVDA   short      54     194.96     187.20     +419.18   +3.98%
-  AVGO   short      18     302.03     292.83     +165.64   +3.05%
+  IWM    short      85     281.03     277.52     +298.03   +1.25%
+  AMZN   long       24     274.10     266.79     -175.43   -2.67%
+  DAL    long       69      89.50      86.87     -181.47   -2.94%
 
