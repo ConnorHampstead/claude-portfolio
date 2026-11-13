@@ -1,5 +1,6 @@
 
-  2 resting exit order(s) left alone (protecting an open position):
+  3 resting exit order(s) left alone (protecting an open position):
+    DAL    sell  x69     bracket @96.5
     IWM    buy   x85     bracket @271
     AMZN   sell  x24     bracket @293
 

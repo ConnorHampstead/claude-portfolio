@@ -1,0 +1,28 @@
+
+====================================================================
+  SESSION 2026-11-13   equity $102,234.86   day P&L +0.03%
+====================================================================
+
+  [OK] GLD SHORT
+      entry 352.40 (stop)  stop 361.50  target 334.00  [2.02R]
+      qty 56  notional $19,734  risk $509.60 (0.50% of equity, tier 0.5%)
+      P(target first) 36%   conviction 3
+      stated EV +0.09R   (breakeven P at 2.02R is 33%)
+
+  ----------------------------------------------------------------
+  BOOK-LEVEL ADMISSION   highest conviction first
+      book now: 4 positions/resting entries, gross 54%, net -29%, risk at stake 1.49%
+      + GLD    admitted  -> gross 73%, net -49%, risk 1.99%
+
+  ----------------------------------------------------------------
+  PASSED IDEAS   logged to the shadow book and scored later, no orders
+      . CSCO   long  limit 97.50  stop 93.00  target 106.50  P 34%
+      . TLT    short stop 78.90  stop 80.40  target 75.90  P 33%
+      . NU     long  market 12.37  stop 11.15  target 14.80  P 32%
+
+  ----------------------------------------------------------------
+  1 approved, 0 rejected.  Total new risk $509.60 (0.50% of equity)
+  3 idea(s) for the shadow book.
+
+  Validation only - `check` never sends. `submit --confirm` sends these.
+

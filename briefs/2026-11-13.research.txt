@@ -1,0 +1,28 @@
+27 lookups in 28 turns, 359 s
+WebSearch: stock market today November 13 2026 futures
+WebSearch: economic calendar Friday November 13 2026 PPI retail sales
+WebSearch: Applied Materials earnings November 12 2026 shares
+WebSearch: Cisco earnings November 2026 stock falls guidance
+WebFetch: https://www.stocktitan.net/articles/stock-market-today-live-november-13-2026
+WebFetch: https://finance.yahoo.com/markets/live/stock-market-today-friday-november-13-dow-sp-500-nasdaq-nvidia-110151154.html
+WebSearch: October PPI producer prices rose 0.3% November 13 2026
+WebSearch: Applied Materials fourth quarter fiscal 2026 results revenue guidance stock after hours
+WebFetch: https://www.cnbc.com/2026/11/13/ppi-inflation-report-october-2026.html
+WebSearch: Treasury yields November 13 2026 2-year 10-year after PPI rate hike December
+WebFetch: https://www.zerohedge.com/markets/futures-rise-wall-street-moves-jensen-microsoft-outage-drags-day-two
+WebFetch: https://www.bnnbloomberg.ca/business/artificial-intelligence/2026/11/13/us-futures-climb-as-wall-street-keeps-an-eye-on-nvidia-microsoft-and-producer-prices/
+WebSearch: Travelers stock jumps November 13 2026
+WebSearch: Humana stock rises November 13 2026 Medicare Advantage
+WebSearch: Applied Materials stock premarket November 13 2026 reaction guidance
+WebSearch: Cisco fiscal Q1 2027 results product orders gross margin November 12 2026
+WebSearch: "Cisco Reports First Quarter" fiscal 2027 earnings
+WebSearch: Nu Holdings third quarter 2026 results net income $1.1 billion stock
+WebSearch: gold price November 13 2026 dollar rate hike 13-month low
+WebSearch: VIX volatility index November 12 2026 close
+WebSearch: Lowe's Stifel downgrade sell $190 November 13 2026 earnings date
+WebSearch: homebuilder stocks mortgage rates November 2026 10-year 5%
+WebSearch: Travelers TRV shares premarket November 13 2026 news
+WebSearch: Quanta Services PWR stock November 13 2026
+WebFetch: https://www.bullionvault.com/gold-news/gold-price-news/gold-inflation-fed-rate-hikes-111220261
+WebSearch: Amazon stock news November 13 2026
+WebSearch: Fed Logan Collins Daly speak November 13 2026 rate hike

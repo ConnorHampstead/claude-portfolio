@@ -1,5 +1,5 @@
 
-  Entry fill rate  66%  (47 filled / 71 proposed, 24 never reached)
+  Entry fill rate  65%  (47 filled / 72 proposed, 25 never reached)
 
 ====================================================================
   PERFORMANCE   47 closed trades
@@ -13,9 +13,9 @@
   Best / worst    +2.63R / -1.74R
   Max drawdown    -6.29R
 
-  Brackets left alone  +2.02R over 46 of these trades (as managed: +1.66R)
+  Brackets left alone  +2.64R over 47 of these trades (as managed: +1.17R)
   What was done after entry - stops moved, closes by hand, stops that
-  filled early - has cost 0.36R.
+  filled early - has cost 1.47R.
 
   3 closed trade(s) not in calibration yet: `manage` moved their levels
   and the bracket replay has not resolved them (or neither level came
@@ -36,7 +36,7 @@
   Note: thesis_verdict column is empty. Fill it in to separate skill from luck.
 
 ====================================================================
-  SHADOW BOOK   130 ideas passed on or dropped, 112 resolved
+  SHADOW BOOK   133 ideas passed on or dropped, 112 resolved
 ====================================================================
   Never filled    20
   Target first    34

@@ -1,5 +1,5 @@
 
-  0 idea(s) resolved, 11 still pending.
-  XLE    bracket as submitted: stop       -1.06R   (as managed: -1.02R)
+  0 idea(s) resolved, 18 still pending.
+  XLP    bracket as submitted: expired    +0.62R   (as managed: -0.49R)
 
   1 trade bracket(s) replayed.
