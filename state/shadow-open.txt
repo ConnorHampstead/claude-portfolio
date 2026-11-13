@@ -1,7 +1,4 @@
-  COST   long  target       +2.18R  (passed 2026-11-05)
-  NVDA   short target       +1.78R  (passed 2026-11-09)
-  CTVA   short target       +0.76R  (passed 2026-11-12)
 
-  3 idea(s) resolved, 15 still pending.
+  0 idea(s) resolved, 21 still pending.
 
   0 trade bracket(s) replayed.

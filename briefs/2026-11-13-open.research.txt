@@ -1,0 +1,24 @@
+23 lookups in 24 turns, 176 s
+WebSearch: stock market today November 13 2026 chip stocks fall
+WebSearch: Logan Collins Fed remarks November 13 2026
+WebSearch: gold price dollar index November 13 2026 after PPI
+WebFetch: https://finance.yahoo.com/markets/live/stock-market-today-friday-november-13-dow-sp-500-nasdaq-nvidia-110151154.html
+WebFetch: https://www.tipranks.com/news/heres-why-chip-stocks-are-falling-today
+WebSearch: AMD stock down 8% today
+WebSearch: Dell stock falls November 13 2026
+WebSearch: Nu Holdings stock jumps Q3 results November 13
+WebSearch: Brent crude oil price Friday November 13 2026
+WebSearch: Kitco gold price November 13 2026
+WebSearch: semiconductor stocks slide Friday AMD Broadcom Marvell Sandisk November 13
+WebFetch: https://finance.yahoo.com/markets/article/semiconductor-stocks-retreat-over-worries-about-memory-costs-131508185.html
+WebFetch: https://www.zerohedge.com/markets/futures-rise-wall-street-moves-jensen-microsoft-outage-drags-day-two
+WebSearch: AI stocks sell off Friday Nasdaq falls AMD Dell Marvell drop "November 13"
+WebSearch: 10-year Treasury yield 5.16% Friday dollar gold
+WebFetch: https://www.cnbc.com/2026/11/12/stock-market-today-live-updates.html
+WebFetch: https://www.stocktitan.net/articles/stock-market-today-live-november-13-2026
+WebSearch: Nu Holdings third quarter 2026 results estimates shares rise analysts
+WebSearch: AppLovin stock rises today November 2026
+WebSearch: why AMD Broadcom shares falling today chip rotation Nvidia Kress
+WebSearch: Dell Sandisk Western Digital shares fall memory storage stocks today downgrade
+WebSearch: Dell Technologies third quarter fiscal 2027 earnings date
+WebSearch: US dollar index DXY Friday PPI softer November 13 2026 FXStreet

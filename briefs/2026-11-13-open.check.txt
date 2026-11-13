@@ -1,0 +1,15 @@
+
+====================================================================
+  SESSION 2026-11-13   equity $102,416.95   day P&L +0.21%
+====================================================================
+
+  ----------------------------------------------------------------
+  PASSED IDEAS   logged to the shadow book and scored later, no orders
+      . SMH    short market 483.12  stop 512.00  target 446.00  P 35%
+
+  ----------------------------------------------------------------
+  No new positions today.
+  1 idea(s) for the shadow book.
+
+  Validation only - `check` never sends. `submit --confirm` sends these.
+
