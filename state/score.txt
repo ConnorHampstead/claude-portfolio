@@ -1,5 +1,5 @@
 
-  Entry fill rate  65%  (47 filled / 72 proposed, 25 never reached)
+  Entry fill rate  64%  (47 filled / 74 proposed, 27 never reached)
 
 ====================================================================
   PERFORMANCE   47 closed trades
@@ -36,43 +36,43 @@
   Note: thesis_verdict column is empty. Fill it in to separate skill from luck.
 
 ====================================================================
-  SHADOW BOOK   134 ideas passed on or dropped, 112 resolved
+  SHADOW BOOK   134 ideas passed on or dropped, 115 resolved
 ====================================================================
-  Never filled    20
+  Never filled    21
   Target first    34
-  Stop first      49
+  Stop first      51
   Expired         9   (neither level inside the window)
   Ambiguous       0   (both in one bar - not scored)
-  Avg R if taken  +0.08R over 92 filled ideas   (trades actually taken: +0.02R)
+  Avg R if taken  +0.06R over 94 filled ideas   (trades actually taken: +0.02R)
   A shadow book that out-earns the trades taken says the filter is rejecting
   the better ideas.
 
   ----------------------------------------------------------------
-  CALIBRATION   83 passed ideas with a stated probability
+  CALIBRATION   85 passed ideas with a stated probability
   ----------------------------------------------------------------
   stated           n   mean said    actual
   0%-30%           1        28%      100%
   30%-35%         30        32%       53%
-  35%-40%         39        36%       26%
+  35%-40%         41        36%       24%
   40%-45%         12        40%       58%
   45%-50%          1        45%        0%  <-- overconfident
 
-  Brier score     0.249   (lower is better; always saying the 41% base rate scores 0.242)
+  Brier score     0.246   (lower is better; always saying the 40% base rate scores 0.240)
   The stated probabilities do not beat the base rate: they are not telling
   the better ideas from the worse ones.
 
   ----------------------------------------------------------------
-  CALIBRATION   127 trades and passed ideas together with a stated probability
+  CALIBRATION   129 trades and passed ideas together with a stated probability
   ----------------------------------------------------------------
   stated           n   mean said    actual
   0%-30%           1        28%      100%
   30%-35%         36        32%       50%
-  35%-40%         59        36%       31%
+  35%-40%         61        36%       30%
   40%-45%         26        41%       46%
   45%-50%          4        46%       25%  <-- overconfident
   50%-60%          1        52%      100%
 
-  Brier score     0.243   (lower is better; always saying the 40% base rate scores 0.240)
+  Brier score     0.242   (lower is better; always saying the 40% base rate scores 0.239)
   The stated probabilities do not beat the base rate: they are not telling
   the better ideas from the worse ones.
 
