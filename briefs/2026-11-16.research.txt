@@ -1,0 +1,31 @@
+30 lookups in 31 turns, 413 s
+WebSearch: stock market today November 16 2026 futures
+WebSearch: premarket movers Monday November 16 2026
+WebSearch: economic calendar week of November 16 2026 Empire State manufacturing
+WebFetch: https://finviz.com/calendar/economic?dateFrom=2026-11-16
+WebSearch: stock futures Monday Nvidia Huang chip selloff November 16
+WebFetch: https://cnbc.com/2026/11/15/stock-market-today-live-updates.html
+WebFetch: https://www.zerohedge.com/markets/futures-slide-asian-chip-carnage-greets-nvidias-first-post-huang-earnings-week
+WebSearch: Micron Taichung fab fatal accident shares
+WebSearch: Hershey stock rises November 16 2026
+WebSearch: FAA ground stop Friday airlines Delta United November 13 2026
+WebSearch: gold price falls dollar Fed hike November 16 2026
+WebFetch: https://www.tradingkey.com/analysis/stocks/us-stocks/262307008-us-nvda-nasdaq-futures-nvidia-jensen-huang-anthropic-ipo-tradingkey
+WebFetch: https://coincentral.com/todays-market-movers-nvidia-falls-before-earnings-as-spacex-catches-starship-stage
+WebSearch: Humana Centene shares rise premarket November 16
+WebSearch: bitcoin falls $62,000 Sunday November 15 2026 why
+WebSearch: Johnson & Johnson stock record high November 2026
+WebSearch: Trump administration states delay Medicaid work requirements managed care stocks Centene Molina
+WebSearch: Financial Times Jensen Huang return CEO Nvidia board White House
+WebFetch: https://ttgtrading.substack.com/p/the-marketwebs-roadmap-for-index-c3f
+WebFetch: https://washingtonpost.com/health/2026/11/13/states-can-delay-controversial-medicaid-work-requirement-six-months
+WebFetch: https://thehill.com/policy/healthcare/6220069-trump-delays-medicaid-work-requirements/
+WebFetch: https://rallies.ai/news/health-insurers-rise-as-us-temporarily-eases-medicaid-work-rule-enforcement-be69f2c64e04f319
+WebSearch: gold yearly low $3,850 silver dollar index Monday
+WebSearch: Coinbase next earnings date Q4 2026
+WebSearch: Centene CNC next earnings date February 2027
+WebFetch: https://fxstreet.com/analysis/gold-today-2-analysts-see-more-losses-as-3-800-comes-into-focus-202611161231
+WebFetch: https://financefeeds.com/gold-price-today-3872-monday-lowest-since-october-2025-warsh-speech-bull-4010-bear-3800/
+WebFetch: https://www.fxempire.com/forecasts/article/gold-xauusd-silver-price-forecast-gold-near-one-year-low-can-it-hold-3852-1644760
+WebSearch: HubSpot shares jump premarket November 16 2026
+WebSearch: Huang return as Nvidia CEO report FT backers November 15 2026

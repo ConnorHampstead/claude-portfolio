@@ -1,5 +1,4 @@
 
-  0 idea(s) resolved, 18 still pending.
-  XLP    bracket as submitted: expired    +0.62R   (as managed: -0.49R)
+  0 idea(s) resolved, 19 still pending.
 
-  1 trade bracket(s) replayed.
+  0 trade bracket(s) replayed.
