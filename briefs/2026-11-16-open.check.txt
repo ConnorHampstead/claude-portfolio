@@ -1,0 +1,16 @@
+
+====================================================================
+  SESSION 2026-11-16   equity $102,392.19   day P&L +0.15%
+====================================================================
+
+  ----------------------------------------------------------------
+  PASSED IDEAS   logged to the shadow book and scored later, no orders
+      . MSTR   short limit 108.00  stop 116.50  target 91.00  P 33%
+      . LUV    long  stop 47.15  stop 44.80  target 51.00  P 35%
+
+  ----------------------------------------------------------------
+  No new positions today.
+  2 idea(s) for the shadow book.
+
+  Validation only - `check` never sends. `submit --confirm` sends these.
+

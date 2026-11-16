@@ -1,0 +1,19 @@
+18 lookups in 19 turns, 180 s
+WebSearch: stock market today November 16 2026 Nasdaq chip stocks open
+WebSearch: Fed Williams remarks November 16 2026
+WebSearch: gold price today November 16 2026
+WebSearch: stocks Nasdaq falls Monday Nvidia earnings week chip selloff Taiwan Anthropic IPO
+WebSearch: Centene stock rises November 16 Medicaid
+WebSearch: Southwest Airlines stock LUV rises today
+WebFetch: https://cnbc.com/2026/11/15/stock-market-today-live-updates.html
+WebSearch: oil prices fall Monday Brent November 16 2026
+WebSearch: Treasury yields dollar index Monday November 16 2026 Warsh speech
+WebSearch: NAHB housing market index November 2026
+WebSearch: health insurers rally Centene Elevance HCA shares November 16 2026
+WebFetch: https://www.cnbc.com/2026/11/16/oil-prices-fall-on-expectations-of-coming-supply-surplus.html
+WebFetch: https://www.home.saxo/content/articles/macro/market-quick-take---fed-chair-warsh-to-speak-today---16-november-2026-16112026
+WebSearch: bitcoin price Strategy MSTR shares Monday November 16 2026
+WebFetch: https://fxleaders.com/news/2026/11/16/gold-price-forecast-xau-usd-slips-below-3851-ahead-of-warsh-speech
+WebFetch: https://www.benzinga.com/crypto/cryptocurrency/26/11/63292581/mstr-plunges-6-despite-strategys-33-million-bitcoin-buy-whats-going-on
+WebSearch: Medicaid ACA subsidies news managed care stocks Monday Nov 16 2026 Centene Molina
+WebSearch: MSCI removes Strategy MSTR from global standard index November 2026 review

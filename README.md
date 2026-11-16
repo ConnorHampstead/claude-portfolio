@@ -10,7 +10,7 @@
 | Max drawdown | -2.83% | -5.86% |
 | Avg. gross exposure | 34% | 100% |
 
-*74 sessions, 47 closed trades, updated 2026-11-14.*
+*74 sessions, 49 closed trades, updated 2026-11-14.*
 
 The desk holds cash most of the time and SPY does not, so this is not a like-for-like comparison — read it alongside the exposure row rather than as a scoreboard. SPY is dividend- and split-adjusted.
 
