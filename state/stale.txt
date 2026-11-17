@@ -1,8 +1,6 @@
 
-  3 resting exit order(s) left alone (protecting an open position):
-    DAL    sell  x69     bracket @96.5
+  1 resting exit order(s) left alone (protecting an open position):
     IWM    buy   x85     bracket @271
-    AMZN   sell  x24     bracket @293
 
   No unfilled entry orders older than 5d.
 

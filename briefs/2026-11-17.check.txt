@@ -1,0 +1,28 @@
+
+====================================================================
+  SESSION 2026-11-17   equity $102,668.17   day P&L +0.09%
+====================================================================
+
+  [OK] HD SHORT
+      entry 343.50 (limit)  stop 353.50  target 323.50  [2.00R]
+      qty 51  notional $17,518  risk $510.00 (0.50% of equity, tier 0.5%)
+      P(target first) 36%   conviction 3
+      stated EV +0.08R   (breakeven P at 2.00R is 33%)
+
+  ----------------------------------------------------------------
+  BOOK-LEVEL ADMISSION   highest conviction first
+      book now: 2 positions/resting entries, gross 43%, net -43%, risk at stake 0.99%
+      + HD     admitted  -> gross 60%, net -60%, risk 1.49%
+
+  ----------------------------------------------------------------
+  PASSED IDEAS   logged to the shadow book and scored later, no orders
+      . NVDA   long  market 157.80  stop 142.00  target 176.00  P 45%
+      . UNH    short limit 405.00  stop 417.00  target 381.00  P 30%
+      . TLT    short stop 78.95  stop 80.40  target 76.80  P 36%
+
+  ----------------------------------------------------------------
+  1 approved, 0 rejected.  Total new risk $510.00 (0.50% of equity)
+  3 idea(s) for the shadow book.
+
+  Validation only - `check` never sends. `submit --confirm` sends these.
+

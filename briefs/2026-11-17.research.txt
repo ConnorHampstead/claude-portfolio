@@ -1,0 +1,41 @@
+40 lookups in 41 turns, 383 s
+WebSearch: stock futures November 17 2026 retail sales
+WebSearch: Home Depot third quarter 2026 results November 17
+WebSearch: October retail sales report November 17 2026 Census
+WebFetch: https://www.sec.gov/Archives/edgar/data/0000354950/000035495026000184/hd_exhibit991x11012026.htm
+WebSearch: retail sales October rose fell economists expected stocks Tuesday Home Depot
+WebFetch: https://www.cnbc.com/2026/11/16/stock-market-today-live-updates.html
+WebFetch: https://pro.thestreet.com/portfolio/disney-and-home-depot-report-nvidia-on-deck-8-key-items-shaping-the-stock-market-tuesday
+WebSearch: UnitedHealth Humana CVS shares fall premarket November 17 2026
+WebSearch: TE Connectivity stock jumps November 17 2026
+WebSearch: Musalem rate hikes November 17 2026 speech
+WebFetch: https://www.chartmill.com/news/ALB/Chartmill-58824-SP-500-Premarket-Movers-on-Nov-17-Gainers-and-Losers
+WebSearch: JD.com third quarter 2026 results shares fall
+WebSearch: Home Depot new CEO takes over shares fall guidance
+WebSearch: Home Depot Q3 2026 earnings new CEO Decker successor shares premarket
+WebSearch: Nvidia earnings preview implied move Jensen Huang resigned November 2026
+WebSearch: Treasury yields Musalem four rate hikes November 17 2026 2-year
+WebFetch: https://walksquawk.substack.com/p/walk-squawk-morning-wire-e4c
+WebSearch: health insurers stocks fall Tuesday Medicare Advantage UnitedHealth Humana November 17
+WebFetch: https://seekingalpha.com/news/4673627-managed-care-drops-proposed-crackdown-medicare-fraud
+WebSearch: CMS CRUSH proposal Medicare Advantage fraud waste November 2026
+WebSearch: TE Connectivity TEL shares premarket Tuesday news
+WebSearch: JD.com Q3 results November 17 2026 revenue shares drop premarket
+WebSearch: VIX volatility index November 16 2026 close stocks selloff Nasdaq
+WebSearch: stock market close Monday November 16 2026 S&P 500 falls 1.9% Nvidia Anthropic
+WebFetch: https://spotgamma.com/nvidia-earnings-preview-leadership-shock/
+WebFetch: https://theweekendspread.substack.com/p/the-close-monday-november-16-2026
+WebSearch: Warsh speech November 16 2026 Fed chair remarks rate hike markets
+WebFetch: https://www.rttnews.com/3715441/home-depot-q3-profit-comps-up-cuts-fy26-adj-margin-view-names-new-ceo-coo-cfo-shares-drop.aspx
+WebSearch: Nike stock rises premarket November 17 2026 upgrade
+WebSearch: Anthropic IPO pricing date Nasdaq debut November 2026
+WebSearch: Lowe's third quarter 2026 earnings date November 18 Target Walmart earnings week
+WebSearch: Home Depot analysts react Q3 2026 McPhail CEO price target fourth quarter implied
+WebSearch: Iran claims strike US radar Bahrain oil prices November 17 2026
+WebFetch: https://www.defenseworld.net/2026/11/17/home-depot-nysehd-downgraded-by-zelman-associates-to-underperform.html
+WebFetch: https://www.tradingkey.com/analysis/stocks/us-stocks/262304274-home-depot-stock-344-31-support-20-percent-run-into-q3-earnings-november-14-2026-tradingkey
+WebSearch: Home Depot next earnings date February 2027 fourth quarter fiscal 2026
+WebSearch: CMS proposed rule Medicare Advantage fraud crackdown insurers November 17 2026 Oz
+WebFetch: https://www.newsquawk.com/headlines/primer---todays-fedspeak-17th-november-2026-includes-musalem-waller-hammack-williams
+WebFetch: https://www.cnbc.com/2026/11/17/alberto-musalem-fed-interest-rates.html
+WebSearch: import prices October 2026 industrial production forecast November 17 economic calendar consensus
