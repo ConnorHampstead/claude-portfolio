@@ -1,9 +1,4 @@
-  AMZN   long  stop         -1.00R  (passed 2026-11-06)
-  AVGO   long  stop         -1.26R  (passed 2026-11-11)
-  XLP    short stop         -1.37R  (passed 2026-11-11)
 
-  3 idea(s) resolved, 22 still pending.
-  AMZN   bracket as submitted: stop       -1.11R   (as managed: -1.20R)
-  DAL    bracket as submitted: stop       -1.00R   (as managed: -0.60R)
+  0 idea(s) resolved, 27 still pending.
 
-  2 trade bracket(s) replayed.
+  0 trade bracket(s) replayed.

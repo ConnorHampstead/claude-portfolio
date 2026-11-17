@@ -1,0 +1,23 @@
+22 lookups in 23 turns, 170 s
+WebSearch: stock market today November 17 2026 software stocks Salesforce falls
+WebSearch: industrial production October 2026 NAHB housing market index November 2026
+WebSearch: Salesforce shares drop software selloff Workday Intuit HubSpot today
+WebSearch: stocks open Tuesday Nvidia earnings Home Depot UnitedHealth Dow
+WebFetch: https://www.cnbc.com/2026/11/16/stock-market-today-live-updates.html
+WebFetch: https://qz.com/dow-falls-337-points-home-depot-nvidia-earnings-111726
+WebSearch: Salesforce stock November 17 2026
+WebSearch: UnitedHealth Humana shares fall CMS CRUSH rule Medicare Advantage November 17
+WebSearch: Anthropic launches software stocks slide Salesforce Intuit Workday DocuSign MongoDB
+WebFetch: https://www.gurufocus.com/news/9205170/unitedhealth-unh-shares-dip-premarket-amid-new-federal-healthcare-fraud-regulations
+WebFetch: https://www.claudehub.fr/en/blog/claude-for-small-business-anthropic-explained/
+WebSearch: "Claude for Small Business" Anthropic announcement stocks
+WebSearch: why Salesforce CRM shares are trading lower today software stocks Tuesday
+WebSearch: Fed industrial production October 2026 manufacturing output released November 17
+WebFetch: https://www.tradingkey.com/news/market-movers/262309214-market-movers-crm-20261117
+WebFetch: https://chartmill.com/news/MPWR/Chartmill-58824-SP-500-Premarket-Movers-on-Nov-17-Gainers-and-Losers
+WebSearch: UnitedHealth stock down 5% Humana CVS managed care Tuesday CRUSH proposed rule analysts
+WebSearch: Treasury yields Tuesday November 17 2026 10-year import prices
+WebSearch: NAHB builder confidence November 2026 index
+WebSearch: Arm Holdings stock rises November 17 2026
+WebFetch: https://investinglive.com/news/nahb-housing-market-index-for-november-25-vs-29-estimate/
+WebFetch: https://investinglive.com/news/us-october-industrial-production-0-4-vs-0-1-expected/

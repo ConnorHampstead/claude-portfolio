@@ -1,0 +1,16 @@
+
+====================================================================
+  SESSION 2026-11-17   equity $102,687.21   day P&L +0.11%
+====================================================================
+
+  ----------------------------------------------------------------
+  PASSED IDEAS   logged to the shadow book and scored later, no orders
+      . CRM    short market 200.11  stop 210.50  target 180.00  P 33%
+      . UNH    short already logged or traded today - not counted twice
+
+  ----------------------------------------------------------------
+  No new positions today.
+  1 idea(s) for the shadow book.
+
+  Validation only - `check` never sends. `submit --confirm` sends these.
+

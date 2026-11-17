@@ -1,7 +1,2 @@
-  closed AMZN   stop    -1.20R  $-303.42
-  closed DAL    stop    -0.60R  $-154.29
-  ! DAL: the stop at 85.8 filled at 87.26, 0.40 of its risk short of the stop price - the bracket replay scores it; look at that order
 
-  2 trade(s) closed out.
-  Fill in `thesis_verdict` by hand: right/wrong thesis vs right/wrong outcome.
-
+  0 trade(s) closed out.
