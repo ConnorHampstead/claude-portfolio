@@ -34,43 +34,43 @@
   Brier score     0.233   (lower is better; always saying the 38% base rate scores 0.236)
 
 ====================================================================
-  SHADOW BOOK   150 ideas passed on or dropped, 123 resolved
+  SHADOW BOOK   153 ideas passed on or dropped, 125 resolved
 ====================================================================
   Never filled    22
-  Target first    36
-  Stop first      55
+  Target first    37
+  Stop first      56
   Expired         10   (neither level inside the window)
   Ambiguous       0   (both in one bar - not scored)
-  Avg R if taken  +0.03R over 101 filled ideas   (trades actually taken: +0.02R)
+  Avg R if taken  +0.04R over 103 filled ideas   (trades actually taken: +0.02R)
   A shadow book that out-earns the trades taken says the filter is rejecting
   the better ideas.
 
   ----------------------------------------------------------------
-  CALIBRATION   91 passed ideas with a stated probability
+  CALIBRATION   93 passed ideas with a stated probability
   ----------------------------------------------------------------
   stated           n   mean said    actual
   0%-30%           1        28%      100%
-  30%-35%         34        33%       50%
-  35%-40%         43        36%       26%
+  30%-35%         35        33%       51%
+  35%-40%         44        36%       25%
   40%-45%         12        40%       58%
   45%-50%          1        45%        0%  <-- overconfident
 
-  Brier score     0.244   (lower is better; always saying the 40% base rate scores 0.239)
+  Brier score     0.245   (lower is better; always saying the 40% base rate scores 0.240)
   The stated probabilities do not beat the base rate: they are not telling
   the better ideas from the worse ones.
 
   ----------------------------------------------------------------
-  CALIBRATION   138 trades and passed ideas together with a stated probability
+  CALIBRATION   140 trades and passed ideas together with a stated probability
   ----------------------------------------------------------------
   stated           n   mean said    actual
   0%-30%           1        28%      100%
-  30%-35%         40        33%       48%
-  35%-40%         66        36%       30%
+  30%-35%         41        33%       49%
+  35%-40%         67        36%       30%
   40%-45%         26        41%       46%
   45%-50%          4        46%       25%  <-- overconfident
   50%-60%          1        52%      100%
 
-  Brier score     0.240   (lower is better; always saying the 39% base rate scores 0.238)
+  Brier score     0.241   (lower is better; always saying the 39% base rate scores 0.239)
   The stated probabilities do not beat the base rate: they are not telling
   the better ideas from the worse ones.
 

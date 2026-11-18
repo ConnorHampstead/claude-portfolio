@@ -1,4 +1,6 @@
+  XLE    long  stop         -0.87R  (passed 2026-11-12)
+  MSTR   short target       +1.82R  (passed 2026-11-12)
 
-  0 idea(s) resolved, 27 still pending.
+  2 idea(s) resolved, 25 still pending.
 
   0 trade bracket(s) replayed.

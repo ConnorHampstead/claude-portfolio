@@ -81,207 +81,206 @@ and "Your record" in the book state has the current figures.*
 
 ## This morning's pre-market brief
 
-# Pre-market brief: Tuesday 2026-11-17, 09:05 ET / 15:05 Stockholm
+I'm placing one new trade, a LOW short at half risk, and amending the resting GLD short. The open HD short is left alone.
 
-## 1. Tape
+### 1. Tape
+Lowe's (LOW) beat with tariff-refund help and is down about 5% pre-market. Gold is at a 14-month low. Index futures are up modestly on Nvidia (NVDA) but small caps are lagging, so the edge today is on the short side of rate-sensitive names: housing, small caps and gold.
 
-Monday was the third straight losing session, and it was led by AI names. Per Reuters via search summaries, the S&P 500 fell 1.92% to 7,416.59, the Nasdaq 2.49% and the Dow 1.41%. NVDA fell about 4%, its third straight drop since Jensen Huang resigned. This morning is split. CNBC at 09:03 ET had S&P futures about −0.1%, Nasdaq-100 +0.4% and Dow −0.8%. The Dow is weighed down by HD (−2.9% on its results and a CEO change) and UNH (−2.9% on CMS's CRUSH anti-fraud proposal).
+- **NVDA:** Revenue was $115.8B against about $109B expected, and Q4 guidance is about $130B against about $125B. The stock is +2.9% to 159.94. Gross-margin guidance is down to 71–72%, and the 10-Q is delayed with no explanation.
+- **Futures:** S&P +0.3–0.4%, Nasdaq-100 +0.8%, Dow flat, Russell 2000 −0.2%. VIX is 23.8 (−6.5%). Semis lead (SMH +2.3%).
+- **Rates and the Fed:** the 10-year is flat at 5.10% and the dollar is near a 19-month high. A December hike is about 97% priced, and Waller has floated 50bp.
+- **Gold:** below $3,800 for the first time since September 2025 (−2%). GLD is 346.99, under its 351.96 20-day low.
+- **Regime:** a bear market driven by rate hikes. Today's tech bounce comes after a −8% to −17% month for semis, and rate-sensitive names are not joining it.
 
-Rates are what drive this tape. The 10-year is about 5.12%, the 30-year about 5.47% and the 2-year about 4.81% (−2bp). Musalem said at 07:30 ET that the Fed may need as many as four hikes by spring. CNBC citing FedWatch says a December hike is about 95% priced; that is a single source. The 08:30 retail sales were firm underneath: the headline was in line and the control-style measure beat.
+### 2. Calendar (Stockholm is ET+6 today)
 
-The week has two liquidity and volatility events. NVDA reports tonight with an implied move of about 8–10%. Anthropic prices its roughly $64B IPO tomorrow and starts trading Thursday.
-
-I couldn't verify today's VIX level. The regime is risk-off rotation out of AI and long-duration names into defensives, with rising yields. **The edge is modestly short.** The main risk to a short book is a relief squeeze if NVDA's print is good tonight.
-
-## 2. Calendar
-
-Stockholm is ET+6 today (both regions are on standard time; the book state confirms 09:05 ET = 15:05).
-
-| Time ET | Stockholm | Event | Actual / consensus | Touches |
+| ET | Stockholm | Event | Actual / consensus | Touches |
 |---|---|---|---|---|
-| 07:00 approx. | 13:00 | HD Q3 (BMO) | Adj. EPS $3.86 vs $3.84; sales $43.4B vs $42.8B; comps +2.2%. FY26 adj. EPS about +2% (was flat to +4%), adj. op margin about 12.8% (low end of 12.8–13.0%), comps about 1.4%. McPhail becomes CEO Nov 23. Stock −2.9% pre-market | HD (proposed) |
-| 07:30 | 13:30 | Musalem (Buenos Aires) | Up to four hikes before spring; 2-year still −2bp | IWM, GLD |
-| 08:30 | 14:30 | Retail sales, Oct | +0.2% m/m, in line; ex-autos & gas +0.6% vs 0.4%; autos −1.6% | IWM, HD |
-| 08:30 | 14:30 | Import prices, Oct | Couldn't find the figure | – |
-| 09:10 | 15:10 | Waller (payments conference) | Topic is payments; policy comments unlikely | – |
-| 09:15 | 15:15 | Industrial production, Oct | Not out at writing; couldn't verify consensus | – |
-| 09:30 | 15:30 | Hammack (Treasury market) | – | – |
-| 10:00 | 16:00 | NAHB housing index, Nov; business inventories, Sep | Couldn't verify consensus | HD |
-| 14:25 | 20:25 | Williams fireside chat | – | IWM, GLD |
-| ~16:20 | ~22:20 | **NVDA FQ3** | Consensus about $108.7–109B revenue, EPS $2.47, GM about 73–74%; implied move 8–10% | Whole book (beta) |
-| Wed BMO | Wed ~13:00 | LOW Q3 (call 09:00 ET); Anthropic prices | LOW EPS consensus $2.86 (Earnings Whispers) | HD (sympathy) |
+| 06:47 | 12:47 | LOW Q3 | Adjusted EPS $3.10 vs $2.88, but it includes $0.34 of tariff refunds, so about **$2.76 without them, a miss**. Comps +1.8%. FY EPS held at $12.25. Operating-margin guidance cut to about 11.5% from 11.6%. Stock −5.2% | LOW (new), HD |
+| pre | pre | TJX Q3 | Comps +4%, EPS in line. **Q4 EPS guidance $1.42–1.45 vs about $1.48–1.51 consensus.** Stock +6% | pass |
+| pre | pre | TGT Q3 | EPS $2.65 incl. $0.50 of refunds; guidance raised. Stock about −1% | none |
+| 07:00 | 13:00 | MBA mortgage applications | 30-year rate 7.35%, up from 7.21% | LOW, HD |
+| 08:30 | 14:30 | Housing starts / permits (Oct) | Starts 1.309M vs about 1.25M expected. **Permits −7.4% to 1.295M, the lowest since Sep 2025; single-family −8.7%.** XHB −0.7%, TLT +0.3% | LOW, HD |
+| 10:00 | 16:00 | Pending home sales (Oct) | Prior −7.3%; consensus not found | LOW, HD |
+| 10:30 | 16:30 | EIA crude inventories | — | none |
+| 13:00 | 19:00 | $16B 20-year auction | Recent 10-year at 5.020%, 30-year at 5.441% | GLD |
+| 14:00 | 20:00 | FOMC minutes (Oct 27–28) | Fed held at 3.75–4.00%, vote 10–2 | all |
+| after close | after close | PANW earnings; Anthropic prices its IPO (range $70–78, guided to the top or above) | ANT lists Thursday | software (pass) |
 
-## 3. Open positions and resting entries
+### 3. Open positions and resting entries
 
-**IWM short**, 281.03, bracket 287.00 / 271.00. Session 6 of 10.
-- **Invalidation not met.** The test was the 2-year fully reversing the CPI move, or a close above 284. The 2-year is about 4.81%, still at elevated levels, and IWM closed at 272.94 and trades 271.60 pre-market.
-- **Hold, bracket unchanged.** The target is 0.60 away.
+**HD short (session 2 of 10): hold, bracket unchanged.**
+- The invalidation is a close above 347.51. It hasn't happened: HD closed at 339.01 yesterday and is 332.71 pre-market.
+- LOW's refund-flattered print reinforces the thesis.
 
-**GLD sell stop** 350.50, bracket 359.00 / 333.00.
-- **Keep.** GLD is at 352.48, so the trigger is still below the market and below the 351.96 20-day low.
-- The cancel condition from yesterday (a trade above 362.00) hasn't happened.
+**GLD sell stop at 350.50: amend the stop to 355.50 and the target to 330.00.**
+- Gold has already fallen through the trigger pre-market (346.99). The stop will fire at the open, around 347.
+- On the original levels that fill would risk 12 points against 14 of reward (1.17R). At about 0.39 probability that is roughly −0.15R expected.
+- The new stop sits above yesterday's 354.92 high and the broken 351.96 20-day low. If GLD gets back there, the breakdown has failed.
+- At a 347 fill, the planned 8.5 points (60 shares, about $510 at risk) and a 2R target are restored. This is a resting entry, so amending it is within policy.
+- The original cancel condition (a trade above 362) stays.
 
-## 4. New plays
-
-### HD short
+### 4. New plays
 
 | Field | Value |
 |---|---|
-| Ticker | HD |
+| Ticker | LOW |
 | Direction | Short |
-| Catalyst | HD Q3 FY26 release on the 8-K, Nov 17 before the open. Adj. EPS beat by only $0.02. FY adj. op margin guided to the low end (about 12.8%). Adj. EPS growth narrowed to about 2%. Sales growth of about 4.5% for the year against 5.2% for the first nine months implies Q4 slows to roughly 2.5% (my inference). CFO McPhail replaces Decker as CEO on Nov 23. Read at source (SEC 8-K) plus RTTNews and Invezz |
-| Thesis | HD rose about 19.5% from Oct 13 to Nov 11 into the print while consensus EPS was flat (TradingKey), leaving it at about 22x forward. The print gave no reason to pay more. It has gapped through the $344.31 channel support, with the 10-year at 5.1% and the Fed talking hikes. A failed retest of that broken support is the short. |
-| Entry | Sell **limit 343.50**, a retest of the broken 344.31 support. Pre-market is 337.51, so it rests above the market |
-| Stop | **353.50**: 6 above the 347.51 pre-earnings close, about 1.0 ATR (9.96) from entry. A move there means the gap has been rejected |
-| Target | **323.50**, 2.0R. Below the 330.65 support and above the 316.51 support |
-| Risk tier | **0.5%.** Conviction 3. The tape could squeeze tonight on NVDA, LOW reports tomorrow, and the book is already net short |
+| Catalyst | Lowe's Q3, 2026-11-18 06:47 ET (CNBC, Newsquawk, Startup Fortune). Without the $0.34 tariff refund, EPS of about $2.76 misses $2.88–2.89 and is below last year. FY EPS guidance unchanged despite the refund; operating-margin guidance cut. Zelman downgraded it to Underperform days earlier. Same morning: permits at a 14-month low and mortgage rates at 7.35% |
+| Thesis | Same setup as the HD short that is working: LOW ran +10% above its 50-day average into a print whose underlying earnings missed. Rates are rising and housing is weakening. Short a bounce into the gap and target the 20-day low. |
+| Entry | Sell limit 212.50. LOW is 209.00 pre-market; 212.50 is a retest of about 30% of the gap and sits inside today's pre-market range |
+| Stop | 221.50: above the 220.46 pre-earnings close. If the gap fully fills, the market has rejected the miss. That is 1.23 ATR |
+| Target | 194.50, just above the 194.43 20-day low. **2.0R** |
+| Risk tier | 0.5%: it adds to the same housing/rates factor as HD, and it is a short against an uptrend |
 | Time horizon | 3–10 sessions |
-| Next earnings | About 2027-02-23 (Wall Street Horizon, an *inferred* date; HD hasn't confirmed it). Not within 7 days, so not an event trade. LOW reports Nov 18; that is another company's earnings, so ambient risk, not rule 8 |
+| Next earnings | About 2027-02-24. That is inferred from the Feb 25, 2026 pattern, not confirmed. Not an event trade |
 | Conviction | 3 |
-| P(target before stop) | **0.36.** A random walk to a 2:1 bracket is about 33%, and the record's base rate is 38%. +3 points for negative post-earnings drift after a run-up that priced in a beat and a broken support, in a falling-housing, rising-rate tape. EV = 0.36×2 − 0.64 = **+0.08R** |
-| Invalidation | HD **closes above 347.51** (the gap fully filled) on any session before the stop is hit, e.g. on a strong LOW print Wed Nov 18 |
-| What I'd be wrong about | The guidance midpoint didn't change and sales guidance was raised to the top end, so this is a "narrowed", not a "cut". Consensus target is $377.59 (MarketScreener, 36 analysts), retail sales control beat, and McPhail is an orderly internal successor. A gap that only reflects a crowded run-up can be fully retraced within days, especially if LOW beats tomorrow. |
+| P(target first) | **0.37.** Starting from the 39% base rate, I took a little off because the target is 2.5 ATR away. The underlying miss plus a negative reaction (a drift setup) roughly offsets the risk that a gap-down on a headline beat gets bought, with Thanksgiving seasonality ahead. EV = 0.37 × 2 − 0.63 = +0.11R |
+| Invalidation | LOW closes above 220.46 (gap fully filled) before the stop |
+| What I'd be wrong about | It is a headline beat-and-raise on sales: comps +1.8% against about 0.4% expected, online +17%. Gaps down on beats in a market already −3% this month often reverse, and the trade doubles up on HD's factor |
 
-**Reasoning.** What I verified: the 8-K figures; the old and new guidance ranges (RTTNews); the pre-market price (Alpaca table 337.51, RTTNews 339.16 at 07:12); and the run-up size and the 344.31 / 330.65 / 316.51 levels (TradingKey, one source, technical). What I inferred: the implied Q4 slowdown. The move so far is −10 against an ATR of 9.96, about 1 ATR, so most of a typical post-earnings range is still open below. I'm using a limit at the broken support instead of shorting the open, because this desk's open entries into gaps have been stopped repeatedly (AMZN, DAL yesterday). If HD never bounces to 343.50, I miss the trade, and that's acceptable. A Zelman downgrade to Underperform shows up in a headline dated today, but I couldn't open it; I'm not relying on it.
+The sector check: Consumer Discretionary would be about −28% net (HD −16%, LOW about −12%) against the 40% cap.
 
-## 5. Both sides
+### 5. Both sides
 
-- **Best short: HD**, taken above. Sell limit 343.50, stop 353.50, target 323.50, P 0.36.
-- **Best long: NVDA into tonight's print, as an event trade. Passed.** Levels: buy about 157.80 at the open, stop 142.00 (below SpotGamma's $150 gamma floor and near the $140 straddle boundary), target 176.00 (the $175–180 test), 1.15R.
-  - For it: Morgan Stanley calls it the most under-owned large-cap tech name; it is −35% from its October record; downside puts are priced at extremes (120-strike IV about 111%).
-  - Against it: the leadership shock (interim CEO Kress) makes guidance tone a coin flip, and the options price a move well above the stock's roughly 4–5% average reaction.
-  - P 0.45 gives EV of about −0.03R. Conviction 2, shadow book.
+- **Best short: LOW**, taken as above (212.50 / 221.50 / 194.50, P 0.37).
+- **Best long: NVDA, passed.** Market about 159.94, stop 147.50 (under the 148.80 20-day low), target 185.00 (2.0R), P 0.33, EV about −0.01R. The beat-and-raise is real. Against it: the 10-Q is delayed with no explanation (due by Dec 4), the board is split on CEO succession, margin guidance is down, and it would be a counter-trend entry. Conviction 2.
 
-## 6. Passing on
+### 6. Passing on
 
-- **NVDA long (event):** no directional edge on the print; EV ≤ 0. Levels in `passed`.
-- **UNH short (CRUSH rule):** the catalyst is real and dated. The HHS release on the CMS proposal was Nov 16; comments are due Jan 19, 2027; it claims about $90B of savings over 10 years, partly through expanded RADV audits. But analysts (via Seeking Alpha) call the impact protracted and likely litigated, and courts have struck down earlier CMS audit expansions. UNH is already −2.9%, about 1.1 ATR. Sell limit 405 / stop 417 / target 381, P 0.30, EV −0.10R. Conviction 2.
-- **TLT breakdown short:** TLT is at 79.33 against a 79.11 20-day low, with the long end at 5.12%/5.47% and Musalem hawkish. But a December hike is already about 95% priced, and it would be a third bet on the same rates factor as the IWM short and the GLD trigger. Sell stop 78.95 / stop 80.40 / target 76.80, P 0.36, EV −0.11R. Conviction 2.
-- **JD short:** Q3 revenue was RMB309.6B, slightly below estimates (the GlobeNewswire release). The stock is already −8.1%, about 3 ATR (0.73). Nothing left. No levels.
-- **TEL long (+5.2%):** I couldn't find a dated catalyst. A mover I can't explain is not a trade.
-- **MRVL, NKE (+4.3%, +3.6%):** I didn't find a dated reason today; MRVL's ATR is 12.7%. No levels.
-- **MSTR and LUV follow-ups from yesterday:** not re-researched today; the conditions in yesterday's review haven't been checked, so no action.
+- **TJX long** (limit 136.00 / stop 131.50 / target 145.00, P 0.35): already +6% (1.9 ATR) on in-line EPS, with Q4 and full-year EPS guidance below consensus. It looks like positioning relief. Conviction 2.
+- **IWM breakdown short** (sell stop 267.40 / stop 274.00 / target 257.50, P 0.38, EV about −0.05R): the regime fits, but I just took target on this, and the stop is based on ATR because I couldn't verify yesterday's high.
+- **CRM short** (sell stop 189.50 / stop 199.50 / target 172.00, P 0.33): after −9.5% yesterday, the Anthropic supply overhang ends when ANT lists Thursday. Earnings on Dec 2 (confirmed by Salesforce IR) fall inside the horizon.
+- **TTWO / ROST / XHB:**
+  - TTWO is a GTA VI launch "sell-the-news" coin flip.
+  - ROST's sympathy move: I didn't verify its earnings date.
+  - XHB: LOW is the cleaner expression.
 
-## 7. For the post-open review
+### 7. For the post-open review
 
-1. **HD:**
-   - If the limit fills and HD then trades through 353.50, the stop handles it. No discretionary action.
-   - If HD has fallen below 330.65 without filling, leave the limit resting. It is still a valid retest level through LOW tomorrow, and tomorrow's brief re-checks it after LOW's print.
-   - Cancel it only if HD *trades* above 347.51 without having filled. That can't happen without filling, so in practice there is no review action.
-   - NAHB at 10:00 ET is informational only.
-2. **IWM:** the target 271.00 may fill at the open (pre-market 271.60). No action either way.
-3. **GLD:** keep the 350.50 sell stop unless GLD trades above 362.00, then cancel it.
-4. **Industrial production (09:15) and Hammack (09:30):** no pre-planned action.
+- **LOW:** if it is unfilled and below its opening range, leave the limit; don't chase. If it filled and is above 218, take no action; the stop covers it.
+- **GLD:** record the fill price. If it filled below 344, the risk is still within the 0.5–0.7% range; take no action.
+- **Pending home sales at 10:00:** informational only.
 
-## 8. Book state
+### 8. Book state
 
-- **Exposure if HD fills:** gross about 60% of 150%; net about −60% of ±100%. That counts GLD as filled; HD is about −17% of equity in Consumer Discretionary.
-- **Risk at stake:** about 1.49% of 4%; 3 of 8 slots used.
+- **Exposure:** gross about 48% of the 150% cap; net about −48% of ±100% once LOW fills.
+- **Risk at stake:** about 1.5% of the 4% cap (HD $506, GLD about $510 at a 347 fill, LOW about $517), with 3 of 8 slots used.
 
 ```json
 {
-  "date": "2026-11-17",
+  "date": "2026-11-18",
   "no_trade": false,
-  "session_note": "Risk-off, rates-driven rotation (10y ~5.12%, Musalem floats four hikes) with NVDA tonight and Anthropic's IPO tomorrow; one half-size short in HD on a failed retest of broken support after a guidance narrowing that followed a 20% run-up. IWM and GLD brackets unchanged.",
+  "session_note": "Rate-hike regime (Dec hike ~97% priced, 10y 5.10%, gold 14-month low) with an NVDA-led tech relief bounce; shorting the rate-sensitive laggards: LOW on a refund-flattered underlying miss, GLD through its 20d low (bracket re-set for the gap).",
   "plays": [
     {
-      "ticker": "HD",
+      "ticker": "LOW",
       "direction": "short",
       "entry_type": "limit",
-      "entry": 343.50,
-      "stop": 353.50,
-      "targets": [323.50],
+      "entry": 212.50,
+      "stop": 221.50,
+      "targets": [194.50],
       "time_horizon": "3-10 days",
       "conviction": 3,
       "risk_pct": 0.5,
-      "p_target_first": 0.36,
-      "earnings_date": "2027-02-23",
+      "p_target_first": 0.37,
+      "earnings_date": "2027-02-24",
       "event_trade": false,
-      "catalyst": "HD Q3 FY26 8-K, Nov 17 BMO: adj EPS $3.86 vs $3.84, FY adj op margin guided to low end (~12.8%), adj EPS growth narrowed to ~2% from flat-4%, implied Q4 sales slowdown; CFO McPhail replaces Decker as CEO Nov 23. Stock -2.9% pre-market through $344.31 support.",
-      "thesis": "HD ran ~19.5% into the print on flat estimates at ~22x forward; the print gave no reason to pay more and the gap broke the 344.31 channel support with 10y yields at 5.1% and the Fed talking hikes. Short a failed retest of broken support toward the 330/316 supports.",
-      "invalidation": "HD closes above 347.51 (pre-earnings close, gap fully filled) on any session before the stop, e.g. after a strong LOW print on Nov 18.",
-      "bear_case": "Guidance midpoint unchanged and sales guide raised; consensus target ~$378, retail-sales control beat, orderly internal CEO succession; a run-up-driven gap can fully retrace within days, especially on a good LOW print."
+      "catalyst": "LOW Q3 2026-11-18 06:47 ET: adj EPS $3.10 includes $0.34 tariff refund (~$2.76 ex-refund vs $2.88-2.89 consensus), FY EPS held at $12.25, op margin guide cut to ~11.5%; Zelman Underperform days earlier; Oct permits -7.4% to 14-month low, MBA 30y 7.35%.",
+      "thesis": "LOW ran +10% above its 50d into a print whose underlying EPS missed, with housing weakening and the Fed hiking. Short a retest of the gap, mirroring the working HD short, toward the 20d low.",
+      "invalidation": "LOW closes above 220.46 (pre-earnings close, gap fully filled) on any session before the stop.",
+      "bear_case": "Headline beat with comps +1.8% vs ~0.4% and raised sales guide; gap-downs on beats in an oversold tape often reverse, and this doubles HD's housing/rates factor."
     }
   ],
-  "manage": [],
+  "manage": [
+    {
+      "ticker": "GLD",
+      "action": "update",
+      "stop": 355.50,
+      "target": 330.00,
+      "reason": "Resting entry, not yet filled: GLD is 346.99 pre-market, through the 350.50 trigger, so it fills near 347; re-set to stop above the Nov 17 354.92 high and broken 351.96 20d low, keeping the planned ~8.5-pt risk and a 2R target from the expected fill."
+    }
+  ],
   "passed": [
     {
       "ticker": "NVDA",
       "direction": "long",
       "entry_type": "market",
-      "entry": 157.80,
-      "stop": 142.00,
-      "targets": [176.00],
-      "p_target_first": 0.45,
-      "reason": "Best long: event trade into tonight's FQ3 (implied move 8-10%), under-owned per Morgan Stanley and -35% from record with extreme put skew, but leadership shock makes the print a coin flip; 1.15R at P 0.45 is EV ~-0.03R. Conviction 2."
+      "entry": 159.94,
+      "stop": 147.50,
+      "targets": [185.00],
+      "p_target_first": 0.33,
+      "reason": "Beat-and-raise verified (rev $115.8B vs ~$109B, Q4 guide ~$130B vs ~$125B), but the 10-Q is delayed with no explanation, the board is split on the CEO search, GM guide is lower, and it is counter-trend. Conviction 2."
     },
     {
-      "ticker": "UNH",
-      "direction": "short",
+      "ticker": "TJX",
+      "direction": "long",
       "entry_type": "limit",
-      "entry": 405.00,
-      "stop": 417.00,
-      "targets": [381.00],
-      "p_target_first": 0.30,
-      "reason": "CMS CRUSH proposed rule (HHS release Nov 16, comments due Jan 19 2027) expands MA audits, but analysts see impact protracted and litigated; already -2.9% (~1.1 ATR). EV ~-0.10R. Conviction 2."
+      "entry": 136.00,
+      "stop": 131.50,
+      "targets": [145.00],
+      "p_target_first": 0.35,
+      "reason": "+6% (1.9 ATR) on in-line EPS with Q4 and FY EPS guides below consensus; the move looks like positioning relief. Conviction 2."
     },
     {
-      "ticker": "TLT",
+      "ticker": "IWM",
       "direction": "short",
       "entry_type": "stop",
-      "entry": 78.95,
-      "stop": 80.40,
-      "targets": [76.80],
-      "p_target_first": 0.36,
-      "reason": "Long end at 5.12%/5.47% with Musalem hawkish and TLT 0.2 above its 20d low, but a December hike is ~95% priced and it stacks a third rates bet on the IWM short and GLD trigger. EV ~-0.11R. Conviction 2."
+      "entry": 267.40,
+      "stop": 274.00,
+      "targets": [257.50],
+      "p_target_first": 0.38,
+      "reason": "Breakdown under the 267.87 20d low fits the hike regime, but I just took target on it, the stop is ATR-based (the Nov 17 high is unverified), and EV is about -0.05R."
+    },
+    {
+      "ticker": "CRM",
+      "direction": "short",
+      "entry_type": "stop",
+      "entry": 189.50,
+      "stop": 199.50,
+      "targets": [172.00],
+      "p_target_first": 0.33,
+      "reason": "Anthropic supply overhang ends when ANT lists Thursday; already -9.5% Nov 17; earnings Dec 2 (Salesforce IR) inside the horizon."
     }
   ]
 }
 ```
 
 Sources:
-- [CNBC live updates, Nov 17 (posted under the 11/16 URL)](https://www.cnbc.com/2026/11/16/stock-market-today-live-updates.html)
-- [CNBC: Musalem says four more rate hikes may be needed](https://www.cnbc.com/2026/11/17/alberto-musalem-fed-interest-rates.html)
-- [Newsquawk: Fedspeak primer, Nov 17](https://www.newsquawk.com/headlines/primer---todays-fedspeak-17th-november-2026-includes-musalem-waller-hammack-williams)
-- [Home Depot Q3 FY26 8-K exhibit (SEC)](https://www.sec.gov/Archives/edgar/data/0000354950/000035495026000184/hd_exhibit991x11012026.htm)
-- [RTTNews: Home Depot Q3, guidance changes, management changes](https://www.rttnews.com/3715441/home-depot-q3-profit-comps-up-cuts-fy26-adj-margin-view-names-new-ceo-coo-cfo-shares-drop.aspx)
-- [Yahoo Finance: Home Depot names McPhail CEO](https://finance.yahoo.com/markets/stocks/article/home-depot-taps-richard-mcphail-as-new-ceo-reports-q3-earnings-beat-111428412.html)
-- [Invezz: Home Depot beats and names new CEO](https://invezz.com/news/2026/11/17/home-depot-beats-earnings-and-names-new-ceo-the-bigger-test-is-still-ahead/)
-- [MarketScreener: Home Depot in line in Q3](https://www.marketscreener.com/news/home-depot-results-in-line-with-expectations-in-third-quarter-ce785edcd98ff52c)
-- [TradingKey: HD $344.31 support after a 20% run](https://www.tradingkey.com/analysis/stocks/us-stocks/262304274-home-depot-stock-344-31-support-20-percent-run-into-q3-earnings-november-14-2026-tradingkey)
-- [Defense World: Zelman downgrades HD (headline only; page returned 403)](https://www.defenseworld.net/2026/11/17/home-depot-nysehd-downgraded-by-zelman-associates-to-underperform.html)
-- [Wall Street Horizon: HD earnings calendar (inferred date)](https://wallstreethorizon.com/home-depot-earnings-calendar)
-- [Lowe's Q3 2026 call on Nov 18](https://www.constructionowners.com/news/lowes-to-hold-third-quarter-2026-earnings-conference-call-on-november-18)
-- [Earnings Whispers: LOW](https://www.earningswhispers.com/stocks/LOW)
-- [TheStreet Pro: 8 key items for Tuesday](https://pro.thestreet.com/portfolio/disney-and-home-depot-report-nvidia-on-deck-8-key-items-shaping-the-stock-market-tuesday)
-- [SpotGamma: NVIDIA earnings preview](https://spotgamma.com/nvidia-earnings-preview-leadership-shock/)
-- [Benzinga: Nvidia earnings without Jensen Huang](https://www.benzinga.com/markets/options/26/11/63277522/nvidia-earnings-without-jensen-huang-could-trigger-341-billion-stock-swing-as-options-traders-brace-for-volatility)
-- [Invezz: Nvidia options signal an 8% swing](https://invezz.com/news/2026/11/17/nvidia-stock-faces-a-300-billion-earnings-gamble-as-options-signal-8-swing/)
-- [Seeking Alpha: managed care drops on proposed Medicare fraud crackdown](https://seekingalpha.com/news/4673627-managed-care-drops-proposed-crackdown-medicare-fraud)
-- [HHS: CMS CRUSH proposed rule](https://www.hhs.gov/press-room/cms-crush-rule-targets-healthcare-fraud-saves-90-billion.html)
-- [Becker's: CMS targets $90B with anti-fraud rule](https://www.beckershospitalreview.com/legal-regulatory-issues/cms-targets-90b-in-savings-with-sweeping-new-anti-fraud-rule/)
-- [Chartmill: S&P 500 premarket movers, Nov 17 (snippet only; page returned 403)](https://www.chartmill.com/news/ALB/Chartmill-58824-SP-500-Premarket-Movers-on-Nov-17-Gainers-and-Losers)
-- [GlobeNewswire: JD.com Q3 2026 results](https://www.globenewswire.com/news-release/2026/11/17/3404344/0/en/jd-com-announces-third-quarter-2026-results.html)
-- [CNN: stocks slide to start a major week](https://www.cnn.com/2026/11/16/business/stocks-nvidia-ai-anthropic)
-- [StockTitan: stock market today, Nov 16](https://www.stocktitan.net/articles/stock-market-today-live-november-16-2026)
-- [Newsquawk: Anthropic IPO pricing Nov 18, trading Nov 19](https://www.newsquawk.com/headlines/anthropic-ant-expects-ipo-price-of-usd-70-78shr-to-sell-80135mln-ipo-shares-with-the-co-seeking-to-raise-usd-644bln-to-price-on-november-18th-and-trade-on-november-19th)
-- [Al Jazeera: Iran says it struck a US radar site in Bahrain (Nov 13)](https://aljazeera.com/news/2026/11/13/iran-says-it-struck-us-radar-site-in-bahrain)
-- [Kitco: VIX jump, Nov 5](https://www.kitco.com/news/off-the-wire/2026-11-05/wall-street-fear-gauge-jumps-most-liberation-day-ai-trade-stumbles)
+- [Yahoo Finance live, Nov 18](https://finance.yahoo.com/markets/live/stock-market-today-wednesday-november-18-dow-sp-500-nasdaq-nvidia-anthropic-ipo-090613569.html)
+- [CNBC premarket movers, Nov 18](https://www.cnbc.com/2026/11/18/stocks-moving-the-most-today-live-updates.html)
+- [CNBC: Lowe's Q3](https://cnbc.com/2026/11/18/lowes-low-q3-2026-earnings.html)
+- [Startup Fortune: Lowe's tariff refund](https://startupfortune.com/lowes-beats-third-quarter-estimates-but-shares-fall-as-tariff-refund-flatters-the-profit/)
+- [Newsquawk premarket movers](https://www.newsquawk.com/headlines/us-premarket-movers-nvda-tjx-low-fcx-ttwo-tgt-fix-aaoi-dlb)
+- [TradingKey US pre-market](https://www.tradingkey.com/analysis/stocks/us-stocks/262311015-us-pre-market-nvda-anthropic-tradingkey)
+- [CNBC: Nvidia Q3 FY27](https://www.cnbc.com/2026/11/17/nvidia-nvda-earnings-report-q3-2027.html)
+- [Yahoo: Nvidia delayed 10-Q](https://finance.yahoo.com/markets/stocks/articles/nvidia-delayed-10-q-draws-040618822.html)
+- [mlq.ai: Gold below $3,800](https://mlq.ai/news/gold-falls-below-3800-to-its-lowest-since-september-2025-as-traders-price-a-december-fed-hike-before-the-minutes/)
+- [ActionForex: Gold one-year low](https://www.actionforex.com/action-insight/market-overview/661273-gold-hits-one-year-low-ahead-of-fomc-minutes-as-fed-rate-path-takes-center-stage/)
+- [mlq.ai: Housing starts October](https://mlq.ai/news/us-housing-starts-rebound-nearly-10-in-october-as-building-permits-fall-to-their-lowest-in-more-than-a-year/)
+- [Census new residential construction](https://www.census.gov/construction/nrc/pdf/newresconst_202610.pdf)
+- [Investing.com: TJX](https://au.investing.com/news/stock-market-news/tjx-stock-surges-on-revenue-beat-strong-guidance-93CH-4780325)
+- [MarketBeat: TJX Q4 guidance](https://www.marketbeat.com/instant-alerts/guidance-tjx-companies-nyse-tjx-announces-q4-2027-earnings-guidance-2026-11-18/)
+- [Kitco: Waller/Logan](https://www.kitco.com/news/article/2026-11-10/feds-waller-and-logan-signal-readiness-hike-higher-and-faster-50-bps-table)
+- [CNBC: Anthropic IPO price](https://www.cnbc.com/2026/11/17/anthropic-ipo-price.html)
+- [Salesforce IR: Q3 FY27 date](https://investor.salesforce.com/news/news-details/2026/Salesforce-Announces-Date-of-Third-Quarter-Fiscal-2027-Earnings-Release-and-Webcast/default.aspx)
+- [Treasury 20-year announcement](https://fiscaldata.treasury.gov/static-data/published-reports/auctions-query/announcements/A_20261112_5.pdf)
+- [Yahoo: LOW next earnings pattern](https://finance.yahoo.com/news/heres-expect-lowes-next-earnings-133928550.html)
 
 ## Current book state
 *Auto-generated. These are live figures - use them, do not estimate.*
 
-- Time now: **10:05 ET** (15:05 UTC, 16:05 Stockholm), Tuesday 2026-11-17. The cash session opened 35 min ago and closes at 16:00 ET (22:00 Stockholm).
-- Equity: **$102,676.76**
-- Cash: $143,294.09
-- Session P&L so far: +0.10% (new entries are blocked at -3.0%)
-- Gross exposure: $61,647 (60% of equity, cap 150%)
-- Net exposure: $-61,647 (-60%, cap +/-100%)
-- Risk at stake (entry to stop): $1,524 (1.48% of equity, cap 4.0%) — 2.52% left for new plays
-- Slots: 2 open + 1 resting entries of 8 — you may add at most 5 more
+- Time now: **10:05 ET** (15:05 UTC, 16:05 Stockholm), Wednesday 2026-11-18. The cash session opened 35 min ago and closes at 16:00 ET (22:00 Stockholm).
+- Equity: **$102,920.32**
+- Cash: $153,301.93
+- Session P&L so far: -0.05% (new entries are blocked at -3.0%)
+- Gross exposure: $50,382 (49% of equity, cap 150%)
+- Net exposure: $-50,382 (-49%, cap +/-100%)
+- Risk at stake (entry to stop): $1,419 (1.38% of equity, cap 4.0%) — 2.62% left for new plays
+- Slots: 3 open + 0 resting entries of 8 — you may add at most 5 more
 - *Gross, net, risk and slots count resting entries as if filled.*
 - A new long can be up to 50% of equity in notional: at 1% risk its stop must be at least 2.0% from entry (half that at 0.5%).
-- A new short can be up to 40% of equity in notional: at 1% risk its stop must be at least 2.5% from entry (half that at 0.5%).
+- A new short can be up to 50% of equity in notional: at 1% risk its stop must be at least 2.0% from entry (half that at 0.5%).
 
 ### Open positions
 
@@ -289,56 +288,50 @@ Sources:
 
 | Symbol | Side | Qty | Avg entry | Last | Unreal. P&L | Share of equity | Stop | Target |
 |---|---|---|---|---|---|---|---|---|
-| HD | short | 51 | 343.57 | 342.38 | +60 (+0.3%) | -17% | 353.50 | 323.50 |
-| IWM | short | 85 | 281.03 | 272.42 | +732 (+3.1%) | -23% | 287.00 | 271.00 |
+| GLD | short | 60 | 345.91 | 344.73 | +71 (+0.3%) | -20% | 355.50 | 330.00 |
+| HD | short | 51 | 343.57 | 336.97 | +337 (+1.9%) | -17% | 353.50 | 323.50 |
+| LOW | short | 57 | 215.58 | 219.52 | -225 (-1.8%) | -12% | 221.50 | 194.50 |
 
 *What you wrote when you opened each one. The invalidation is the test for closing it early.*
 
-- **HD**, opened 2026-11-17 (session 1 of at most 10), submitted with stop 353.5 and target 323.5, P 36%. Thesis: HD ran ~19.5% into the print on flat estimates at ~22x forward; the print gave no reason to pay more and the gap broke the 344.31 channel support with 10y yields at 5.1% and the Fed talking hikes. Short a failed retest of broken support toward the 330/316 supports. Invalidation: HD closes above 347.51 (pre-earnings close, gap fully filled) on any session before the stop, e.g. after a strong LOW print on Nov 18.
-- **IWM**, opened 2026-11-10 (session 6 of at most 10), submitted with stop 287 and target 271, P 36%. Thesis: Small caps are the most rate-sensitive equity cohort; a front-end repricing should pull IWM from +2% above its 20d average back toward the 270 range low. Invalidation: 2-year yields fully reverse the CPI move, or IWM closes above 284.
-
-### Resting entries (unfilled, carried from earlier sessions)
-
-*These are live GTC orders and fill without you. Re-proposing the name in `plays` is rejected; to change the levels use `manage` with `update`, to withdraw the idea use `manage` with `close`. Unfilled entries are cancelled after 5 days and before every weekend or market holiday.*
-
-| Symbol | Side | Qty | Entry | Type | Stop | Target | Submitted |
-|---|---|---|---|---|---|---|---|
-| GLD | short | 60 | 350.50 | stop | 359.00 | 333.00 | 2026-11-16 |
+- **GLD**, opened 2026-11-18 (session 1 of at most 10), submitted with stop 359 and target 333, P 36%. Thesis: Gold is trending down on rising real rates and the strongest dollar in 18 months (-4.6% in 5 days, below its 20d and 50d averages). A US-session break below the overnight low (GLD 350.50, under its 352.91 20-day low) confirms the move toward the $3,800 and then ~$3,650 area. The stop entry stays unfilled if Warsh or the minutes turn dovish. Invalidation: DXY back below 102.50 with market-implied December-hike odds below 70%.
+- **HD**, opened 2026-11-17 (session 2 of at most 10), submitted with stop 353.5 and target 323.5, P 36%. Thesis: HD ran ~19.5% into the print on flat estimates at ~22x forward; the print gave no reason to pay more and the gap broke the 344.31 channel support with 10y yields at 5.1% and the Fed talking hikes. Short a failed retest of broken support toward the 330/316 supports. Invalidation: HD closes above 347.51 (pre-earnings close, gap fully filled) on any session before the stop, e.g. after a strong LOW print on Nov 18.
+- **LOW**, opened 2026-11-18 (session 1 of at most 10), submitted with stop 221.5 and target 194.5, P 37%. Thesis: LOW ran +10% above its 50d into a print whose underlying EPS missed, with housing weakening and the Fed hiking. Short a retest of the gap, mirroring the working HD short, toward the 20d low. Invalidation: LOW closes above 220.46 (pre-earnings close, gap fully filled) on any session before the stop.
 
 ### Your record
 
-49 closed trades: 15W / 34L, total -0.64R, net $+1,900 realized.
+50 closed trades: 16W / 34L, total +1.03R, net $+2,753 realized.
 
 *Every idea is scored on the bracket as you submitted it: which of the initial target and the initial stop came first, within 10 sessions. R is profit over the risk budgeted.*
 
 | | Ideas | Target first | Stop first | Average R |
 |---|---|---|---|---|
-| Trades taken, as managed | 49 | 17 | 29 | -0.01R |
-| The same trades, bracket left alone | 49 | | | +0.01R |
-| Ideas you passed on, or the caps dropped | 97 | 34 | 54 | +0.02R |
+| Trades taken, as managed | 50 | 18 | 29 | +0.02R |
+| The same trades, bracket left alone | 50 | | | +0.04R |
+| Ideas you passed on, or the caps dropped | 103 | 37 | 56 | +0.04R |
 
 What you said against what happened, trades and passes together:
 
 | You said | Ideas | Reached target first |
 |---|---|---|
 | 0%-30% | 1 | 100% |
-| 30%-35% | 39 | 46% |
-| 35%-40% | 63 | 29% |
+| 30%-35% | 41 | 49% |
+| 35%-40% | 67 | 30% |
 | 40%-45% | 26 | 46% |
 | 45%-50% | 4 | 25% |
 | 50%-60% | 1 | 100% |
 
-Base rate: 38% of 134 brackets reached target first. Your Brier score is 0.237; saying 38% every time scores 0.236. Your probabilities are not yet telling the better ideas from the worse ones: start from the base rate and move off it only for a reason you can name.
+Base rate: 39% of 140 brackets reached target first. Your Brier score is 0.241; saying 39% every time scores 0.239. Your probabilities are not yet telling the better ideas from the worse ones: start from the base rate and move off it only for a reason you can name.
 
 ### Last 5 closed trades
 
 | Symbol | Direction | Exit | R | P&L | You said |
 |---|---|---|---|---|---|
+| IWM | short | target | +1.67R | $+853 | 36% |
 | AMZN | long | stop | -1.20R | $-303 | 36% |
 | DAL | long | stop | -0.60R | $-154 | 37% |
 | XLE | short | close | -1.02R | $-521 | 37% |
 | AVGO | short | close | -0.92R | $-232 | 37% |
-| NVDA | short | target | +2.16R | $+1,108 | 37% |
 
 ### Market data
 
@@ -348,87 +341,87 @@ Base rate: 38% of 134 brackets reached target first. Your Brier score is 0.237; 
 
 | Symbol | Last (ET) | vs prev | Prev close | Today open / low-high | ATR14 | 20d low-high | Prev vs 20d / 50d avg | 5d | Avg vol 20d |
 |---|---|---|---|---|---|---|---|---|---|
-| HD | 342.85 (10:05 iex) | -1.3% | 347.51 | 335.07 / 334.44-346.75 | 9.96 (2.9%) | 310.64-362.44 | +3.5% / +11.1% | -1.7% | 4.5M |
-| IWM | 272.44 (10:05 iex) | -0.2% | 272.94 | 272.04 / 271.55-273.05 | 5.61 (2.1%) | 270.23-286.17 | -2.0% / -2.6% | -3.4% | 23.7M |
-| GLD | 353.45 (10:05 iex) | +0.1% | 352.93 | 353.87 / 353.42-354.92 | 7.57 (2.1%) | 351.96-380.88 | -4.0% / -7.1% | -7.0% | 9.6M |
+| GLD | 344.70 (10:05 iex) | -2.2% | 352.48 | 346.31 / 344.51-346.31 | 7.55 (2.1%) | 351.96-380.18 | -3.7% / -7.0% | -4.6% | 9.7M |
+| HD | 336.94 (10:05 iex) | -0.6% | 339.01 | 331.25 / 330.31-338.16 | 10.50 (3.1%) | 311.14-362.44 | +0.6% / +8.2% | -3.4% | 4.7M |
+| LOW | 218.90 (10:05 iex) | -0.7% | 220.46 | 212.07 / 211.00-219.90 | 7.33 (3.3%) | 194.43-235.00 | +2.1% / +10.3% | -4.9% | 3.5M |
 
 #### Indices, rates, commodities and sectors
 
 | Symbol | Last (ET) | vs prev | Prev close | Today open / low-high | ATR14 | 20d low-high | Prev vs 20d / 50d avg | 5d | Avg vol 20d |
 |---|---|---|---|---|---|---|---|---|---|
-| SPY | 737.99 (10:05 iex) | -0.3% | 739.95 | 738.39 / 737.47-739.69 | 13.51 (1.8%) | 732.71-775.64 | -2.3% / -3.1% | -1.7% | 48.5M |
-| QQQ | 661.13 (10:05 iex) | -0.1% | 661.75 | 663.06 / 659.70-663.36 | 19.23 (2.9%) | 647.05-727.95 | -4.5% / -7.7% | -2.6% | 49.9M |
-| IWM | 272.44 (10:05 iex) | -0.2% | 272.94 | 272.04 / 271.55-273.05 | 5.61 (2.1%) | 270.23-286.17 | -2.0% / -2.6% | -3.4% | 23.7M |
-| DIA | 512.74 (10:05 iex) | -0.6% | 515.68 | 511.04 / 510.96-514.12 | 8.04 (1.6%) | 508.66-536.60 | -1.2% / -0.6% | -1.5% | 3.7M |
-| TLT | 79.27 (10:04 iex) | -0.1% | 79.38 | 79.31 / 79.23-79.36 | 0.78 (1.0%) | 79.11-82.42 | -1.9% / -0.5% | -3.1% | 35.8M |
-| GLD | 353.45 (10:05 iex) | +0.1% | 352.93 | 353.87 / 353.42-354.92 | 7.57 (2.1%) | 351.96-380.88 | -4.0% / -7.1% | -7.0% | 9.6M |
-| USO | 142.07 (10:04 iex) | +1.5% | 140.03 | 142.58 / 141.94-142.74 | 5.90 (4.2%) | 138.36-171.82 | -9.7% / -8.3% | -1.8% | 5.4M |
-| SMH | 461.81 (10:04 iex) | -0.0% | 461.90 | 466.43 / 459.63-466.43 | 27.80 (6.0%) | 445.59-571.00 | -10.1% / -17.2% | -5.2% | 11.9M |
-| XLK | 164.15 (10:05 iex) | -0.4% | 164.76 | 165.49 / 163.88-165.53 | 6.43 (3.9%) | 162.14-191.55 | -7.2% / -11.7% | -3.6% | 12.7M |
-| XLF | 57.80 (10:05 iex) | -0.6% | 58.18 | 57.71 / 57.69-58.02 | 1.04 (1.8%) | 55.17-60.04 | +1.7% / +4.0% | +0.3% | 33.4M |
-| XLE | 64.10 (10:05 iex) | +0.6% | 63.69 | 64.09 / 63.91-64.55 | 1.70 (2.7%) | 60.43-70.15 | -3.4% / -1.9% | +2.8% | 36.5M |
-| XLV | 186.15 (10:04 iex) | -0.9% | 187.88 | 185.72 / 185.42-186.86 | 3.83 (2.0%) | 177.07-192.32 | +2.0% / +7.2% | -0.2% | 11.3M |
-| XLI | 166.29 (10:05 iex) | +0.4% | 165.66 | 165.45 / 165.37-166.90 | 3.54 (2.1%) | 161.74-172.40 | -1.3% / -1.8% | -1.9% | 8.9M |
-| XLY | 118.47 (10:05 iex) | +0.3% | 118.15 | 117.64 / 117.60-118.69 | 2.63 (2.2%) | 112.83-122.92 | +0.5% / +3.8% | -2.4% | 9.1M |
-| XLP | 92.29 (10:05 iex) | -0.3% | 92.60 | 91.85 / 91.78-92.73 | 1.66 (1.8%) | 86.36-93.48 | +3.2% / +8.0% | +1.9% | 19.2M |
-| XLU | 43.88 (10:04 iex) | -0.5% | 44.12 | 43.74 / 43.72-43.98 | 0.60 (1.4%) | 41.44-44.40 | +2.1% / +5.4% | +0.8% | 24.7M |
-| XLB | 51.83 (10:05 iex) | +0.7% | 51.47 | 51.32 / 51.25-52.04 | 1.05 (2.0%) | 50.61-54.63 | -1.5% / +1.2% | -2.8% | 12.1M |
-| XLRE | 44.13 (10:03 iex) | -0.3% | 44.25 | 43.98 / 43.90-44.22 | 0.70 (1.6%) | 41.78-45.34 | +1.6% / +4.0% | -0.9% | 7.9M |
-| XLC | 106.67 (10:05 iex) | -0.1% | 106.82 | 106.45 / 106.08-106.84 | 2.29 (2.1%) | 99.33-110.84 | +1.4% / -2.2% | -0.5% | 8.0M |
-| KRE | 72.15 (10:05 iex) | -0.1% | 72.19 | 71.91 / 71.61-72.24 | 1.56 (2.2%) | 69.40-75.80 | -0.5% / +0.8% | -1.7% | 14.2M |
-| XHB | 101.38 (10:00 iex) | +0.4% | 101.01 | 100.28 / 99.89-101.74 | 3.26 (3.2%) | 94.23-108.78 | -0.2% / +2.7% | -4.7% | 2.4M |
+| SPY | 732.63 (10:05 iex) | +0.0% | 732.44 | 733.35 / 728.72-735.06 | 14.14 (1.9%) | 727.00-775.64 | -3.1% / -4.0% | -2.3% | 50.4M |
+| QQQ | 659.83 (10:05 iex) | +0.4% | 656.95 | 661.02 / 654.00-662.65 | 20.01 (3.0%) | 646.64-727.95 | -4.7% / -8.2% | -2.6% | 51.2M |
+| IWM | 270.69 (10:05 iex) | +0.6% | 269.05 | 268.15 / 267.89-271.60 | 5.81 (2.2%) | 267.87-286.17 | -3.3% / -3.8% | -4.1% | 23.9M |
+| DIA | 503.70 (10:03 iex) | -0.7% | 507.31 | 505.45 / 501.99-506.22 | 8.57 (1.7%) | 505.29-536.60 | -2.6% / -2.1% | -2.8% | 3.7M |
+| TLT | 79.93 (10:05 iex) | +0.5% | 79.55 | 79.91 / 79.82-80.16 | 0.74 (0.9%) | 79.11-82.42 | -1.7% / -0.2% | -1.6% | 36.1M |
+| GLD | 344.70 (10:05 iex) | -2.2% | 352.48 | 346.31 / 344.51-346.31 | 7.55 (2.1%) | 351.96-380.18 | -3.7% / -7.0% | -4.6% | 9.7M |
+| USO | 138.35 (10:03 iex) | -1.3% | 140.24 | 139.74 / 137.69-139.81 | 5.73 (4.1%) | 138.36-171.82 | -8.9% / -8.1% | -0.9% | 5.1M |
+| SMH | 461.49 (10:05 iex) | +0.3% | 460.10 | 467.98 / 453.98-469.50 | 28.38 (6.2%) | 445.32-571.00 | -9.7% / -17.2% | -4.9% | 12.1M |
+| XLK | 163.93 (10:04 iex) | +0.4% | 163.26 | 164.87 / 161.96-165.39 | 6.70 (4.1%) | 159.63-191.55 | -7.5% / -12.3% | -3.3% | 13.1M |
+| XLF | 56.59 (10:05 iex) | -0.8% | 57.07 | 56.78 / 56.56-57.01 | 1.09 (1.9%) | 55.64-60.04 | -0.4% / +2.0% | -2.1% | 35.1M |
+| XLE | 62.29 (10:05 iex) | -1.7% | 63.36 | 63.00 / 61.64-63.28 | 1.75 (2.8%) | 60.43-70.15 | -3.6% / -2.4% | +1.8% | 35.7M |
+| XLV | 183.83 (10:04 iex) | -0.8% | 185.24 | 183.73 / 183.23-185.28 | 3.77 (2.0%) | 177.07-192.32 | +0.4% / +5.5% | -1.9% | 11.5M |
+| XLI | 164.93 (10:05 iex) | +0.1% | 164.75 | 164.59 / 163.77-165.65 | 3.62 (2.2%) | 161.74-172.40 | -1.7% / -2.2% | -2.4% | 8.8M |
+| XLY | 118.82 (10:04 iex) | +1.5% | 117.10 | 117.24 / 117.20-119.16 | 2.70 (2.3%) | 112.83-122.92 | -0.4% / +2.8% | -3.3% | 9.2M |
+| XLP | 91.36 (10:05 iex) | -0.1% | 91.46 | 90.82 / 90.59-91.59 | 1.69 (1.9%) | 86.36-93.48 | +1.7% / +6.5% | +0.5% | 19.4M |
+| XLU | 43.49 (10:05 iex) | +0.2% | 43.42 | 43.20 / 43.19-43.61 | 0.62 (1.4%) | 41.87-44.40 | +0.3% / +3.7% | -0.7% | 25.0M |
+| XLB | 50.49 (10:05 iex) | -0.7% | 50.84 | 50.28 / 50.12-50.62 | 1.10 (2.2%) | 50.76-54.63 | -2.7% / -0.0% | -3.8% | 12.2M |
+| XLRE | 43.52 (10:04 iex) | -0.2% | 43.59 | 43.28 / 43.25-43.60 | 0.70 (1.6%) | 41.78-45.34 | -0.0% / +2.5% | -2.2% | 7.9M |
+| XLC | 105.76 (10:05 iex) | +0.5% | 105.26 | 105.68 / 105.27-106.15 | 2.33 (2.2%) | 99.33-109.88 | +0.2% / -3.5% | -2.3% | 8.1M |
+| KRE | 70.74 (10:05 iex) | -0.2% | 70.85 | 70.74 / 70.66-71.20 | 1.57 (2.2%) | 70.15-75.80 | -2.3% / -0.9% | -3.1% | 14.4M |
+| XHB | 99.96 (10:05 iex) | +0.9% | 99.09 | 98.20 / 98.00-100.28 | 3.30 (3.3%) | 94.81-108.78 | -2.2% / +0.8% | -4.0% | 2.4M |
 
 #### Large caps
 
 | Symbol | Last (ET) | vs prev | Prev close | Today open / low-high | ATR14 | 20d low-high | Prev vs 20d / 50d avg | 5d | Avg vol 20d |
 |---|---|---|---|---|---|---|---|---|---|
-| AAPL | 354.62 (10:05 iex) | +0.5% | 352.78 | 352.83 / 351.81-355.29 | 9.48 (2.7%) | 325.08-360.83 | +1.8% / +3.9% | +0.7% | 48.2M |
-| MSFT | 511.08 (10:05 iex) | -1.3% | 517.99 | 514.57 / 509.88-515.64 | 17.89 (3.5%) | 504.96-559.15 | -2.0% / -0.3% | -5.0% | 27.1M |
-| NVDA | 155.10 (10:05 iex) | -0.7% | 156.14 | 156.90 / 154.76-157.46 | 11.33 (7.3%) | 148.80-222.19 | -20.2% / -26.7% | -12.6% | 221.4M |
-| AMZN | 258.92 (10:05 iex) | +0.5% | 257.75 | 257.27 / 257.10-259.35 | 11.03 (4.3%) | 229.36-275.34 | +0.3% / +1.2% | -3.4% | 49.7M |
-| GOOGL | 282.49 (10:05 iex) | -0.4% | 283.72 | 283.33 / 280.89-284.09 | 12.32 (4.3%) | 276.92-344.77 | -5.6% / -13.3% | -1.5% | 41.7M |
-| META | 623.69 (10:05 iex) | -0.4% | 626.41 | 624.21 / 619.36-627.48 | 21.69 (3.5%) | 583.80-713.22 | -1.1% / -7.9% | -2.3% | 23.6M |
-| TSLA | 382.12 (10:05 iex) | +0.6% | 379.74 | 382.19 / 378.92-382.84 | 18.00 (4.7%) | 338.15-414.23 | -1.6% / +1.2% | +0.4% | 39.3M |
-| AVGO | 339.71 (10:05 iex) | +1.9% | 333.40 | 335.99 / 334.86-341.50 | 20.44 (6.1%) | 289.77-369.82 | +0.8% / -3.3% | +4.4% | 27.4M |
-| AMD | 504.71 (10:05 iex) | +0.1% | 504.28 | 512.44 / 497.80-512.44 | 47.89 (9.5%) | 402.10-594.00 | -2.5% / -9.2% | -0.8% | 35.6M |
-| ORCL | 117.47 (10:05 iex) | -1.4% | 119.09 | 119.02 / 117.05-120.90 | 9.51 (8.0%) | 109.21-148.48 | -5.5% / -12.2% | -0.6% | 41.8M |
-| NFLX | 60.71 (10:05 iex) | -0.1% | 60.75 | 60.66 / 60.29-60.93 | 1.83 (3.0%) | 60.48-70.66 | -4.9% / -11.7% | -5.0% | 45.9M |
-| CRM | 200.11 (10:05 iex) | -6.9% | 214.83 | 209.01 / 199.63-211.00 | 8.15 (3.8%) | 208.88-252.42 | -6.2% / -8.3% | -0.1% | 6.7M |
-| JPM | 335.11 (10:05 iex) | -0.9% | 338.21 | 333.57 / 332.32-336.73 | 8.24 (2.4%) | 330.40-359.80 | -0.3% / -0.3% | -1.1% | 6.4M |
-| GS | 888.59 (10:05 iex) | -0.3% | 891.54 | 888.06 / 882.51-892.43 | 29.74 (3.3%) | 854.45-939.38 | -1.1% / -3.0% | -1.6% | 2.2M |
-| BAC | 50.00 (10:05 iex) | -0.2% | 50.08 | 49.80 / 49.63-50.15 | 1.22 (2.4%) | 49.17-53.02 | -0.8% / -6.9% | -0.9% | 34.6M |
-| XOM | 168.14 (10:05 iex) | +0.8% | 166.87 | 167.46 / 167.46-169.42 | 4.66 (2.8%) | 159.11-187.32 | -3.9% / -1.0% | +1.9% | 14.3M |
-| CVX | 218.13 (10:04 iex) | +0.5% | 217.14 | 217.58 / 217.00-219.45 | 5.22 (2.4%) | 206.01-236.48 | -2.5% / +0.7% | +3.0% | 8.1M |
-| LLY | 1,427.12 (10:05 iex) | -0.3% | 1,431.67 | 1,415.99 / 1,410.00-1,432.28 | 52.53 (3.7%) | 1,256.10-1,475.25 | +4.9% / +15.0% | +1.5% | 3.1M |
-| UNH | 389.75 (10:05 iex) | -5.4% | 412.02 | 399.23 / 389.12-399.99 | 10.98 (2.7%) | 388.00-426.55 | +1.0% / +5.2% | +3.6% | 4.9M |
-| JNJ | 280.20 (10:05 iex) | -0.8% | 282.55 | 279.42 / 277.56-281.00 | 7.39 (2.6%) | 254.56-290.25 | +3.5% / +5.8% | +0.2% | 7.5M |
-| WMT | 128.28 (10:05 iex) | -0.1% | 128.41 | 127.61 / 127.43-129.01 | 3.06 (2.4%) | 116.63-131.82 | +3.8% / +11.7% | +2.2% | 21.9M |
-| COST | 1,119.16 (10:05 iex) | +0.5% | 1,113.74 | 1,109.26 / 1,109.26-1,123.25 | 21.39 (1.9%) | 978.87-1,117.00 | +7.4% / +14.8% | +4.5% | 2.4M |
-| HD | 342.85 (10:05 iex) | -1.3% | 347.51 | 335.07 / 334.44-346.75 | 9.96 (2.9%) | 310.64-362.44 | +3.5% / +11.1% | -1.7% | 4.5M |
-| CAT | 575.06 (10:04 iex) | +0.8% | 570.49 | 573.54 / 571.49-580.86 | 32.26 (5.7%) | 550.81-743.23 | -10.4% / -22.3% | -4.7% | 3.9M |
-| BA | 167.64 (10:03 iex) | +1.5% | 165.22 | 165.00 / 164.65-168.13 | 5.09 (3.1%) | 164.71-193.28 | -6.3% / -12.1% | -4.2% | 10.6M |
-| DAL | 85.95 (10:04 iex) | -0.8% | 86.60 | 86.49 / 85.53-86.60 | 3.24 (3.7%) | 74.14-92.52 | +3.3% / +5.7% | -5.7% | 6.5M |
-| UAL | 109.63 (10:05 iex) | -1.0% | 110.76 | 109.41 / 109.06-110.52 | 5.41 (4.9%) | 94.54-122.08 | +2.4% / +2.5% | -8.0% | 5.8M |
+| AAPL | 354.93 (10:05 iex) | +0.9% | 351.91 | 352.05 / 351.87-356.32 | 9.62 (2.7%) | 325.08-360.83 | +1.4% / +3.5% | +1.1% | 48.2M |
+| MSFT | 505.81 (10:05 iex) | -0.1% | 506.24 | 505.49 / 501.86-508.50 | 18.80 (3.7%) | 496.51-559.15 | -4.0% / -2.6% | -5.0% | 27.7M |
+| NVDA | 154.96 (10:05 iex) | -0.3% | 155.46 | 159.15 / 153.27-159.70 | 11.49 (7.4%) | 148.80-222.19 | -19.3% / -26.6% | -8.0% | 237.8M |
+| AMZN | 263.49 (10:05 iex) | +2.2% | 257.89 | 259.68 / 259.51-264.32 | 11.21 (4.3%) | 229.36-275.34 | +0.4% / +1.2% | -4.8% | 49.9M |
+| GOOGL | 283.28 (10:05 iex) | +1.1% | 280.20 | 282.98 / 281.41-284.97 | 12.31 (4.4%) | 276.92-337.27 | -5.8% / -14.0% | -2.5% | 42.4M |
+| META | 617.35 (10:05 iex) | -0.2% | 618.87 | 620.56 / 613.79-620.81 | 21.58 (3.5%) | 583.80-713.22 | -1.7% / -9.0% | -3.5% | 23.4M |
+| TSLA | 384.61 (10:05 iex) | +1.2% | 380.11 | 385.24 / 379.35-389.27 | 17.65 (4.6%) | 338.15-414.23 | -1.6% / +1.2% | +0.1% | 38.8M |
+| AVGO | 349.06 (10:05 iex) | +2.2% | 341.60 | 349.04 / 340.74-351.89 | 20.71 (6.1%) | 289.77-369.82 | +3.1% / -0.8% | +2.9% | 27.9M |
+| AMD | 513.16 (10:05 iex) | +1.9% | 503.41 | 510.44 / 495.20-519.80 | 48.80 (9.7%) | 402.10-594.00 | -2.4% / -9.3% | -2.3% | 36.7M |
+| ORCL | 115.60 (10:05 iex) | +0.5% | 115.00 | 116.30 / 113.62-117.44 | 8.64 (7.5%) | 109.21-148.48 | -8.2% / -14.6% | -2.5% | 41.7M |
+| NFLX | 59.69 (10:05 iex) | +0.0% | 59.68 | 59.70 / 59.66-60.39 | 1.86 (3.1%) | 59.41-67.82 | -5.9% / -12.9% | -5.7% | 44.3M |
+| CRM | 187.85 (10:04 iex) | -3.4% | 194.52 | 193.07 / 186.84-193.50 | 9.13 (4.7%) | 193.41-252.42 | -14.2% / -16.6% | -8.9% | 7.0M |
+| JPM | 327.75 (10:05 iex) | -0.7% | 329.96 | 327.52 / 326.79-330.09 | 8.50 (2.6%) | 328.74-359.80 | -2.7% / -2.6% | -3.5% | 6.6M |
+| GS | 875.07 (10:04 iex) | -0.3% | 877.52 | 880.00 / 867.29-880.00 | 30.50 (3.5%) | 854.45-939.38 | -2.6% / -4.2% | -3.6% | 2.1M |
+| BAC | 49.14 (10:05 iex) | -0.6% | 49.44 | 49.20 / 49.05-49.48 | 1.26 (2.5%) | 49.08-53.02 | -2.0% / -7.7% | -2.4% | 34.2M |
+| XOM | 164.49 (10:05 iex) | -1.6% | 167.21 | 165.92 / 162.45-166.96 | 4.63 (2.8%) | 159.11-187.32 | -3.5% / -0.8% | +2.3% | 14.3M |
+| CVX | 209.48 (10:05 iex) | -2.3% | 214.35 | 212.60 / 207.25-213.58 | 5.24 (2.4%) | 204.31-234.53 | -2.7% / +0.2% | +2.3% | 8.2M |
+| LLY | 1,402.97 (10:04 iex) | -0.9% | 1,415.55 | 1,407.93 / 1,399.14-1,423.11 | 51.93 (3.7%) | 1,256.10-1,475.25 | +3.2% / +13.1% | -1.0% | 3.1M |
+| UNH | 372.92 (10:05 iex) | -4.3% | 389.68 | 387.14 / 371.99-387.53 | 11.96 (3.1%) | 387.14-426.55 | -4.1% / -0.4% | -3.8% | 5.0M |
+| JNJ | 276.64 (10:04 iex) | -0.7% | 278.70 | 275.55 / 275.55-278.72 | 7.14 (2.6%) | 254.56-290.25 | +1.7% / +4.3% | -0.7% | 7.5M |
+| WMT | 127.07 (10:05 iex) | -0.4% | 127.52 | 126.51 / 125.07-127.08 | 3.10 (2.4%) | 116.63-131.82 | +2.7% / +10.5% | +1.6% | 21.8M |
+| COST | 1,106.23 (10:04 iex) | -0.3% | 1,110.08 | 1,104.00 / 1,097.50-1,110.45 | 21.62 (1.9%) | 978.87-1,123.67 | +6.4% / +14.0% | +4.1% | 2.5M |
+| HD | 336.94 (10:05 iex) | -0.6% | 339.01 | 331.25 / 330.31-338.16 | 10.50 (3.1%) | 311.14-362.44 | +0.6% / +8.2% | -3.4% | 4.7M |
+| CAT | 561.74 (10:04 iex) | -1.6% | 570.79 | 576.25 / 552.75-578.00 | 31.72 (5.6%) | 550.81-743.23 | -9.3% / -21.8% | -2.4% | 3.9M |
+| BA | 163.06 (10:04 iex) | -0.5% | 163.91 | 163.43 / 161.90-163.69 | 5.07 (3.1%) | 163.30-193.28 | -6.3% / -12.3% | -5.5% | 10.5M |
+| DAL | 85.56 (10:04 iex) | +1.5% | 84.30 | 84.37 / 84.29-86.20 | 3.25 (3.9%) | 75.33-92.52 | +0.1% / +2.8% | -8.6% | 6.2M |
+| UAL | 108.72 (10:04 iex) | +2.2% | 106.35 | 106.01 / 106.01-109.55 | 5.53 (5.2%) | 96.24-122.08 | -2.1% / -1.6% | -11.8% | 5.7M |
 
-#### Today's biggest movers among 270 other liquid names (at least $5 and 1M average volume)
+#### Today's biggest movers among 269 other liquid names (at least $5 and 1M average volume)
 
 *Last price against the prior close, largest moves each way. A stock that has moved this far today usually has a dated reason: find it.*
 
 | Symbol | Last (ET) | vs prev | Prev close | Today open / low-high | ATR14 | 20d low-high | Prev vs 20d / 50d avg | 5d | Avg vol 20d |
 |---|---|---|---|---|---|---|---|---|---|
-| SNAP | 5.38 (10:05 iex) | +5.7% | 5.09 | 5.12 / 5.07-5.43 | 0.35 (6.8%) | 4.85-6.59 | -9.7% / -10.8% | +0.8% | 44.2M |
-| ARM | 183.99 (10:05 iex) | +5.1% | 175.05 | 179.25 / 177.03-184.93 | 16.79 (9.6%) | 163.13-237.88 | -13.7% / -29.0% | -6.0% | 5.8M |
-| MCHP | 60.45 (10:05 iex) | +3.1% | 58.64 | 60.21 / 59.27-60.49 | 4.87 (8.3%) | 54.83-81.22 | -17.1% / -20.1% | -4.6% | 16.0M |
-| VRT | 194.47 (10:04 iex) | +3.1% | 188.67 | 191.97 / 191.97-197.68 | 20.94 (11.1%) | 170.80-254.73 | -9.3% / -17.8% | -5.9% | 8.7M |
-| NEM | 113.35 (10:05 iex) | +2.8% | 110.31 | 110.50 / 110.44-114.40 | 5.02 (4.6%) | 104.51-127.28 | -3.5% / -6.3% | -11.9% | 7.0M |
-| MPWR | 1,349.07 (10:05 iex) | +2.7% | 1,314.00 | 1,329.00 / 1,311.75-1,353.62 | 106.23 (8.1%) | 1,125.00-1,513.49 | +3.6% / +2.2% | -5.3% | 1.1M |
-| ALB | 90.49 (10:00 iex) | +2.6% | 88.16 | 89.58 / 89.33-91.76 | 3.91 (4.4%) | 87.78-102.28 | -6.7% / -14.2% | -11.1% | 2.5M |
-| ENTG | 143.66 (10:04 iex) | +2.6% | 140.02 | 142.73 / 141.34-145.75 | 12.75 (9.1%) | 124.14-170.06 | -3.1% / -5.1% | -0.0% | 3.8M |
-| HUBS | 216.97 (10:03 iex) | -6.5% | 231.98 | 226.06 / 216.06-226.06 | 14.72 (6.3%) | 188.25-271.60 | +0.2% / +2.2% | +12.6% | 1.5M |
-| JD | 25.79 (10:05 iex) | -6.4% | 27.54 | 25.75 / 25.65-26.41 | 0.73 (2.6%) | 25.05-29.34 | +2.5% / +2.5% | -3.0% | 9.2M |
-| DOCU | 74.92 (10:02 iex) | -6.1% | 79.82 | 77.95 / 74.84-78.45 | 2.82 (3.5%) | 75.56-85.90 | -1.5% / +7.5% | +2.7% | 2.3M |
-| MDB | 300.42 (10:05 iex) | -5.2% | 316.92 | 317.00 / 297.51-319.44 | 20.62 (6.5%) | 296.54-400.88 | -9.5% / -12.9% | -3.2% | 1.3M |
-| WDAY | 183.99 (10:03 iex) | -5.2% | 194.06 | 189.67 / 182.60-190.06 | 7.43 (3.8%) | 185.78-212.91 | -2.5% / +0.4% | +2.0% | 2.1M |
-| TEAM | 142.35 (10:05 iex) | -5.1% | 149.94 | 148.34 / 140.73-149.08 | 11.43 (7.6%) | 143.88-229.96 | -20.4% / -21.6% | -3.2% | 3.4M |
-| HUM | 437.96 (10:05 iex) | -5.0% | 461.25 | 447.00 / 431.78-447.00 | 17.77 (3.9%) | 399.35-462.87 | +8.3% / +12.7% | +9.0% | 1.6M |
-| INTU | 329.08 (10:04 iex) | -4.8% | 345.56 | 339.34 / 327.59-341.50 | 12.67 (3.7%) | 319.02-366.47 | +1.1% / +8.9% | +2.2% | 2.8M |
+| TJX | 142.73 (10:05 iex) | +9.9% | 129.85 | 137.01 / 134.05-143.07 | 4.07 (3.1%) | 129.39-147.17 | -6.4% / -4.3% | -4.8% | 6.4M |
+| TTWO | 217.01 (10:05 iex) | +6.4% | 203.93 | 212.57 / 210.50-221.00 | 12.03 (5.9%) | 183.86-237.41 | -2.0% / -1.8% | -9.2% | 3.8M |
+| LYFT | 17.76 (10:05 iex) | +6.3% | 16.71 | 16.68 / 16.65-17.91 | 0.88 (5.3%) | 15.81-18.84 | -1.4% / +3.3% | -1.8% | 11.5M |
+| TGT | 169.55 (10:05 iex) | +6.3% | 159.53 | 160.99 / 159.95-169.78 | 5.44 (3.4%) | 144.30-166.43 | +2.1% / +2.7% | -1.4% | 3.9M |
+| RBLX | 46.44 (10:05 iex) | +5.5% | 44.00 | 43.67 / 43.43-46.99 | 3.69 (8.4%) | 41.36-56.08 | -11.9% / -8.9% | -14.0% | 10.0M |
+| PANW | 324.12 (10:05 iex) | +4.8% | 309.29 | 313.75 / 311.63-325.88 | 19.76 (6.4%) | 301.28-406.88 | -11.1% / -15.6% | -5.2% | 6.3M |
+| OKTA | 180.98 (10:05 iex) | +3.7% | 174.54 | 177.92 / 174.52-181.93 | 14.69 (8.4%) | 164.18-228.72 | -10.1% / -12.0% | -2.1% | 4.9M |
+| ROST | 228.27 (10:03 iex) | +3.5% | 220.45 | 226.68 / 221.13-228.80 | 8.24 (3.7%) | 219.06-249.30 | -5.3% / -4.7% | -7.7% | 2.1M |
+| FCX | 51.49 (10:05 iex) | -6.9% | 55.30 | 52.18 / 50.48-52.63 | 3.10 (5.6%) | 54.73-68.94 | -11.1% / -18.2% | -8.3% | 12.8M |
+| NEM | 105.04 (10:05 iex) | -5.6% | 111.26 | 106.80 / 104.72-107.60 | 5.09 (4.6%) | 104.51-127.28 | -2.5% / -5.2% | -7.3% | 7.1M |
+| VLO | 348.36 (10:05 iex) | -4.2% | 363.77 | 360.57 / 344.18-361.83 | 17.33 (4.8%) | 341.51-440.94 | -5.0% / -9.0% | +3.7% | 3.2M |
+| HUM | 425.10 (10:04 iex) | -4.1% | 443.34 | 441.44 / 415.84-443.52 | 19.09 (4.3%) | 399.35-462.87 | +3.9% / +8.1% | +1.2% | 1.6M |
+| CNC | 69.75 (10:04 iex) | -3.9% | 72.55 | 71.45 / 68.90-72.41 | 3.60 (5.0%) | 64.85-78.08 | +3.3% / +7.7% | +3.4% | 6.2M |
+| AA | 35.88 (10:05 iex) | -3.7% | 37.27 | 36.54 / 35.56-36.62 | 1.66 (4.5%) | 37.11-42.14 | -5.9% / -11.2% | -6.8% | 4.5M |
+| OXY | 54.54 (10:05 iex) | -3.5% | 56.52 | 55.80 / 54.42-56.30 | 1.89 (3.3%) | 53.86-64.95 | -5.7% / -5.2% | -0.7% | 10.7M |
+| TMUS | 162.02 (10:03 iex) | -3.5% | 167.90 | 166.52 / 161.84-167.01 | 6.09 (3.6%) | 143.75-175.00 | +5.3% / +3.0% | -0.7% | 6.3M |

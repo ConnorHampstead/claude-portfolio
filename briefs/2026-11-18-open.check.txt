@@ -1,0 +1,17 @@
+
+====================================================================
+  SESSION 2026-11-18   equity $103,130.35   day P&L +0.16%
+====================================================================
+
+  ----------------------------------------------------------------
+  PASSED IDEAS   logged to the shadow book and scored later, no orders
+      . TGT    long  limit 166.50  stop 159.40  target 180.50  P 36%
+      . UNH    short market 372.92  stop 390.50  target 338.00  P 32%
+      . NVDA   short market 154.96  stop 166.50  target 132.00  P 33%
+
+  ----------------------------------------------------------------
+  No new positions today.
+  3 idea(s) for the shadow book.
+
+  Validation only - `check` never sends. `submit --confirm` sends these.
+

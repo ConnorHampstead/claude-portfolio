@@ -1,0 +1,20 @@
+19 lookups in 20 turns, 231 s
+WebSearch: pending home sales October 2026
+WebSearch: stock market today November 18 2026 Lowe's shares reverse
+WebSearch: UnitedHealth stock falls November 18 2026
+WebSearch: stocks Wednesday November 18 2026 Dow S&P 500 Nasdaq open Nvidia Lowe's Target
+WebSearch: NAR pending home sales index October released November 18 2026
+WebFetch: https://finance.yahoo.com/markets/live/stock-market-today-wednesday-november-18-dow-sp-500-nasdaq-nvidia-earnings-anthropic-ipo-143530588.html
+WebFetch: https://investing.com/news/stock-market-news/sp-500-nasdaq-open-higher-as-nvidia-forecast-eases-ai-jitters-5036411
+WebSearch: Humana UnitedHealth Centene shares fall Medicare Advantage November 18
+WebSearch: Freeport-McMoRan shares drop copper November 18 2026
+WebSearch: Lowe's stock pares losses turns higher after earnings tariff refund November 18
+WebSearch: Freeport McMoRan Newmont stocks fall gold copper slide Wednesday
+WebFetch: https://www.heygotrade.com/en/news/unitedhealth-unh-stock-news-november-18-2026/
+WebFetch: https://investinglive.com/stocks/macro-signals-from-today-s-earnings-target-tjx-and-lowe-s/
+WebSearch: Target third quarter 2026 results comparable sales 5.6% guidance raised press release
+WebSearch: Target stock jumps reverses higher November 18 2026 traffic
+WebFetch: https://www.cnbc.com/2026/11/18/target-tgt-q3-2026-earnings.html
+WebSearch: Target Corporation fourth quarter 2025 earnings release date March 2026
+WebSearch: Target TGT stock 52-week high November 2026
+WebSearch: Walmart earnings date Q3 fiscal 2027 November 19 2026
