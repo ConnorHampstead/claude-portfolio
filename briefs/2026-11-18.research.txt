@@ -1,0 +1,33 @@
+32 lookups in 33 turns, 395 s
+WebSearch: stock futures November 18 2026 Nvidia earnings Lowe's
+WebSearch: Nvidia third quarter fiscal 2027 results revenue guidance November 17 2026
+WebSearch: Lowe's third quarter 2026 results guidance shares
+WebSearch: TJX third quarter fiscal 2027 results raises guidance November 18
+WebSearch: Nvidia earnings results data center revenue outlook stock after hours
+WebSearch: Lowe's earnings November 18 2026 comparable sales outlook stock falls
+WebSearch: stock market today November 18 2026 futures
+WebFetch: https://finance.yahoo.com/markets/live/stock-market-today-wednesday-november-18-dow-sp-500-nasdaq-nvidia-anthropic-ipo-090613569.html
+WebSearch: Waller 50 basis point rate hike December inflation
+WebSearch: Target third quarter 2026 earnings shares premarket November 18
+WebFetch: https://www.cnbc.com/2026/11/18/stocks-moving-the-most-today-live-updates.html
+WebFetch: https://www.tradingkey.com/analysis/stocks/us-stocks/262311015-us-pre-market-nvda-anthropic-tradingkey
+WebSearch: housing starts October 2026 building permits Census report November 18
+WebSearch: TJX third quarter fiscal 2027 results comparable sales Marmaxx raises outlook shares jump
+WebSearch: gold price falls lowest since September 2025 Fed hike yields November 18
+WebFetch: https://investor.tjx.com/news-releases/news-release-details/tjx-companies-inc-reports-q3-fy27-results-comp-sales-growth-4
+WebSearch: Nvidia stock premarket Wednesday Kress guidance gross margin Huang SEC investigation analysts
+WebSearch: Anthropic IPO pricing range raised software stocks selloff Salesforce November 2026
+WebFetch: https://www.chartmill.com/news/NKE/Chartmill-58852-stock-market-today-nvidia-beats-raises-kress-software-selloff-anthropic-ipo-nike-disney-2026-11-18
+WebSearch: Treasury auction November 18 2026 20-year bond
+WebFetch: https://qz.com/tjx-raises-full-year-outlook-holiday-sales-accelerate-111826
+WebFetch: https://mlq.ai/news/tjxs-comparable-sales-rise-4-above-its-plan-and-it-narrows-its-full-year-outlook-toward-the-top-of-the-range/
+WebFetch: https://stockhouse.com/news/press-releases/2026/11/18/the-tjx-companies-inc-reports-q3-fy27-results-comp-sales-growth-of-4-pretax
+WebSearch: TJX stock premarket November 18 2026 analysts fourth quarter guidance consensus
+WebFetch: https://cnbc.com/2026/11/18/lowes-low-q3-2026-earnings.html
+WebFetch: https://invezz.com/news/2026/11/18/lowes-stock-falls-4-despite-earnings-beat-as-tariff-refunds-lift-profit/
+WebSearch: Lowe's LOW next earnings date February 2027 fourth quarter
+WebSearch: Lowe's stock premarket gross margin 32.95% tariff refund downgrade November 18 2026
+WebFetch: https://optionsoracle.substack.com/p/nvidia-clears-the-bar-gold-cracks
+WebSearch: Fed speakers November 18 2026 schedule FOMC minutes 2 pm Barr Bowman Jefferson
+WebSearch: Salesforce third quarter fiscal 2027 earnings date announcement December 2026
+WebSearch: Nvidia 10-Q delayed SEC inquiry Wall Street Journal Huang resignation stock reaction November 2026

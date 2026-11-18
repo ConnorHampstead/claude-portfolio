@@ -1,0 +1,48 @@
+
+====================================================================
+  SESSION 2026-11-18   equity $103,309.91   day P&L +0.33%
+====================================================================
+
+  POSITION MANAGEMENT
+
+  [OK] GLD UPDATE x60 (short, avg 350.50)
+      stop   359.00 -> 355.50
+      target 333.00 -> 330.00
+      risk-at-stake $300.00 (0.29% of equity)
+      Resting entry, not yet filled: GLD is 346.99 pre-market, through the 350.50 trigger, so it fills near 347; re-set to stop above the Nov 17 354.92 high and broken 351.96 20d low, keeping the planned ~8.5-pt risk and a 2R target from the expected fill.
+      ! GLD entry is still resting unfilled at 350.50 - amending the bracket legs it will open with
+
+  ----------------------------------------------------------------
+
+  [OK] LOW SHORT
+      entry 212.50 (limit)  stop 221.50  target 194.50  [2.00R]
+      qty 57  notional $12,112  risk $513.00 (0.50% of equity, tier 0.5%)
+      P(target first) 37%   conviction 3
+      stated EV +0.11R   (breakeven P at 2.00R is 33%)
+
+  ----------------------------------------------------------------
+  BOOK-LEVEL ADMISSION   highest conviction first
+      book now: 2 positions/resting entries, gross 37%, net -37%, risk at stake 0.98%
+      + LOW    admitted  -> gross 48%, net -48%, risk 1.48%
+
+  ----------------------------------------------------------------
+  PASSED IDEAS   logged to the shadow book and scored later, no orders
+      . NVDA   long  market 159.94  stop 147.50  target 185.00  P 33%
+      . TJX    long  limit 136.00  stop 131.50  target 145.00  P 35%
+      . IWM    short stop 267.40  stop 274.00  target 257.50  P 38%
+      . CRM    short stop 189.50  stop 199.50  target 172.00  P 33%
+
+  ----------------------------------------------------------------
+  1 approved, 0 rejected.  Total new risk $513.00 (0.50% of equity)
+  1 position update(s) pending.
+  4 idea(s) for the shadow book.
+
+  ! Market is closed. Next open: 2026-11-18T09:30:00-05:00
+    Orders will queue. Market orders will fill at the next open.
+
+  ~ GLD stop -> 355.50 [held]
+  ~ GLD target -> 330.00 [held]
+  > LOW short x57 submitted [pending_new]  id=463975a2
+
+  Logged to journal.csv
+
