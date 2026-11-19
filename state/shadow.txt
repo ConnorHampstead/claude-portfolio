@@ -1,10 +1,7 @@
-  HD     long  expired      -0.23R  (passed 2026-11-04)
-  XLRE   short never filled   (passed 2026-11-11)
-  ORCL   long  stop         -1.06R  (passed 2026-11-11)
-  SMH    short target       +1.77R  (passed 2026-11-12)
-  SMH    short target       +1.27R  (passed 2026-11-13)
+  JNJ    long  stop         -0.87R  (passed 2026-11-10)
+  CNC    long  stop         -1.00R  (passed 2026-11-16)
 
-  5 idea(s) resolved, 23 still pending.
-  IWM    bracket as submitted: target     +1.67R   (as managed: +1.67R)
+  2 idea(s) resolved, 26 still pending.
+  LOW    bracket as submitted: stop       -0.66R   (as managed: -0.67R)
 
   1 trade bracket(s) replayed.

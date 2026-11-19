@@ -1,0 +1,36 @@
+35 lookups in 36 turns, 418 s
+WebSearch: stock futures November 19 2026 Walmart earnings jobless claims
+WebSearch: Walmart third quarter fiscal 2027 results November 19 2026
+WebSearch: Palo Alto Networks earnings stock jumps November 2026
+WebFetch: https://finance.yahoo.com/markets/live/stock-market-today-thursday-november-19-dow-sp-500-nasdaq-anthropic-ipo-090910916.html
+WebFetch: https://invezz.com/ie/news/2026/11/19/nasdaq-futures-jump-560-points-5-things-to-know-before-wall-street-opens/
+WebSearch: initial jobless claims week ended November 14 2026
+WebSearch: Philadelphia Fed manufacturing index November 2026
+WebSearch: Palo Alto Networks fiscal first quarter 2027 results
+WebFetch: https://mlq.ai/news/jobless-claims-edge-up-to-203000-as-the-philadelphia-fed-index-falls-to-a-six-month-low-and-prices-paid-jump/
+WebFetch: https://investors.paloaltonetworks.com/news-releases/news-release-details/palo-alto-networks-reports-fiscal-first-quarter-2027-financial
+WebFetch: https://www.sec.gov/Archives/edgar/data/0001327567/000132756726000030/ex991q127earningsrelease.htm
+WebSearch: Philly Fed November index six-month low prices paid jobless claims 203,000
+WebFetch: https://www.investing.com/news/economy-news/us-weekly-jobless-claims-increase-slightly-5039110
+WebSearch: Walmart stock falls earnings November 19 2026 guidance comparable sales
+WebSearch: fxstreet Philly Fed manufacturing index November 2026 actual vs expected
+WebSearch: Alphabet Google stock premarket November 19 2026 Anthropic stake
+WebSearch: Williams-Sonoma third quarter 2026 results stock falls
+WebFetch: https://coincentral.com/todays-market-movers-anthropic-google-palo-alto-walmart-and-more
+WebSearch: Target stock premarket November 19 2026 after Walmart earnings
+WebFetch: https://stocktwits.com/news-articles/markets/equity/stock-futures-climb-ahead-of-anthropic-s-nasdaq-debut-nvda-baba-ttwo-sls-stocks-in-focus/cNbiED8R9iw
+WebSearch: dollar index DXY November 19 2026 Fed December rate hike odds Waller
+WebSearch: earnings after the bell Thursday November 19 2026 Intuit Ross Stores Workday
+WebSearch: Palo Alto Networks shares premarket analysts price target raised November 19 2026
+WebSearch: Walmart Q4 EPS guidance $0.73 $0.78 consensus shares premarket November 19 2026
+WebFetch: https://www.cnbc.com/2026/11/19/walmart-wmt-q3-2026-earnings.html
+WebSearch: Palo Alto Networks stock price November 19 2026
+WebSearch: PDD Holdings third quarter 2026 results shares November 19
+WebSearch: Entegris stock jumps November 19 2026
+WebSearch: VIX volatility index November 18 2026 close stocks five-day losing streak
+WebSearch: PDD Holdings announces third quarter 2026 unaudited financial results revenue Temu
+WebSearch: Target TGT stock closed November 18 2026 record high
+WebSearch: Palo Alto Networks shares rise raises annual forecast Reuters Applied Compute November 18 2026
+WebFetch: https://www.marketscreener.com/news/palo-alto-s-raised-sales-forecast-powers-cybersecurity-stock-rally-ce785ed2d88cfe24
+WebFetch: https://www.tradingkey.com/analysis/stocks/us-stocks/262312701-palo-alto-networks-raises-outlook-applied-compute-deal-panw-389-93-november-19-2026-tradingkey
+WebSearch: Take-Two stock falls GTA VI launch November 19 2026 premarket

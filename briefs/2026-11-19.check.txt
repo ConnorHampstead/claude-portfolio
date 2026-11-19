@@ -1,0 +1,20 @@
+
+====================================================================
+  SESSION 2026-11-19   equity $103,278.78   day P&L +0.29%
+====================================================================
+
+  ----------------------------------------------------------------
+  PASSED IDEAS   logged to the shadow book and scored later, no orders
+      . PANW   long  market 369.00  stop 347.00  target 405.00  P 38%
+      . WMT    short market 125.36  stop 130.00  target 118.00  P 37%
+      . GOOGL  long  market 293.88  stop 278.50  target 318.00  P 36%
+      . TTWO   short limit 212.00  stop 226.00  target 190.00  P 34%
+      . CRM    short stop 186.00  stop 196.50  target 172.00  P 38%
+      . NEM    short stop 102.00  stop 108.00  target 93.00  P 37%
+
+  ----------------------------------------------------------------
+  No new positions today.
+  6 idea(s) for the shadow book.
+
+  Validation only - `check` never sends. `submit --confirm` sends these.
+
