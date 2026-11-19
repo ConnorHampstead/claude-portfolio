@@ -34,7 +34,7 @@
   Brier score     0.231   (lower is better; always saying the 38% base rate scores 0.234)
 
 ====================================================================
-  SHADOW BOOK   159 ideas passed on or dropped, 127 resolved
+  SHADOW BOOK   162 ideas passed on or dropped, 127 resolved
 ====================================================================
   Never filled    22
   Target first    37

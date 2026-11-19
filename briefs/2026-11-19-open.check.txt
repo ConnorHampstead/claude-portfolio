@@ -1,0 +1,17 @@
+
+====================================================================
+  SESSION 2026-11-19   equity $103,147.53   day P&L +0.16%
+====================================================================
+
+  ----------------------------------------------------------------
+  PASSED IDEAS   logged to the shadow book and scored later, no orders
+      . UNH    short stop 339.50  stop 358.00  target 310.00  P 36%
+      . XLP    short market 89.50  stop 91.60  target 86.40  P 37%
+      . QQQ    short limit 686.00  stop 707.00  target 650.00  P 35%
+
+  ----------------------------------------------------------------
+  No new positions today.
+  3 idea(s) for the shadow book.
+
+  Validation only - `check` never sends. `submit --confirm` sends these.
+
