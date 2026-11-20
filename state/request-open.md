@@ -81,252 +81,218 @@ and "Your record" in the book state has the current figures.*
 
 ## This morning's pre-market brief
 
-# Pre-market brief: Thursday 2026-11-19, 09:05 ET (15:05 Stockholm; ET+6 today, per the book state)
+# Pre-market brief: Friday 2026-11-20, 09:05 ET (15:05 Stockholm; ET+6 today)
 
-I'm opening nothing new today and leaving both shorts (GLD, HD) on their brackets.
+I'm opening nothing new today, and both open brackets stay as submitted. GLD is already trading below its 330 target before the open.
 
-## 1. Tape
+### 1. Tape
 
-**Overnight and pre-market**
-- S&P futures are up about 1% and Nasdaq-100 futures about 1.8–2%. SPY is at 737.72 (+1.0%) and QQQ at 671.70 (+1.8%). This follows five straight S&P declines.
-- The bounce is mostly about one deal. Anthropic priced its IPO at $83, above its $70–78 range. It raised about $81.3B at roughly a $1.5T fully diluted valuation, the largest IPO on record, and lists today as ANT.
-- That lifted the companies that own stakes in it: GOOGL is +4.1% (about 1.8B shares, worth roughly $149B at $83) and AMZN +1.7%.
-- It also lifted AI infrastructure (SMH +2.5%; STX, WDC and SNDK up about 5% after a week of heavy losses).
-- PANW is +8.6% after raising its full-year guidance, and other cybersecurity names followed: CRWD +5.5%, NET +4.5%, with ZS and FTNT also up.
+**Thursday reversed hard.**
+- At 10:05 ET the S&P was +1% and QQQ +2.1%. By the close the S&P was −2.02% at 7,175.83, the Nasdaq −2.25% and the Dow −2.19% (−1,101 points). All eleven sectors fell (Benzinga/TradingView; Fool).
+- QQQ closed at 645.04, below Wednesday's 659.51. That is the "AI relief has failed" condition last night's review set.
+- NVDA closed at 145.98 (−3.3%), a 52-week low. Thursday's range was 158.13 to 145.71, on 323M shares against a 200M average (HeyGoTrade).
+- After the close, CNBC reported (17:49 ET) that California's Attorney General has subpoenaed NVDA over chips reaching China and investor disclosures. The WSJ reports an SEC civil probe. This comes on top of Huang's Nov 12 resignation.
+- AMD fell 7.7% after a Hunterbrook short report, which AMD denies.
+- ANT closed its debut at 97.17. That is +17% on the $83 pricing but far below its 111.50 open, and it is down 6–10% pre-market.
 
-**Macro**
-- The backdrop is still hostile. The 10-year yield is about 5.08% and DXY about 103.8, near a 19-month high.
-- A December 9 hike is about 90% priced for 25bp, with about 10% on 50bp after Waller raised the half-point option.
-- This morning's data was softer: claims 203K against 197K expected, and Philly Fed 6.3 against about 20. Futures did not react much.
-- Defensives and gold are lagging: XLP −0.8%, WMT −1.6% after its report, and GLD at its 20-day low.
+**This morning:**
+- Nasdaq-100 futures are about −1.5%, S&P about −0.65% and the Dow about −0.1%.
+- Chips, memory and optical names are leading lower: SMH −2.8%, TSM −5.5%, AMD −4.8%, ARM −5.4%, MRVL −4.7%, SNDK −6.2%, WDC −4.9%.
+- AVGO is −1.6% on a Korean industry report (Chosun Biz, relayed by TrendForce and Counterpoint) that Google will buy HBM directly for its MediaTek-built TPU 8t, bypassing Broadcom.
+- Gold is −2.4% (GLD 327.09; spot under $3,600).
+- Havens are bid: TLT +0.7%, XLP +1.2%, XLU +0.6%. The 10-year is 5.00%, against about 5.10% yesterday morning.
+- Hawkish backdrop: December-hike odds are 98.7% (CME FedWatch via Benzinga) and DXY is about 103.85.
+- Geopolitics: the US naval blockade of Hormuz is still in place, and a vessel off Oman was hit by an "unknown projectile" Thursday (UKMTO). Even so, WTI is about −1% near $82.
 
-**Regime and edge**
-- The regime is a downtrend: SPY is 3.1% under its 20-day average and below its 50-day. Today's relief bounce rests on a single event.
-- I see **no edge at the open**. Over the 1–5 day horizon, the short side has the slight edge, given rates, the dollar and the trend.
-- I could not verify a current VIX level; the last figure I found was 19.45 on Nov 11.
+**Regime and edge:**
+- This is a risk-off trend in AI and growth under a Fed that is still hiking. The short side has the trend edge.
+- But the edge is in the trend, not in today's price. SPY is −5.4% in 5 days and sits under its 20-day low (715.65). QQQ is −6.3% in 5 days. Every short candidate is already 2 ATR or more into its catalyst. And next week is Thanksgiving week, which tends to drift higher on thin volume (a general prior, not verified this session).
 
-## 2. Calendar
+### 2. Calendar
 
 | Time ET | Stockholm | Event | Actual / consensus | Touches |
 |---|---|---|---|---|
-| 08:30 | 14:30 | Initial jobless claims (week to Nov 14) | **203K** vs 197K expected (prior revised 202K). Continuing claims 1.763M (+70K). Slightly soft; futures barely moved. | GLD (rates/dollar) |
-| 08:30 | 14:30 | Philly Fed manufacturing (Nov) | **6.3** vs about 20 expected (prior 20.9). Employment index 11.6. One headline says prices paid jumped, but I couldn't verify the figure. Bearish for the dollar on paper; DXY is still about 103.8. | GLD |
-| Pre-mkt | – | WMT Q3 FY27 | Adj. EPS $0.65 vs $0.64; revenue $188.84B vs $187.27B; US comps +2.9%, in line. Full-year EPS guide raised to $2.84–2.89 from $2.80–2.87. Stock 125.36 (−1.6%). One analysis puts Q4 guidance at $0.73–0.78 vs $0.78 consensus; not verified at source. | HD (read-across), WMT idea |
-| Pre-mkt | – | PDD Q3 | Revenue flat on the year at RMB108.3B; net income RMB29.5B vs 29.3B a year ago. Stock +5.7%. I didn't verify the consensus. | – |
-| Pre-mkt | – | WSM Q3 | Comps +5.1%; full-year outlook reiterated (8-K). Yahoo's snapshot has it −7%; not in my data table, price not verified. | – |
-| ~10:00 | ~16:00 | Possibly existing home sales / LEI | **Not verified as scheduled today.** | HD |
-| After the 09:30 open (likely late morning) | – | ANT (Anthropic) first trade on Nasdaq | Priced at $83. Volatility source for GOOGL, AMZN and AI names. ANT itself is not tradable here (no volume history). | – |
-| After close | – | INTU, GAP, BULL earnings | – | – |
-| Fri Nov 20 | – | Possible first GTA VI sales disclosure (Oppenheimer) | Company event for TTWO | TTWO idea |
-| Dec 9 | – | FOMC | 25bp hike about 90% priced | GLD |
+| Thu after close | — | INTU, ROST, GAP, KEYS, ESTC, BSP earnings | **INTU**: FQ1 EPS $2.91 beat, but Credit Karma growth guide cut to 3–7% (from 11–13%) and FY revenue cut to $23.08–23.37B. Mailchimp sold to Bending Spoons for $3.68B. Pre-market −9.8%. **ROST**: Q3 EPS $1.91 beat and FY guide raised, but Q4 EPS guide of $2.16–2.25 is under the ~$2.28 estimate; −3% to −6%. | Passes |
+| 08:25 | 14:25 | Fed Gov. Waller, welcoming remarks at the College Fed Challenge | Already happened, but **I could not find coverage of what he said.** His Nov 18 line ("shock people"; 50bp or a January signal) is the latest I can verify. | All |
+| 10:00 | 16:00 | UMich sentiment, final November | Prelim 51.0, with 1-year inflation expectations at 4.3% (October 4.7%). Final consensus not found. | Review |
+| 12:15 | 18:15 | Fed Gov. Cook | Still ahead | All |
+| TBA | — | Waller again (Fed Challenge finals) | Still ahead | All |
+| Next week | — | Thanksgiving: closed Thu Nov 26, early close Fri Nov 27 | — | Horizon |
 
-Thanksgiving week is next. The market is closed Nov 26 and closes early Nov 27. Resting entries are cleared before weekends and holidays.
+No macro release today is a binary event for anything held. HD and GLD have no company events of their own inside ten sessions.
 
-## 3. Open positions and resting entries
+### 3. Open positions and resting entries
 
-**GLD short** (session 2 of 10, entry 345.91, stop 355.50, target 330.00; last 340.37)
-- **Invalidation met? No.** It needs DXY below 102.50 *and* December-hike odds below 70%.
-  - DXY is about 103.8 (TradingView and FXEmpire, Nov 18–19).
-  - CME FedWatch as reported Thursday shows about 90% for 25bp plus 10% for 50bp.
-- The Philly Fed miss is a dovish data point, but it does not meet either condition.
-- **Hold**; the bracket is unchanged.
+**GLD short** (session 3 of 10; entry 345.91, stop 355.50, target 330.00; pre-market 327.09): **hold.**
+- **Invalidation not met.** It needs DXY below 102.50 *and* December-hike odds below 70%. DXY is about 103.85 and the odds are 98.7%.
+- GLD is an ETF and has no binary event.
+- Pre-market is already below the 330 target. The resting buy-to-cover limit should fill at or near the opening print, for roughly +1.6R on the entry-to-stop risk. No action is needed.
 
-**HD short** (session 3 of 10, entry 343.57, stop 353.50, target 323.50; last 333.58)
-- **Invalidation met? No.** It needs a close above 347.51; the prior close was 337.64, and it is 333.58 pre-market.
-- HD has no binary event of its own ahead (it reported Nov 17).
-- **Hold**; the bracket is unchanged.
+**HD short** (session 4 of 10; entry 343.57, stop 353.50, target 323.50; pre-market 339.05): **hold.**
+- **Invalidation not met.** It needs a close above 347.51; Thursday closed at 336.68.
+- HD reported Nov 17 and has nothing of its own scheduled.
 
 **Resting entries:** none.
 
-## 4. New plays
+### 4. New plays
 
-**None.** No candidate cleared the bar of a catalyst verified at source, conviction 3 or higher, and positive expected value on my own numbers:
+**None.** Each candidate was checked against its catalyst, its extension and the EV on my own numbers. Every one comes out at about 0R or below (section 6). The specific reason is not "the tape is uncertain":
+- The short catalysts are verified, but the moves have already happened. INTU is gapping 2.2 ATR. NVDA is −22% in nine sessions and −38% over seven weeks (CNBC). AMD is −16% in 5 days. QQQ is −6.3% in 5 days at its 20-day low.
+- The one laggard with a fresh catalyst, AVGO, rests on a single unconfirmed Korean industry report, with no Google or Broadcom comment.
+- The long candidates are a haven bid with no dated catalyst.
+- Resting entries are cleared before the weekend, so a bounce-sell limit placed today lives for one session only.
 
-- **The verified catalysts are already priced.**
-  - PANW has moved about 3 ATR in two sessions: +9.9% Wednesday before the report, then +8.6% pre-market.
-  - GOOGL's move is a mark on an IPO that prices out after the review has run.
-- **The short ideas don't pay enough.** At the 38% base rate, none of them reaches positive EV with a stop outside one ATR.
+### 5. Both sides
 
-## 5. Both sides
+**Best short: AVGO.** Sell limit 352.00 on a retest of Thursday's broken 345 low and Wednesday's 354.05 close; stop 373.50; target 310.00. That is 1.95R, P 0.34, EV about 0.
+- **Verified:** Thursday was an outside reversal. It opened at 362.94, made a high of 369.26 against the 369.82 Nov 12 high (a double top), and closed at 346.65 near its 345.00 low on 26.1M shares (StockAnalysis). Pre-market is 341.04. AVGO is still +4% above its 20-day average while SMH is −10.7% below its own, so the catch-down room is real.
+- **Next earnings:** Dec 9 after the close (company release). That is more than 7 days away and about session 12, outside the horizon.
+- **Why P 0.34, not the 39% base:**
+  - The fill needs a 3% intraday bounce on a −1.5% Nasdaq morning.
+  - The target sits beyond the 327.80 Nov 16 low.
+  - The catalyst is single-sourced with no company comment.
+- **Conviction 2. Passed.**
 
-**Best long: PANW. Passed at conviction 2.**
-- **Levels:** market about 369.00, stop 347.00, target 405.00. That is 1.64R at P 0.38, so EV ≈ 0.00R.
-- **The catalyst is verified at source.** The [SEC 8-K exhibit](https://www.sec.gov/Archives/edgar/data/0001327567/000132756726000030/ex991q127earningsrelease.htm) dated Nov 18:
-  - Revenue $3.44B (+39%); next-generation security ARR $9.73B (+66%); RPO $21.0B (+35%).
-  - Full-year revenue guidance $14.52–14.57B, up from $14.10–14.20B per Reuters; full-year non-GAAP EPS $4.26–4.30.
-  - Applied Compute acquisition, $4.5B per Reuters.
-  - At least nine brokers raised targets to $370–460 (KeyBanc and Piper $450, BTIG $442).
-- **Why I'm passing anyway:**
-  - The stock was about 309 on Tuesday. It has gained about 60 points (3 ATR at an ATR of 20.2) into and on the print.
-  - The consensus target (about 400–406) and the 20-day high (406.88) leave about 36 points of room. A stop outside the gap's 353 support has to sit about 22 points away.
-  - Starting from the 38% base rate (and my 35–40% bucket has hit only 29%), the EV is zero.
-  - Next earnings: inferred mid-to-late Feb 2027, not confirmed.
+**Best long: XLP.** Limit 90.40, stop 88.40, target 93.40 (the 20-day high is 93.48). That is 1.5R, P 0.38, EV −0.05.
+- Haven rotation, with the 10-year down about 10bp and staples bid pre-market (CL +1.8%, GIS +1.8%, KDP +1.9%, WMT +1.5%).
+- Thursday morning's staples selloff was the mirror of the AI rally that reversed. That is rotation, not a dated catalyst, so I pass it. Conviction 2.
 
-**Best short: WMT. Passed at conviction 2.**
-- **Levels:** market 125.36, stop 130.00, target 118.00. That is 1.59R at P 0.37, so EV ≈ −0.04R.
-- **The catalyst is verified** via [CNBC](https://www.cnbc.com/2026/11/19/walmart-wmt-q3-2026-earnings.html):
-  - A narrow beat; comps of 2.9% in line and slowing from 4.5% a year earlier.
-  - A small raise to the full-year guide (EPS midpoint up about 1%).
-  - About 40x forward earnings, and the stock ran up into the print (+10% vs its 50-day average).
-- **Why I'm passing:**
-  - The reaction is only 0.65 ATR.
-  - After its February 2026 report, WMT reversed a 3% pre-market drop the same morning.
-  - To clear the 20-day high noise, the stop has to sit 1.5 ATR away.
+**Others on the short side:** NVDA (the strongest verified catalyst), INTU, QQQ and ROST. All are in section 6. AMD's Hunterbrook report I could not find at its source.
 
-**Other shorts I looked at:**
-- TTWO: sell-the-news on GTA VI launch day, but a possible sales disclosure tomorrow.
-- CRM: relative weakness, no bounce on a +1.8% Nasdaq day.
-- NEM: the same gold factor as the GLD short I already hold.
-- BABA: below its 20-day low, but −17% in 5 days, and its results timing is conflicting.
+### 6. Passing on
 
-## 6. Passing on
+- **AVGO short:** levels above. A thin single-source catalyst with EV about 0.
+- **NVDA short** (limit 150.50 near Thursday's open and the prior 150.96 close / stop 163.00 above the 158.13 Thursday high / target 126.00; 1.96R, P 0.33, EV −0.02):
+  - The catalyst is verified at CNBC (CA AG subpoena, Nov 19 17:49 ET), plus the WSJ SEC probe.
+  - But the stock is −38% in seven weeks and reacted only −2.3% pre-market, which suggests the bad news is crowded in.
+  - Next earnings are late February 2027 (inferred, not verified this session).
+- **INTU short** (market about 279.65 / stop 297.00 / target 252.00; 1.59R, P 0.36, EV −0.07):
+  - The guidance cut is verified from the call coverage.
+  - But the gap is already 2.2 ATR, the stock is about −50% year on year, and EPS guidance ($22.88–23.12) was held, which puts it near 12x.
+  - Next earnings are late February 2027 (inferred).
+- **QQQ short** (market about 636.34 / stop 662.00 above Wednesday's 659.51 close / target 600.00; 1.42R, P 0.37, EV −0.11): −6.3% in 5 days, with no index catalyst beyond momentum, into Thanksgiving week.
+- **ROST short** (market about 206.00 / stop 216.00 / target 192.00; 1.4R, P 0.35, EV −0.16): this was a beat-and-raise on the year with a slightly soft Q4. The gap is a valuation reset, not a thesis.
+- **XLP long:** levels above.
+- **TTWO long:** GTA VI launched Nov 19, and the shares are +1.7% pre-market with no sales figure released. The disclosure itself is an unscheduled company event I can't verify. No levels.
 
-- **PANW long** (369.00 / 347.00 / 405.00, P 0.38): a 3-ATR two-day run leaves too little room; EV about zero.
-- **WMT short** (125.36 / 130.00 / 118.00, P 0.37): small reaction, needs a wide stop, and WMT has a history of reversing post-print drops. EV negative.
-- **GOOGL long** (293.88 / 278.50 / 318.00, P 0.36): today's gap is the market pricing its Anthropic stake. The listing comes after the review, and sell-the-news on the debut is the obvious risk. EV about −0.07R.
-- **TTWO short** (limit 212.00 / 226.00 / 190.00, P 0.34):
-  - The stock is −3.1% on launch day despite the 99 Metacritic score and about $1.65B in first sales (Sensor Tower).
-  - A company sales disclosure could come Nov 20 and gap it either way. EV −0.13R.
-- **CRM short** (sell stop 186.00 under the 186.45 20-day low / 196.50 / 172.00, P 0.38): only 1.33R. Its own earnings are probably inside the horizon; I didn't verify the date this session.
-- **NEM short** (sell stop 102.00 / 108.00 / 93.00, P 0.37): it would double the gold/rates factor I already hold in GLD.
-- **TGT long:** yesterday's condition was half met. WMT did not cut its full-year guidance, but **I could not verify a current TGT price**, so it gets no levels and no order.
-- **PDD long:** revenue was flat on the year and I couldn't verify the consensus. It is a China ADR facing the new US chip and data-center rules. No levels.
-- **ANT:** a new listing with no volume history, so it is outside the universe.
+### 7. For the post-open review
 
-## 7. For the post-open review
+- **GLD:** confirm the 330 target filled near the open. If GLD somehow opened above 330 and the position is still open, the bracket stands. No other action.
+- **HD:** hold. The only test is a daily close above 347.51.
+- **UMich at 10:00 ET:** record the final headline and the 1-year inflation expectation (prelim 4.3%). A revision to 4.6% or higher is a hawkish data point for Cook at 12:15. It changes no order on its own.
+- **AVGO:** only act if Google or Broadcom confirm the HBM change at source before 10:05. Then short at market, stop 373.50, target 305.00, at conviction 3 and the 0.5 tier, provided the 10:04 price is at or below 345 (otherwise R:R is below 1.1). Without confirmation, do nothing.
+- **QQQ:** if the first 30 minutes run back to 655–660 and the 10:04 price is still at or above 652 with a fresh negative AI headline, a short with stop 676 and target 615 is about 1.7R. That stop sits above about 673, Thursday's level inferred from +2.1% at 10:05 on 659.51; the session high is not verified. That would be 0.5 tier. Otherwise nothing. Do not chase below 630.
 
-- **PANW:**
-  - The default is pass.
-  - The review may buy at market at **risk 0.5**, stop 347.00, target 405.00, only if both of these are true:
-    - (a) PANW's 09:30–10:00 low is at or above 360.00 (the gap is holding);
-    - (b) it trades between 368 and 375 at 10:05.
-  - Above 375 the reward falls below 1.3R; do not chase it.
-  - If it trades below 353.36 (the gap support), drop the idea for the session.
-- **GLD:** close only if DXY is below 102.50 *and* December-hike odds are below 70%. Neither is close.
-- **HD:** close only on a daily close above 347.51. The review cannot see the close, so tomorrow's brief checks it.
-- **WMT:** no action whatever the opening range does; the needed stop distance doesn't improve intraday.
+### 8. Book state
 
-## 8. Book state
-
-| | Now | Cap |
-|---|---|---|
-| Gross exposure | 36% | 150% |
-| Net exposure | −36% | ±100% |
-| Risk at stake | 1.05% of equity | 4% |
-| Slots | 2 of 8 | |
-| Consumer Discretionary net | −16% (HD) | 40% |
-
-No new orders, so nothing changes.
+- **Now:** gross 36% and net −36% of equity (caps 150% / ±100%); risk at stake 1.04% (cap 4%); 2 of 8 slots.
+- **After GLD's target fills:** gross about 17% and net about −17%; risk at stake about 0.49% (HD only); 1 of 8 slots.
 
 ```json
 {
-  "date": "2026-11-19",
+  "date": "2026-11-20",
   "no_trade": true,
-  "session_note": "Anthropic-IPO relief bounce (NQ +1.8-2%) inside a hawkish-Fed downtrend (10y 5.08%, DXY ~103.8, Dec hike ~90%+); verified catalysts are already priced (PANW ~3 ATR in two sessions) and shorts (WMT, TTWO) lack reward:risk at the base rate. Would act on PANW only if the 09:30-10:00 low holds >=360 and it trades 368-375 at 10:05 (stop 347, target 405, 0.5 risk). GLD and HD held: invalidations unmet.",
+  "session_note": "Risk-off AI/semis trend under a hiking Fed (Thu S&P -2.02% outside reversal, NQ futures -1.5%, 10y 5.00%, Dec hike 98.7%), but every short candidate is already 2+ ATR into its catalyst (INTU -2.2 ATR gap, NVDA -38% in 7 weeks, QQQ -6.3% in 5d at its 20d low) and the laggard AVGO rests on a single unconfirmed Korean report; longs are a haven bid with no catalyst. All candidate EVs <= 0. Would act on source confirmation of Google bypassing Broadcom on HBM (AVGO short <=345, stop 373.50) or a failed QQQ retest of 655-660 with a fresh headline. GLD short should hit its 330 target at the open; HD held.",
   "plays": [],
   "manage": [],
   "passed": [
     {
-      "ticker": "PANW",
-      "direction": "long",
-      "entry_type": "market",
-      "entry": 369.00,
-      "stop": 347.00,
-      "targets": [405.00],
-      "p_target_first": 0.38,
-      "reason": "Verified FQ1'27 beat-and-raise (8-K Nov 18: rev +39%, NGS ARR +66%, FY rev guide $14.52-14.57B from $14.10-14.20B; 9+ PT raises), but +9.9% Wed and +8.6% pre-market = ~3 ATR already; only ~36 pts to the 406.88 20d high / ~$406 consensus PT against a 22-pt stop. EV ~0 at base rate. Conviction 2."
-    },
-    {
-      "ticker": "WMT",
-      "direction": "short",
-      "entry_type": "market",
-      "entry": 125.36,
-      "stop": 130.00,
-      "targets": [118.00],
-      "p_target_first": 0.37,
-      "reason": "Narrow Q3 beat, in-line 2.9% comps, small FY guide raise, ~40x forward and +10% vs 50d into print; but the reaction is only -1.6% (0.65 ATR), WMT reversed a similar dip in Feb 2026, and the stop must be 1.5 ATR. EV about -0.04R. Conviction 2."
-    },
-    {
-      "ticker": "GOOGL",
-      "direction": "long",
-      "entry_type": "market",
-      "entry": 293.88,
-      "stop": 278.50,
-      "targets": [318.00],
-      "p_target_first": 0.36,
-      "reason": "+4.1% on the mark-to-market of its ~1.8B-share Anthropic stake after the $83 IPO pricing; the ANT debut comes after the review with clear sell-the-news risk, the stock is -13% vs its 50d avg in a falling tape, and it needs a 1.6 ATR stop. EV about -0.07R."
-    },
-    {
-      "ticker": "TTWO",
+      "ticker": "AVGO",
       "direction": "short",
       "entry_type": "limit",
-      "entry": 212.00,
-      "stop": 226.00,
-      "targets": [190.00],
+      "entry": 352.00,
+      "stop": 373.50,
+      "targets": [310.00],
       "p_target_first": 0.34,
-      "reason": "Sell-the-news on GTA VI launch day (-3.1% pre-market despite a 99 Metacritic score and ~$1.65B first sales per Sensor Tower), but a possible company sales disclosure Nov 20 could gap it higher; ATR 6%. EV about -0.13R."
+      "reason": "Best short. Thu outside reversal from 369.26 (double top vs 369.82 Nov 12) to close 346.65 near the 345.00 low; pre-market 341.04 on a Chosun Biz/TrendForce report that Google will buy HBM directly for TPU 8t. Single-sourced, no company comment; target sits beyond the 327.80 Nov 16 low; earnings Dec 9 (confirmed). 1.95R, EV about 0. Conviction 2."
     },
     {
-      "ticker": "CRM",
+      "ticker": "NVDA",
       "direction": "short",
-      "entry_type": "stop",
-      "entry": 186.00,
-      "stop": 196.50,
-      "targets": [172.00],
-      "p_target_first": 0.38,
-      "reason": "Relative weakness (flat on a +1.8% Nasdaq morning, -15% vs 20d avg) and AI-disruption pressure on software around the Anthropic listing, but only 1.33R, and its own early-December earnings (not verified this session) likely fall inside the horizon."
+      "entry_type": "limit",
+      "entry": 150.50,
+      "stop": 163.00,
+      "targets": [126.00],
+      "p_target_first": 0.33,
+      "reason": "CA AG subpoena (CNBC, Nov 19 17:49 ET) and WSJ-reported SEC civil probe verified, after Huang's Nov 12 resignation; but -38% in seven weeks, 52w low 145.71 already broken pre-market (142.68), and only -2.3% reaction suggests crowded. Bounce-sell near Thu open/prior close, stop above Thu 158.13 high. 1.96R, EV -0.02."
     },
     {
-      "ticker": "NEM",
+      "ticker": "INTU",
       "direction": "short",
-      "entry_type": "stop",
-      "entry": 102.00,
-      "stop": 108.00,
-      "targets": [93.00],
+      "entry_type": "market",
+      "entry": 279.65,
+      "stop": 297.00,
+      "targets": [252.00],
+      "p_target_first": 0.36,
+      "reason": "FQ1 beat but Credit Karma growth guide cut to 3-7% from 11-13% (AI discovery shift, rates) and FY revenue to $23.08-23.37B; Mailchimp sold for $3.68B. Gap already -9.8% (2.2 ATR), stock about -50% YoY, EPS guide held (about 12x). 1.59R, EV -0.07."
+    },
+    {
+      "ticker": "QQQ",
+      "direction": "short",
+      "entry_type": "market",
+      "entry": 636.34,
+      "stop": 662.00,
+      "targets": [600.00],
       "p_target_first": 0.37,
-      "reason": "Breakdown under the 102.35 20d low with gold falling, but it is the same real-rates/dollar factor as the open GLD short; adding it doubles one bet."
+      "reason": "Thu close 645.04 below Wed 659.51 met the 'AI relief failed' condition, but QQQ is -6.3% in 5d and under its 644.34 20d low into Thanksgiving week; no index-level catalyst beyond momentum. 1.42R, EV -0.11."
+    },
+    {
+      "ticker": "ROST",
+      "direction": "short",
+      "entry_type": "market",
+      "entry": 206.00,
+      "stop": 216.00,
+      "targets": [192.00],
+      "p_target_first": 0.35,
+      "reason": "Q3 EPS $1.91 beat and FY raised; only Q4 EPS guide $2.16-2.25 below ~$2.28. Gap is a valuation reset, not a broken thesis. 1.4R, EV -0.16."
+    },
+    {
+      "ticker": "XLP",
+      "direction": "long",
+      "entry_type": "limit",
+      "entry": 90.40,
+      "stop": 88.40,
+      "targets": [93.40],
+      "p_target_first": 0.38,
+      "reason": "Best long. Haven rotation (XLP +1.2%, 10y about 5.00% from about 5.10%, CL/GIS/KDP up) reversing Thursday morning's staples selloff, but no dated catalyst; target at the 93.48 20d high. 1.5R, EV -0.05. Conviction 2."
     }
   ]
 }
 ```
 
 Sources:
-- [Yahoo Finance live, Nov 19 (futures, WMT, ANT pricing, movers, oil, gold, 10y)](https://finance.yahoo.com/markets/live/stock-market-today-thursday-november-19-dow-sp-500-nasdaq-anthropic-ipo-090910916.html)
-- [Stocktwits: futures before the Anthropic debut (NVDA, BABA, TTWO, after-close earnings)](https://stocktwits.com/news-articles/markets/equity/stock-futures-climb-ahead-of-anthropic-s-nasdaq-debut-nvda-baba-ttwo-sls-stocks-in-focus/cNbiED8R9iw)
-- [Reuters via Investing.com: weekly jobless claims](https://www.investing.com/news/economy-news/us-weekly-jobless-claims-increase-slightly-5039110)
-- [FXStreet: claims 203K](https://www.fxstreet.com/news/us-initial-jobless-claims-rose-to-203k-last-week-202611191337)
-- [Newsquawk: Philly Fed 6.3 vs 20 expected](https://www.newsquawk.com/headlines/us-philadelphia-fed-manufacturing-index-nov-63-vs-exp-20-prev-209)
-- [mlq.ai: claims and Philly Fed headline (page blocked; headline only)](https://mlq.ai/news/jobless-claims-edge-up-to-203000-as-the-philadelphia-fed-index-falls-to-a-six-month-low-and-prices-paid-jump/)
-- [CNBC: Walmart Q3 FY27](https://www.cnbc.com/2026/11/19/walmart-wmt-q3-2026-earnings.html)
-- [TradingKey: Walmart earnings today](https://www.tradingkey.com/analysis/stocks/us-stocks/262312955-walmart-earnings-today-wmt-three-report-losing-streak-125-10-november-19-2026-tradingkey)
-- [Palo Alto Networks FQ1'27 release (SEC 8-K exhibit)](https://www.sec.gov/Archives/edgar/data/0001327567/000132756726000030/ex991q127earningsrelease.htm)
-- [Reuters via Investing.com: Palo Alto raises forecast, $4.5B Applied Compute deal](https://www.investing.com/news/stock-market-news/palo-alto-raises-annual-forecast-signs-45-billion-deal-for-applied-compute-5037460)
-- [MarketScreener/Reuters: Palo Alto forecast powers cyber rally](https://www.marketscreener.com/news/palo-alto-s-raised-sales-forecast-powers-cybersecurity-stock-rally-ce785ed2d88cfe24)
-- [TradingKey: PANW levels and Wednesday close](https://www.tradingkey.com/analysis/stocks/us-stocks/262312701-palo-alto-networks-raises-outlook-applied-compute-deal-panw-389-93-november-19-2026-tradingkey)
-- [TipRanks/TheFly: PANW target raises](https://www.tipranks.com/news/the-fly/palo-alto-networks-price-target-raised-to-442-from-425-at-btig-thefly-news)
-- [CoinCentral: today's market movers](https://coincentral.com/todays-market-movers-anthropic-google-palo-alto-walmart-and-more)
-- [Invezz: Alphabet +4% on the Anthropic IPO](https://invezz.com/news/2026/11/19/alphabet-stock-rises-4-as-anthropic-ipo-boosts-investor-optimism/)
-- [Blockonomi: Alphabet's stake valued at $149B](https://blockonomi.com/alphabet-googl-stock-rises-4-as-anthropic-ipo-values-googles-stake-at-149b/)
-- [TradingView: DXY 103.91, Waller's 50bp option](https://www.tradingview.com/news/binance_news:5204ef80c094b:0-dollar-index-rises-to-103-91-highest-since-april-2025-as-fed-s-waller-reportedly-raises-50-bp-hike-option/)
-- [FXEmpire: DXY holds 103.76](https://www.fxempire.com/forecasts/article/us-dollar-price-forecast-dxy-holds-103-76-as-fed-minutes-back-hikes-eur-usd-and-gbp-usd-stay-weak-1645653)
-- [TipRanks: markets brace for claims after the minutes](https://www.tipranks.com/news/markets-brace-for-u-s-jobless-claims-and-factory-data-after-fed-minutes-lock-in-rate-hike-bets)
-- [GlobeNewswire: PDD Q3 2026 results](https://www.globenewswire.com/news-release/2026/11/19/3406398/0/en/pdd-holdings-announces-third-quarter-2026-unaudited-financial-results.html)
-- [Williams-Sonoma Q3 8-K exhibit](https://www.sec.gov/Archives/edgar/data/0000719955/000071995526000244/exhibit991fy2026q3earnings.htm)
-- [Yahoo: GTA VI sales top $1.6B](https://finance.yahoo.com/markets/stocks/articles/gta-vi-sales-top-1-093642746.html)
-- [GuruFocus: TTWO on the 99 Metacritic score](https://www.gurufocus.com/news/9207732/taketwo-stocks-rise-485-premarket-as-gta-vi-hits-99-metacritic-before-launch)
-- [TheStreet: VIX 19.45 (Nov 11)](https://pro.thestreet.com/stock-market-today/stocks-and-the-vix-fell-together-tuesday-heres-what-usually-comes-next)
+- [Benzinga/TradingView: futures, Thursday's close, yields, FedWatch, today's calendar](https://www.tradingview.com/news/benzinga:1c06a4673094b:0-stock-market-today-dow-jones-s-p-500-futures-fall-as-trump-weighs-iran-decision-intu-rost-keys-in-focus/)
+- [CNBC: stocks moving Friday](https://www.cnbc.com/2026/11/20/stocks-moving-the-most-today-live-updates.html)
+- [Investing.com: pre-market movers](https://www.investing.com/news/stock-market-news/premarket-movers-anthropic-slides-after-debut-intuit-tumbles-on-mailchimp-sale-5041130)
+- [TradingKey: US pre-market, AVGO/HBM, chips, gold](https://www.tradingkey.com/analysis/stocks/us-stocks/262315308-us-pre-market-anthropic-tradingkey)
+- [Fool: Nov 19 market, Nvidia](https://www.fool.com/coverage/stock-market-today/2026/11/19/stock-market-today-nov-19-nvidia-slides-as-investors-weigh-ceo-transition-fallout-despite-strong-q3-results/)
+- [HeyGoTrade: NVDA Nov 19 close](https://www.heygotrade.com/en/news/nvidia-nvda-stock-news-november-20-2026/)
+- [CNBC: California AG subpoenas Nvidia](https://www.cnbc.com/2026/11/19/nvidia-california-bonta-subpoena-china-chips.html)
+- [Yahoo: CA AG subpoena and SEC probe](https://finance.yahoo.com/markets/stocks/articles/california-attorney-general-subpoenas-nvidia-235558917.html)
+- [Intuit Q1 FY27 call coverage (Yahoo)](https://finance.yahoo.com/markets/stocks/articles/intuit-intu-said-q1-earnings-001407071.html)
+- [Intuit Q1: Credit Karma and Mailchimp (TradingView/SA)](https://www.tradingview.com/news/seekingalpha:91a0413ae094b:0-intuit-meets-fq1-earnings-estimates-credit-karma-hits-guidance-mailchimp-sale-disclosed/)
+- [Ross Stores Q3 8-K (SEC)](https://www.sec.gov/Archives/edgar/data/0000745732/000074573226000047/q326exhibit991.htm)
+- [Broadcom Q4 date announcement](https://investors.broadcom.com/news-releases/news-release-details/broadcom-inc-announce-fourth-quarter-and-fiscal-year-2026)
+- [Google HBM bypassing Broadcom (mlq.ai; page fetch blocked, search summary only)](https://mlq.ai/news/google-moves-to-buy-hbm-directly-for-its-mediatek-built-ai-chips-bypassing-broadcom-industry-reports-say/)
+- [StockAnalysis: AVGO price history](https://stockanalysis.com/stocks/avgo/history/)
+- [GuruFocus: AVGO +4.21% on Nov 19 on the Anthropic placement](https://gurufocus.com/news/9210257/broadcom-stocks-rise-421-as-chip-supplier-joins-anthropics-26-billion-placement)
+- [Waller: "shock people" (The Hill)](https://thehill.com/business/6228471-waller-fed-rate-hike-plan/)
+- [TipRanks: Waller/Cook schedule](https://www.tipranks.com/news/investors-pile-into-u-s-bonds-as-fed-governors-eye-rate-hikes-ahead-of-oil-rig-data)
+- [StockAnalysis: UMich preliminary November 51.0](https://stockanalysis.com/news/consumer-sentiment-rises-november-2026/)
+- [Finviz: TTWO, GTA VI Nov 19 release confirmed](https://finviz.com/news/419805/take-two-shares-rise-over-3-after-quarterly-results-as-gta-vi-november-19-release-confirmed)
+- [RTTNews (Nov 12, background)](https://www.rttnews.com/3713931/wall-street-poised-to-open-broadly-lower.aspx?type=uscom)
 
 ## Current book state
 *Auto-generated. These are live figures - use them, do not estimate.*
 
-- Time now: **10:05 ET** (15:05 UTC, 16:05 Stockholm), Thursday 2026-11-19. The cash session opened 35 min ago and closes at 16:00 ET (22:00 Stockholm).
-- Equity: **$103,111.28**
-- Cash: $140,670.03
-- Session P&L so far: +0.13% (new entries are blocked at -3.0%)
-- Gross exposure: $37,559 (36% of equity, cap 150%)
-- Net exposure: $-37,559 (-36%, cap +/-100%)
-- Risk at stake (entry to stop): $1,082 (1.05% of equity, cap 4.0%) — 2.95% left for new plays
-- Slots: 2 open + 0 resting entries of 8 — you may add at most 6 more
+- Time now: **10:05 ET** (15:05 UTC, 16:05 Stockholm), Friday 2026-11-20. The cash session opened 35 min ago and closes at 16:00 ET (22:00 Stockholm).
+- Equity: **$103,395.38**
+- Cash: $121,012.05
+- Session P&L so far: +0.01% (new entries are blocked at -3.0%)
+- Gross exposure: $17,617 (17% of equity, cap 150%)
+- Net exposure: $-17,617 (-17%, cap +/-100%)
+- Risk at stake (entry to stop): $506 (0.49% of equity, cap 4.0%) — 3.51% left for new plays
+- Slots: 1 open + 0 resting entries of 8 — you may add at most 7 more
 - *Gross, net, risk and slots count resting entries as if filled.*
 - A new long can be up to 50% of equity in notional: at 1% risk its stop must be at least 2.0% from entry (half that at 0.5%).
 - A new short can be up to 50% of equity in notional: at 1% risk its stop must be at least 2.0% from entry (half that at 0.5%).
@@ -337,48 +303,46 @@ Sources:
 
 | Symbol | Side | Qty | Avg entry | Last | Unreal. P&L | Share of equity | Stop | Target |
 |---|---|---|---|---|---|---|---|---|
-| GLD | short | 60 | 345.91 | 339.92 | +359 (+1.7%) | -20% | 355.50 | 330.00 |
-| HD | short | 51 | 343.57 | 336.54 | +359 (+2.0%) | -17% | 353.50 | 323.50 |
+| HD | short | 51 | 343.57 | 345.43 | -95 (-0.5%) | -17% | 353.50 | 323.50 |
 
 *What you wrote when you opened each one. The invalidation is the test for closing it early.*
 
-- **GLD**, opened 2026-11-18 (session 2 of at most 10), submitted with stop 359 and target 333, P 36%. Thesis: Gold is trending down on rising real rates and the strongest dollar in 18 months (-4.6% in 5 days, below its 20d and 50d averages). A US-session break below the overnight low (GLD 350.50, under its 352.91 20-day low) confirms the move toward the $3,800 and then ~$3,650 area. The stop entry stays unfilled if Warsh or the minutes turn dovish. Invalidation: DXY back below 102.50 with market-implied December-hike odds below 70%.
-- **HD**, opened 2026-11-17 (session 3 of at most 10), submitted with stop 353.5 and target 323.5, P 36%. Thesis: HD ran ~19.5% into the print on flat estimates at ~22x forward; the print gave no reason to pay more and the gap broke the 344.31 channel support with 10y yields at 5.1% and the Fed talking hikes. Short a failed retest of broken support toward the 330/316 supports. Invalidation: HD closes above 347.51 (pre-earnings close, gap fully filled) on any session before the stop, e.g. after a strong LOW print on Nov 18.
+- **HD**, opened 2026-11-17 (session 4 of at most 10), submitted with stop 353.5 and target 323.5, P 36%. Thesis: HD ran ~19.5% into the print on flat estimates at ~22x forward; the print gave no reason to pay more and the gap broke the 344.31 channel support with 10y yields at 5.1% and the Fed talking hikes. Short a failed retest of broken support toward the 330/316 supports. Invalidation: HD closes above 347.51 (pre-earnings close, gap fully filled) on any session before the stop, e.g. after a strong LOW print on Nov 18.
 
 ### Your record
 
-51 closed trades: 16W / 35L, total +0.37R, net $+2,410 realized.
+52 closed trades: 17W / 35L, total +2.52R, net $+3,507 realized.
 
 *Every idea is scored on the bracket as you submitted it: which of the initial target and the initial stop came first, within 10 sessions. R is profit over the risk budgeted.*
 
 | | Ideas | Target first | Stop first | Average R |
 |---|---|---|---|---|
-| Trades taken, as managed | 51 | 18 | 30 | +0.01R |
-| The same trades, bracket left alone | 51 | | | +0.03R |
-| Ideas you passed on, or the caps dropped | 105 | 37 | 58 | +0.02R |
+| Trades taken, as managed | 52 | 19 | 30 | +0.05R |
+| The same trades, bracket left alone | 52 | | | +0.07R |
+| Ideas you passed on, or the caps dropped | 115 | 40 | 65 | +0.02R |
 
 What you said against what happened, trades and passes together:
 
 | You said | Ideas | Reached target first |
 |---|---|---|
 | 0%-30% | 1 | 100% |
-| 30%-35% | 41 | 49% |
-| 35%-40% | 70 | 29% |
+| 30%-35% | 44 | 48% |
+| 35%-40% | 77 | 30% |
 | 40%-45% | 26 | 46% |
-| 45%-50% | 4 | 25% |
+| 45%-50% | 5 | 20% |
 | 50%-60% | 1 | 100% |
 
-Base rate: 38% of 143 brackets reached target first. Your Brier score is 0.239; saying 38% every time scores 0.237. Your probabilities are not yet telling the better ideas from the worse ones: start from the base rate and move off it only for a reason you can name.
+Base rate: 38% of 154 brackets reached target first. Your Brier score is 0.239; saying 38% every time scores 0.236. Your probabilities are not yet telling the better ideas from the worse ones: start from the base rate and move off it only for a reason you can name.
 
 ### Last 5 closed trades
 
 | Symbol | Direction | Exit | R | P&L | You said |
 |---|---|---|---|---|---|
+| GLD | short | target | +2.15R | $+1,097 | 36% |
 | LOW | short | stop | -0.67R | $-343 | 37% |
 | IWM | short | target | +1.67R | $+853 | 36% |
 | AMZN | long | stop | -1.20R | $-303 | 36% |
 | DAL | long | stop | -0.60R | $-154 | 37% |
-| XLE | short | close | -1.02R | $-521 | 37% |
 
 ### Market data
 
@@ -388,66 +352,65 @@ Base rate: 38% of 143 brackets reached target first. Your Brier score is 0.239; 
 
 | Symbol | Last (ET) | vs prev | Prev close | Today open / low-high | ATR14 | 20d low-high | Prev vs 20d / 50d avg | 5d | Avg vol 20d |
 |---|---|---|---|---|---|---|---|---|---|
-| GLD | 339.90 (10:04 iex) | -0.4% | 341.19 | 339.88 / 339.20-340.52 | 7.92 (2.3%) | 340.76-380.18 | -6.3% / -9.7% | -6.6% | 10.0M |
-| HD | 335.67 (10:03 iex) | -0.6% | 337.64 | 335.00 / 332.34-336.38 | 10.42 (3.1%) | 313.56-362.44 | -0.1% / +7.6% | -3.9% | 4.8M |
+| HD | 345.42 (10:04 iex) | +2.6% | 336.68 | 341.70 / 339.26-346.98 | 10.52 (3.1%) | 316.15-362.44 | -0.5% / +7.1% | -3.3% | 4.8M |
 
 #### Indices, rates, commodities and sectors
 
 | Symbol | Last (ET) | vs prev | Prev close | Today open / low-high | ATR14 | 20d low-high | Prev vs 20d / 50d avg | 5d | Avg vol 20d |
 |---|---|---|---|---|---|---|---|---|---|
-| SPY | 737.23 (10:05 iex) | +1.0% | 730.20 | 737.46 / 735.42-739.90 | 14.32 (2.0%) | 726.79-775.64 | -3.1% / -4.2% | -3.9% | 51.4M |
-| QQQ | 673.12 (10:05 iex) | +2.1% | 659.51 | 671.09 / 670.13-675.20 | 19.71 (3.0%) | 646.64-726.14 | -3.9% / -7.7% | -4.5% | 51.8M |
-| IWM | 269.82 (10:04 iex) | -0.1% | 270.12 | 271.07 / 269.12-271.80 | 5.84 (2.2%) | 267.87-286.17 | -2.8% / -3.3% | -4.6% | 24.2M |
-| DIA | 502.08 (10:05 iex) | +0.1% | 501.73 | 503.95 / 501.17-504.43 | 8.81 (1.8%) | 500.03-536.60 | -3.5% / -3.1% | -4.3% | 3.8M |
-| TLT | 79.90 (10:04 iex) | -0.4% | 80.22 | 80.08 / 79.86-80.10 | 0.73 (0.9%) | 79.11-82.42 | -0.9% / +0.6% | -0.9% | 36.4M |
-| GLD | 339.90 (10:04 iex) | -0.4% | 341.19 | 339.88 / 339.20-340.52 | 7.92 (2.3%) | 340.76-380.18 | -6.3% / -9.7% | -6.6% | 10.0M |
-| USO | 138.86 (10:03 iex) | +2.0% | 136.11 | 138.96 / 138.73-139.45 | 5.75 (4.2%) | 135.01-171.82 | -10.9% / -10.7% | -3.8% | 5.1M |
-| SMH | 478.16 (10:04 iex) | +4.1% | 459.54 | 472.70 / 471.32-479.96 | 28.70 (6.2%) | 445.32-571.00 | -8.9% / -16.9% | -9.4% | 12.1M |
-| XLK | 168.83 (10:04 iex) | +3.1% | 163.81 | 167.47 / 167.18-169.30 | 6.73 (4.1%) | 159.63-191.55 | -6.5% / -11.8% | -6.1% | 13.3M |
-| XLF | 56.37 (10:04 iex) | -0.1% | 56.42 | 56.51 / 56.28-56.63 | 1.06 (1.9%) | 55.74-60.04 | -1.5% / +0.9% | -3.8% | 35.6M |
-| XLE | 61.29 (10:04 iex) | +0.0% | 61.29 | 61.71 / 61.26-61.94 | 1.81 (3.0%) | 60.43-70.15 | -6.3% / -5.4% | -3.3% | 37.1M |
-| XLV | 178.97 (10:05 iex) | -1.2% | 181.17 | 180.40 / 178.58-181.25 | 3.73 (2.1%) | 177.07-192.32 | -1.9% / +3.0% | -4.1% | 12.0M |
-| XLI | 164.82 (10:04 iex) | +0.1% | 164.66 | 165.76 / 164.37-166.00 | 3.56 (2.2%) | 161.74-172.40 | -1.7% / -2.2% | -3.7% | 8.9M |
-| XLY | 118.97 (10:04 iex) | -0.2% | 119.20 | 119.59 / 118.74-119.71 | 2.79 (2.3%) | 112.83-122.92 | +1.2% / +4.5% | -1.5% | 9.2M |
-| XLP | 89.50 (10:05 iex) | -1.8% | 91.18 | 90.03 / 89.33-90.15 | 1.67 (1.8%) | 86.36-93.48 | +1.1% / +6.0% | -0.3% | 20.0M |
-| XLU | 43.13 (10:05 iex) | -1.0% | 43.55 | 43.33 / 43.04-43.44 | 0.60 (1.4%) | 42.01-44.40 | +0.4% / +4.0% | -0.6% | 23.9M |
-| XLB | 50.12 (10:04 iex) | -0.7% | 50.46 | 50.29 / 49.87-50.35 | 1.09 (2.2%) | 50.12-54.63 | -3.3% / -0.7% | -4.8% | 12.2M |
-| XLRE | 43.28 (10:04 iex) | -0.8% | 43.62 | 43.52 / 43.23-43.52 | 0.66 (1.5%) | 41.78-45.34 | -0.1% / +2.5% | -2.2% | 7.9M |
-| XLC | 105.98 (10:05 iex) | +0.4% | 105.58 | 106.72 / 105.76-107.11 | 2.21 (2.1%) | 99.33-109.26 | +0.6% / -3.1% | -2.8% | 7.9M |
-| KRE | 70.40 (10:04 iex) | -0.2% | 70.52 | 70.60 / 70.25-70.86 | 1.54 (2.2%) | 70.19-75.80 | -2.8% / -1.3% | -3.3% | 14.5M |
-| XHB | 99.71 (10:03 iex) | -1.0% | 100.75 | 100.44 / 99.18-100.48 | 3.28 (3.3%) | 94.86-108.78 | -0.8% / +2.4% | -2.3% | 2.4M |
+| SPY | 716.25 (10:05 iex) | +0.1% | 715.87 | 713.61 / 711.72-718.26 | 14.70 (2.1%) | 715.65-775.64 | -4.7% / -6.0% | -5.4% | 52.5M |
+| QQQ | 640.22 (10:05 iex) | -0.7% | 645.04 | 638.82 / 633.86-643.21 | 19.73 (3.1%) | 644.34-726.14 | -5.6% / -9.5% | -6.3% | 52.2M |
+| IWM | 264.74 (10:05 iex) | +0.2% | 264.22 | 263.32 / 262.62-265.85 | 5.91 (2.2%) | 263.74-286.17 | -4.7% / -5.3% | -5.1% | 24.5M |
+| DIA | 494.93 (10:05 iex) | +1.0% | 490.24 | 490.39 / 489.67-495.25 | 9.23 (1.9%) | 490.18-536.00 | -5.2% / -5.1% | -6.1% | 3.9M |
+| TLT | 80.81 (10:04 iex) | +0.6% | 80.35 | 80.74 / 80.69-80.97 | 0.73 (0.9%) | 79.11-82.42 | -0.7% / +0.8% | +0.8% | 35.1M |
+| GLD | 327.08 (10:05 iex) | -2.4% | 335.18 | 326.96 / 326.52-328.53 | 7.37 (2.2%) | 335.05-380.18 | -7.6% / -11.0% | -5.6% | 9.7M |
+| USO | 136.10 (10:04 iex) | -1.4% | 138.09 | 136.61 / 135.34-136.66 | 5.73 (4.1%) | 135.01-171.82 | -8.9% / -9.1% | -5.5% | 5.0M |
+| SMH | 433.32 (10:05 iex) | -3.2% | 447.48 | 438.10 / 427.56-438.44 | 27.46 (6.1%) | 445.32-571.00 | -10.7% / -18.8% | -10.8% | 11.8M |
+| XLK | 158.03 (10:05 iex) | -1.7% | 160.69 | 158.71 / 156.23-158.96 | 6.52 (4.1%) | 159.63-191.55 | -7.7% / -13.2% | -7.5% | 13.8M |
+| XLF | 55.91 (10:05 iex) | +0.6% | 55.58 | 55.68 / 55.53-56.02 | 1.09 (2.0%) | 55.30-60.04 | -2.9% / -0.6% | -4.5% | 36.9M |
+| XLE | 61.32 (10:05 iex) | +0.7% | 60.89 | 60.71 / 60.48-61.38 | 1.79 (2.9%) | 60.43-70.15 | -6.4% / -6.0% | -5.3% | 36.6M |
+| XLV | 180.04 (10:05 iex) | +1.5% | 177.46 | 179.00 / 178.84-180.06 | 3.76 (2.1%) | 176.96-192.32 | -3.8% / +0.7% | -5.5% | 12.5M |
+| XLI | 161.97 (10:04 iex) | +0.4% | 161.36 | 160.91 / 160.50-162.35 | 3.67 (2.3%) | 160.83-172.40 | -3.5% / -4.1% | -4.8% | 8.9M |
+| XLY | 116.94 (10:04 iex) | +0.9% | 115.88 | 115.62 / 115.09-116.97 | 2.95 (2.5%) | 112.83-122.92 | -1.7% / +1.5% | -3.8% | 9.4M |
+| XLP | 91.59 (10:05 iex) | +1.9% | 89.86 | 90.93 / 90.78-91.58 | 1.65 (1.8%) | 86.36-93.48 | -0.3% / +4.3% | -1.3% | 20.3M |
+| XLU | 43.31 (10:05 iex) | +0.7% | 43.01 | 43.27 / 43.12-43.34 | 0.62 (1.4%) | 42.39-44.40 | -0.8% / +2.7% | -1.8% | 24.1M |
+| XLB | 49.87 (10:05 iex) | +0.9% | 49.42 | 49.42 / 49.30-49.91 | 1.13 (2.3%) | 49.32-54.63 | -5.1% / -2.7% | -5.6% | 12.5M |
+| XLRE | 43.28 (10:05 iex) | +0.9% | 42.88 | 43.17 / 43.05-43.30 | 0.69 (1.6%) | 41.78-45.34 | -1.9% / +0.8% | -3.3% | 7.8M |
+| XLC | 103.44 (10:05 iex) | +0.7% | 102.76 | 102.70 / 102.30-103.90 | 2.39 (2.3%) | 99.33-109.26 | -1.8% / -5.6% | -4.5% | 8.1M |
+| KRE | 70.00 (10:05 iex) | +1.1% | 69.26 | 69.31 / 69.25-70.15 | 1.59 (2.3%) | 68.66-75.80 | -4.3% / -3.0% | -4.5% | 14.8M |
+| XHB | 99.64 (10:04 iex) | +1.8% | 97.89 | 98.08 / 98.07-99.79 | 3.31 (3.4%) | 97.19-108.78 | -3.6% / -0.5% | -3.4% | 2.3M |
 
 #### Large caps
 
 | Symbol | Last (ET) | vs prev | Prev close | Today open / low-high | ATR14 | 20d low-high | Prev vs 20d / 50d avg | 5d | Avg vol 20d |
 |---|---|---|---|---|---|---|---|---|---|
-| AAPL | 349.69 (10:05 iex) | -0.8% | 352.45 | 353.01 / 348.50-355.28 | 9.43 (2.7%) | 325.08-360.83 | +1.4% / +3.4% | -0.8% | 48.2M |
-| MSFT | 523.22 (10:05 iex) | +3.1% | 507.31 | 519.50 / 518.30-526.49 | 17.88 (3.5%) | 495.55-558.07 | -3.4% / -2.2% | -2.5% | 28.2M |
-| NVDA | 156.16 (10:05 iex) | +3.4% | 150.96 | 152.91 / 152.54-158.13 | 11.92 (7.9%) | 148.80-219.99 | -20.1% / -28.2% | -13.1% | 250.9M |
-| AMZN | 271.44 (10:05 iex) | +1.4% | 267.74 | 272.57 / 270.77-274.00 | 11.00 (4.1%) | 229.36-275.34 | +4.1% / +4.9% | +0.6% | 50.4M |
-| GOOGL | 293.81 (10:04 iex) | +4.0% | 282.44 | 294.30 / 289.74-295.43 | 9.50 (3.4%) | 276.92-331.43 | -4.2% / -13.1% | -3.8% | 42.4M |
-| META | 626.34 (10:04 iex) | +1.6% | 616.38 | 624.60 / 621.67-630.06 | 20.75 (3.4%) | 583.80-681.07 | -1.4% / -9.3% | -2.0% | 22.4M |
-| TSLA | 386.68 (10:05 iex) | +0.8% | 383.72 | 389.90 / 385.38-393.60 | 17.96 (4.7%) | 338.15-414.23 | -0.6% / +2.1% | -1.8% | 37.7M |
-| AVGO | 366.31 (10:05 iex) | +3.5% | 354.05 | 362.99 / 361.65-369.26 | 20.97 (5.9%) | 289.77-369.82 | +6.6% / +2.9% | +2.6% | 28.3M |
-| AMD | 545.08 (10:04 iex) | +2.8% | 530.14 | 542.17 / 537.09-554.99 | 50.16 (9.5%) | 402.10-594.00 | +3.0% / -4.5% | -4.1% | 37.5M |
-| ORCL | 117.17 (10:04 iex) | +2.9% | 113.89 | 116.67 / 116.01-118.50 | 8.36 (7.3%) | 109.21-148.48 | -8.5% / -14.8% | -11.3% | 41.2M |
-| NFLX | 60.10 (10:05 iex) | +0.5% | 59.82 | 60.03 / 59.88-60.45 | 1.85 (3.1%) | 59.41-67.82 | -5.3% / -12.2% | -7.3% | 40.6M |
-| CRM | 193.08 (10:04 iex) | +1.4% | 190.40 | 191.63 / 191.35-195.39 | 8.49 (4.5%) | 186.45-252.42 | -15.1% / -18.0% | -12.7% | 7.2M |
-| JPM | 326.27 (10:05 iex) | +0.7% | 324.11 | 326.38 / 325.87-328.27 | 8.50 (2.6%) | 323.71-359.80 | -4.2% / -4.2% | -5.6% | 6.6M |
-| GS | 885.58 (10:03 iex) | +1.4% | 873.18 | 885.55 / 879.98-891.25 | 30.40 (3.5%) | 854.45-939.38 | -2.9% / -4.3% | -5.8% | 2.1M |
-| BAC | 49.10 (10:05 iex) | +0.4% | 48.91 | 49.31 / 48.95-49.37 | 1.23 (2.5%) | 48.74-53.02 | -2.8% / -8.2% | -3.5% | 34.4M |
-| XOM | 159.92 (10:05 iex) | -0.4% | 160.58 | 161.32 / 159.95-162.07 | 4.86 (3.0%) | 159.11-187.32 | -6.9% / -4.7% | -3.1% | 14.6M |
-| CVX | 206.25 (10:05 iex) | +0.2% | 205.88 | 207.48 / 206.21-208.11 | 5.58 (2.7%) | 204.31-234.53 | -6.2% / -3.7% | -2.7% | 8.3M |
-| LLY | 1,364.74 (10:05 iex) | -1.3% | 1,382.75 | 1,369.38 / 1,361.97-1,382.00 | 46.44 (3.4%) | 1,256.10-1,475.25 | +0.4% / +10.1% | -3.7% | 3.1M |
-| UNH | 342.22 (10:04 iex) | -2.2% | 349.91 | 351.13 / 340.19-353.85 | 14.59 (4.2%) | 342.45-426.55 | -13.2% / -10.4% | -13.2% | 5.6M |
-| JNJ | 266.41 (10:05 iex) | -2.3% | 272.70 | 269.61 / 265.79-270.60 | 7.08 (2.6%) | 259.04-290.25 | -0.7% / +2.0% | -2.7% | 7.6M |
-| WMT | 125.61 (10:05 iex) | -1.4% | 127.36 | 123.68 / 123.27-125.67 | 3.09 (2.4%) | 117.83-131.82 | +2.2% / +10.0% | +1.3% | 22.3M |
-| COST | 1,087.95 (10:04 iex) | -0.8% | 1,096.62 | 1,089.56 / 1,086.24-1,094.56 | 21.91 (2.0%) | 978.87-1,123.67 | +4.6% / +12.1% | +0.8% | 2.5M |
-| HD | 335.67 (10:03 iex) | -0.6% | 337.64 | 335.00 / 332.34-336.38 | 10.42 (3.1%) | 313.56-362.44 | -0.1% / +7.6% | -3.9% | 4.8M |
-| CAT | 563.81 (10:04 iex) | +0.9% | 558.77 | 567.94 / 559.03-569.77 | 27.74 (5.0%) | 550.81-732.73 | -9.9% / -22.9% | -7.1% | 4.0M |
-| BA | 163.73 (10:03 iex) | +0.5% | 162.91 | 163.80 / 163.11-164.22 | 4.74 (2.9%) | 161.75-193.19 | -6.1% / -12.4% | -6.7% | 10.5M |
-| DAL | 84.78 (10:04 iex) | -0.1% | 84.88 | 85.08 / 83.30-85.30 | 3.24 (3.8%) | 75.33-92.52 | +0.4% / +3.3% | -7.1% | 6.0M |
-| UAL | 107.30 (10:04 iex) | -0.3% | 107.63 | 107.41 / 105.09-107.55 | 5.50 (5.1%) | 96.39-122.08 | -1.2% / -0.4% | -9.1% | 5.4M |
+| AAPL | 349.44 (10:05 iex) | +0.1% | 349.21 | 352.87 / 348.64-354.34 | 9.01 (2.6%) | 325.08-360.83 | +0.5% / +2.3% | -1.6% | 47.9M |
+| MSFT | 502.73 (10:05 iex) | +0.9% | 498.30 | 493.69 / 490.87-503.74 | 18.77 (3.8%) | 495.55-558.07 | -4.9% / -4.0% | -4.5% | 28.6M |
+| NVDA | 141.75 (10:05 iex) | -2.9% | 145.98 | 143.52 / 138.84-143.72 | 11.90 (8.2%) | 145.71-219.99 | -21.4% / -30.1% | -12.2% | 260.8M |
+| AMZN | 258.57 (10:05 iex) | +0.5% | 257.37 | 253.37 / 251.12-259.94 | 11.20 (4.4%) | 229.36-275.34 | -0.0% / +0.8% | -3.8% | 50.6M |
+| GOOGL | 280.81 (10:05 iex) | +3.0% | 272.66 | 274.32 / 272.83-283.02 | 10.66 (3.9%) | 272.36-326.40 | -6.7% / -15.8% | -8.7% | 43.5M |
+| META | 586.65 (10:05 iex) | -1.6% | 596.22 | 582.72 / 573.48-588.58 | 22.04 (3.7%) | 583.80-648.45 | -4.2% / -12.1% | -4.4% | 21.2M |
+| TSLA | 372.23 (10:05 iex) | -0.6% | 374.41 | 370.02 / 365.14-373.71 | 18.40 (4.9%) | 338.15-414.23 | -3.0% / -0.4% | -5.8% | 36.4M |
+| AVGO | 330.00 (10:05 iex) | -4.8% | 346.65 | 343.01 / 330.00-343.01 | 20.87 (6.0%) | 289.77-369.82 | +4.0% / +0.8% | -4.9% | 28.2M |
+| AMD | 467.18 (10:05 iex) | -4.5% | 489.19 | 471.23 / 453.73-474.68 | 50.89 (10.4%) | 402.10-594.00 | -4.8% / -11.8% | -16.4% | 39.6M |
+| ORCL | 108.45 (10:04 iex) | -1.9% | 110.57 | 108.47 / 106.30-108.92 | 8.20 (7.4%) | 109.21-148.48 | -10.7% / -16.8% | -13.0% | 40.7M |
+| NFLX | 58.95 (10:05 iex) | +0.8% | 58.46 | 58.26 / 58.26-59.35 | 1.91 (3.3%) | 58.18-67.82 | -6.8% / -13.8% | -6.7% | 39.6M |
+| CRM | 188.61 (10:05 iex) | +2.9% | 183.31 | 183.31 / 183.26-188.69 | 8.91 (4.9%) | 182.51-250.99 | -17.0% / -20.6% | -15.7% | 7.2M |
+| JPM | 319.99 (10:05 iex) | -0.1% | 320.22 | 320.76 / 317.95-320.88 | 8.55 (2.7%) | 317.43-359.80 | -5.2% / -5.2% | -6.6% | 6.6M |
+| GS | 822.76 (10:05 iex) | -2.9% | 847.53 | 826.49 / 812.19-827.89 | 30.36 (3.6%) | 843.88-939.38 | -5.6% / -6.8% | -7.2% | 2.1M |
+| BAC | 48.48 (10:05 iex) | -0.2% | 48.57 | 48.45 / 48.14-48.77 | 1.21 (2.5%) | 48.05-53.02 | -3.3% / -8.4% | -3.8% | 34.3M |
+| XOM | 160.36 (10:04 iex) | +0.9% | 158.93 | 158.83 / 158.60-160.69 | 4.74 (3.0%) | 158.60-187.32 | -7.3% / -5.7% | -5.8% | 14.7M |
+| CVX | 208.79 (10:05 iex) | +1.1% | 206.50 | 206.44 / 205.94-208.82 | 5.40 (2.6%) | 204.31-234.53 | -5.5% / -3.4% | -3.8% | 8.4M |
+| LLY | 1,364.62 (10:05 iex) | +1.0% | 1,351.12 | 1,362.38 / 1,354.23-1,366.51 | 43.97 (3.3%) | 1,256.10-1,475.25 | -2.0% / +7.2% | -5.2% | 3.1M |
+| UNH | 345.39 (10:05 iex) | +4.5% | 330.48 | 341.01 / 338.24-346.49 | 15.94 (4.8%) | 324.67-425.25 | -17.1% / -15.1% | -18.4% | 6.4M |
+| JNJ | 271.37 (10:05 iex) | +1.6% | 267.14 | 270.36 / 269.47-272.15 | 7.01 (2.6%) | 262.40-290.25 | -2.7% / -0.1% | -5.8% | 7.6M |
+| WMT | 129.69 (10:05 iex) | +2.9% | 126.04 | 127.40 / 127.18-129.80 | 3.14 (2.5%) | 118.11-131.82 | +0.9% / +8.4% | -0.1% | 22.5M |
+| COST | 1,110.41 (10:04 iex) | +1.5% | 1,093.83 | 1,103.10 / 1,099.30-1,110.41 | 20.97 (1.9%) | 978.87-1,123.67 | +4.0% / +11.4% | +0.1% | 2.5M |
+| HD | 345.42 (10:04 iex) | +2.6% | 336.68 | 341.70 / 339.26-346.98 | 10.52 (3.1%) | 316.15-362.44 | -0.5% / +7.1% | -3.3% | 4.8M |
+| CAT | 534.23 (10:03 iex) | -0.6% | 537.37 | 528.42 / 524.50-538.98 | 27.99 (5.2%) | 535.53-732.73 | -12.2% / -25.3% | -11.2% | 4.0M |
+| BA | 164.09 (10:04 iex) | +2.2% | 160.51 | 161.00 / 160.15-164.32 | 4.87 (3.0%) | 158.92-189.66 | -6.8% / -13.3% | -6.4% | 10.6M |
+| DAL | 84.42 (10:01 iex) | +1.5% | 83.17 | 83.60 / 83.51-84.80 | 3.18 (3.8%) | 75.33-92.52 | -1.9% / +1.1% | -3.9% | 6.0M |
+| UAL | 107.48 (10:04 iex) | +1.8% | 105.53 | 105.46 / 105.30-107.78 | 5.45 (5.2%) | 96.39-122.08 | -3.3% / -2.3% | -5.1% | 5.2M |
 
 #### Today's biggest movers among 270 other liquid names (at least $5 and 1M average volume)
 
@@ -455,19 +418,19 @@ Base rate: 38% of 143 brackets reached target first. Your Brier score is 0.239; 
 
 | Symbol | Last (ET) | vs prev | Prev close | Today open / low-high | ATR14 | 20d low-high | Prev vs 20d / 50d avg | 5d | Avg vol 20d |
 |---|---|---|---|---|---|---|---|---|---|
-| PDD | 86.82 (10:05 iex) | +12.1% | 77.45 | 82.44 / 82.02-87.38 | 2.57 (3.3%) | 76.27-85.42 | -2.5% / -2.3% | -2.0% | 5.8M |
-| ZS | 217.06 (10:05 iex) | +9.7% | 197.83 | 202.01 / 201.46-218.10 | 12.34 (6.2%) | 180.47-267.87 | -9.6% / -6.2% | +2.1% | 2.4M |
-| STX | 565.19 (10:05 iex) | +9.6% | 515.90 | 546.90 / 536.54-565.38 | 49.84 (9.7%) | 449.28-718.65 | -10.0% / -28.2% | -6.5% | 6.0M |
-| OKTA | 213.90 (10:04 iex) | +9.4% | 195.61 | 203.25 / 202.00-214.33 | 14.91 (7.6%) | 164.18-228.72 | +1.1% / -1.6% | +7.3% | 4.9M |
-| WDC | 315.03 (10:05 iex) | +9.3% | 288.19 | 306.17 / 300.82-315.74 | 27.33 (9.5%) | 258.61-402.23 | -11.1% / -24.2% | -8.0% | 8.4M |
-| INTC | 59.36 (10:05 iex) | +8.6% | 54.67 | 57.54 / 57.28-59.32 | 6.11 (11.2%) | 51.51-95.68 | -19.8% / -40.7% | -12.5% | 147.0M |
-| DDOG | 181.29 (10:04 iex) | +8.5% | 167.11 | 174.80 / 173.66-182.39 | 14.90 (8.9%) | 162.11-285.00 | -21.6% / -30.6% | -9.4% | 4.8M |
-| SNDK | 833.60 (10:05 iex) | +7.4% | 776.22 | 811.47 / 804.01-846.76 | 111.84 (14.4%) | 749.39-1,408.45 | -25.2% / -43.9% | -20.6% | 12.9M |
-| ZTS | 82.21 (10:04 iex) | -3.9% | 85.57 | 84.84 / 82.18-85.13 | 3.19 (3.7%) | 76.51-89.29 | +4.4% / +11.8% | +3.6% | 4.6M |
-| MO | 73.59 (10:05 iex) | -3.5% | 76.26 | 75.30 / 73.54-75.45 | 1.71 (2.2%) | 72.30-79.97 | -0.3% / +4.9% | -1.5% | 8.3M |
-| PM | 186.18 (10:04 iex) | -3.4% | 192.73 | 190.26 / 186.07-191.54 | 5.29 (2.7%) | 191.07-214.35 | -4.0% / -1.9% | -1.8% | 4.9M |
-| KO | 94.91 (10:05 iex) | -3.2% | 98.09 | 96.21 / 94.73-96.68 | 1.81 (1.8%) | 90.58-100.56 | +2.6% / +7.3% | +0.5% | 18.7M |
-| W | 106.00 (10:05 iex) | -3.1% | 109.35 | 107.85 / 105.68-108.68 | 7.07 (6.5%) | 105.17-127.99 | -3.7% / +1.3% | -4.4% | 2.1M |
-| NKE | 35.23 (10:05 iex) | -3.0% | 36.31 | 35.75 / 35.11-36.00 | 1.62 (4.5%) | 34.96-41.10 | -5.0% / -1.4% | -5.2% | 24.0M |
-| HSY | 170.78 (10:03 iex) | -2.9% | 175.94 | 173.01 / 170.78-174.39 | 5.59 (3.2%) | 158.55-178.42 | +3.2% / +5.3% | +0.6% | 2.0M |
-| STZ | 139.48 (10:03 iex) | -2.9% | 143.62 | 141.53 / 139.48-141.55 | 4.45 (3.1%) | 128.06-149.43 | +2.5% / +12.0% | -0.3% | 2.3M |
+| HUBS | 206.45 (10:05 iex) | +7.5% | 191.99 | 191.98 / 190.95-207.12 | 15.17 (7.9%) | 188.25-271.60 | -14.2% / -14.8% | -11.0% | 1.6M |
+| TEAM | 140.93 (10:04 iex) | +6.0% | 133.01 | 131.08 / 131.04-141.13 | 10.24 (7.7%) | 132.49-228.13 | -24.2% / -29.6% | -12.7% | 3.7M |
+| CPNG | 14.72 (10:05 iex) | +4.7% | 14.06 | 13.91 / 13.80-14.76 | 0.80 (5.7%) | 13.44-17.45 | -6.3% / -4.2% | -8.0% | 14.8M |
+| MRNA | 208.05 (10:05 iex) | +4.4% | 199.33 | 199.23 / 196.50-209.37 | 18.49 (9.3%) | 179.53-280.80 | -11.6% / -3.6% | -13.8% | 11.3M |
+| GIS | 35.94 (10:05 iex) | +4.2% | 34.48 | 35.01 / 34.93-35.98 | 1.16 (3.4%) | 32.82-37.02 | +0.0% / +2.1% | +2.9% | 8.1M |
+| WDAY | 180.63 (10:05 iex) | +4.2% | 173.36 | 172.93 / 172.93-179.24 | 7.47 (4.3%) | 172.63-212.91 | -11.0% / -10.1% | -9.1% | 2.1M |
+| ACN | 227.75 (10:05 iex) | +4.2% | 218.58 | 221.88 / 220.89-228.13 | 9.72 (4.4%) | 216.13-271.76 | -12.3% / -0.9% | -12.6% | 5.3M |
+| NOW | 92.50 (10:05 iex) | +4.1% | 88.87 | 87.33 / 87.33-92.57 | 4.62 (5.2%) | 88.13-159.50 | -20.8% / -31.0% | -11.7% | 21.2M |
+| SNDK | 86.71 (10:05 iex) | -8.1% | 94.40 | 89.98 / 85.63-90.67 | 12.90 (13.7%) | 93.67-176.06 | -25.4% / -44.7% | -19.4% | 105.4M |
+| ANET | 176.60 (10:05 iex) | -6.9% | 189.59 | 185.09 / 174.28-185.82 | 13.53 (7.1%) | 158.34-212.16 | +4.0% / -1.6% | -8.2% | 8.7M |
+| MU | 648.87 (10:05 iex) | -6.0% | 690.44 | 664.62 / 625.24-669.00 | 65.31 (9.5%) | 650.00-990.00 | -13.8% / -24.9% | -13.5% | 32.0M |
+| NET | 285.61 (10:05 iex) | -6.0% | 303.68 | 300.00 / 281.00-300.88 | 22.63 (7.5%) | 233.62-337.00 | +2.3% / -5.1% | -4.7% | 4.4M |
+| STX | 491.09 (10:05 iex) | -5.8% | 521.39 | 506.05 / 479.50-506.09 | 48.21 (9.2%) | 449.28-718.65 | -8.1% / -26.7% | -4.4% | 6.0M |
+| DELL | 296.15 (10:05 iex) | -5.2% | 312.54 | 303.60 / 286.20-303.60 | 34.32 (11.0%) | 305.80-507.38 | -18.6% / -34.4% | -15.8% | 7.5M |
+| ARM | 167.88 (10:05 iex) | -5.2% | 177.17 | 169.07 / 164.58-170.68 | 15.65 (8.8%) | 163.13-237.88 | -10.1% / -26.8% | -11.3% | 5.9M |
+| WDC | 281.76 (10:05 iex) | -5.1% | 296.78 | 287.01 / 274.63-288.56 | 26.87 (9.1%) | 258.61-402.23 | -7.7% / -21.3% | -4.6% | 8.2M |

@@ -1,0 +1,11 @@
+
+====================================================================
+  SESSION 2026-11-20   equity $103,408.42   day P&L +0.02%
+====================================================================
+
+  ----------------------------------------------------------------
+  PASSED IDEAS   logged to the shadow book and scored later, no orders
+      . AVGO   short already logged or traded today - not counted twice
+
+  ----------------------------------------------------------------
+  No new positions today.

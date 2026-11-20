@@ -1,0 +1,16 @@
+15 lookups in 16 turns, 114 s
+WebSearch: University of Michigan consumer sentiment final November 2026
+WebSearch: Broadcom Google HBM direct purchase TPU response November 20
+WebSearch: stock market today November 20 2026 open Nasdaq chips
+WebSearch: consumer sentiment final November 10:00 inflation expectations released Friday
+WebSearch: Waller remarks November 20 2026 College Fed Challenge
+WebSearch: software stocks rally HubSpot Atlassian ServiceNow Workday November 20
+WebFetch: https://www.stocktitan.net/articles/stock-market-today-live-november-20-2026
+WebFetch: https://journalarta.com/en/2026/11/20/stock-market-today-dow-rises-0-39-while-nasdaq-drops-1-39-at-open/
+WebSearch: UnitedHealth stock rises November 20 2026
+WebSearch: Broadcom shares fall Friday November 20 2026
+WebSearch: Alphabet Google stock up Friday November 20 2026
+WebSearch: Home Depot stock November 20 2026
+WebSearch: 10-year Treasury yield Friday November 20 2026 bonds rally
+WebFetch: https://www.cnbc.com/amp/2026/11/20/treasury-yields-bonds-inflation.html
+WebSearch: "consumer sentiment" November final 2026 Michigan Hsu year-ahead inflation expectations
