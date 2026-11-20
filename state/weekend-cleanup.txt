@@ -1,34 +1,25 @@
-run 2026-11-13
+run 2026-11-20
 
-  3 resting exit order(s) left alone (protecting an open position):
-    DAL    sell  x69     bracket @96.5
-    IWM    buy   x85     bracket @271
-    AMZN   sell  x24     bracket @293
+  1 resting exit order(s) left alone (protecting an open position):
+    HD     buy   x51     bracket @323.5
 
-  2 unfilled entry order(s):
-    GLD    sell  x56     stop   @352.4  submitted 2026-11-13  id=67acb814
-    QQQ    sell  x29     stop   @646.5  submitted 2026-11-09  id=bf0f42bb
-    cancelled GLD
-    cancelled QQQ
+  No unfilled entry orders.
 
-  GLD    never filled (canceled)
 
-  0 trade(s) closed out, 1 never filled.
+  0 trade(s) closed out.
 
 ====================================================================
   BOOK STATE   market OPEN
 ====================================================================
-  Equity          $102,283.90
-  Cash            $113,476.11
-  Day P&L         $+84.68  (+0.08%)
-  Gross exposure  $35,986.19  (35.2% of equity)
-  Net exposure    $-11,192.21  (-10.9%)
-  Positions       3 / 8
-  Loss-limit room 3.08% before the 3.0% kill switch
+  Equity          $103,649.61
+  Cash            $121,012.05
+  Day P&L         $+261.06  (+0.25%)
+  Gross exposure  $17,362.44  (16.8% of equity)
+  Net exposure    $-17,362.44  (-16.8%)
+  Positions       1 / 8
+  Loss-limit room 3.25% before the 3.0% kill switch
 
   SYM    SIDE      QTY        AVG       LAST       P&L $    P&L %
   ---------------------------------------------------------------
-  IWM    short      85     281.03     277.52     +298.03   +1.25%
-  AMZN   long       24     274.10     266.79     -175.43   -2.67%
-  DAL    long       69      89.50      86.87     -181.47   -2.94%
+  HD     short      51     343.57     340.44     +159.63   +0.91%
 
