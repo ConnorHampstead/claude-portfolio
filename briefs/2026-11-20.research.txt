@@ -1,0 +1,32 @@
+31 lookups in 32 turns, 383 s
+WebSearch: stock market futures November 20 2026
+WebSearch: Nasdaq reversal Thursday November 19 2026 close Anthropic IPO
+WebSearch: Intuit earnings stock falls guidance November 2026
+WebFetch: https://streetinsider.com/Basic+Content/Wall+Street+indexes+end+lower+after+sharp+reversal%2C+tech+leads+drop/25640164.html
+WebFetch: https://www.rttnews.com/3713931/wall-street-poised-to-open-broadly-lower.aspx?type=uscom
+WebSearch: stocks close lower Thursday Nvidia Anthropic debut tech reverses Nov 19
+WebSearch: premarket movers Friday Intuit Ross Stores Gap shares
+WebFetch: https://www.cnbc.com/2026/11/20/stocks-moving-the-most-today-live-updates.html
+WebFetch: https://www.tradingview.com/news/benzinga:1c06a4673094b:0-stock-market-today-dow-jones-s-p-500-futures-fall-as-trump-weighs-iran-decision-intu-rost-keys-in-focus/
+WebFetch: https://www.tradingkey.com/analysis/stocks/us-stocks/262315308-us-pre-market-anthropic-tradingkey
+WebSearch: Waller speech November 20 2026 rate hike
+WebSearch: Waller remarks Friday morning economic outlook inflation hike December
+WebSearch: University of Michigan consumer sentiment final November 2026 preliminary forecast
+WebFetch: https://www.investing.com/news/stock-market-news/premarket-movers-anthropic-slides-after-debut-intuit-tumbles-on-mailchimp-sale-5041130
+WebSearch: Broadcom shares Google HBM memory TPU directly report November 20
+WebSearch: Asian chip stocks selloff Friday November 20 2026 SK Hynix Samsung TSMC Nikkei
+WebSearch: Broadcom fiscal Q4 2026 earnings date December
+WebFetch: https://mlq.ai/news/google-moves-to-buy-hbm-directly-for-its-mediatek-built-ai-chips-bypassing-broadcom-industry-reports-say/
+WebSearch: Hunterbrook AMD short report China chip sales stock November 19 2026
+WebSearch: Intuit first quarter fiscal 2027 results Credit Karma guidance Mailchimp Bending Spoons press release
+WebSearch: Ross Stores third quarter 2026 results fourth quarter guidance comparable sales
+WebSearch: Broadcom stock reversal Thursday November 19 2026 close
+WebSearch: Walmart stock November 20 2026 earnings guidance shares
+WebSearch: Treasury yields Friday November 20 2026 10-year bonds rally stocks selloff
+WebFetch: https://www.heygotrade.com/en/news/nvidia-nvda-stock-news-november-20-2026/
+WebSearch: Nvidia SEC civil investigation Wall Street Journal California attorney general subpoena
+WebSearch: Nasdaq 100 futures Friday chip stocks premarket Nvidia new low Anthropic below
+WebFetch: https://www.cnbc.com/2026/11/19/nvidia-california-bonta-subpoena-china-chips.html
+WebFetch: https://stockanalysis.com/stocks/avgo/history/
+WebSearch: Take-Two GTA VI sales announcement November 2026 stock
+WebSearch: "November 20" 2026 economic calendar Michigan sentiment final consensus 51 inflation expectations Cook speech

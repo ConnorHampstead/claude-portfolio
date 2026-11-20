@@ -1,0 +1,21 @@
+
+====================================================================
+  SESSION 2026-11-20   equity $103,648.38   day P&L +0.25%
+====================================================================
+
+  ----------------------------------------------------------------
+  PASSED IDEAS   logged to the shadow book and scored later, no orders
+      . AVGO   short limit 352.00  stop 373.50  target 310.00  P 34%
+      . NVDA   short limit 150.50  stop 163.00  target 126.00  P 33%
+      . INTU   short market 279.65  stop 297.00  target 252.00  P 36%
+      . QQQ    short market 636.34  stop 662.00  target 600.00  P 37%
+      . ROST   short market 206.00  stop 216.00  target 192.00  P 35%
+      . XLP    long  limit 90.40  stop 88.40  target 93.40  P 38%
+
+  ----------------------------------------------------------------
+  No new positions today.
+  6 idea(s) for the shadow book.
+
+
+  Logged to journal.csv
+

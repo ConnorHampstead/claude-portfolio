@@ -1,5 +1,2 @@
-  closed LOW    stop    -0.67R  $-343.12
 
-  1 trade(s) closed out.
-  Fill in `thesis_verdict` by hand: right/wrong thesis vs right/wrong outcome.
-
+  0 trade(s) closed out.

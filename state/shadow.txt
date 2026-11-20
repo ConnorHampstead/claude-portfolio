@@ -1,7 +1,11 @@
-  JNJ    long  stop         -0.87R  (passed 2026-11-10)
-  CNC    long  stop         -1.00R  (passed 2026-11-16)
+  GLD    short target       +1.97R  (passed 2026-11-12)
+  NVDA   long  stop         -0.94R  (passed 2026-11-18)
+  HUBS   long  stop         -0.66R  (passed 2026-11-12)
+  MOS    short target       +1.41R  (passed 2026-11-12)
+  TLT    short never filled   (passed 2026-11-13)
+  UNH    short target       +1.95R  (passed 2026-11-18)
+  GOOGL  long  stop         -1.03R  (passed 2026-11-19)
 
-  2 idea(s) resolved, 26 still pending.
-  LOW    bracket as submitted: stop       -0.66R   (as managed: -0.67R)
+  7 idea(s) resolved, 28 still pending.
 
-  1 trade bracket(s) replayed.
+  0 trade bracket(s) replayed.
