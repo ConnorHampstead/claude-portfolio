@@ -1,0 +1,57 @@
+56 lookups in 57 turns, 662 s
+WebSearch: Microsoft stock Melius upgrade October 12 2026
+WebSearch: UnitedHealth third quarter 2026 results stock October 13 2026
+WebSearch: CXMT 4F2 SK Hynix KOSPI plunge October 13 2026 semiconductor stocks
+WebSearch: Houthi strikes Riyadh oil prices October 12 2026 Exxon energy stocks
+WebSearch: September CPI October 14 2026 Russell 2000 small caps Treasury yields
+WebSearch: UnitedHealth shares reverse lower October 13 2026 earnings Medicaid
+WebSearch: chip stocks fall October 15 2026 semiconductor index Oracle credit
+WebSearch: Microsoft shares October 13 2026 stock rises record
+WebSearch: Warsh October hike off the table October 15 2026 Treasury yields fall small caps rally
+WebSearch: oil prices Brent October 14 15 2026 Exxon shares energy stocks record
+WebSearch: stocks October 15 2026 Treasury yields fall Russell 2000 rally Warsh
+WebSearch: Home Depot stock rises October 2026 housing stocks yields fall
+WebSearch: AMD stock falls October 21 22 2026 why
+WebSearch: Alphabet stock falls October 22 23 2026 Meta earnings capex Google shares
+WebSearch: Boeing third quarter 2026 results October 27 shares fall
+WebSearch: Meta shares tumble October 22 2026 negative free cash flow Alphabet shares
+WebSearch: oil falls October 26 2026 de-escalation hopes Brent airlines rally
+WebSearch: Oracle stock October 16 2026 S&P downgrade BBB- shares
+WebSearch: Nvidia stock rally October 27 28 2026 SK Hynix earnings semiconductors
+WebSearch: Elice IPO collapse October 20 2026 AI infrastructure Nvidia shares
+WebSearch: stock market today October 26 2026 Dow S&P industrials airlines oil
+WebSearch: SK Hynix third quarter 2026 results record shares surge October
+WebSearch: Alphabet shares fall October 21 2026 KeyCorp price target cut
+WebSearch: UnitedHealth stock closes October 13 2026 gives up gains
+WebFetch: https://stockstory.org/us/stocks/nyse/unh/news/earnings-call/unh-q3-deep-dive-margin-recovery-and-ai-initiatives-shape-2027-outlook
+WebSearch: Alphabet Google stock October 21 2026 falls 20-day low antitrust
+WebSearch: Oracle shares October 2026 rally financing data center stock rebounds
+WebSearch: Chevron stock October 22 2026 energy stocks fall oil
+WebFetch: https://www.money365.market/news/latest/chevron-cvx-declines-1-65-amid-report-of-potential-gulf-9596b8f5
+WebSearch: "October 15, 2026" stocks close Treasury yields small caps
+WebSearch: flash PMI October 23 2026 selling prices fastest since 2022 stocks industrials
+WebSearch: Exxon stock October 27 2026 Saudi Iran talks oil falls energy shares
+WebFetch: https://tradingeconomics.com/commodity/crude-oil/news/595157
+WebFetch: https://boereport.com/2026/10/28/oil-prices-fall-as-peace-hopes-offset-fears-of-growing-middle-east-conflict/amp/
+WebFetch: https://strategitz.substack.com/p/global-markets-close-october-15-2026
+WebFetch: https://portfolio-terminal.com/markets/10-year-treasury-yield/october-2026
+WebFetch: https://portfolio-terminal.com/markets/stock-market-close/october-15-2026
+WebFetch: https://stocktwits.com/news-articles/markets/equity/why-did-xom-cop-cvx-jump-to-52-week-highs-last-week/cZUdVAARBUz
+WebSearch: semiconductor stocks October 14 2026 hot CPI SMH chip selloff memory
+WebSearch: Nvidia shares October 29 30 2026 tech rout Alphabet Microsoft capex
+WebSearch: stock market news for Oct 27 2026 zacks
+WebSearch: Lam Research Texas Instruments results October 21 2026 shares chip stocks
+WebSearch: Oracle stock October 26 27 2026 shares jump
+WebFetch: https://www.zacks.com/stock/news/3015467/stock-market-news-for-oct-27-2026
+WebFetch: https://aljazeera.com/economy/2026/10/23/us-tech-stocks-tumble-as-investors-fret-over-ai-spending
+WebSearch: Nasdaq 100 QQQ closes October 9 2026 tech selloff chips
+WebFetch: https://stocktwits.com/news-articles/markets/equity/nasdaq-100-records-worst-week-in-18-months/cZxK0vGRBt2
+WebFetch: https://www.oanda.com/au-en/skills-and-insights/education/market-commentary/chart-of-the-week/19102026-nasdaq-100-downside-ai-semiconductor-weakness/
+WebSearch: airline stocks rise October 26 2026 United Airlines oil retreats Iran talks
+WebSearch: Treasury yields October 21 2026 20-year bond auction 10-year yield
+WebSearch: Wall Street Monday October 26 2026 stocks close oil eases Iran diplomacy
+WebSearch: Home Depot Lowe's shares climb October 2026 pending home sales housing stocks rally rates
+WebSearch: Home Depot stock October 22 2026 rises Dow rotation out of tech
+WebSearch: 10-year Treasury yield October 16 19 20 2026 close housing starts pending home sales
+WebFetch: https://tradingeconomics.com/united-states/government-bond-yield/news/590859
+WebSearch: "10-year" Treasury yield rises October 16 2026 Warsh stocks recovery haven
