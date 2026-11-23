@@ -1,0 +1,18 @@
+
+====================================================================
+  SESSION 2026-11-23   equity $103,579.73   day P&L -0.14%
+====================================================================
+
+  ----------------------------------------------------------------
+  PASSED IDEAS   logged to the shadow book and scored later, no orders
+      . UNH    short limit 331.00  stop 348.50  target 298.00  P 35%
+      . NVDA   long  limit 155.00  stop 141.00  target 190.00  P 31%
+      . QQQ    short limit 662.00  stop 684.00  target 618.00  P 32%
+      . CRWD   long  market 216.50  stop 198.00  target 246.00  P 34%
+
+  ----------------------------------------------------------------
+  No new positions today.
+  4 idea(s) for the shadow book.
+
+  Validation only - `check` never sends. `submit --confirm` sends these.
+

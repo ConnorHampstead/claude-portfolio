@@ -1,11 +1,4 @@
-  GLD    short target       +1.97R  (passed 2026-11-12)
-  NVDA   long  stop         -0.94R  (passed 2026-11-18)
-  HUBS   long  stop         -0.66R  (passed 2026-11-12)
-  MOS    short target       +1.41R  (passed 2026-11-12)
-  TLT    short never filled   (passed 2026-11-13)
-  UNH    short target       +1.95R  (passed 2026-11-18)
-  GOOGL  long  stop         -1.03R  (passed 2026-11-19)
 
-  7 idea(s) resolved, 28 still pending.
+  0 idea(s) resolved, 16 still pending.
 
   0 trade bracket(s) replayed.

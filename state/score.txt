@@ -33,8 +33,10 @@
 
   Brier score     0.235   (lower is better; always saying the 39% base rate scores 0.237)
 
+  ! 2 trade(s) marked wrong-thesis/right-outcome. These are the dangerous ones.
+
 ====================================================================
-  SHADOW BOOK   168 ideas passed on or dropped, 152 resolved
+  SHADOW BOOK   172 ideas passed on or dropped, 152 resolved
 ====================================================================
   Never filled    27
   Target first    45
