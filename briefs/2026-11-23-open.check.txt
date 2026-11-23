@@ -1,0 +1,18 @@
+
+====================================================================
+  SESSION 2026-11-23   equity $103,538.93   day P&L -0.18%
+====================================================================
+
+  ----------------------------------------------------------------
+  PASSED IDEAS   logged to the shadow book and scored later, no orders
+      . UNH    short already logged or traded today - not counted twice
+      . CRWD   short market 208.06  stop 226.50  target 180.00  P 36%
+      . AVGO   short market 309.18  stop 334.00  target 280.00  P 40%
+      . QQQ    short already logged or traded today - not counted twice
+
+  ----------------------------------------------------------------
+  No new positions today.
+  2 idea(s) for the shadow book.
+
+  Validation only - `check` never sends. `submit --confirm` sends these.
+

@@ -36,43 +36,43 @@
   ! 2 trade(s) marked wrong-thesis/right-outcome. These are the dangerous ones.
 
 ====================================================================
-  SHADOW BOOK   172 ideas passed on or dropped, 152 resolved
+  SHADOW BOOK   174 ideas passed on or dropped, 153 resolved
 ====================================================================
   Never filled    27
   Target first    45
-  Stop first      70
+  Stop first      71
   Expired         10   (neither level inside the window)
   Ambiguous       0   (both in one bar - not scored)
-  Avg R if taken  +0.05R over 125 filled ideas   (trades actually taken: +0.05R)
+  Avg R if taken  +0.05R over 126 filled ideas   (trades actually taken: +0.05R)
   A shadow book that out-earns the trades taken says the filter is rejecting
   the better ideas.
 
   ----------------------------------------------------------------
-  CALIBRATION   115 passed ideas with a stated probability
+  CALIBRATION   116 passed ideas with a stated probability
   ----------------------------------------------------------------
   stated           n   mean said    actual
   0%-30%           1        28%      100%
-  30%-35%         42        33%       52%
+  30%-35%         43        33%       51%
   35%-40%         58        36%       26%
   40%-45%         12        40%       58%
   45%-50%          2        45%        0%  <-- overconfident
 
-  Brier score     0.245   (lower is better; always saying the 39% base rate scores 0.238)
+  Brier score     0.243   (lower is better; always saying the 39% base rate scores 0.237)
   The stated probabilities do not beat the base rate: they are not telling
   the better ideas from the worse ones.
 
   ----------------------------------------------------------------
-  CALIBRATION   164 trades and passed ideas together with a stated probability
+  CALIBRATION   165 trades and passed ideas together with a stated probability
   ----------------------------------------------------------------
   stated           n   mean said    actual
   0%-30%           1        28%      100%
-  30%-35%         48        33%       50%
+  30%-35%         49        33%       49%
   35%-40%         83        36%       30%
   40%-45%         26        41%       46%
   45%-50%          5        46%       20%  <-- overconfident
   50%-60%          1        52%      100%
 
-  Brier score     0.242   (lower is better; always saying the 39% base rate scores 0.238)
+  Brier score     0.241   (lower is better; always saying the 39% base rate scores 0.237)
   The stated probabilities do not beat the base rate: they are not telling
   the better ideas from the worse ones.
 

@@ -1,9 +1,5 @@
-  NVDA   long  stop         -0.69R  (passed 2026-11-12)
-  NVDA   long  stop         -0.94R  (passed 2026-11-17)
-  INTU   short stop         -0.75R  (passed 2026-11-20)
-  ROST   short stop         -0.36R  (passed 2026-11-20)
+  NVDA   short stop         +0.00R  (passed 2026-11-20)
 
-  4 idea(s) resolved, 30 still pending.
-  GLD    bracket as submitted: target     +2.23R   (as managed: +2.15R)
+  1 idea(s) resolved, 19 still pending.
 
-  1 trade bracket(s) replayed.
+  0 trade bracket(s) replayed.

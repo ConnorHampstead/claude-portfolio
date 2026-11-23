@@ -1,0 +1,20 @@
+19 lookups in 20 turns, 200 s
+WebSearch: S&P Global flash PMI November 2026 US manufacturing services
+WebSearch: stock market today November 23 2026 open Nvidia Huang
+WebSearch: UnitedHealth stock reverses November 23 2026 Medicare Advantage
+WebFetch: https://www.fxstreet.com/news/us-sp-manufacturing-pmi-retreats-to-545-services-pmi-declines-to-547-202611231502
+WebFetch: https://finance.yahoo.com/markets/live/stock-market-today-monday-november-23-dow-sp-500-nasdaq-091118583.html
+WebFetch: https://cnbc.com/2026/11/23/stocks-moving-the-most-today-live-updates.html
+WebSearch: health insurer stocks UnitedHealth Humana pare losses CMS Star Ratings proposal Monday
+WebSearch: Broadcom stock today November 23 2026 lags chip rally
+WebSearch: Tesla stock jumps November 23 2026
+WebFetch: https://www.trefis.com/stock/avgo/articles/627781/why-did-broadcom-stock-drop-on-friday/2026-11-23
+WebFetch: https://www.thestreet.com/technology/google-2027-chip-plan-broadcom
+WebSearch: Home Depot $2.33 dividend ex-dividend date December 2026
+WebSearch: Chicago Fed National Activity Index October 2026 released November 23
+WebSearch: Tesla shares rally Monday Nvidia Huang rebound robotaxi news Nov 23
+WebFetch: https://www.cnbc.com/2026/11/23/anthropic-nvidia-shares.html
+WebSearch: Williams New York Fed speech November 23 2026
+WebSearch: CrowdStrike shares extend losses Zscaler deal arbitrage analysts downgrade November 23
+WebFetch: https://investinglive.com/news/s-p-global-us-services-november-flash-pmi-54-7-vs-55-7-expected/
+WebFetch: https://www.pmi.spglobal.com/Public/Home/PressRelease/18abd879261e464fbcc1bc22d4ea64eb
