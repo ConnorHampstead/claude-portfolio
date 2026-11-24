@@ -1,0 +1,17 @@
+
+====================================================================
+  SESSION 2026-11-24   equity $103,214.44   day P&L -0.14%
+====================================================================
+
+  ----------------------------------------------------------------
+  PASSED IDEAS   logged to the shadow book and scored later, no orders
+      . BBY    long  already logged or traded today - not counted twice
+      . ADI    long  market 319.00  stop 295.00  target 346.00  P 38%
+      . TXN    long  market 266.83  stop 248.50  target 291.00  P 37%
+
+  ----------------------------------------------------------------
+  No new positions today.
+  2 idea(s) for the shadow book.
+
+  Validation only - `check` never sends. `submit --confirm` sends these.
+

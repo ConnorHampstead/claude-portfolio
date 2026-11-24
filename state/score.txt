@@ -36,7 +36,7 @@
   ! 2 trade(s) marked wrong-thesis/right-outcome. These are the dangerous ones.
 
 ====================================================================
-  SHADOW BOOK   181 ideas passed on or dropped, 155 resolved
+  SHADOW BOOK   183 ideas passed on or dropped, 155 resolved
 ====================================================================
   Never filled    29
   Target first    45

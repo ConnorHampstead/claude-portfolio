@@ -1,5 +1,4 @@
-  NVDA   short stop         +0.00R  (passed 2026-11-20)
 
-  1 idea(s) resolved, 19 still pending.
+  0 idea(s) resolved, 26 still pending.
 
   0 trade bracket(s) replayed.
