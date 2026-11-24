@@ -1,0 +1,22 @@
+
+====================================================================
+  SESSION 2026-11-24   equity $103,295.66   day P&L -0.07%
+====================================================================
+
+  ----------------------------------------------------------------
+  PASSED IDEAS   logged to the shadow book and scored later, no orders
+      . BBY    long  market 100.00  stop 94.40  target 110.00  P 37%
+      . QQQ    short market 637.71  stop 657.50  target 606.50  P 37%
+      . ADI    short market 339.03  stop 363.50  target 300.00  P 35%
+      . DKS    long  market 151.00  stop 141.00  target 168.00  P 36%
+      . DLTR   long  market 148.96  stop 140.50  target 162.00  P 36%
+      . NVDA   short stop 154.90  stop 172.00  target 128.00  P 34%
+      . HPE    short market 41.90  stop 46.20  target 36.00  P 35%
+
+  ----------------------------------------------------------------
+  No new positions today.
+  7 idea(s) for the shadow book.
+
+
+  Logged to journal.csv
+

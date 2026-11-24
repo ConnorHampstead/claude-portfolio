@@ -1,4 +1,6 @@
+  UNH    short never filled   (passed 2026-11-17)
+  TLT    short never filled   (passed 2026-11-17)
 
-  0 idea(s) resolved, 16 still pending.
+  2 idea(s) resolved, 19 still pending.
 
   0 trade bracket(s) replayed.
