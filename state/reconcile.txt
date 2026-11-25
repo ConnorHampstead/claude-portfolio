@@ -1,2 +1,5 @@
+  closed HD     stop    -1.01R  $-516.12
 
-  0 trade(s) closed out.
+  1 trade(s) closed out.
+  Fill in `thesis_verdict` by hand: right/wrong thesis vs right/wrong outcome.
+

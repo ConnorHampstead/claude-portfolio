@@ -1,6 +1,3 @@
 
-  1 resting exit order(s) left alone (protecting an open position):
-    HD     buy   x51     bracket @323.5
-
   No unfilled entry orders older than 5d.
 

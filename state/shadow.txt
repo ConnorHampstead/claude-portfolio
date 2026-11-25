@@ -1,6 +1,6 @@
-  UNH    short never filled   (passed 2026-11-17)
-  TLT    short never filled   (passed 2026-11-17)
+  TTWO   short stop         -0.77R  (passed 2026-11-19)
 
-  2 idea(s) resolved, 19 still pending.
+  1 idea(s) resolved, 27 still pending.
+  HD     bracket as submitted: stop       -0.99R   (as managed: -1.01R)
 
-  0 trade bracket(s) replayed.
+  1 trade bracket(s) replayed.

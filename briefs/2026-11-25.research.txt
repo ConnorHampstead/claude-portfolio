@@ -1,0 +1,27 @@
+26 lookups in 27 turns, 451 s
+WebSearch: stock futures November 25 2026
+WebSearch: PCE inflation October GDP third quarter release November 25 2026
+WebSearch: Nvidia shares fall premarket Wednesday chip stocks selloff
+WebFetch: https://cnbc.com/2026/11/24/stock-market-today-live-updates-.html
+WebFetch: https://swingfolio.com/daily/us/2026-11-25/morning
+WebSearch: October PCE core 0.3% personal spending income jobless claims durable goods November 25
+WebSearch: Section 301 overcapacity tariffs 14 trading partners proposed USTR November 25 2026
+WebSearch: Dell third quarter fiscal 2027 results guidance shares premarket
+WebFetch: https://www.investing.com/news/stock-market-news/nvidia-chipmakers-slide-premarket-dell-falls-despite-upbeat-outlook-5050581
+WebSearch: Jensen Huang reinstated CEO Trump board Nvidia testimony December 1 why removed
+WebSearch: gold price falls November 25 2026 rate hike expectations
+WebSearch: HP Inc fourth quarter fiscal 2026 results outlook fiscal 2027 EPS guidance
+WebSearch: Walmart Costco stocks record high November 2026 defensive rotation
+WebFetch: https://www.sec.gov/Archives/edgar/data/0000047217/000004721726000054/hp103126exhibit991q426.htm
+WebSearch: HP Inc shares fiscal 2027 outlook analysts consensus November 24 2026
+WebSearch: kitco gold slides PCE November 25
+WebSearch: VIX 10-year Treasury yield dollar November 25 2026 premarket Fed December hike odds
+WebSearch: Alphabet Oracle shares fall premarket November 25 2026 AI data center debt
+WebSearch: Workday Q3 fiscal 2027 results free cash flow shares fall subscription revenue guidance
+WebSearch: Urban Outfitters third quarter fiscal 2027 comparable sales shares November 24 2026
+WebSearch: Walmart Q3 fiscal 2027 earnings November 19 2026 raises guidance stock reaction
+WebSearch: Dell Technologies Q3 fiscal 2027 revenue $54.9 billion AI servers raises fiscal 2027 outlook $202 billion
+WebSearch: stocks day before Thanksgiving 2026 Beige Book 2pm market holiday Friday early close
+WebSearch: Alphabet stock falls Wednesday November 25 2026 why
+WebFetch: https://finance.biggo.com/news/3666ab4b-585f-40b8-96d4-2afc2a755af8
+WebSearch: HP Inc stock rises premarket fiscal 2027 outlook $3.15 to $3.45 consensus estimate

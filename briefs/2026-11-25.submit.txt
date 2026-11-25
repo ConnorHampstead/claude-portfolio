@@ -1,0 +1,36 @@
+
+====================================================================
+  SESSION 2026-11-25   equity $102,973.84   day P&L +0.00%
+====================================================================
+
+  [OK] QQQ SHORT
+      entry 604.00 (stop)  stop 628.50  target 555.00  [2.00R]
+      qty 21  notional $12,684  risk $514.50 (0.50% of equity, tier 0.5%)
+      P(target first) 35%   conviction 3
+      stated EV +0.05R   (breakeven P at 2.00R is 33%)
+
+  ----------------------------------------------------------------
+  BOOK-LEVEL ADMISSION   highest conviction first
+      book now: 0 positions/resting entries, gross 0%, net +0%, risk at stake 0.00%
+      + QQQ    admitted  -> gross 12%, net -12%, risk 0.50%
+
+  ----------------------------------------------------------------
+  PASSED IDEAS   logged to the shadow book and scored later, no orders
+      . WMT    long  limit 131.60  stop 127.40  target 140.00  P 32%
+      . GLD    short limit 323.00  stop 331.00  target 307.00  P 33%
+      . NVDA   long  market 145.26  stop 127.00  target 181.50  P 30%
+      . DELL   long  market 273.64  stop 233.00  target 355.00  P 28%
+      . HPQ    long  market 28.90  stop 27.35  target 32.00  P 30%
+      . ORCL   short stop 99.90  stop 109.60  target 80.50  P 30%
+
+  ----------------------------------------------------------------
+  1 approved, 0 rejected.  Total new risk $514.50 (0.50% of equity)
+  6 idea(s) for the shadow book.
+
+  ! Market is closed. Next open: 2026-11-25T09:30:00-05:00
+    Orders will queue. Market orders will fill at the next open.
+
+  > QQQ short x21 submitted [pending_new]  id=14918cc0
+
+  Logged to journal.csv
+
