@@ -1,0 +1,18 @@
+
+====================================================================
+  SESSION 2026-11-25   equity $102,973.84   day P&L +0.00%
+====================================================================
+
+  ----------------------------------------------------------------
+  PASSED IDEAS   logged to the shadow book and scored later, no orders
+      . WMT    long  already logged or traded today - not counted twice
+      . DE     long  market 629.64  stop 602.00  target 685.00  P 32%
+      . HPQ    long  already logged or traded today - not counted twice
+      . AAPL   short market 350.48  stop 361.50  target 328.00  P 30%
+
+  ----------------------------------------------------------------
+  No new positions today.
+  2 idea(s) for the shadow book.
+
+  Validation only - `check` never sends. `submit --confirm` sends these.
+

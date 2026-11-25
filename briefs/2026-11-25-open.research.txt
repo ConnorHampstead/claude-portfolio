@@ -1,0 +1,19 @@
+18 lookups in 19 turns, 180 s
+WebSearch: stock market today November 25 2026 Nasdaq open
+WebSearch: Deere earnings fourth quarter 2026 fiscal 2027 outlook shares
+WebSearch: University of Michigan consumer sentiment final November 2026
+WebSearch: Deere stock today fiscal 2026 fourth quarter results net income
+WebSearch: HP Inc stock jumps November 25 2026
+WebFetch: https://cnbc.com/2026/11/24/stock-market-today-live-updates-.html
+WebFetch: https://www.stocktitan.net/news/DE/deere-reports-net-income-of-1-051-billion-for-fourth-quarter-4-860-o8y609mffx35.html
+WebSearch: Deere shares reverse higher 2027 outlook analysts consensus estimate November 25
+WebSearch: HPQ shares rise HP Inc fiscal 2027 outlook memory costs analyst
+WebSearch: Deere earnings call John May early order program large ag 2027 stock turns higher
+WebFetch: https://www.cmelitegroup.com/trends-and-insights/deere-shares-slide-as-fiscal-2027-guidance-falls-short-leaving-investors-asking-whether-it-is-realistic-or-conservative/
+WebSearch: Walmart stock record high November 25 2026
+WebSearch: FedWatch December rate hike probability after PCE November 25 2026
+WebSearch: stocks Wednesday AI selloff Nvidia chipmakers tariffs Section 301 Wall Street morning trading
+WebFetch: https://www.investmentnews.com/equities/pce-data-cools-but-further-rate-hikes-loom/268415
+WebFetch: https://finance.yahoo.com/markets/article/nvidia-amd-micron-stocks-sink-as-investors-flee-ai-trade-134518921.html
+WebSearch: Apple shares Section 301 tariffs China India iPhone November 25 2026
+WebSearch: oil prices rise November 25 2026 crude airlines shares fall
