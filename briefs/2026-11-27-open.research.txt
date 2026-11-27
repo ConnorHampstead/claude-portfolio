@@ -1,0 +1,15 @@
+14 lookups in 15 turns, 133 s
+WebSearch: stock market today November 27 2026 Black Friday stocks open
+WebSearch: Nvidia shares fall Friday November 27 2026
+WebSearch: VIX volatility index today November 27
+WebFetch: https://finance.yahoo.com/markets/live/stock-market-today-firday-november-27-dow-sp-500-nasdaq-black-friday-holiday-091152065.html
+WebSearch: stocks pare gains chips reverse Nvidia Friday half-day session
+WebSearch: CME FedWatch December hike odds 50 basis points November 27 2026
+WebFetch: https://bankofvol.substack.com/p/chips-rebound-into-a-half-session-0ba
+WebSearch: Charter Communications stock jumps November 27 2026
+WebSearch: Shopify stock rises Black Friday November 27 2026
+WebSearch: Dell stock up November 27 2026
+WebSearch: Nvidia S&P Global Ratings governance risk Huang export probe House
+WebFetch: https://www.tradingview.com/news/seekingalpha:bf3438e6e094b:0-chip-stocks-rebound-to-cap-a-volatile-week/
+WebSearch: Wall Street stocks trim gains after open Friday November 27 Nvidia turns lower neocloud China chips
+WebSearch: Nvidia next earnings date fiscal 2027 fourth quarter February 2027

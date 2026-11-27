@@ -1,6 +1,6 @@
-  TJX    long  target       +2.00R  (passed 2026-11-18)
-  AVGO   short target       +1.21R  (passed 2026-11-23)
-  TXN    long  stop         -0.99R  (passed 2026-11-24)
-  HPQ    long  target       +1.32R  (passed 2026-11-25)
+  UNH    short stop         -1.11R  (passed 2026-11-23)
+  GLD    short stop         -1.27R  (passed 2026-11-25)
 
-  4 idea(s) resolved, 29 still pending.
+  2 idea(s) resolved, 31 still pending.
+
+  0 trade bracket(s) replayed.

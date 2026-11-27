@@ -1,0 +1,17 @@
+
+====================================================================
+  SESSION 2026-11-27   equity $102,946.61   day P&L -0.03%
+====================================================================
+
+  ----------------------------------------------------------------
+  PASSED IDEAS   logged to the shadow book and scored later, no orders
+      . QQQ    short already logged or traded today - not counted twice
+      . NVDA   short market 145.78  stop 162.00  target 125.00  P 40%
+
+  ----------------------------------------------------------------
+  No new positions today.
+  1 idea(s) for the shadow book.
+
+
+  Logged to journal.csv
+
