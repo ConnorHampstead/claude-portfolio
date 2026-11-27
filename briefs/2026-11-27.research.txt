@@ -1,0 +1,37 @@
+36 lookups in 37 turns, 544 s
+WebSearch: stock futures Friday November 27 2026 Black Friday
+WebSearch: stocks rally Wednesday November 25 2026 close Nasdaq rebound
+WebSearch: stock market today November 27 2026 futures
+WebSearch: stocks close November 25 2026 Nasdaq S&P 500 reversal AI
+WebFetch: https://finance.yahoo.com/markets/live/stock-market-today-firday-november-27-dow-sp-500-nasdaq-black-friday-holiday-091152065.html
+WebFetch: https://stockinvest.us/digest/digest-us-premarket-2026-11-27
+WebSearch: Vertex Pharmaceuticals stock falls November 27 2026
+WebSearch: Altria Imperial Brands possible offer November 2026
+WebSearch: Nu Holdings stock jumps November 27 2026
+WebFetch: https://unusualwhales.com/news/premarket-brief-stocks-rebound-thanksgiving-vertex-2026-11-27
+WebFetch: https://www.investing.com/news/stock-market-news/vertex-shares-drop-75-as-fda-extends-review-for-kidney-drug-povetacicept-5051552
+WebFetch: https://optionsoracle.substack.com/p/the-chips-bounce-back-nasdaq-futures
+WebFetch: https://247wallst.com/investing/2026/11/27/stock-futures-rip-on-thanksgiving-night-as-sp-500-futures-top-7300/
+WebSearch: FedWatch December rate hike probability after PCE GDP revision November 2026
+WebSearch: Marvell fiscal third quarter 2027 results guidance stock
+WebSearch: Vertex povetacicept major amendment analysts reaction price target
+WebSearch: Brazil stocks Inter&Co Nu Holdings rally November 27 2026 reason
+WebSearch: Palo Alto Networks stock down premarket November 27 2026
+WebFetch: https://www.benzinga.com/markets/equities/26/11/63666893/stock-market-today-dow-sp-500-nasdaq-100-futures-rise-as-wall-street-returns-to-wrap-up-holiday-shortened-week-spcx-panw-hpq-in-focus
+WebFetch: https://www.tradingview.com/news/benzinga:59e33908c094b:0-stock-market-today-dow-s-p-500-nasdaq-100-futures-rise-as-wall-street-returns-to-wrap-up-holiday-shortened-week-spcx-panw-hpq-in-focus/
+WebFetch: https://api.finexus.net/api/news/earnings/129964/html
+WebSearch: Vertex Pharmaceuticals press release povetacicept BLA PDUFA extension February 28 2027
+WebSearch: Vertex Pharmaceuticals fourth quarter 2026 earnings date
+WebSearch: Deere stock reversal after fiscal 2027 guidance analysts why shares rose November 25 2026
+WebFetch: https://news.vrtx.com/news-releases
+WebFetch: https://www.investing.com/news/analyst-ratings/vertex-stock-rating-reiterated-by-jpmorgan-after-povetacicept-pdufa-delay-93CH-5052108
+WebFetch: https://cappnotes.substack.com/p/closing-look-wednesday-november-25
+WebFetch: https://swingfolio.com/daily/us/2026-11-27/morning
+WebSearch: Lula names Trabuco finance minister Ibovespa rallies
+WebSearch: Meta shares rose Wednesday November 25 2026 why
+WebFetch: https://www.foxbusiness.com/markets/stocks-11-25-2026
+WebSearch: Nvidia Jensen Huang resignation return CEO export probe House hearing December 1
+WebSearch: advance goods trade deficit October 2026 wholesale inventories released November 27
+WebSearch: S&P 500 Wednesday November 25 2026 intraday low 6,970 reversal Nasdaq 100 bear market 20%
+WebSearch: Marvell Technology to announce third quarter fiscal 2027 financial results date
+WebFetch: https://cnttrading.substack.com/p/daily-market-2026-11-25

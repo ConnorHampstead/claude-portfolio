@@ -74,145 +74,153 @@ and "Your record" in the book state has the current figures.*
   trades and took slots, while the ideas you passed on averaged +0.10R over 80.
   Low-conviction ideas are now scored in the shadow book instead of traded.
 
-## Your last post-open review (2026-11-24)
+## Your last post-open review (2026-11-25)
 
 *For continuity: what you were watching and why. The book state below is
 current and overrides anything here.*
 
-# Post-open review: Tuesday 2026-11-24, 10:05 ET (16:05 Stockholm, ET+6)
+# Post-open review: Wednesday 2026-11-25, 10:05 ET (16:05 Stockholm)
 
-**No new trades, and HD is held.** Consumer confidence beat forecasts by about 11 points, but BBY fell back below its open, so the morning's BBY entry didn't trigger. Nothing else that moved has a catalyst and a positive expected value on my numbers.
+**No changes to the book and no new plays.** The QQQ sell stop at 604 stays in place. Its fall-back-to-the-review range was 604–630, and QQQ is at 617.73. The WMT long that this morning flagged for re-scoring met its condition, but it scores about −0.01R, so I'm passing.
 
 ### 1. Since the open
-
-**Consumer confidence was a big upside surprise.** The Conference Board released it at 10:00 ET (16:00 Stockholm):
-
-| | November | October | Consensus |
-|---|---|---|---|
-| Headline | **103.3** | 91.9 (revised; previews had 91.7) | 92.1–92.5 |
-| Present situation | 132.8 | — | — |
-| Expectations | 83.6 | — | — |
-| 12-month inflation expectations | 5.7% | — | — |
-
-- Planned durable-goods spending rose.
-- The only source is the Conference Board's own release on PR Newswire. That is the primary source, but secondary coverage hasn't caught up yet.
-
-**The tape is a rotation, not a broad selloff:**
-- **Tech is down:** SMH −6.2%, AMD −8.4%, MU −8.5%, NVDA −6.3% to 154.59. That puts NVDA below Monday's 156.93 low, so the morning's shadow NVDA sell stop at 154.90 would have filled.
-- **Most other sectors are up:** XLV +2.3%, XLP +1.7%, DIA +0.6%, IWM +0.6%.
-- **The indexes are recovering:** SPY is at 719.65, up from a 715.18 open and near its high. QQQ is at 640.57, inside the morning's 630–645 band.
-
-**What changed versus the morning:**
-- The breadth is better than the brief assumed, which weakens the case for an index short.
-- ADI has fallen further: −15.8% to 319.00, against 339.03 pre-market.
-- Nothing new has come out on the WSJ tariff report. I found no USTR release.
+- **No new 10:00 ET data.**
+  - The final UMich reading came out on Nov 20, not today.
+  - CNBC's live post at 10:04 lists no 10:00 release.
+  - The 08:30 numbers stand as written this morning (core PCE 3.3% vs 3.2%).
+- **The open was as weak as expected, then bounced.**
+  - At the open: Nasdaq −3.3%, S&P −2.3% (CNBC).
+  - **QQQ** made its low at 607.74, 1.5 points above the 20-day low of 606.23, then bounced to 617.73, near the top of its opening range.
+  - **SPY** is 704.10, also near its range high of 704.55.
+  - **VIX** is about 33.7–33.9, up from 30.8 pre-market.
+- **New single-name information:**
+  - **Deere** reported at 06:15 ET. FY27 net income guidance is $4.50–5.25B against about $5.9B consensus (CMeLite, Stocktitan/PRNewswire). The stock fell 3.7% pre-market and opened −4.2%, then reversed to +2.6% on 13.8× normal volume.
+  - **HPQ** is +9.6% after printing as high as 32.05.
+- **What hasn't changed:** the tariff and Fed backdrop.
+  - I couldn't get a fresh CME FedWatch figure for today. An InvestmentNews page that came up turned out to be from Sept 30, so I discarded it.
+  - Nothing I found suggests the December hike probability has fallen toward the 60% invalidation.
 
 ### 2. Fills, positions and resting entries
-
-**HD short (343.57 / stop 353.50 / target 323.50): hold, session 6 of 10.**
-- **Invalidation (a close above 347.51): not met.** HD is at 348.34, above 347.51 during the session, but the test is the close, and the session closes at 16:00 ET.
-- **No HD news today.** The CEO change took effect Nov 23 but was announced Nov 17 and is already priced. HD has no binary event before tomorrow, and it is not in its tenth session.
-- **The bracket stands.** The confidence beat is a headwind for this short, but it isn't the recorded invalidation. The stop is 0.5 ATR above the price and may fire today; that is its job.
-
-**Resting entries:** none. **Fills since the morning:** none.
+- **Open positions:** none.
+- **QQQ sell stop at 604 (stop 628.50, target 555): keep.**
+  - Last trade 617.73 is inside the 604–630 band the morning set for "leave it resting."
+  - The trigger is still below today's low (607.74), so it is still valid at the broker.
+  - Neither invalidation has happened: no sign that FedWatch fell below 60%, and no USTR withdrawal of the Section 301 proposal.
+  - If it doesn't fill today, the harness clears it before Thursday's holiday.
 
 ### 3. The morning's plans
-
-- **BBY long (needed ≥101.00, above its open, and confidence ≥92.4): not triggered, dropped.** Confidence passed easily, but BBY is at 98.23, below its 99.22 open and the 101 trigger. That is also under 99, the level where the morning said to do nothing. The stock faded after a beat on both the company's results and the macro print, so the tariff worry is setting the price.
-- **QQQ: no short in the review, as planned.** At 640.57 it is neither above 645 (gap failure off) nor below 630.
-- **NVDA: nothing, as planned.** The 143–147 level carries over to tomorrow.
-- **ADI: nothing, as planned.** It is down another 5 points into the call and is now 2.5 ATR down on the day.
+- **QQQ: not triggered, left resting.** QQQ is 617.73. It is not above 630, so the cancel condition wasn't met, and it hasn't broken 604.
+- **WMT: condition met, re-scored, passed.**
+  - The condition held: SPY is −2.0% (more than −1.5%), and WMT is 132.74, above its old 20-day high of 132.42.
+  - **Re-scored bracket:** market 132.74 / stop 127.40 / target 141.00, which is 1.55R. P = 0.39 (the base rate; I found no new reason to move it). Value is 0.39 × 1.55 − 0.61 = **−0.01R**.
+  - The catalyst (the Nov 19 earnings) is still six sessions old, and WMT is 12.6% above its 50-day average.
+- **Index long: not triggered.** SPY is 704.10, short of the 712 reclaim level, and VIX is about 34, not below 28.
 
 ### 4. New plays
-
-None. What I checked:
-- **PINS (+12.8%):** TheFly reports that Pinterest amended the change-in-control terms of its equity plan, and announced a Microsoft Advertising tie-up. Both items come second-hand through a news aggregator, and the move is takeover speculation 2.7 ATR in.
-- **TXN, MPWR and ENTG:** these fell in sympathy with ADI's in-line guide during a chip rout. I found no news of their own.
-- **HUM, LLY and the healthcare names:** they are rising with the rotation. I found no dated catalyst for any of them today.
-- **Shorting semis:** already a full ATR down on the day, so it would be a chase.
+None. Every candidate below failed pass 2 or came out at zero or negative expected value.
 
 ### 5. Passing on
+| Idea | Levels | P | Why I passed |
+|---|---|---|---|
+| WMT long | Market 132.74 / stop 127.40 / target 141.00 (1.55R) | 0.39 | Re-scored above: about −0.01R, with a stale catalyst and an extended stock. |
+| DE long (post-earnings reversal) | Market 629.64 / stop 602.00 / target 685.00 (2.0R) | 0.32 | Details below. |
+| HPQ long | Market 30.64 / stop 29.20 / target 33.50 (2.0R) | 0.30 | Details below. |
+| AAPL short (tariff catch-down) | Market 350.48 / stop 361.50 / target 328.00 (2.0R) | 0.30 | Details below. |
 
-- **BBY long** at 98.23 market, stop 94.40, target 110.00, about 3.1R. I put P at 0.25: a 3R bracket starts near 0.25 on a random walk, and the fade below the open after a confidence beat keeps it there. EV is about +0.02. The morning's conditions are not met. Logged.
-- **ADI long** at 319.00 market, stop 295.00 (1 ATR), target 346.00 (Friday's close, about 345.92), 1.1R. P 0.38, EV about −0.19. This is buying against the trend in the middle of a chip rout. The guide was in line and Cantor raised its target, but there's no reversal sign. Logged.
-- **TXN long** at 266.83 market, stop 248.50 (1 ATR), target 291.00 (yesterday's close), 1.3R. P 0.37, EV about −0.14. It is a sympathy drop down near its 262.29 20-day low, with no news of its own. I didn't look up its earnings date, and the levels are for scoring only. Logged.
-- **PINS long:** no levels. It is speculation on a plan amendment, it has already moved 2.7 ATR, and the only source is a news aggregator's write-up.
-- **DLTR (153.09, +10.1%):** now 2.3 ATR up and above its 20-day high. The morning's reasons for passing still apply, and more strongly.
+- **DE long.**
+  - The guidance missed badly. Morgan Stanley said it "weakens" their thesis.
+  - I couldn't find a source for the reversal. The best guess is that the bad news was already priced in after a 7% drop the week before.
+  - It is up 2.3 ATR off its low in 35 minutes, and the market is shut Thursday. A move I can't explain at its source is not a trade.
+- **HPQ long.**
+  - Sources conflict on the reaction: a 14–17% after-hours spike faded, and the stock is now +9.6% after printing as high as 32.05.
+  - Goldman says the guidance midpoint is about −11% year on year on a comparable basis.
+  - It is already 2.5 ATR up today, so buying now would be chasing.
+- **AAPL short.**
+  - Section 301 covers China and India, but I found no dated source tying it to Apple today.
+  - AAPL is acting as a mega-cap haven (−1.0%).
+  - The catalyst is unverified.
+- **Not given levels:**
+  - **DAL and UAL** (−5%): I couldn't find a dated source for today's oil move (USO +2.9%).
+  - **Semi shorts** (LRCX, AMAT, MU, AVGO): already −4% to −9% with ATRs of 8–12%, so a short now chases the move.
 
-### 6. For tomorrow
-
-Wednesday's PCE and Q3 GDP come out at 08:30 ET (14:30 Stockholm), before the brief.
-- **HD:** if today closes above 347.51, close the position at tomorrow's open. That is the recorded invalidation, condition 1. If it closes at or below 347.51, hold the bracket.
-- **QQQ:** if today closes below 630 and PCE is hot, consider a short with the stop above 657.50 and the target at 606.50. Today's breadth argues against it unless both conditions hold.
-- **NVDA:** a print in the 143–147 zone that holds 140 is a long at the 0.5 tier.
-- **BBY:** only if it closes back above 100.73 (today's high) after PCE, with the same 94.40 stop and 110 target. Below that, the tariff report is setting the price.
-- **Timing:** resting entries are cleared before Thursday's holiday, so anything placed Wednesday must fill that day or Friday.
-
-**Book once orders fill (none today):** gross 17% (cap 150%), net −17% (cap ±100%), consumer discretionary −17% (cap 40%). Risk at stake 0.49% (cap 4%), 1 of 8 slots used.
+### 6. For tomorrow (Friday 11-27, half day, 13:00 ET / 19:00 Stockholm close)
+- **QQQ:**
+  - If the 604 trigger didn't fill, it has been cleared.
+  - If QQQ opens Friday still above 606.23, a new breakdown trigger can go in below that day's low.
+  - If it gapped below 606, don't chase. Only a bounce limit in the 625–630 area, stop above 650, is worth scoring.
+- **DE:** consider it only if it holds above 613.76 (Wednesday's prior close) into Friday, and only once there is a dated analyst source explaining today's reversal.
+- **WMT:** consider a long only on a pullback limit near 129.50 (the 132.42 breakout zone minus 1 ATR), not up here.
 
 ```json
 {
-  "date": "2026-11-24",
+  "date": "2026-11-25",
   "no_trade": true,
-  "session_note": "Rotation tape: semis -6% (SMH, NVDA below Monday's low) while breadth improves (DIA/IWM +0.6%, XLV +2.3%) after a big consumer confidence beat (103.3 vs ~92.3). The morning's BBY trigger failed: 98.23 is below its 99.22 open and the 101 condition. No new idea clears positive EV with a verified catalyst. Would act: HD close if today closes >347.51; QQQ short on a close <630 plus a hot PCE; NVDA long at 0.5 in 143-147 holding 140; BBY only on a close >100.73.",
+  "session_note": "Post-open: AI unwind continuing (Nasdaq -3.1%, VIX ~34) but QQQ bounced off 607.74 to 617.73, so the 604 breakdown trigger stays as planned. WMT met its re-score condition but is ~-0.01R; DE's reversal after a guide miss is unexplained at source; no new plays. I would act on a QQQ break of 606.23 (order resting) or a WMT pullback toward 129.50.",
   "plays": [],
   "manage": [],
   "passed": [
     {
-      "ticker": "BBY",
+      "ticker": "WMT",
       "direction": "long",
       "entry_type": "market",
-      "entry": 98.23,
-      "stop": 94.40,
-      "targets": [110.00],
-      "p_target_first": 0.25,
-      "reason": "Morning review condition not met: 98.23 (10:04) below the 99.22 open and the 101 trigger despite consumer confidence at 103.3. The fade after a beat on both the results and the macro print says tariff risk is setting the price. A 3.1R bracket with the stop 0.9 ATR away; EV about +0.02."
+      "entry": 132.74,
+      "stop": 127.40,
+      "targets": [141.00],
+      "p_target_first": 0.39,
+      "reason": "Morning's review condition met (SPY -2.0%, WMT > 132.42) but re-scored at 1.55R with P at the 39% base rate gives about -0.01R; catalyst six sessions old, +12.6% vs 50-day average."
     },
     {
-      "ticker": "ADI",
+      "ticker": "DE",
       "direction": "long",
       "entry_type": "market",
-      "entry": 319.00,
-      "stop": 295.00,
-      "targets": [346.00],
-      "p_target_first": 0.38,
-      "reason": "Counter-trend after -15.8% (2.5 ATR) on an in-line Q1 guide; now about 8% below Friday's ~345.92 pre-rally close. Cantor raised its target, but a chip-sector rout is underway (SMH -6.2%) and there's no reversal signal. 1.1R, EV about -0.19."
+      "entry": 629.64,
+      "stop": 602.00,
+      "targets": [685.00],
+      "p_target_first": 0.32,
+      "reason": "Reversed from -4.2% to +2.6% on 13.8x volume after FY27 net income guidance of $4.50-5.25B vs about $5.9B consensus; no source for the reversal, 2.3 ATR off the low in 35 minutes, holiday gap ahead. EV about -0.04R."
     },
     {
-      "ticker": "TXN",
+      "ticker": "HPQ",
       "direction": "long",
       "entry_type": "market",
-      "entry": 266.83,
-      "stop": 248.50,
-      "targets": [291.00],
-      "p_target_first": 0.37,
-      "reason": "Sympathy drop of 8.4% on ADI's guide and the chip rout, with no news of its own found. Near its 262.29 20-day low. Earnings date not looked up (shadow only). 1.3R, EV about -0.14."
+      "entry": 30.64,
+      "stop": 29.20,
+      "targets": [33.50],
+      "p_target_first": 0.30,
+      "reason": "+9.6% after a choppy post-earnings path (14-17% after-hours spike, faded, re-rallied to 32.05); Goldman says the FY27 guide midpoint is about -11% y/y on a comparable basis; already 2.5 ATR up today, so this would be a chase."
+    },
+    {
+      "ticker": "AAPL",
+      "direction": "short",
+      "entry_type": "market",
+      "entry": 350.48,
+      "stop": 361.50,
+      "targets": [328.00],
+      "p_target_first": 0.30,
+      "reason": "Laggard catch-down idea on the Section 301 tariffs (China, India), but no dated source ties them to Apple today, and AAPL is trading as a mega-cap haven (-1.0%). Catalyst unverified."
     }
   ]
 }
 ```
 
 Sources:
-- [Conference Board via PR Newswire: US Consumer Confidence Surged in November](https://www.prnewswire.com/news-releases/us-consumer-confidence-surged-in-november-302949447.html)
-- [Yahoo Finance live blog, Nov 24](https://finance.yahoo.com/markets/live/stock-market-today-tuesday-november-24-dow-sp-500-nasdaq-rebound-090614276.html)
-- [Investing.com: CB Consumer Confidence preview](https://in.investing.com/news/stock-market-news/cb-consumer-confidence-highlights-economic-data-due-tuesday-93CH-5721796)
-- [StockAnalysis: BBY quote](https://stockanalysis.com/stocks/bby/)
-- [TipRanks: Best Buy comps +6.1%, holiday guide](https://www.tipranks.com/news/best-buys-bby-comparable-sales-jump-6-1-ahead-of-black-friday-whats-next-for-holiday-spending)
-- [CNBC: Best Buy Q3 FY27](https://www.cnbc.com/2026/11/24/best-buy-bby-q3-2027-earnings.html)
-- [TradingView/StockStory: Why are Best Buy shares soaring](https://www.tradingview.com/news/stockstory:4637c8861094b:0-why-are-best-buy-shares-soaring-today/)
-- [Seeking Alpha: ADI slides after in-line Q1 outlook](https://seekingalpha.com/news/4676118-analog-devices-shares-slide-after-its-inline-q1-outlook?feed_item_type=news)
-- [Benzinga: ADI analyst forecasts](https://www.benzinga.com/analyst-stock-ratings/price-target/26/11/63525866/analog-devices-to-rally-over-66-here-are-10-top-analyst-forecasts-for-monday)
-- [StockAnalysis: PINS quote and news](https://stockanalysis.com/stocks/pins/)
-- [Home Depot IR: McPhail named CEO effective Nov 23](https://ir.homedepot.com/news-releases/2026/11-17-2026-104320345)
-- [TT News: Home Depot names McPhail CEO](https://www.ttnews.com/articles/home-depot-mcphail-ceo)
-- [StockAnalysis: HD](https://stockanalysis.com/stocks/hd/)
-- [Wiley: Section 301 forced-labor tariffs (background)](https://www.wiley.law/alert-New-Forced-Labor-Tariffs-Imposed-on-60-US-Trading-Partners)
-- [Quiver Quant: Humana / Medicare Advantage sentiment (undated)](https://www.quiverquant.com/news/Humana+Rises+as+Medicare+Advantage+Sentiment+Improves)
+- [CNBC live updates, Nov 25 (10:04 ET update: indices, VIX)](https://cnbc.com/2026/11/24/stock-market-today-live-updates-.html)
+- [Stocktitan / PRNewswire: Deere Q4 FY26 release, 06:15 ET](https://www.stocktitan.net/news/DE/deere-reports-net-income-of-1-051-billion-for-fourth-quarter-4-860-o8y609mffx35.html)
+- [CMeLite: Deere FY27 guidance vs consensus, Morgan Stanley comment](https://www.cmelitegroup.com/trends-and-insights/deere-shares-slide-as-fiscal-2027-guidance-falls-short-leaving-investors-asking-whether-it-is-realistic-or-conservative/)
+- [MLQ: Deere FY27 outlook](https://mlq.ai/news/deere-forecasts-fiscal-2027-net-income-of-450-billion-to-525-billion-as-north-american-large-ag-demand-starts-to-improve/)
+- [Blockonomi: DE slips pre-market](https://blockonomi.com/deere-de-stock-slips-as-large-ag-slump-offsets-revenue-beat-and-2027-guidance)
+- [Invezz: HP popped after earnings, pared gains](https://invezz.com/news/2026/11/25/hp-stock-popped-after-earnings-beat-why-it-has-pared-gains-in-premarket/)
+- [Pomegra: HPQ rally fades on FY2027 outlook](https://pomegra.io/news/hp-inc-hpq-q4-2026-14-rally-fades-on-fy2027-outlook)
+- [Startup Fortune: HP FY27 forecast vs estimates](https://startupfortune.com/hp-inc-forecasts-fiscal-2027-profit-above-wall-streets-estimate-as-memory-costs-ease/)
+- [Yahoo Finance: Nvidia, AMD, Micron sink as investors flee AI trade (Nov 25)](https://finance.yahoo.com/markets/article/nvidia-amd-micron-stocks-sink-as-investors-flee-ai-trade-134518921.html)
+- [Stockanalysis: UMich November prelim (final was Nov 20)](https://stockanalysis.com/news/consumer-sentiment-rises-november-2026/)
+- [InvestmentNews (dated Sept 30, 2026; stale and discarded)](https://www.investmentnews.com/equities/pce-data-cools-but-further-rate-hikes-loom/268415)
+- [MarketScreener: WMT on track for record close](https://ca.marketscreener.com/quote/stock/WALMART-INC-4841/news/Walmart-on-Track-for-Record-High-Close-Data-Talk-30917318/)
 
 ## Current book state
 *Auto-generated. These are live figures - use them, do not estimate.*
 
-- Time now: **09:05 ET** (14:05 UTC, 15:05 Stockholm), Wednesday 2026-11-25. The cash session opens at 09:30 ET (15:30 Stockholm), in 25 min, and closes at 16:00 ET (22:00 Stockholm). Anything scheduled before 09:05 ET today has already been released: look up the actual figure and the market's reaction, not the consensus.
+- Time now: **09:05 ET** (14:05 UTC, 15:05 Stockholm), Friday 2026-11-27. The cash session opens at 09:30 ET (15:30 Stockholm), in 25 min, and closes at 13:00 ET (19:00 Stockholm). Anything scheduled before 09:05 ET today has already been released: look up the actual figure and the market's reaction, not the consensus.
 - Equity: **$102,973.84**
 - Cash: $102,973.84
 - Session P&L so far: +0.00% (new entries are blocked at -3.0%)
@@ -235,20 +243,20 @@ Sources:
 |---|---|---|---|---|
 | Trades taken, as managed | 53 | 19 | 31 | +0.03R |
 | The same trades, bracket left alone | 53 | | | +0.05R |
-| Ideas you passed on, or the caps dropped | 127 | 45 | 72 | +0.04R |
+| Ideas you passed on, or the caps dropped | 135 | 48 | 76 | +0.05R |
 
 What you said against what happened, trades and passes together:
 
 | You said | Ideas | Reached target first |
 |---|---|---|
 | 0%-30% | 1 | 100% |
-| 30%-35% | 50 | 48% |
-| 35%-40% | 84 | 30% |
-| 40%-45% | 26 | 46% |
+| 30%-35% | 53 | 47% |
+| 35%-40% | 87 | 30% |
+| 40%-45% | 27 | 48% |
 | 45%-50% | 5 | 20% |
 | 50%-60% | 1 | 100% |
 
-Base rate: 38% of 167 brackets reached target first. Your Brier score is 0.239; saying 38% every time scores 0.236. Your probabilities are not yet telling the better ideas from the worse ones: start from the base rate and move off it only for a reason you can name.
+Base rate: 39% of 174 brackets reached target first. Your Brier score is 0.240; saying 39% every time scores 0.237. Your probabilities are not yet telling the better ideas from the worse ones: start from the base rate and move off it only for a reason you can name.
 
 ### Last 5 closed trades
 
@@ -268,59 +276,59 @@ Base rate: 38% of 167 brackets reached target first. Your Brier score is 0.239; 
 
 | Symbol | Last (ET) | vs prev | Prev close | ATR14 | 20d low-high | Prev vs 20d / 50d avg | 5d | Avg vol 20d |
 |---|---|---|---|---|---|---|---|---|
-| SPY | 704.39 (08:49 sip) | -2.0% | 718.78 | 17.65 (2.5%) | 686.75-775.64 | -3.3% / -5.2% | -1.9% | 63.0M |
-| QQQ | 616.98 (09:04 iex) | -3.3% | 638.10 | 24.36 (3.8%) | 606.23-726.14 | -4.9% / -9.9% | -2.9% | 61.3M |
-| IWM | 263.72 (08:49 sip) | -1.3% | 267.14 | 6.61 (2.5%) | 256.32-286.17 | -2.9% / -3.7% | -0.7% | 27.6M |
-| DIA | 493.20 (08:49 sip) | -1.3% | 499.74 | 10.11 (2.0%) | 479.40-536.00 | -2.6% / -2.9% | -1.4% | 4.2M |
-| TLT | 82.27 (09:03 iex) | +1.0% | 81.49 | 0.75 (0.9%) | 79.11-82.42 | +0.7% / +2.1% | +2.4% | 38.5M |
-| GLD | 318.08 (08:57 iex) | -2.3% | 325.45 | 8.28 (2.5%) | 320.95-380.18 | -8.7% / -12.6% | -7.7% | 10.8M |
-| USO | 137.32 (08:49 sip) | +1.4% | 135.43 | 4.69 (3.5%) | 132.28-171.82 | -7.9% / -10.1% | -3.4% | 4.8M |
-| SMH | 405.00 (08:49 sip) | -5.1% | 426.75 | 34.19 (8.0%) | 396.85-571.00 | -11.8% / -21.5% | -7.2% | 13.4M |
-| XLK | 151.20 (08:49 sip) | -3.7% | 157.09 | 8.05 (5.1%) | 148.09-191.55 | -7.4% / -14.4% | -3.8% | 16.5M |
-| XLF | 55.70 (08:49 sip) | -0.7% | 56.11 | 1.11 (2.0%) | 54.42-60.04 | -1.9% / +0.5% | -1.7% | 42.0M |
-| XLE | 60.17 (08:49 sip) | -0.5% | 60.45 | 1.49 (2.5%) | 59.55-70.15 | -5.2% / -6.2% | -4.6% | 37.1M |
-| XLV | 184.42 (08:49 sip) | -0.2% | 184.72 | 3.90 (2.1%) | 176.71-192.32 | +0.0% / +4.3% | -0.3% | 13.6M |
-| XLI | 158.91 (08:45 sip) | -1.7% | 161.61 | 4.07 (2.5%) | 155.70-172.40 | -2.8% / -3.6% | -1.9% | 9.5M |
-| XLY | 115.90 (08:49 sip) | -1.5% | 117.72 | 3.04 (2.6%) | 112.03-122.92 | -0.3% / +2.9% | +0.5% | 10.0M |
-| XLP | 92.36 (08:49 sip) | +0.5% | 91.88 | 1.53 (1.7%) | 86.36-93.48 | +1.4% / +6.0% | +0.5% | 22.0M |
-| XLU | 43.40 (08:49 sip) | +0.0% | 43.40 | 0.64 (1.5%) | 42.42-44.40 | -0.1% / +3.3% | -0.0% | 26.0M |
-| XLB | 49.60 (08:35 sip) | -1.1% | 50.17 | 1.17 (2.3%) | 48.21-54.63 | -3.1% / -1.1% | -1.3% | 13.1M |
-| XLRE | 43.42 (08:35 sip) | -0.1% | 43.46 | 0.70 (1.6%) | 41.78-45.34 | -0.6% / +2.1% | -0.3% | 7.9M |
-| XLC | 102.29 (08:25 sip) | -2.1% | 104.45 | 2.60 (2.5%) | 99.33-109.26 | +0.0% / -3.5% | -0.8% | 8.3M |
-| KRE | 69.25 (08:49 sip) | -0.7% | 69.76 | 1.50 (2.1%) | 68.14-75.80 | -2.9% / -1.9% | -1.5% | 15.6M |
-| XHB | 101.01 (05:10 sip) | -0.3% | 101.28 | 3.12 (3.1%) | 96.34-108.78 | -0.3% / +2.8% | +2.2% | 2.4M |
+| SPY | 728.07 (08:49 sip) | +1.6% | 716.70 | 16.88 (2.4%) | 686.75-775.64 | -3.2% / -5.4% | -1.8% | 65.2M |
+| QQQ | 648.44 (08:49 sip) | +2.3% | 633.93 | 23.32 (3.7%) | 606.23-718.07 | -4.9% / -10.3% | -3.9% | 63.9M |
+| IWM | 272.57 (08:49 sip) | +1.4% | 268.87 | 6.23 (2.3%) | 256.32-286.17 | -2.0% / -3.0% | -0.5% | 28.4M |
+| DIA | 508.08 (08:49 sip) | +1.4% | 501.27 | 9.56 (1.9%) | 479.40-536.00 | -2.0% / -2.6% | +0.0% | 4.3M |
+| TLT | 81.81 (08:49 sip) | -0.5% | 82.24 | 0.80 (1.0%) | 79.11-82.81 | +1.5% / +3.0% | +2.5% | 39.2M |
+| GLD | 334.15 (08:49 sip) | +2.0% | 327.45 | 8.87 (2.7%) | 313.96-380.18 | -7.5% / -11.7% | -4.0% | 11.2M |
+| USO | 140.49 (08:49 sip) | +0.4% | 139.89 | 4.76 (3.4%) | 132.28-171.82 | -4.0% / -7.0% | +2.8% | 4.6M |
+| SMH | 439.04 (08:50 iex) | +3.9% | 422.46 | 32.34 (7.7%) | 393.88-565.87 | -11.4% / -21.9% | -8.1% | 13.8M |
+| XLK | 159.98 (08:49 sip) | +2.7% | 155.79 | 7.64 (4.9%) | 148.09-189.34 | -7.2% / -14.8% | -4.9% | 17.1M |
+| XLF | 57.10 (08:45 sip) | +1.0% | 56.51 | 1.02 (1.8%) | 54.42-60.04 | -1.2% / +1.2% | +0.2% | 42.6M |
+| XLE | 61.71 (08:49 sip) | +1.3% | 60.90 | 1.40 (2.3%) | 59.55-70.15 | -3.9% / -5.5% | -0.6% | 37.0M |
+| XLV | 183.75 (08:49 sip) | +0.0% | 183.68 | 3.62 (2.0%) | 176.71-192.32 | -0.6% / +3.6% | +1.4% | 13.9M |
+| XLI | 165.40 (08:20 sip) | +1.5% | 162.95 | 3.98 (2.4%) | 155.70-172.40 | -1.8% / -2.7% | -1.0% | 9.7M |
+| XLY | 119.24 (08:25 sip) | +1.5% | 117.49 | 2.90 (2.5%) | 112.03-122.92 | -0.6% / +2.6% | -1.4% | 10.1M |
+| XLP | 92.05 (08:49 sip) | -0.3% | 92.30 | 1.45 (1.6%) | 87.39-93.48 | +1.6% / +6.3% | +1.2% | 22.5M |
+| XLU | 43.99 (08:49 sip) | +0.9% | 43.61 | 0.60 (1.4%) | 42.63-44.40 | +0.3% / +3.7% | +0.1% | 26.2M |
+| XLB | 51.93 (08:40 sip) | +1.4% | 51.21 | 1.12 (2.2%) | 48.21-54.63 | -1.0% / +0.9% | +1.5% | 13.3M |
+| XLRE | 43.92 (07:25 sip) | +0.1% | 43.86 | 0.68 (1.6%) | 42.40-45.34 | +0.1% / +3.0% | +0.6% | 7.9M |
+| XLC | 107.12 (08:40 sip) | +1.7% | 105.38 | 2.59 (2.5%) | 99.33-109.26 | +0.8% / -2.5% | -0.2% | 8.2M |
+| KRE | 70.39 (08:20 sip) | +0.8% | 69.83 | 1.31 (1.9%) | 68.14-75.80 | -2.7% / -1.8% | -1.0% | 15.8M |
+| XHB | 104.26 (08:10 sip) | +0.6% | 103.67 | 3.08 (3.0%) | 96.34-108.78 | +1.7% / +5.1% | +2.9% | 2.4M |
 
 #### Large caps
 
 | Symbol | Last (ET) | vs prev | Prev close | ATR14 | 20d low-high | Prev vs 20d / 50d avg | 5d | Avg vol 20d |
 |---|---|---|---|---|---|---|---|---|
-| AAPL | 351.29 (08:49 sip) | -0.8% | 354.07 | 8.15 (2.3%) | 325.08-360.83 | +1.8% / +3.4% | +0.6% | 50.8M |
-| MSFT | 481.70 (08:58 iex) | -2.9% | 496.13 | 17.47 (3.5%) | 481.03-558.07 | -4.3% / -4.3% | -1.8% | 31.0M |
-| NVDA | 145.26 (09:03 iex) | -6.5% | 155.38 | 16.15 (10.4%) | 124.50-219.99 | -11.6% / -24.2% | -0.1% | 338.1M |
-| AMZN | 243.25 (09:04 iex) | -3.6% | 252.29 | 10.79 (4.3%) | 229.36-275.34 | -2.1% / -1.1% | -2.2% | 54.1M |
-| GOOGL | 264.67 (09:03 iex) | -5.2% | 279.05 | 11.78 (4.2%) | 264.22-326.40 | -2.3% / -12.7% | -0.4% | 46.8M |
-| META | 576.50 (08:49 sip) | -2.3% | 589.82 | 24.88 (4.2%) | 558.68-648.45 | -4.2% / -12.4% | -4.7% | 19.2M |
-| TSLA | 370.50 (08:59 iex) | -3.7% | 384.68 | 21.48 (5.6%) | 338.15-414.23 | +0.3% / +2.1% | +1.2% | 35.9M |
-| AVGO | 286.30 (09:04 iex) | -4.9% | 301.08 | 24.00 (8.0%) | 289.77-369.82 | -8.6% / -11.8% | -11.9% | 31.8M |
-| AMD | 383.52 (08:59 iex) | -7.2% | 413.27 | 55.60 (13.5%) | 396.01-594.00 | -17.0% / -24.9% | -17.9% | 45.5M |
-| ORCL | 102.51 (08:59 iex) | -6.4% | 109.50 | 8.49 (7.8%) | 100.25-148.48 | -9.4% / -16.2% | -4.8% | 42.8M |
-| NFLX | 58.03 (08:49 sip) | -1.4% | 58.87 | 1.96 (3.3%) | 56.56-67.49 | -4.8% / -11.6% | -1.4% | 40.3M |
-| CRM | 189.02 (08:45 sip) | -2.2% | 193.26 | 8.52 (4.4%) | 179.91-244.64 | -8.8% / -14.8% | -0.6% | 7.4M |
-| JPM | 313.00 (08:49 sip) | -1.3% | 317.10 | 8.80 (2.8%) | 309.18-359.80 | -5.3% / -5.5% | -3.9% | 7.3M |
-| GS | 789.85 (08:49 sip) | -2.0% | 806.02 | 35.09 (4.4%) | 786.66-939.38 | -8.9% / -10.2% | -8.1% | 2.4M |
-| BAC | 47.86 (08:49 sip) | -1.4% | 48.56 | 1.25 (2.6%) | 46.88-53.02 | -2.5% / -7.1% | -1.8% | 36.2M |
-| XOM | 158.64 (08:49 sip) | +0.3% | 158.23 | 3.88 (2.5%) | 156.67-187.32 | -5.8% / -5.8% | -5.4% | 15.1M |
-| CVX | 208.98 (08:45 sip) | +0.1% | 208.73 | 4.72 (2.3%) | 204.31-234.53 | -3.0% / -2.2% | -2.6% | 8.7M |
-| LLY | 1,408.43 (08:49 sip) | +0.1% | 1,407.59 | 43.30 (3.1%) | 1,258.81-1,475.25 | +1.0% / +10.3% | -0.6% | 3.3M |
-| UNH | 338.00 (08:49 sip) | -1.1% | 341.88 | 16.51 (4.8%) | 319.13-416.19 | -11.7% / -11.7% | -12.3% | 7.5M |
-| JNJ | 278.03 (08:49 sip) | +0.6% | 276.46 | 6.73 (2.4%) | 262.89-288.81 | +0.8% / +3.8% | -0.3% | 8.2M |
-| WMT | 133.15 (08:57 iex) | +0.6% | 132.31 | 2.99 (2.3%) | 118.11-132.42 | +4.6% / +12.6% | +3.8% | 24.6M |
-| COST | 1,095.00 (08:49 sip) | +0.3% | 1,091.71 | 19.53 (1.8%) | 952.12-1,094.75 | +5.0% / +12.9% | +1.1% | 2.6M |
-| HD | 353.48 (08:40 sip) | -0.1% | 353.69 | 9.56 (2.7%) | 316.15-362.44 | +3.2% / +11.7% | +4.3% | 5.2M |
-| CAT | 520.59 (08:49 sip) | -3.7% | 540.63 | 29.50 (5.5%) | 508.11-732.73 | -8.0% / -23.2% | -5.3% | 4.2M |
-| BA | 161.79 (08:49 sip) | -1.1% | 163.59 | 5.34 (3.3%) | 155.56-179.19 | -3.2% / -10.2% | -0.2% | 8.7M |
-| DAL | 83.00 (08:49 sip) | -1.8% | 84.50 | 3.18 (3.8%) | 78.66-92.52 | -1.0% / +2.4% | +0.2% | 5.9M |
-| UAL | 105.59 (08:35 sip) | -2.1% | 107.80 | 5.29 (4.9%) | 100.28-122.08 | -1.8% / -0.1% | +1.4% | 5.4M |
+| AAPL | 358.71 (08:54 iex) | +0.9% | 355.58 | 8.03 (2.3%) | 325.08-360.83 | +2.0% / +3.7% | +0.9% | 51.7M |
+| MSFT | 499.16 (08:49 sip) | +1.9% | 489.93 | 17.04 (3.5%) | 477.39-558.07 | -5.1% / -5.5% | -3.4% | 30.9M |
+| NVDA | 152.75 (09:01 iex) | +2.3% | 149.30 | 15.83 (10.6%) | 124.50-215.33 | -13.4% / -26.7% | -1.1% | 351.8M |
+| AMZN | 250.52 (09:05 iex) | +2.5% | 244.43 | 10.46 (4.3%) | 229.36-275.34 | -5.0% / -4.2% | -8.7% | 55.4M |
+| GOOGL | 280.23 (08:49 sip) | +2.6% | 273.10 | 11.63 (4.3%) | 262.73-304.97 | -3.5% / -14.2% | -3.3% | 45.7M |
+| META | 629.81 (08:49 sip) | +3.3% | 609.89 | 24.31 (4.0%) | 558.68-648.45 | -0.9% / -9.3% | -1.1% | 18.3M |
+| TSLA | 390.30 (08:49 sip) | +2.7% | 380.14 | 20.05 (5.3%) | 338.15-414.23 | -0.5% / +0.8% | -0.9% | 35.8M |
+| AVGO | 310.98 (08:57 iex) | +3.4% | 300.86 | 23.14 (7.7%) | 278.00-369.82 | -8.0% / -11.6% | -15.0% | 32.4M |
+| AMD | 423.35 (08:49 sip) | +4.3% | 406.03 | 52.47 (12.9%) | 370.40-594.00 | -17.0% / -26.0% | -23.4% | 47.2M |
+| ORCL | 107.84 (08:49 sip) | +3.8% | 103.88 | 8.32 (8.0%) | 99.34-144.61 | -12.6% / -20.1% | -8.8% | 40.6M |
+| NFLX | 60.21 (08:49 sip) | +1.3% | 59.41 | 1.94 (3.3%) | 56.56-67.49 | -3.7% / -10.3% | -0.7% | 40.5M |
+| CRM | 197.38 (08:49 sip) | +0.1% | 197.21 | 8.67 (4.4%) | 179.91-234.62 | -5.9% / -12.7% | +3.6% | 7.4M |
+| JPM | 322.88 (08:49 sip) | +1.9% | 316.74 | 7.73 (2.4%) | 309.18-359.80 | -5.1% / -5.4% | -2.3% | 7.4M |
+| GS | 822.25 (08:49 sip) | +2.6% | 801.03 | 31.80 (4.0%) | 772.74-939.38 | -8.8% / -10.5% | -8.3% | 2.5M |
+| BAC | 49.37 (08:40 sip) | +1.7% | 48.54 | 1.14 (2.4%) | 46.88-53.02 | -2.3% / -6.8% | -0.8% | 36.8M |
+| XOM | 160.14 (08:45 sip) | +1.3% | 158.08 | 3.48 (2.2%) | 156.67-187.32 | -5.3% / -5.9% | -1.6% | 15.5M |
+| CVX | 213.29 (08:45 sip) | +1.1% | 210.95 | 4.36 (2.1%) | 204.31-234.53 | -1.6% / -1.2% | +2.5% | 8.7M |
+| LLY | 1,386.82 (08:49 sip) | -0.4% | 1,392.22 | 40.02 (2.9%) | 1,328.39-1,475.25 | -0.5% / +8.7% | +0.7% | 3.3M |
+| UNH | 348.55 (08:49 sip) | +0.7% | 346.19 | 15.91 (4.6%) | 319.13-416.11 | -9.9% / -10.4% | -1.1% | 7.6M |
+| JNJ | 274.17 (08:49 sip) | +0.1% | 273.94 | 6.46 (2.4%) | 263.37-288.81 | -0.2% / +2.8% | +1.0% | 8.3M |
+| WMT | 132.00 (08:49 sip) | +0.0% | 131.94 | 2.81 (2.1%) | 119.66-133.19 | +3.8% / +11.8% | +3.6% | 25.0M |
+| COST | 1,086.03 (08:49 sip) | -0.1% | 1,086.81 | 17.93 (1.6%) | 956.23-1,098.00 | +3.9% / +11.9% | +1.9% | 2.7M |
+| HD | 363.52 (08:49 sip) | +0.6% | 361.26 | 9.45 (2.6%) | 322.68-363.65 | +4.8% / +13.7% | +7.0% | 5.4M |
+| CAT | 560.69 (08:45 sip) | +3.1% | 543.69 | 28.98 (5.3%) | 508.11-664.47 | -6.1% / -22.2% | -2.7% | 4.3M |
+| BA | 167.98 (08:49 sip) | +2.1% | 164.53 | 5.23 (3.2%) | 155.56-179.19 | -2.6% / -9.3% | +1.0% | 8.0M |
+| DAL | 84.31 (08:45 sip) | +1.6% | 82.95 | 3.10 (3.7%) | 78.66-92.52 | -2.9% / +0.4% | -2.3% | 5.9M |
+| UAL | 106.53 (08:49 sip) | +1.9% | 104.52 | 5.09 (4.9%) | 100.28-122.08 | -4.9% / -3.1% | -2.9% | 5.5M |
 
 #### Today's biggest movers among 270 other liquid names (at least $5 and 1M average volume)
 
@@ -328,19 +336,19 @@ Base rate: 38% of 167 brackets reached target first. Your Brier score is 0.239; 
 
 | Symbol | Last (ET) | vs prev | Prev close | ATR14 | 20d low-high | Prev vs 20d / 50d avg | 5d | Avg vol 20d |
 |---|---|---|---|---|---|---|---|---|
-| HPQ | 28.90 (08:54 iex) | +3.4% | 27.94 | 1.07 (3.8%) | 26.95-33.50 | -3.7% / -9.1% | -2.7% | 14.4M |
-| GIS | 36.00 (08:45 sip) | +1.2% | 35.59 | 1.17 (3.3%) | 32.82-37.02 | +2.5% / +5.4% | +2.6% | 8.6M |
-| BMY | 62.69 (08:49 sip) | +1.1% | 62.02 | 1.87 (3.0%) | 57.88-65.54 | +0.4% / +1.4% | +1.1% | 10.7M |
-| COP | 136.06 (07:05 sip) | +1.1% | 134.64 | 3.78 (2.8%) | 130.26-153.27 | -3.3% / -1.3% | -3.5% | 7.6M |
-| MO | 75.59 (08:40 sip) | +1.0% | 74.82 | 1.70 (2.3%) | 72.75-79.97 | -2.2% / +2.3% | -3.4% | 8.9M |
-| MDLZ | 67.63 (08:35 sip) | +0.9% | 67.01 | 1.40 (2.1%) | 61.51-68.92 | +1.5% / +6.2% | +0.4% | 9.0M |
-| KO | 98.50 (08:57 iex) | +0.9% | 97.62 | 1.94 (2.0%) | 90.58-100.56 | +1.3% / +6.0% | -1.2% | 20.1M |
-| PAYX | 115.99 (04:10 sip) | +0.8% | 115.08 | 2.97 (2.6%) | 106.67-122.72 | +0.5% / +4.7% | +0.9% | 2.7M |
-| MU | 573.00 (09:04 iex) | -9.0% | 629.79 | 75.53 (12.0%) | 585.25-990.00 | -17.3% / -30.2% | -11.6% | 36.0M |
-| SNDK | 71.23 (09:05 iex) | -8.6% | 77.95 | 13.86 (17.8%) | 74.83-176.06 | -32.3% / -52.4% | -21.8% | 113.6M |
-| DELL | 273.64 (09:04 iex) | -7.3% | 295.28 | 40.28 (13.6%) | 274.35-507.00 | -17.5% / -36.1% | -8.5% | 9.2M |
-| ARM | 150.67 (08:49 sip) | -6.7% | 161.56 | 18.27 (11.3%) | 150.37-237.88 | -14.4% / -31.8% | -11.9% | 6.5M |
-| AMAT | 302.52 (08:49 sip) | -6.6% | 323.76 | 30.86 (9.5%) | 300.62-425.88 | -10.7% / -23.2% | -7.2% | 9.0M |
-| MRVL | 122.95 (08:53 iex) | -6.6% | 131.57 | 16.23 (12.3%) | 120.56-253.66 | -18.3% / -39.4% | -11.5% | 34.7M |
-| STX | 451.00 (08:49 sip) | -6.5% | 482.48 | 53.06 (11.0%) | 449.28-718.65 | -11.2% / -30.3% | -4.3% | 5.8M |
-| LRCX | 183.60 (08:49 sip) | -6.4% | 196.16 | 19.49 (9.9%) | 181.77-260.58 | -10.4% / -25.8% | -6.9% | 14.2M |
+| NU | 13.82 (08:49 sip) | +11.8% | 12.36 | 0.61 (5.0%) | 11.21-13.25 | +2.7% / -7.3% | +2.3% | 70.6M |
+| SNDK | 80.94 (09:04 iex) | +10.0% | 73.61 | 12.56 (17.1%) | 67.02-173.23 | -33.1% / -54.4% | -24.1% | 116.1M |
+| STX | 502.77 (08:49 sip) | +6.4% | 472.33 | 49.81 (10.5%) | 432.04-718.65 | -11.2% / -31.2% | -8.4% | 5.4M |
+| WDC | 289.82 (08:49 sip) | +6.4% | 272.45 | 27.15 (10.0%) | 244.77-402.23 | -10.0% / -25.4% | -5.5% | 7.9M |
+| MRVL | 138.95 (08:49 sip) | +6.1% | 130.93 | 15.27 (11.7%) | 117.80-225.68 | -15.5% / -39.1% | -10.0% | 35.3M |
+| ARM | 171.26 (09:02 iex) | +6.0% | 161.51 | 17.63 (10.9%) | 143.55-231.99 | -12.7% / -31.3% | -11.6% | 6.7M |
+| MU | 636.53 (09:05 iex) | +5.9% | 601.25 | 70.99 (11.8%) | 548.13-971.01 | -19.1% / -32.9% | -14.7% | 37.1M |
+| TER | 224.58 (08:49 sip) | +5.9% | 212.15 | 23.09 (10.9%) | 190.91-304.59 | -12.4% / -33.9% | -9.7% | 4.5M |
+| VRTX | 518.31 (08:49 sip) | -8.1% | 564.12 | 15.75 (2.8%) | 513.80-571.75 | +3.9% / +7.4% | +5.2% | 1.6M |
+| MO | 74.35 (08:49 sip) | -2.5% | 76.28 | 1.65 (2.2%) | 73.12-79.97 | -0.5% / +4.1% | +0.0% | 8.9M |
+| PANW | 347.43 (08:49 sip) | -2.4% | 356.14 | 19.84 (5.6%) | 301.28-390.00 | +4.8% / -2.7% | +4.8% | 8.2M |
+| AZN | 181.95 (08:40 sip) | -1.2% | 184.21 | 3.85 (2.1%) | 172.87-192.65 | +0.6% / +7.2% | +3.0% | 2.7M |
+| EL | 108.76 (07:20 sip) | -0.8% | 109.61 | 4.24 (3.9%) | 99.22-115.28 | +1.5% / +6.6% | +5.4% | 4.1M |
+| NVO | 40.66 (08:49 sip) | -0.8% | 40.97 | 1.22 (3.0%) | 37.75-43.24 | +1.6% / +3.9% | +3.9% | 13.7M |
+| TRV | 404.01 (07:40 sip) | -0.7% | 406.86 | 8.57 (2.1%) | 385.68-418.00 | +2.0% / +5.7% | +3.9% | 1.5M |
+| HSY | 181.30 (07:05 sip) | -0.7% | 182.57 | 5.57 (3.1%) | 158.55-183.98 | +5.7% / +9.0% | +3.8% | 2.2M |

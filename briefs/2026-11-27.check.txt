@@ -1,0 +1,32 @@
+
+====================================================================
+  SESSION 2026-11-27   equity $102,973.84   day P&L +0.00%
+====================================================================
+
+  [OK] SPY LONG
+      entry 722.00 (limit)  stop 692.00  target 760.00  [1.27R]
+      qty 17  notional $12,274  risk $510.00 (0.50% of equity, tier 0.5%)
+      P(target first) 46%   conviction 3
+      stated EV +0.04R   (breakeven P at 1.27R is 44%)
+
+  ----------------------------------------------------------------
+  BOOK-LEVEL ADMISSION   highest conviction first
+      book now: 0 positions/resting entries, gross 0%, net +0%, risk at stake 0.00%
+      + SPY    admitted  -> gross 12%, net +12%, risk 0.50%
+
+  ----------------------------------------------------------------
+  PASSED IDEAS   logged to the shadow book and scored later, no orders
+      . QQQ    short limit 664.00  stop 690.00  target 612.00  P 33%
+      . VRTX   long  market 518.31  stop 499.00  target 545.00  P 38%
+      . MO     short market 74.35  stop 77.10  target 70.20  P 32%
+      . PANW   short market 347.43  stop 370.00  target 305.00  P 30%
+      . NU     long  market 13.82  stop 12.90  target 15.20  P 34%
+      . META   long  market 629.81  stop 595.00  target 680.00  P 36%
+      . WMT    long  limit 129.50  stop 125.50  target 136.50  P 36%
+
+  ----------------------------------------------------------------
+  1 approved, 0 rejected.  Total new risk $510.00 (0.50% of equity)
+  7 idea(s) for the shadow book.
+
+  Validation only - `check` never sends. `submit --confirm` sends these.
+

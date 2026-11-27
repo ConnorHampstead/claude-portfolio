@@ -1,6 +1,7 @@
-  TTWO   short stop         -0.77R  (passed 2026-11-19)
+  KDP    long  expired      +0.06R  (passed 2026-11-12)
+  CRM    short stop         -1.00R  (passed 2026-11-18)
+  CRM    short stop         -1.00R  (passed 2026-11-19)
+  QQQ    short never filled   (passed 2026-11-19)
+  CRWD   long  stop         -1.08R  (passed 2026-11-23)
 
-  1 idea(s) resolved, 27 still pending.
-  HD     bracket as submitted: stop       -0.99R   (as managed: -1.01R)
-
-  1 trade bracket(s) replayed.
+  5 idea(s) resolved, 26 still pending.
