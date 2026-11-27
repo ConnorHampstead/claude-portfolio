@@ -1,20 +1,25 @@
-run 2026-11-25
+run 2026-11-27
 
-  1 unfilled entry order(s):
-    QQQ    sell  x21     stop   @604  submitted 2026-11-25  id=14918cc0
-    cancelled QQQ
+  1 resting exit order(s) left alone (protecting an open position):
+    SPY    sell  x17     bracket @760
+
+  No unfilled entry orders.
 
 
   0 trade(s) closed out.
 
 ====================================================================
-  BOOK STATE   market OPEN
+  BOOK STATE   market closed
 ====================================================================
-  Equity          $102,973.84
-  Cash            $102,973.84
-  Day P&L         $+0.00  (+0.00%)
-  Gross exposure  $0.00  (0.0% of equity)
-  Net exposure    $+0.00  (+0.0%)
-  Positions       0 / 8
-  Loss-limit room 3.00% before the 3.0% kill switch
+  Equity          $103,118.99
+  Cash            $90,700.49
+  Day P&L         $+145.15  (+0.14%)
+  Gross exposure  $12,418.50  (12.0% of equity)
+  Net exposure    $+12,418.50  (+12.0%)
+  Positions       1 / 8
+  Loss-limit room 3.14% before the 3.0% kill switch
+
+  SYM    SIDE      QTY        AVG       LAST       P&L $    P&L %
+  ---------------------------------------------------------------
+  SPY    long       17     721.96     730.50     +145.15   +1.18%
 
